@@ -3963,7 +3963,13 @@ document.addEventListener('DOMContentLoaded', function() {
       
       // Aguarda um momento para garantir que tudo foi atualizado
       setTimeout(() => {
-        // Encontra a variante correspondente
+        // Gerencia opções de quantidade ANTES de buscar variante
+        // (ex: Mix de Sabores → força "3 unidades" como ativa antes do findVariantByOptions)
+        if (typeof gerenciarOpcoesQuantidade === 'function') {
+          gerenciarOpcoesQuantidade();
+        }
+
+        // Encontra a variante correspondente (já com a quantidade correta ativa)
         const variant = findVariantByOptions();
         
         if (variant) {
