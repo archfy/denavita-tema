@@ -3981,6 +3981,11 @@ document.addEventListener('DOMContentLoaded', function() {
           // Atualiza imagem principal da galeria
           updateMainImage(variant);
 
+          // Atualiza imagens dos swatches de quantidade (sincroniza com sabor ativo)
+          if (typeof atualizarImagemVariante === 'function') {
+            atualizarImagemVariante();
+          }
+
           // Dispara eventos do tema (se houver)
           try {
             const variantSelects = document.querySelector('variant-selects');
