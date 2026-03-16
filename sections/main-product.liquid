@@ -3849,7 +3849,63 @@ document.addEventListener('DOMContentLoaded', function() {
       
       console.log('[PDP v3.1] ✅ Preços atualizados!');
     }
-    
+
+    /**
+     * Atualiza a imagem principal da galeria para a variante selecionada
+     */
+    function updateMainImage(variant) {
+      if (!variant || !variant.featured_media) {
+        console.log('[PDP v3.1] ⚠️ Variante sem featured_media — galeria não atualizada');
+        return;
+      }
+
+      const mediaId = variant.featured_media.id;
+      console.log('[PDP v3.1] 🖼️ Atualizando galeria → media ID:', mediaId);
+
+      const gallery = document.querySelector('.product__media-gallery');
+      if (!gallery) {
+        console.log('[PDP v3.1] ⚠️ Galeria não encontrada');
+        return;
+      }
+
+      // Encontra o slide correspondente ao featured_media da variante
+      const targetSlide = gallery.querySelector(`[data-media-id="${mediaId}"]`);
+      if (!targetSlide) {
+        console.log('[PDP v3.1] ⚠️ Slide não encontrado para media ID:', mediaId, '— indo para slide 0');
+        navigateGalleryTo(gallery, 0);
+        return;
+      }
+
+      const position = parseInt(targetSlide.getAttribute('data-position')) || 1;
+      console.log('[PDP v3.1] 🖼️ Navegando para posição:', position, '(índice:', position - 1, ')');
+      navigateGalleryTo(gallery, position - 1);
+    }
+
+    /**
+     * Navega todos os swipers da galeria para o índice especificado
+     */
+    function navigateGalleryTo(gallery, index) {
+      // Desktop: swiper principal (não é thumbnail nem mobile)
+      const desktopEl = gallery.querySelector('.bls__swiper-gallery:not(.bls__swiper-gallery-thumbnails):not(.bls__swiper-gallery-mobile)');
+      if (desktopEl && desktopEl.swiper) {
+        desktopEl.swiper.slideTo(index, 600);
+        console.log('[PDP v3.1] ✅ Desktop swiper → slide', index);
+      }
+
+      // Mobile
+      const mobileEl = gallery.querySelector('.bls__swiper-gallery-mobile');
+      if (mobileEl && mobileEl.swiper) {
+        mobileEl.swiper.slideTo(index, 600);
+        console.log('[PDP v3.1] ✅ Mobile swiper → slide', index);
+      }
+
+      // Thumbnails (se existir)
+      const thumbEl = gallery.querySelector('.bls__swiper-gallery-thumbnails');
+      if (thumbEl && thumbEl.swiper) {
+        thumbEl.swiper.slideTo(index, 600);
+      }
+    }
+
     /**
      * Handler CIRÚRGICO para clicks em variantes
      */
@@ -3921,7 +3977,10 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // Atualiza preços
           updatePrice(variant);
-          
+
+          // Atualiza imagem principal da galeria
+          updateMainImage(variant);
+
           // Dispara eventos do tema (se houver)
           try {
             const variantSelects = document.querySelector('variant-selects');
