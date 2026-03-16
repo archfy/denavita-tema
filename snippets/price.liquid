@@ -1,0 +1,132 @@
+<style>
+  /* Alinha os itens de preço e a label de desconto */
+  .price__sale {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px; /* Espaçamento entre os elementos */
+  }
+
+  /* Label de desconto */
+  .price__discount-badge {
+    background-color: #ff0000; /* Vermelho */
+    color: #ffffff; /* Branco */
+    padding: 5px 10px;
+    border-radius: 13px; /* Bordas arredondadas */
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1;
+    position: relative;
+    margin-left: 5px;
+    bottom: 1px;
+  }
+</style>
+
+{%- liquid
+  # Define alvo (produto ou variante)
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+  assign available = target.available | default: false
+
+  # Formatação monetária
+  assign money_price = price | money
+  assign money_compare = compare_at_price | money
+  if settings.currency_code_enabled
+    assign money_price = price | money_with_currency
+    assign money_compare = compare_at_price | money_with_currency
+  endif
+
+  # Quando o target é o produto e o preço varia, usa o texto "a partir de"
+  if target == product and product.price_varies
+    assign money_price = 'products.product.price.from_price_html' | t: price: money_price
+  endif
+
+  # Calcula desconto com segurança (evita divisão por 0/nil)
+  assign on_sale = false
+  assign discount_percentage = 0
+  if compare_at_price and compare_at_price > price and compare_at_price > 0
+    assign on_sale = true
+    assign discount_amount = compare_at_price | minus: price
+    assign discount_percentage = discount_amount | times: 100.0 | divided_by: compare_at_price | round
+  endif
+
+  # Parcelamento (10x com juros)
+  assign installments = 10
+  assign interest_multiplier = 1.1718
+  # Fórmula: X * 1.1718 / 10  (X em centavos)
+  assign installment_price = price | times: interest_multiplier | divided_by: installments | round: 0
+
+  assign money_installment = installment_price | money
+  if settings.currency_code_enabled
+    assign money_installment = installment_price | money_with_currency
+  endif
+
+# Variante para unit price (quando existir)
+  assign unit_variant = product.selected_or_first_available_variant
+  if use_variant
+    assign unit_variant = target
+  endif
+-%}
+
+<div
+  class="
+    bls__price
+    {%- if available == false %} price--sold-out {% endif -%}
+    {%- if on_sale %} price--on-sale {% endif -%}
+    {%- if product.price_varies == false and product.compare_at_price_varies %} price--no-compare{% endif -%}
+  "
+>
+  <div style="display:block;" class="bls__product-price flex flex-wrap align-items-center mt-3">
+
+    {%- if on_sale -%}
+      {%- unless product.price_varies == false and product.compare_at_price_varies -%}
+        <div class="price__sale grey-color">
+          <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.sale_price' | t }}</span>
+          <span>
+            <s class="price-item compare-price">De {{ money_compare }}</s>
+          </span>
+          {%- if discount_percentage > 0 -%}
+            <span class="price__discount-badge">{{ discount_percentage }}% OFF</span>
+          {%- endif -%}
+        </div>
+      {%- endunless -%}
+    {%- endif -%}
+
+    <div class="price__regular">
+      <span class="visually-hidden visually-hidden--inline">{{ 'products.product.price.regular_price' | t }}</span>
+      <span class="price{%- if on_sale %} special-price {% endif -%}">
+        Por {{ money_price }}
+      </span>
+
+      <span class="text-gray-600 text-[12px] text-juros-pdp">
+        <span class="desk-none">{{ installments }}x de</span><span class="mobile-none">ou {{ installments }}x de</span>
+        <span class="value-parcela-pdp">{{ money_installment }}</span>
+        <span class="text-s-juros-pdp desk-none"></span>
+      </span>
+    </div>
+
+    {%- if unit_variant.unit_price_measurement != null -%}
+      <small class="unit-price caption">
+        <span class="visually-hidden">{{ 'products.product.price.unit_price' | t }}</span>
+        <span class="price-item price-item--last">
+          <span class="number">{{- unit_variant.unit_price | money -}}</span>
+          <span aria-hidden="true">/</span>
+          <span class="visually-hidden">&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+          <span class="unit">
+            {%- if unit_variant.unit_price_measurement.reference_value != 1 -%}
+              {{- unit_variant.unit_price_measurement.reference_value -}}
+            {%- endif -%}
+            {{ unit_variant.unit_price_measurement.reference_unit }}
+          </span>
+        </span>
+      </small>
+    {%- endif -%}
+
+  </div>
+</div>

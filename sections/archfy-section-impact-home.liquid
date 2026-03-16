@@ -1,0 +1,3093 @@
+{% liquid
+  assign pb_font = section.settings.font_body
+  capture pb_product_image_override
+    if section.settings.product_image_override != blank
+      echo section.settings.product_image_override | image_url: width: 900
+    endif
+  endcapture
+  capture pb_bg_image_override
+    if section.settings.bg_image_override != blank
+      echo section.settings.bg_image_override | image_url: width: 2400
+    endif
+  endcapture
+%}
+<style>
+{{ pb_font | font_face: font_display: 'swap' }}
+#shopify-section-{{ section.id }} {
+  --pb-font-family: {{ pb_font.family | json }};
+  --pb-max-width: {{ section.settings.max_width }}px;
+  --pb-border-radius: {{ section.settings.border_radius }}px;
+
+  --pb-shadow-x: {{ section.settings.shadow_x }}px;
+  --pb-shadow-y: {{ section.settings.shadow_y }}px;
+  --pb-shadow-blur: {{ section.settings.shadow_blur }}px;
+  --pb-shadow-spread: {{ section.settings.shadow_spread }}px;
+  --pb-shadow-color: {{ section.settings.shadow_color | color_modify: 'alpha', section.settings.shadow_opacity }};
+
+  --pb-bg-gradient-direction: {{ section.settings.bg_gradient_direction }};
+  --pb-bg-1: {{ section.settings.bg_color_1 }};
+  --pb-bg-2: {{ section.settings.bg_color_2 }};
+  --pb-bg-3: {{ section.settings.bg_color_3 }};
+  --pb-bg-size: {{ section.settings.bg_size }};
+  --pb-bg-position: {{ section.settings.bg_position }};
+
+  --pb-bg-overlay-alpha: {{ section.settings.bg_overlay_alpha }};
+  --pb-bg-overlay-1: {{ section.settings.bg_color_1 | color_modify: 'alpha', section.settings.bg_overlay_alpha }};
+  --pb-bg-overlay-2: {{ section.settings.bg_color_2 | color_modify: 'alpha', section.settings.bg_overlay_alpha }};
+  --pb-bg-overlay-3: {{ section.settings.bg_color_3 | color_modify: 'alpha', section.settings.bg_overlay_alpha }};
+
+  --pb-grid-padding-y-mobile: {{ section.settings.grid_padding_y_mobile }}px;
+  --pb-grid-padding-x-mobile: {{ section.settings.grid_padding_x_mobile }}px;
+  --pb-grid-gap-mobile: {{ section.settings.grid_gap_mobile }}px;
+  --pb-grid-padding-desktop: {{ section.settings.grid_padding_desktop }}px;
+  --pb-grid-gap-desktop: {{ section.settings.grid_gap_desktop }}px;
+
+  --pb-left-gap: {{ section.settings.left_gap }}px;
+  --pb-badges-gap: {{ section.settings.badges_gap }}px;
+
+  --pb-badge-font-weight: {{ section.settings.badge_font_weight }};
+  --pb-badge-font-size-mobile: {{ section.settings.badge_font_size_mobile }}px;
+  --pb-badge-font-size-sm: {{ section.settings.badge_font_size_sm }}px;
+  --pb-badge-padding-y-mobile: {{ section.settings.badge_padding_y_mobile }}px;
+  --pb-badge-padding-x-mobile: {{ section.settings.badge_padding_x_mobile }}px;
+  --pb-badge-padding-y-sm: {{ section.settings.badge_padding_y_sm }}px;
+  --pb-badge-padding-x-sm: {{ section.settings.badge_padding_x_sm }}px;
+  --pb-badge-radius: {{ section.settings.badge_radius }}px;
+  --pb-badge-letter-spacing: {{ section.settings.badge_letter_spacing }};
+
+  --pb-badge-primary-bg: {{ section.settings.badge_primary_bg }};
+  --pb-badge-primary-text: {{ section.settings.badge_primary_text_color }};
+  --pb-badge-primary-shadow-x: {{ section.settings.badge_primary_shadow_x }}px;
+  --pb-badge-primary-shadow-y: {{ section.settings.badge_primary_shadow_y }}px;
+  --pb-badge-primary-shadow-blur: {{ section.settings.badge_primary_shadow_blur }}px;
+  --pb-badge-primary-shadow-color: {{ section.settings.badge_primary_shadow_color | color_modify: 'alpha', section.settings.badge_primary_shadow_opacity }};
+
+  --pb-badge-outline-border-width: {{ section.settings.badge_outline_border_width }}px;
+  --pb-badge-outline-border-color: {{ section.settings.badge_outline_border_color | color_modify: 'alpha', section.settings.badge_outline_border_opacity }};
+  --pb-badge-outline-text: {{ section.settings.badge_outline_text_color }};
+
+  --pb-shipping-border-width: {{ section.settings.shipping_border_width }}px;
+  --pb-shipping-border-color: {{ section.settings.shipping_border_color }};
+  --pb-shipping-text: {{ section.settings.shipping_text_color }};
+
+  --pb-discount-bg: {{ section.settings.discount_bg }};
+  --pb-discount-text: {{ section.settings.discount_text_color }};
+  --pb-discount-padding-y-mobile: {{ section.settings.discount_padding_y_mobile }}px;
+  --pb-discount-padding-x-mobile: {{ section.settings.discount_padding_x_mobile }}px;
+  --pb-discount-font-size-mobile: {{ section.settings.discount_font_size_mobile }}px;
+  --pb-discount-radius: {{ section.settings.discount_radius }}px;
+  --pb-discount-padding-y-sm: {{ section.settings.discount_padding_y_sm }}px;
+  --pb-discount-padding-x-sm: {{ section.settings.discount_padding_x_sm }}px;
+  --pb-discount-font-size-sm: {{ section.settings.discount_font_size_sm }}px;
+
+  --pb-coupon-extra-bg: {{ section.settings.coupon_extra_bg }};
+  --pb-coupon-extra-text: {{ section.settings.coupon_extra_text_color }};
+  --pb-coupon-extra-padding-y-mobile: {{ section.settings.coupon_extra_padding_y_mobile }}px;
+  --pb-coupon-extra-padding-x-mobile: {{ section.settings.coupon_extra_padding_x_mobile }}px;
+  --pb-coupon-extra-font-size-mobile: {{ section.settings.coupon_extra_font_size_mobile }}px;
+  --pb-coupon-extra-radius: {{ section.settings.coupon_extra_radius }}px;
+  --pb-coupon-extra-padding-y-sm: {{ section.settings.coupon_extra_padding_y_sm }}px;
+  --pb-coupon-extra-padding-x-sm: {{ section.settings.coupon_extra_padding_x_sm }}px;
+  --pb-coupon-extra-font-size-sm: {{ section.settings.coupon_extra_font_size_sm }}px;
+
+  --pb-product-name-color: {{ section.settings.product_name_color }};
+  --pb-product-name-font-size-mobile: {{ section.settings.product_name_font_size_mobile }}px;
+  --pb-product-name-font-size-sm: {{ section.settings.product_name_font_size_sm }}px;
+  --pb-product-name-font-weight: {{ section.settings.product_name_font_weight }};
+  --pb-product-name-line-height: {{ section.settings.product_name_line_height }};
+  --pb-product-name-shadow-x: {{ section.settings.product_name_shadow_x }}px;
+  --pb-product-name-shadow-y: {{ section.settings.product_name_shadow_y }}px;
+  --pb-product-name-shadow-blur: {{ section.settings.product_name_shadow_blur }}px;
+  --pb-product-name-shadow-color: {{ section.settings.product_name_shadow_color | color_modify: 'alpha', section.settings.product_name_shadow_opacity }};
+
+  --pb-img-mobile-max-width: {{ section.settings.img_mobile_max_width }}px;
+  --pb-img-mobile-aspect-ratio: {{ section.settings.img_mobile_aspect_ratio }};
+  --pb-img-desktop-size: {{ section.settings.img_desktop_size }}px;
+  --pb-img-desktop-margin-y: {{ section.settings.img_desktop_margin_y }}px;
+  --pb-img-desktop-scale: {{ section.settings.img_desktop_scale }};
+  --pb-img-drop-shadow-x: {{ section.settings.img_drop_shadow_x }}px;
+  --pb-img-drop-shadow-y: {{ section.settings.img_drop_shadow_y }}px;
+  --pb-img-drop-shadow-blur: {{ section.settings.img_drop_shadow_blur }}px;
+  --pb-img-drop-shadow-color: {{ section.settings.img_drop_shadow_color | color_modify: 'alpha', section.settings.img_drop_shadow_opacity }};
+
+  --pb-prices-gap: {{ section.settings.prices_gap }}px;
+  --pb-old-price-row-gap: {{ section.settings.old_price_row_gap }}px;
+  --pb-new-price-row-gap: {{ section.settings.new_price_row_gap }}px;
+  --pb-old-price-opacity: {{ section.settings.old_price_opacity }};
+  --pb-old-price-font-size: {{ section.settings.old_price_font_size }}px;
+
+  --pb-new-price-font-weight: {{ section.settings.new_price_font_weight }};
+  --pb-new-price-font-size-base: {{ section.settings.new_price_font_size_base }}px;
+  --pb-new-price-font-size-sm: {{ section.settings.new_price_font_size_sm }}px;
+  --pb-new-price-font-size-lg: {{ section.settings.new_price_font_size_lg }}px;
+
+  --pb-new-price-value-color: {{ section.settings.new_price_value_color }};
+  --pb-new-price-value-shadow-x: {{ section.settings.new_price_value_shadow_x }}px;
+  --pb-new-price-value-shadow-y: {{ section.settings.new_price_value_shadow_y }}px;
+  --pb-new-price-value-shadow-blur: {{ section.settings.new_price_value_shadow_blur }}px;
+  --pb-new-price-value-shadow-color: {{ section.settings.new_price_value_shadow_color | color_modify: 'alpha', section.settings.new_price_value_shadow_opacity }};
+
+  --pb-installments-opacity: {{ section.settings.installments_opacity }};
+  --pb-installments-font-weight: {{ section.settings.installments_font_weight }};
+  --pb-installments-font-size-base: {{ section.settings.installments_font_size_base }}px;
+  --pb-installments-font-size-sm: {{ section.settings.installments_font_size_sm }}px;
+  --pb-installments-font-size-lg: {{ section.settings.installments_font_size_lg }}px;
+
+  --pb-coupon-gap: {{ section.settings.coupon_gap }}px;
+  --pb-coupon-margin-top: {{ section.settings.coupon_margin_top }}px;
+  --pb-coupon-label-opacity: {{ section.settings.coupon_label_opacity }};
+  --pb-coupon-label-font-size: {{ section.settings.coupon_label_font_size }}px;
+  --pb-coupon-label-font-weight: {{ section.settings.coupon_label_font_weight }};
+
+  --pb-coupon-code-border-width: {{ section.settings.coupon_code_border_width }}px;
+  --pb-coupon-code-border-color: {{ section.settings.coupon_code_border_color | color_modify: 'alpha', section.settings.coupon_code_border_opacity }};
+  --pb-coupon-code-padding-y-mobile: {{ section.settings.coupon_code_padding_y_mobile }}px;
+  --pb-coupon-code-padding-x-mobile: {{ section.settings.coupon_code_padding_x_mobile }}px;
+  --pb-coupon-code-radius: {{ section.settings.coupon_code_radius }}px;
+  --pb-coupon-code-font-weight: {{ section.settings.coupon_code_font_weight }};
+  --pb-coupon-code-font-size-mobile: {{ section.settings.coupon_code_font_size_mobile }}px;
+  --pb-coupon-code-letter-spacing: {{ section.settings.coupon_code_letter_spacing }};
+  --pb-coupon-code-padding-y-desktop: {{ section.settings.coupon_code_padding_y_desktop }}px;
+  --pb-coupon-code-padding-x-desktop: {{ section.settings.coupon_code_padding_x_desktop }}px;
+  --pb-coupon-code-font-size-desktop: {{ section.settings.coupon_code_font_size_desktop }}px;
+
+  --pb-copy-btn-bg: {{ section.settings.product_name_color | color_modify: 'alpha', section.settings.copy_btn_bg_opacity }};
+  --pb-copy-btn-bg-hover: {{ section.settings.product_name_color | color_modify: 'alpha', section.settings.copy_btn_bg_hover_opacity }};
+  --pb-copy-btn-padding-y-mobile: {{ section.settings.copy_btn_padding_y_mobile }}px;
+  --pb-copy-btn-padding-x-mobile: {{ section.settings.copy_btn_padding_x_mobile }}px;
+  --pb-copy-btn-radius: {{ section.settings.copy_btn_radius }}px;
+  --pb-copy-btn-font-size-mobile: {{ section.settings.copy_btn_font_size_mobile }}px;
+  --pb-copy-btn-font-weight: {{ section.settings.copy_btn_font_weight }};
+  --pb-copy-btn-transition-s: {{ section.settings.copy_btn_transition_s }}s;
+  --pb-copy-btn-padding-y-desktop: {{ section.settings.copy_btn_padding_y_desktop }}px;
+  --pb-copy-btn-padding-x-desktop: {{ section.settings.copy_btn_padding_x_desktop }}px;
+  --pb-copy-btn-font-size-desktop: {{ section.settings.copy_btn_font_size_desktop }}px;
+  --pb-copy-btn-svg-size: {{ section.settings.copy_btn_svg_size }}px;
+  --pb-copy-btn-gap: {{ section.settings.copy_btn_gap }}px;
+
+  --pb-right-gap: {{ section.settings.right_gap }}px;
+  --pb-countdown-label-font-size: {{ section.settings.countdown_label_font_size }}px;
+  --pb-countdown-label-font-weight: {{ section.settings.countdown_label_font_weight }};
+  --pb-countdown-label-color: {{ section.settings.countdown_label_color }};
+
+  --pb-cta-bg: {{ section.settings.cta_bg }};
+  --pb-cta-bg-hover: {{ section.settings.cta_bg_hover }};
+  --pb-cta-text-color: {{ section.settings.cta_text_color }};
+  --pb-cta-radius: {{ section.settings.cta_radius }}px;
+  --pb-cta-padding-y: {{ section.settings.cta_padding_y }}px;
+  --pb-cta-padding-x-mobile: {{ section.settings.cta_padding_x_mobile }}px;
+  --pb-cta-padding-x-sm: {{ section.settings.cta_padding_x_sm }}px;
+  --pb-cta-gap: {{ section.settings.cta_gap }}px;
+  --pb-cta-font-weight: {{ section.settings.cta_font_weight }};
+  --pb-cta-transition-s: {{ section.settings.cta_transition_s }}s;
+  --pb-cta-hover-scale: {{ section.settings.cta_hover_scale }};
+  --pb-cta-max-width: {{ section.settings.cta_max_width }}px;
+
+  --pb-shine-opacity: {{ section.settings.shine_opacity }};
+  --pb-shine-skew-deg: {{ section.settings.shine_skew_deg }}deg;
+  --pb-shine-width-pct: {{ section.settings.shine_width_pct }}%;
+  --pb-shine-anim-duration: {{ section.settings.shine_anim_duration_s }}s;
+  --pb-shine-anim-timing: {{ section.settings.shine_anim_timing }};
+
+  --pb-timer-gap: {{ section.settings.timer_gap }}px;
+  --pb-timer-number-font-size: {{ section.settings.timer_number_font_size }}px;
+  --pb-timer-number-font-weight: {{ section.settings.timer_number_font_weight }};
+  --pb-timer-label-font-size: {{ section.settings.timer_label_font_size }}px;
+  --pb-timer-label-font-weight: {{ section.settings.timer_label_font_weight }};
+  --pb-timer-label-letter-spacing: {{ section.settings.timer_label_letter_spacing }};
+  --pb-timer-label-opacity: {{ section.settings.timer_label_opacity }};
+  --pb-timer-sep-font-size: {{ section.settings.timer_sep_font_size }}px;
+  --pb-timer-sep-font-weight: {{ section.settings.timer_sep_font_weight }};
+  --pb-timer-sep-margin-x: {{ section.settings.timer_sep_margin_x }}px;
+
+  --pb-cart-gap: {{ section.settings.cart_gap }}px;
+  --pb-cart-font-size: {{ section.settings.cart_font_size }}px;
+  --pb-cart-font-weight: {{ section.settings.cart_font_weight }};
+  --pb-cart-border-width: {{ section.settings.cart_border_width }}px;
+  --pb-cart-border-color: {{ section.settings.cart_border_color | color_modify: 'alpha', section.settings.cart_border_opacity }};
+  --pb-cart-padding-top: {{ section.settings.cart_padding_top }}px;
+  --pb-cart-svg-size: {{ section.settings.cart_svg_size }}px;
+}
+
+#shopify-section-{{ section.id }} .promo-banner * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--pb-font-family), sans-serif;
+}
+
+#shopify-section-{{ section.id }} .promo-banner {
+  position: relative;
+  width: 100%;
+  max-width: var(--pb-max-width);
+  margin: 0 auto;
+  border-radius: var(--pb-border-radius);
+  overflow: visible;
+  box-shadow: var(--pb-shadow-x) var(--pb-shadow-y) var(--pb-shadow-blur) var(--pb-shadow-spread) var(--pb-shadow-color);
+  background: linear-gradient(var(--pb-bg-gradient-direction), var(--pb-bg-1), var(--pb-bg-2), var(--pb-bg-3));
+  background-size: var(--pb-bg-size);
+  background-position: var(--pb-bg-position);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  padding: var(--pb-grid-padding-y-mobile) var(--pb-grid-padding-x-mobile);
+  gap: var(--pb-grid-gap-mobile);
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__grid {
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: var(--pb-grid-padding-desktop);
+    gap: var(--pb-grid-gap-desktop);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pb-left-gap);
+  text-align: center;
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__left {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__badges {
+  display: flex;
+  align-items: center;
+  gap: var(--pb-badges-gap);
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__badges {
+    justify-content: flex-start;
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__badge {
+  display: inline-block;
+  padding: var(--pb-badge-padding-y-mobile) var(--pb-badge-padding-x-mobile);
+  border-radius: var(--pb-badge-radius);
+  font-weight: var(--pb-badge-font-weight);
+  font-size: var(--pb-badge-font-size-mobile);
+  letter-spacing: calc(var(--pb-badge-letter-spacing) * 1em);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  #shopify-section-{{ section.id }} .promo-banner__badge {
+    padding: var(--pb-badge-padding-y-sm) var(--pb-badge-padding-x-sm);
+    font-size: var(--pb-badge-font-size-sm);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__badge--primary {
+  background: var(--pb-badge-primary-bg);
+  color: var(--pb-badge-primary-text);
+  box-shadow: var(--pb-badge-primary-shadow-x) var(--pb-badge-primary-shadow-y) var(--pb-badge-primary-shadow-blur) var(--pb-badge-primary-shadow-color);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__badge--outline {
+  background: transparent;
+  border: var(--pb-badge-outline-border-width) solid var(--pb-badge-outline-border-color);
+  color: var(--pb-badge-outline-text);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__badge--shipping {
+  background: transparent;
+  border: var(--pb-shipping-border-width) solid var(--pb-shipping-border-color);
+  color: var(--pb-shipping-text);
+  display: none;
+}
+
+#shopify-section-{{ section.id }} .promo-banner__badge--shipping.is-visible {
+  display: inline-block;
+}
+
+#shopify-section-{{ section.id }} .promo-banner__badge--discount {
+  background: var(--pb-discount-bg);
+  color: var(--pb-discount-text);
+  padding: var(--pb-discount-padding-y-mobile) var(--pb-discount-padding-x-mobile);
+  font-size: var(--pb-discount-font-size-mobile);
+  border-radius: var(--pb-discount-radius);
+}
+
+@media (min-width: 640px) {
+  #shopify-section-{{ section.id }} .promo-banner__badge--discount {
+    padding: var(--pb-discount-padding-y-sm) var(--pb-discount-padding-x-sm);
+    font-size: var(--pb-discount-font-size-sm);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__badge--coupon-extra {
+  background: var(--pb-coupon-extra-bg);
+  color: var(--pb-coupon-extra-text);
+  padding: var(--pb-coupon-extra-padding-y-mobile) var(--pb-coupon-extra-padding-x-mobile);
+  font-size: var(--pb-coupon-extra-font-size-mobile);
+  border-radius: var(--pb-coupon-extra-radius);
+}
+
+@media (min-width: 640px) {
+  #shopify-section-{{ section.id }} .promo-banner__badge--coupon-extra {
+    padding: var(--pb-coupon-extra-padding-y-sm) var(--pb-coupon-extra-padding-x-sm);
+    font-size: var(--pb-coupon-extra-font-size-sm);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__product-name {
+  color: var(--pb-product-name-color);
+  font-size: var(--pb-product-name-font-size-mobile);
+  font-weight: var(--pb-product-name-font-weight);
+  line-height: var(--pb-product-name-line-height);
+  text-shadow: var(--pb-product-name-shadow-x) var(--pb-product-name-shadow-y) var(--pb-product-name-shadow-blur) var(--pb-product-name-shadow-color);
+}
+
+@media (min-width: 640px) {
+  #shopify-section-{{ section.id }} .promo-banner__product-name {
+    font-size: var(--pb-product-name-font-size-sm);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__img-mobile {
+  display: block;
+  width: 100%;
+  max-width: var(--pb-img-mobile-max-width);
+  aspect-ratio: var(--pb-img-mobile-aspect-ratio);
+  margin: 0 auto;
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__img-mobile {
+    display: none;
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__img-mobile img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(var(--pb-img-drop-shadow-x) var(--pb-img-drop-shadow-y) var(--pb-img-drop-shadow-blur) var(--pb-img-drop-shadow-color));
+}
+
+#shopify-section-{{ section.id }} .promo-banner__prices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pb-prices-gap);
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__prices {
+    align-items: flex-start;
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__old-price-row {
+  display: flex;
+  align-items: center;
+  gap: var(--pb-old-price-row-gap);
+  flex-wrap: nowrap;
+}
+
+#shopify-section-{{ section.id }} .promo-banner__old-price {
+  color: {{ section.settings.product_name_color | color_modify: 'alpha', section.settings.old_price_opacity }};
+  font-size: var(--pb-old-price-font-size);
+  text-decoration: line-through;
+}
+
+#shopify-section-{{ section.id }} .promo-banner__new-price-row {
+  display: flex;
+  align-items: center;
+  gap: var(--pb-new-price-row-gap);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__new-price-row {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__new-price {
+  color: {{ section.settings.product_name_color }};
+  font-size: var(--pb-new-price-font-size-base);
+  font-weight: var(--pb-new-price-font-weight);
+}
+
+@media (min-width: 640px) {
+  #shopify-section-{{ section.id }} .promo-banner__new-price {
+    font-size: var(--pb-new-price-font-size-sm);
+  }
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__new-price {
+    font-size: var(--pb-new-price-font-size-lg);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__new-price-value {
+  color: var(--pb-new-price-value-color);
+  text-shadow: var(--pb-new-price-value-shadow-x) var(--pb-new-price-value-shadow-y) var(--pb-new-price-value-shadow-blur) var(--pb-new-price-value-shadow-color);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__installments {
+  color: {{ section.settings.product_name_color | color_modify: 'alpha', section.settings.installments_opacity }};
+  font-size: var(--pb-installments-font-size-base);
+  font-weight: var(--pb-installments-font-weight);
+}
+
+@media (min-width: 640px) {
+  #shopify-section-{{ section.id }} .promo-banner__installments {
+    font-size: var(--pb-installments-font-size-sm);
+  }
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__installments {
+    font-size: var(--pb-installments-font-size-lg);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__coupon {
+  display: flex;
+  align-items: center;
+  gap: var(--pb-coupon-gap);
+  margin-top: var(--pb-coupon-margin-top);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__coupon {
+    justify-content: flex-start;
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__coupon-label {
+  color: {{ section.settings.product_name_color | color_modify: 'alpha', section.settings.coupon_label_opacity }};
+  font-size: var(--pb-coupon-label-font-size);
+  font-weight: var(--pb-coupon-label-font-weight);
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__coupon-label {
+    display: inline;
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__coupon-code {
+  border: var(--pb-coupon-code-border-width) dashed var(--pb-coupon-code-border-color);
+  padding: var(--pb-coupon-code-padding-y-mobile) var(--pb-coupon-code-padding-x-mobile);
+  border-radius: var(--pb-coupon-code-radius);
+  color: {{ section.settings.product_name_color }};
+  font-weight: var(--pb-coupon-code-font-weight);
+  font-size: var(--pb-coupon-code-font-size-mobile);
+  letter-spacing: calc(var(--pb-coupon-code-letter-spacing) * 1em);
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__coupon-code {
+    padding: var(--pb-coupon-code-padding-y-desktop) var(--pb-coupon-code-padding-x-desktop);
+    font-size: var(--pb-coupon-code-font-size-desktop);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--pb-copy-btn-gap);
+  background: var(--pb-copy-btn-bg);
+  color: {{ section.settings.product_name_color }};
+  padding: var(--pb-copy-btn-padding-y-mobile) var(--pb-copy-btn-padding-x-mobile);
+  border-radius: var(--pb-copy-btn-radius);
+  font-size: var(--pb-copy-btn-font-size-mobile);
+  font-weight: var(--pb-copy-btn-font-weight);
+  border: none;
+  cursor: pointer;
+  transition: background var(--pb-copy-btn-transition-s);
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__copy-btn {
+    padding: var(--pb-copy-btn-padding-y-desktop) var(--pb-copy-btn-padding-x-desktop);
+    font-size: var(--pb-copy-btn-font-size-desktop);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__copy-btn:hover {
+  background: var(--pb-copy-btn-bg-hover);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__copy-btn svg {
+  width: var(--pb-copy-btn-svg-size);
+  height: var(--pb-copy-btn-svg-size);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__center {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 5;
+  overflow: visible;
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__center {
+    display: flex;
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__img-desktop {
+  width: var(--pb-img-desktop-size);
+  height: var(--pb-img-desktop-size);
+  margin: var(--pb-img-desktop-margin-y) 0;
+}
+
+#shopify-section-{{ section.id }} .promo-banner__img-desktop img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(var(--pb-img-drop-shadow-x) var(--pb-img-drop-shadow-y) var(--pb-img-drop-shadow-blur) var(--pb-img-drop-shadow-color));
+  transform: scale(var(--pb-img-desktop-scale));
+}
+
+#shopify-section-{{ section.id }} .promo-banner__right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--pb-right-gap);
+  position: relative;
+  z-index: 10;
+}
+
+#shopify-section-{{ section.id }} .promo-banner__countdown-label {
+  font-weight: var(--pb-countdown-label-font-weight);
+  font-size: var(--pb-countdown-label-font-size);
+  color: var(--pb-countdown-label-color);
+}
+
+@media (min-width: 640px) {
+  #shopify-section-{{ section.id }} .promo-banner__countdown-label {
+    font-size: var(--pb-countdown-label-font-size);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__cta {
+  position: relative;
+  background: var(--pb-cta-bg);
+  color: var(--pb-cta-text-color);
+  border-radius: var(--pb-cta-radius);
+  padding: var(--pb-cta-padding-y) var(--pb-cta-padding-x-mobile);
+  font-weight: var(--pb-cta-font-weight);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--pb-cta-gap);
+  transition: transform var(--pb-cta-transition-s), background var(--pb-cta-transition-s);
+  cursor: pointer;
+  min-width: 0;
+  width: 100%;
+  max-width: var(--pb-cta-max-width);
+  overflow: hidden;
+  border: none;
+  text-decoration: none;
+}
+
+@media (min-width: 640px) {
+  #shopify-section-{{ section.id }} .promo-banner__cta {
+    padding: var(--pb-cta-padding-y) var(--pb-cta-padding-x-sm);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__cta:hover {
+  transform: scale(var(--pb-cta-hover-scale));
+  background: var(--pb-cta-bg-hover);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__shine-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: var(--pb-cta-radius);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, transparent, {{ section.settings.product_name_color | color_modify: 'alpha', section.settings.shine_opacity }}, transparent);
+  transform: skewX(var(--pb-shine-skew-deg));
+  width: var(--pb-shine-width-pct);
+  animation: promo-metallic-shine-{{ section.id }} var(--pb-shine-anim-duration) var(--pb-shine-anim-timing) infinite;
+}
+
+@keyframes promo-metallic-shine-{{ section.id }} {
+  0%, 85% { transform: translateX(-100%) skewX(var(--pb-shine-skew-deg)); }
+  100% { transform: translateX(300%) skewX(var(--pb-shine-skew-deg)); }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__timer {
+  display: flex;
+  align-items: center;
+  gap: var(--pb-timer-gap);
+  position: relative;
+  z-index: 10;
+}
+
+#shopify-section-{{ section.id }} .promo-banner__timer-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#shopify-section-{{ section.id }} .promo-banner__timer-number {
+  font-size: var(--pb-timer-number-font-size);
+  font-weight: var(--pb-timer-number-font-weight);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__timer-label {
+  font-size: var(--pb-timer-label-font-size);
+  font-weight: var(--pb-timer-label-font-weight);
+  text-transform: uppercase;
+  letter-spacing: calc(var(--pb-timer-label-letter-spacing) * 1em);
+  opacity: var(--pb-timer-label-opacity);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__timer-sep {
+  font-size: var(--pb-timer-sep-font-size);
+  font-weight: var(--pb-timer-sep-font-weight);
+  margin: 0 var(--pb-timer-sep-margin-x);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__cart-text {
+  display: flex;
+  align-items: center;
+  gap: var(--pb-cart-gap);
+  font-size: var(--pb-cart-font-size);
+  font-weight: var(--pb-cart-font-weight);
+  border-top: var(--pb-cart-border-width) solid var(--pb-cart-border-color);
+  padding-top: var(--pb-cart-padding-top);
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  z-index: 10;
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__cart-text {
+    font-size: var(--pb-cart-font-size);
+  }
+}
+
+#shopify-section-{{ section.id }} .promo-banner__cart-text svg {
+  width: var(--pb-cart-svg-size);
+  height: var(--pb-cart-svg-size);
+}
+
+#shopify-section-{{ section.id }} .promo-banner__cart-text-desktop {
+  display: none;
+}
+#shopify-section-{{ section.id }} .promo-banner__cart-text-mobile {
+  display: inline;
+}
+
+@media (min-width: 1024px) {
+  #shopify-section-{{ section.id }} .promo-banner__cart-text-desktop {
+    display: inline;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__cart-text-mobile {
+    display: none;
+  }
+}
+</style>
+<div class="promo-banner" id="promoBanner-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="promo-banner__grid">
+    <div class="promo-banner__left">
+      <div class="promo-banner__badges">
+        <span class="promo-banner__badge promo-banner__badge--primary" id="bannerBadge-{{ section.id }}">{{ section.settings.badge_primary_text_initial }}</span>
+        <span class="promo-banner__badge promo-banner__badge--outline" id="bannerPromoLabel-{{ section.id }}">{{ section.settings.badge_secondary_text_initial }}</span>
+      </div>
+
+      <h2 class="promo-banner__product-name" id="bannerProductName-{{ section.id }}">{{ section.settings.product_name_initial }}</h2>
+
+      <div class="promo-banner__img-mobile">
+        <img id="bannerImgMobile-{{ section.id }}" src="{{ section.settings.product_image_url }}" alt="{{ section.settings.image_alt_initial }}">
+      </div>
+
+      <div class="promo-banner__prices">
+        <div class="promo-banner__old-price-row">
+          <span class="promo-banner__old-price">{{ section.settings.old_price_prefix_text }} <span id="bannerOldPrice-{{ section.id }}">{{ section.settings.old_price_initial }}</span></span>
+          <span class="promo-banner__badge promo-banner__badge--discount" id="bannerDiscountBadge-{{ section.id }}"></span>
+        </div>
+        <div class="promo-banner__new-price-row">
+          <span class="promo-banner__new-price">{{ section.settings.new_price_prefix_text }} <span class="promo-banner__new-price-value" id="bannerNewPrice-{{ section.id }}">{{ section.settings.new_price_initial }}</span></span>
+          <span class="promo-banner__badge promo-banner__badge--coupon-extra" id="bannerCouponExtra-{{ section.id }}">{{ section.settings.coupon_extra_initial }}</span>
+        </div>
+        <span class="promo-banner__installments" id="bannerInstallments-{{ section.id }}">{{ section.settings.installments_initial }}</span>
+        <span class="promo-banner__badge promo-banner__badge--shipping" id="bannerShipping-{{ section.id }}">{{ section.settings.shipping_badge_text }}</span>
+      </div>
+
+      <div class="promo-banner__coupon">
+        <span class="promo-banner__coupon-label" id="bannerCouponLabel-{{ section.id }}">{{ section.settings.coupon_label_initial }}</span>
+        <span class="promo-banner__coupon-code" id="bannerCouponCode-{{ section.id }}">{{ section.settings.coupon_code_initial }}</span>
+        <button class="promo-banner__copy-btn" id="bannerCopyBtn-{{ section.id }}" title="{{ section.settings.copy_btn_title_initial }}" type="button">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+          <span id="bannerCopyText-{{ section.id }}">{{ section.settings.copy_btn_text_initial }}</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="promo-banner__center">
+      <div class="promo-banner__img-desktop">
+        <img id="bannerImgDesktop-{{ section.id }}" src="{{ section.settings.product_image_url }}" alt="{{ section.settings.image_alt_initial }}">
+      </div>
+    </div>
+
+    <div class="promo-banner__right">
+      <p class="promo-banner__countdown-label" id="bannerCountdownLabel-{{ section.id }}">{{ section.settings.countdown_label_initial }}</p>
+
+      <button class="promo-banner__cta" id="bannerCta-{{ section.id }}" type="button">
+        <span class="promo-banner__shine-wrap">
+          <span class="promo-banner__shine"></span>
+        </span>
+
+        <span class="promo-banner__timer">
+          <span class="promo-banner__timer-unit">
+            <span class="promo-banner__timer-number" id="countHours-{{ section.id }}">{{ section.settings.timer_initial_hours }}</span>
+            <span class="promo-banner__timer-label" id="countHoursLabel-{{ section.id }}">{{ section.settings.timer_label_hours }}</span>
+          </span>
+          <span class="promo-banner__timer-sep">:</span>
+          <span class="promo-banner__timer-unit">
+            <span class="promo-banner__timer-number" id="countMinutes-{{ section.id }}">{{ section.settings.timer_initial_minutes }}</span>
+            <span class="promo-banner__timer-label" id="countMinutesLabel-{{ section.id }}">{{ section.settings.timer_label_minutes }}</span>
+          </span>
+          <span class="promo-banner__timer-sep">:</span>
+          <span class="promo-banner__timer-unit">
+            <span class="promo-banner__timer-number" id="countSeconds-{{ section.id }}">{{ section.settings.timer_initial_seconds }}</span>
+            <span class="promo-banner__timer-label" id="countSecondsLabel-{{ section.id }}">{{ section.settings.timer_label_seconds }}</span>
+          </span>
+        </span>
+
+        <span class="promo-banner__cart-text">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+          <span class="promo-banner__cart-text-desktop" id="ctaTextDesktop-{{ section.id }}">{{ section.settings.cta_text_desktop_initial }}</span>
+          <span class="promo-banner__cart-text-mobile" id="ctaTextMobile-{{ section.id }}">{{ section.settings.cta_text_mobile_initial }}</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+(function() {
+  'use strict';
+
+  var SECTION_ID = {{ section.id | json }};
+  var ROOT_ID = 'promoBanner-' + SECTION_ID;
+
+  var CONFIG = {
+    sectionId: SECTION_ID,
+    rootId: ROOT_ID,
+
+    // Conteúdo (JS) — equivalente ao CONFIG do artefato original
+    badgeText: {{ section.settings.badge_primary_text | json }},
+    promoLabel: {{ section.settings.badge_secondary_text | json }},
+    productName: {{ section.settings.product_name | json }},
+    oldPrice: {{ section.settings.old_price | json }},
+    newPrice: {{ section.settings.new_price | json }},
+    installments: {{ section.settings.installments | json }},
+    couponLabel: {{ section.settings.coupon_label | json }},
+    couponCode: {{ section.settings.coupon_code | json }},
+    couponExtraText: {{ section.settings.coupon_extra_text | json }},
+    countdownHours: {{ section.settings.countdown_hours }},
+    countdownLabel: {{ section.settings.countdown_label | json }},
+    timerLabelHours: {{ section.settings.timer_label_hours | json }},
+    timerLabelMinutes: {{ section.settings.timer_label_minutes | json }},
+    timerLabelSeconds: {{ section.settings.timer_label_seconds | json }},
+
+    freeShippingMin: {{ section.settings.free_shipping_min }},
+    productImageOverride: {{ pb_product_image_override | strip | json }},
+    productImageUrl: {{ section.settings.product_image_url | json }},
+    bgImageUrl: {{ section.settings.bg_image_url | json }},
+    bgImageOverride: {{ pb_bg_image_override | strip | json }},
+    bgGradientDirection: {{ section.settings.bg_gradient_direction | json }},
+    bgOverlay1: {{ section.settings.bg_color_1 | color_modify: 'alpha', section.settings.bg_overlay_alpha | json }},
+    bgOverlay2: {{ section.settings.bg_color_2 | color_modify: 'alpha', section.settings.bg_overlay_alpha | json }},
+    bgOverlay3: {{ section.settings.bg_color_3 | color_modify: 'alpha', section.settings.bg_overlay_alpha | json }},
+
+    copiedText: {{ section.settings.copied_text | json }},
+    countdownStorageKey: {{ section.settings.countdown_storage_key | json }},
+    countdownTickMs: {{ section.settings.countdown_tick_ms }},
+    copyBtnText: {{ section.settings.copy_btn_text_initial | json }},
+    copyResetMs: {{ section.settings.copied_reset_ms }},
+
+    ctaLink: {{ section.settings.cta_link | json }}
+  };
+
+  var NS = window.__PROMO_BANNER__ || (window.__PROMO_BANNER__ = {});
+  var existing = NS[SECTION_ID];
+  if (existing && typeof existing.destroy === 'function') {
+    try { existing.destroy(); } catch(e) {}
+  }
+
+  var root = document.getElementById(ROOT_ID);
+  if (!root) { return; }
+
+  function q(idSuffix) {
+    return document.getElementById(idSuffix + '-' + SECTION_ID);
+  }
+
+  var els = {
+    badge: q('bannerBadge'),
+    promoLabel: q('bannerPromoLabel'),
+    productName: q('bannerProductName'),
+    oldPrice: q('bannerOldPrice'),
+    newPrice: q('bannerNewPrice'),
+    installments: q('bannerInstallments'),
+    couponLabel: q('bannerCouponLabel'),
+    couponCode: q('bannerCouponCode'),
+    countdownLabel: q('bannerCountdownLabel'),
+    couponExtra: q('bannerCouponExtra'),
+    discountBadge: q('bannerDiscountBadge'),
+    shippingBadge: q('bannerShipping'),
+    imgMobile: q('bannerImgMobile'),
+    imgDesktop: q('bannerImgDesktop'),
+    copyBtn: q('bannerCopyBtn'),
+    copyText: q('bannerCopyText'),
+    ctaBtn: q('bannerCta'),
+    hours: q('countHours'),
+    minutes: q('countMinutes'),
+    seconds: q('countSeconds'),
+    hoursLabel: q('countHoursLabel'),
+    minutesLabel: q('countMinutesLabel'),
+    secondsLabel: q('countSecondsLabel')
+  };
+
+  var intervalId = null;
+  var endTime = null;
+  var storageKey = CONFIG.countdownStorageKey;
+
+  /* ═══ MÓDULO: EstruturaDOM ═══
+     ID: M01
+     ORIGEM: HTML (.promo-banner + grid/colunas/ids) do artefato original
+     DEPENDE DE: —
+     RECEBE: sectionId, root
+     EXPÕE: validateDOM()
+     ESTADO: els
+     SCHEMA BINDINGS: (HTML) *_initial + URLs + labels de timer
+  ═══ */
+  function validateDOM() {
+    return !!(root && els.badge && els.promoLabel && els.productName && els.oldPrice && els.newPrice &&
+      els.installments && els.couponCode && els.copyBtn && els.ctaBtn && els.hours && els.minutes && els.seconds);
+  }
+  /* ═══ CHECKPOINT [M01] EstruturaDOM ✓ — Elementos e IDs escopados por section.id ═══ */
+
+  /* ═══ MÓDULO: BindConteudo ═══
+     ID: M02
+     ORIGEM: CONFIG + assignments (textContent) do artefato original
+     DEPENDE DE: M01
+     RECEBE: CONFIG, els
+     EXPÕE: applyContent()
+     ESTADO: —
+     SCHEMA BINDINGS: badge_primary_text, badge_secondary_text, product_name, old_price, new_price, installments, coupon_label, coupon_code, countdown_label, coupon_extra_text, timer_label_*
+  ═══ */
+  function applyContent() {
+    els.badge.textContent = CONFIG.badgeText;
+    els.promoLabel.textContent = CONFIG.promoLabel;
+    els.productName.textContent = CONFIG.productName;
+    els.oldPrice.textContent = CONFIG.oldPrice;
+    els.newPrice.textContent = CONFIG.newPrice;
+    els.installments.textContent = CONFIG.installments;
+    els.couponLabel.textContent = CONFIG.couponLabel;
+    els.couponCode.textContent = CONFIG.couponCode;
+    els.countdownLabel.textContent = CONFIG.countdownLabel;
+    els.couponExtra.textContent = CONFIG.couponExtraText;
+
+    els.hoursLabel.textContent = CONFIG.timerLabelHours;
+    els.minutesLabel.textContent = CONFIG.timerLabelMinutes;
+    els.secondsLabel.textContent = CONFIG.timerLabelSeconds;
+  }
+  /* ═══ CHECKPOINT [M02] BindConteudo ✓ — Textos aplicados via CONFIG (JS) ═══ */
+
+  /* ═══ MÓDULO: PrecosBadges ═══
+     ID: M03
+     ORIGEM: parsePrice + pct OFF + freeShippingMin do artefato original
+     DEPENDE DE: M01, M02
+     RECEBE: CONFIG.oldPrice/newPrice/freeShippingMin
+     EXPÕE: applyPriceBadges()
+     ESTADO: —
+     SCHEMA BINDINGS: old_price, new_price, free_shipping_min
+  ═══ */
+  function parsePrice(str) {
+    var clean = String(str || '').replace(/[R$\s.]/g, '').replace(',', '.');
+    return parseFloat(clean);
+  }
+  function applyPriceBadges() {
+    var oldNum = parsePrice(CONFIG.oldPrice);
+    var newNum = parsePrice(CONFIG.newPrice);
+
+    if (!isNaN(oldNum) && !isNaN(newNum) && oldNum > 0 && newNum < oldNum) {
+      var pct = Math.round(((oldNum - newNum) / oldNum) * 100);
+      els.discountBadge.textContent = pct + '% OFF';
+    } else {
+      els.discountBadge.textContent = '';
+    }
+
+    if (!isNaN(newNum) && newNum > CONFIG.freeShippingMin) {
+      els.shippingBadge.classList.add('is-visible');
+    } else {
+      els.shippingBadge.classList.remove('is-visible');
+    }
+  }
+  /* ═══ CHECKPOINT [M03] PrecosBadges ✓ — Desconto (%) e frete grátis (threshold) ═══ */
+
+  /* ═══ MÓDULO: MidiaBackground ═══
+     ID: M04
+     ORIGEM: productImage + backgroundImage do artefato original
+     DEPENDE DE: M01, M02
+     RECEBE: CONFIG.productImageOverride/productImageUrl/bgImageOverride/bgImageUrl/bgOverlay*
+     EXPÕE: applyMedia()
+     ESTADO: —
+     SCHEMA BINDINGS: product_image_url, product_image_override, bg_image_url, bg_image_override, bg_overlay_alpha, bg_color_1/2/3, bg_gradient_direction
+  ═══ */
+  function applyMedia() {
+    var productImg = (CONFIG.productImageOverride && String(CONFIG.productImageOverride).trim()) ? CONFIG.productImageOverride : '';
+    if (productImg) {
+      els.imgMobile.src = productImg;
+      els.imgMobile.alt = CONFIG.productName;
+      els.imgDesktop.src = productImg;
+      els.imgDesktop.alt = CONFIG.productName;
+    } else {
+      els.imgMobile.src = CONFIG.productImageUrl;
+      els.imgMobile.alt = els.imgMobile.alt || '';
+      els.imgDesktop.src = CONFIG.productImageUrl;
+      els.imgDesktop.alt = els.imgDesktop.alt || '';
+    }
+
+    var bgImg = (CONFIG.bgImageOverride && String(CONFIG.bgImageOverride).trim()) ? CONFIG.bgImageOverride : CONFIG.bgImageUrl;
+    if (bgImg) {
+      root.style.backgroundImage =
+        'linear-gradient(' + CONFIG.bgGradientDirection + ', ' + CONFIG.bgOverlay1 + ', ' + CONFIG.bgOverlay2 + ', ' + CONFIG.bgOverlay3 + '), url(' + bgImg + ')';
+    }
+  }
+  /* ═══ CHECKPOINT [M04] MidiaBackground ✓ — Imagens do produto + background image/overlay ═══ */
+
+  /* ═══ MÓDULO: CountdownPersistente ═══
+     ID: M05
+     ORIGEM: localStorage (promo-banner-countdown-end) + tick() do artefato original
+     DEPENDE DE: M01, M02
+     RECEBE: CONFIG.countdownHours
+     EXPÕE: initCountdown(), tick(), destroyCountdown()
+     ESTADO: endTime, intervalId, storageKey
+     SCHEMA BINDINGS: countdown_hours, countdown_storage_key, countdown_tick_ms
+  ═══ */
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+  function loadEndTime() {
+    try {
+      var saved = localStorage.getItem(storageKey);
+      if (saved && parseInt(saved, 10) > Date.now()) {
+        return parseInt(saved, 10);
+      }
+      var next = Date.now() + (CONFIG.countdownHours * 3600000);
+      localStorage.setItem(storageKey, String(next));
+      return next;
+    } catch(e) {
+      return Date.now() + (CONFIG.countdownHours * 3600000);
+    }
+  }
+
+  function tick() {
+    var remaining = Math.max(0, endTime - Date.now());
+    var totalSec = Math.floor(remaining / 1000);
+
+    els.hours.textContent = pad(Math.floor((totalSec % 86400) / 3600));
+    els.minutes.textContent = pad(Math.floor((totalSec % 3600) / 60));
+    els.seconds.textContent = pad(totalSec % 60);
+
+    if (remaining <= 0) {
+      endTime = Date.now() + (CONFIG.countdownHours * 3600000);
+      try { localStorage.setItem(storageKey, String(endTime)); } catch(e) {}
+    }
+  }
+
+  function initCountdown() {
+    endTime = loadEndTime();
+    tick();
+    intervalId = window.setInterval(tick, CONFIG.countdownTickMs);
+  }
+
+  function destroyCountdown() {
+    if (intervalId) {
+      window.clearInterval(intervalId);
+      intervalId = null;
+    }
+  }
+  /* ═══ CHECKPOINT [M05] CountdownPersistente ✓ — Timer 24h com persistência em localStorage ═══ */
+
+  /* ═══ MÓDULO: CopiarCupom ═══
+     ID: M06
+     ORIGEM: clipboard.writeText + fallbackCopy + showCopied do artefato original
+     DEPENDE DE: M01, M02
+     RECEBE: CONFIG.couponCode, CONFIG.copiedText, CONFIG.copyBtnText, CONFIG.copyResetMs
+     EXPÕE: bindCopy()
+     ESTADO: —
+     SCHEMA BINDINGS: coupon_code, copied_text, copy_btn_text_initial, copied_reset_ms
+  ═══ */
+  function fallbackCopy(code) {
+    var ta = document.createElement('textarea');
+    ta.value = code;
+    ta.style.position = 'fixed';
+    ta.style.left = '-9999px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch(e) {}
+    document.body.removeChild(ta);
+    showCopied();
+  }
+
+  function showCopied() {
+    els.copyText.textContent = CONFIG.copiedText;
+    window.setTimeout(function() {
+      els.copyText.textContent = CONFIG.copyBtnText;
+    }, CONFIG.copyResetMs);
+  }
+
+  function bindCopy() {
+    els.copyBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var code = CONFIG.couponCode;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(function() {
+          showCopied();
+        }).catch(function() {
+          fallbackCopy(code);
+        });
+      } else {
+        fallbackCopy(code);
+      }
+    });
+  }
+  /* ═══ CHECKPOINT [M06] CopiarCupom ✓ — Copiar cupom + feedback "Copiado!" ═══ */
+
+  /* ═══ MÓDULO: CTA_Redirect ═══
+     ID: M07
+     ORIGEM: click do botão CTA → window.location.href = ctaLink (artefato original)
+     DEPENDE DE: M01
+     RECEBE: CONFIG.ctaLink
+     EXPÕE: bindCTA()
+     ESTADO: —
+     SCHEMA BINDINGS: cta_link
+  ═══ */
+  function bindCTA() {
+    els.ctaBtn.addEventListener('click', function() {
+      window.location.href = CONFIG.ctaLink;
+    });
+  }
+  /* ═══ CHECKPOINT [M07] CTA_Redirect ✓ — Clique redireciona para cta_link ═══ */
+
+  /* ═══ MÓDULO: BootstrapSection ═══
+     ID: M08
+     ORIGEM: IIFE bootstrap do artefato original
+     DEPENDE DE: M01..M07
+     RECEBE: —
+     EXPÕE: init(), destroy()
+     ESTADO: NS[sectionId]
+     SCHEMA BINDINGS: (agregação) todos os bindings consumidos por M02..M07
+  ═══ */
+  function init() {
+    if (!validateDOM()) { return; }
+    applyContent();
+    applyPriceBadges();
+    applyMedia();
+    initCountdown();
+    bindCopy();
+    bindCTA();
+  }
+
+  function destroy() {
+    destroyCountdown();
+  }
+
+  init();
+
+  // Theme Editor support: cleanup quando a seção for descarregada
+  document.addEventListener('shopify:section:unload', function(e) {
+    if (e && e.detail && String(e.detail.sectionId) === String(SECTION_ID)) {
+      destroy();
+    }
+  });
+
+  NS[SECTION_ID] = {
+    config: CONFIG,
+    root: root,
+    els: els,
+    tick: tick,
+    init: init,
+    destroy: destroy,
+    validateDOM: validateDOM
+  };
+  /* ═══ CHECKPOINT [M08] BootstrapSection ✓ — Init + lifecycle + namespace por section.id ═══ */
+
+  /* ═══ MÓDULO: ValidacaoIntegridade ═══
+     ID: M09
+     ORIGEM: OP_7 __VALIDATE_INTEGRITY__ (invariantes executáveis)
+     DEPENDE DE: M01..M08
+     RECEBE: (opcional) sectionId
+     EXPÕE: window.__VALIDATE_INTEGRITY__()
+     ESTADO: —
+     SCHEMA BINDINGS: valida presença de custom properties + CONFIG + DOM
+  ═══ */
+  window.__VALIDATE_INTEGRITY__ = function(sectionId) {
+    var sid = (typeof sectionId !== 'undefined' && sectionId !== null) ? String(sectionId) : String(SECTION_ID);
+    var inst = (window.__PROMO_BANNER__ && window.__PROMO_BANNER__[sid]) ? window.__PROMO_BANNER__[sid] : null;
+    var results = [];
+
+    function assert(module, test, description) {
+      try {
+        var pass = !!test();
+        results.push({ module: module, description: description, status: pass ? '✅' : '❌' });
+      } catch (e) {
+        results.push({ module: module, description: description, status: '💥 ERRO: ' + e.message });
+      }
+    }
+
+    assert('M01', function() { return !!inst && !!inst.root; }, 'Instância existe e root está disponível');
+    assert('M01', function() { return !!inst && typeof inst.validateDOM === 'function' && inst.validateDOM(); }, 'Estrutura DOM válida (IDs/elementos)');
+
+    assert('M02', function() { return !!inst && typeof inst.config === 'object' && inst.config.badgeText !== undefined; }, 'CONFIG existe e contém badgeText');
+    assert('M03', function() { return !!inst && inst.els && inst.els.discountBadge; }, 'Badge de desconto existe no DOM');
+    assert('M03', function() { return !!inst && inst.els && inst.els.shippingBadge; }, 'Badge de frete existe no DOM');
+
+    assert('M04', function() { return !!inst && inst.els && inst.els.imgMobile && inst.els.imgDesktop; }, 'Imagens mobile/desktop existem');
+    assert('M04', function() {
+      var el = document.getElementById('shopify-section-' + sid);
+      if (!el) return false;
+      var style = getComputedStyle(el);
+      return String(style.getPropertyValue('--pb-max-width') || '').trim() !== '';
+    }, 'Custom properties do schema injetadas no CSS (#shopify-section-{{section.id}})');
+
+    assert('M05', function() { return !!inst && typeof inst.tick === 'function'; }, 'Função tick() existe');
+    assert('M06', function() { return !!inst && inst.els && inst.els.copyBtn && inst.els.copyText; }, 'Botão de copiar e label existem');
+    assert('M07', function() { return !!inst && inst.els && inst.els.ctaBtn; }, 'CTA existe');
+    assert('M08', function() { return !!inst && typeof inst.destroy === 'function' && typeof inst.init === 'function'; }, 'Lifecycle init/destroy existe');
+
+    console.table(results);
+    var failures = results.filter(function(r) { return r.status !== '✅'; });
+    if (failures.length === 0) {
+      console.log('%c✅ TODOS OS INVARIANTES PASSARAM', 'color:green;font-size:16px');
+    } else {
+      console.log('%c❌ ' + failures.length + ' FALHA(S) DETECTADA(S)', 'color:red;font-size:16px');
+    }
+    return results;
+  };
+  /* ═══ CHECKPOINT [M09] ValidacaoIntegridade ✓ — __VALIDATE_INTEGRITY__() disponível via console ═══ */
+
+})();
+</script>
+{% schema %}
+
+{
+  "name": "Archfy Section Ravick",
+  "tag": "section",
+  "class": "promo-banner-section",
+  "settings": [
+    {
+      "type": "font_picker",
+      "id": "font_body",
+      "label": "Fonte principal",
+      "default": "poppins_n4"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Largura máxima (px)",
+      "default": 1200,
+      "min": 320,
+      "max": 2000,
+      "step": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius (px)",
+      "default": 12,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "shadow_x",
+      "label": "Sombra X (px)",
+      "default": 0,
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "shadow_y",
+      "label": "Sombra Y (px)",
+      "default": 4,
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Sombra blur (px)",
+      "default": 12,
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "shadow_spread",
+      "label": "Sombra spread (px)",
+      "default": 0,
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Cor sombra",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Sombra opacity (x100)",
+      "default": 15,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "select",
+      "id": "bg_gradient_direction",
+      "label": "Direção gradiente",
+      "default": "to right",
+      "options": [
+        {"value": "to right", "label": "to right"},
+        {"value": "to left", "label": "to left"},
+        {"value": "to bottom", "label": "to bottom"},
+        {"value": "to top", "label": "to top"},
+        {"value": "135deg", "label": "135deg"}
+      ]
+    },
+    {
+      "type": "color",
+      "id": "bg_color_1",
+      "label": "Cor 1 gradiente",
+      "default": "#3B9B3B"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_2",
+      "label": "Cor 2 gradiente",
+      "default": "#367D36"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_3",
+      "label": "Cor 3 gradiente",
+      "default": "#2E602E"
+    },
+    {
+      "type": "select",
+      "id": "bg_size",
+      "label": "Background-size",
+      "default": "cover",
+      "options": [
+        {"value": "cover", "label": "cover"},
+        {"value": "contain", "label": "contain"},
+        {"value": "auto", "label": "auto"}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "bg_position",
+      "label": "Background-position",
+      "default": "center",
+      "options": [
+        {"value": "center", "label": "center"},
+        {"value": "top", "label": "top"},
+        {"value": "bottom", "label": "bottom"},
+        {"value": "left", "label": "left"},
+        {"value": "right", "label": "right"}
+      ]
+    },
+    {
+      "type": "url",
+      "id": "bg_image_url",
+      "label": "Imagem fundo (URL)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_override",
+      "label": "Img fundo (upload)"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay_alpha",
+      "label": "Overlay opac (x100)",
+      "default": 5,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "grid_padding_y_mobile",
+      "label": "Pad Y mobile (px)",
+      "default": 16,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "grid_padding_x_mobile",
+      "label": "Pad X mobile (px)",
+      "default": 14,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_mobile",
+      "label": "Gap grid mob (px)",
+      "default": 10,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "grid_padding_desktop",
+      "label": "Pad desktop (px)",
+      "default": 32,
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "grid_gap_desktop",
+      "label": "Gap grid desk (px)",
+      "default": 24,
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "left_gap",
+      "label": "Gap col esq (px)",
+      "default": 8,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badges_gap",
+      "label": "Gap badges (px)",
+      "default": 6,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_font_weight",
+      "label": "Badge weight",
+      "default": 800,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size_mobile",
+      "label": "Badge size mob (px)",
+      "default": 9,
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_font_size_sm",
+      "label": "Badge size ≥640 (px)",
+      "default": 14,
+      "min": 6,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_y_mobile",
+      "label": "Badge pad Y mob (px)",
+      "default": 4,
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_x_mobile",
+      "label": "Badge pad X mob (px)",
+      "default": 10,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_y_sm",
+      "label": "Badge pad Y ≥640 (px)",
+      "default": 6,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_padding_x_sm",
+      "label": "Badge pad X ≥640 (px)",
+      "default": 16,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_radius",
+      "label": "Badge radius (px)",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_letter_spacing",
+      "label": "Badge space (x100)",
+      "default": 5,
+      "min": 0,
+      "max": 20,
+      "step": 1
+    },
+    {
+      "type": "color",
+      "id": "badge_primary_bg",
+      "label": "Badge 1° bg",
+      "default": "#F9851F"
+    },
+    {
+      "type": "color",
+      "id": "badge_primary_text_color",
+      "label": "Badge 1° texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "badge_primary_shadow_y",
+      "label": "Badge 1° shad Y (px)",
+      "default": 2,
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_primary_shadow_blur",
+      "label": "Badge 1° blur (px)",
+      "default": 6,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "badge_primary_shadow_color",
+      "label": "Badge 1° shad cor",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "badge_primary_shadow_opacity",
+      "label": "Badge 1° opac (x100)",
+      "default": 15,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "badge_outline_border_width",
+      "label": "Badge out borda (px)",
+      "default": 2,
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "badge_outline_border_color",
+      "label": "Badge out cor",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "badge_outline_border_opacity",
+      "label": "Badge out opac x100",
+      "default": 70,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "color",
+      "id": "badge_outline_text_color",
+      "label": "Badge out texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "shipping_border_width",
+      "label": "Frete borda (px)",
+      "default": 2,
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "shipping_border_color",
+      "label": "Frete borda cor",
+      "default": "#CCFD3F"
+    },
+    {
+      "type": "color",
+      "id": "shipping_text_color",
+      "label": "Frete texto cor",
+      "default": "#CCFD3F"
+    },
+    {
+      "type": "color",
+      "id": "discount_bg",
+      "label": "Desconto bg",
+      "default": "#FF0000"
+    },
+    {
+      "type": "color",
+      "id": "discount_text_color",
+      "label": "Desconto texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "discount_padding_y_mobile",
+      "label": "Desc pad Y mob (px)",
+      "default": 3,
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "discount_padding_x_mobile",
+      "label": "Desc pad X mob (px)",
+      "default": 10,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "discount_font_size_mobile",
+      "label": "Desc size mob (px)",
+      "default": 9,
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "discount_radius",
+      "label": "Desc radius (px)",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "discount_padding_y_sm",
+      "label": "Desc pad Y ≥640 (px)",
+      "default": 4,
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "discount_padding_x_sm",
+      "label": "Desc pad X ≥640 (px)",
+      "default": 12,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "discount_font_size_sm",
+      "label": "Desc size ≥640 (px)",
+      "default": 12,
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "coupon_extra_bg",
+      "label": "Cupom extra bg",
+      "default": "#FF8800"
+    },
+    {
+      "type": "color",
+      "id": "coupon_extra_text_color",
+      "label": "Cupom extra texto",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "coupon_extra_padding_y_mobile",
+      "label": "Cupom pad Y mob (px)",
+      "default": 3,
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_extra_padding_x_mobile",
+      "label": "Cupom pad X mob (px)",
+      "default": 8,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_extra_font_size_mobile",
+      "label": "Cupom size mob (px)",
+      "default": 9,
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_extra_radius",
+      "label": "Cupom radius (px)",
+      "default": 4,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_extra_padding_y_sm",
+      "label": "Cupom pad Y ≥640 (px)",
+      "default": 4,
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_extra_padding_x_sm",
+      "label": "Cupom pad X ≥640 (px)",
+      "default": 10,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_extra_font_size_sm",
+      "label": "Cupom size ≥640 (px)",
+      "default": 12,
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "product_name_color",
+      "label": "Nome produto cor",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "product_name_font_size_mobile",
+      "label": "Nome size mob (px)",
+      "default": 20,
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "product_name_font_size_sm",
+      "label": "Nome size ≥640 (px)",
+      "default": 30,
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "product_name_font_weight",
+      "label": "Nome weight",
+      "default": 800,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "product_name_line_height",
+      "label": "Nome line-h (x100)",
+      "default": 120,
+      "min": 80,
+      "max": 200,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "product_name_shadow_y",
+      "label": "Nome shad Y (px)",
+      "default": 1,
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "product_name_shadow_blur",
+      "label": "Nome blur (px)",
+      "default": 2,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "product_name_shadow_color",
+      "label": "Nome shad cor",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "product_name_shadow_opacity",
+      "label": "Nome opac (x100)",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "url",
+      "id": "product_image_url",
+      "label": "Img produto (URL)"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_override",
+      "label": "Img (upload)"
+    },
+    {
+      "type": "text",
+      "id": "image_alt_initial",
+      "label": "Alt imagem (HTML)"
+    },
+    {
+      "type": "range",
+      "id": "img_mobile_max_width",
+      "label": "Img mob max-w (px)",
+      "default": 220,
+      "min": 50,
+      "max": 600,
+      "step": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "img_mobile_aspect_ratio",
+      "label": "Img mob aspect x100",
+      "default": 100,
+      "min": 50,
+      "max": 200,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "img_desktop_size",
+      "label": "Img desk size (px)",
+      "default": 330,
+      "min": 100,
+      "max": 800,
+      "step": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "img_desktop_margin_y",
+      "label": "Img desk marg Y (px)",
+      "default": -48,
+      "min": -200,
+      "max": 200,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "img_desktop_scale",
+      "label": "Img desk scale x100",
+      "default": 110,
+      "min": 50,
+      "max": 200,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "img_drop_shadow_y",
+      "label": "Img shad Y (px)",
+      "default": 8,
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "img_drop_shadow_blur",
+      "label": "Img shad blur (px)",
+      "default": 16,
+      "min": 0,
+      "max": 80,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "img_drop_shadow_color",
+      "label": "Img shad cor",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "img_drop_shadow_opacity",
+      "label": "Img opac (x100)",
+      "default": 25,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "prices_gap",
+      "label": "Gap preços (px)",
+      "default": 4,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "old_price_opacity",
+      "label": "Old price opac x100",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "old_price_font_size",
+      "label": "Old price size (px)",
+      "default": 13,
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "new_price_font_weight",
+      "label": "New price weight",
+      "default": 800,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "new_price_font_size_base",
+      "label": "New price base (px)",
+      "default": 27,
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "new_price_font_size_sm",
+      "label": "New price ≥640 (px)",
+      "default": 24,
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "new_price_font_size_lg",
+      "label": "New price ≥1024 (px)",
+      "default": 24,
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "new_price_value_color",
+      "label": "New price cor",
+      "default": "#CCFD3F"
+    },
+    {
+      "type": "range",
+      "id": "new_price_value_shadow_y",
+      "label": "Price shad Y (px)",
+      "default": 1,
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "new_price_value_shadow_blur",
+      "label": "Price blur (px)",
+      "default": 2,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "new_price_value_shadow_color",
+      "label": "Price shad cor",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "new_price_value_shadow_opacity",
+      "label": "Price opac (x100)",
+      "default": 10,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "installments_opacity",
+      "label": "Parcela opac (x100)",
+      "default": 70,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "installments_font_weight",
+      "label": "Parcela weight",
+      "default": 600,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "installments_font_size_base",
+      "label": "Parcela base (px)",
+      "default": 19,
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "installments_font_size_sm",
+      "label": "Parcela ≥640 (px)",
+      "default": 16,
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "installments_font_size_lg",
+      "label": "Parcela ≥1024 (px)",
+      "default": 16,
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_gap",
+      "label": "Gap cupom (px)",
+      "default": 8,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_margin_top",
+      "label": "Cupom marg-top (px)",
+      "default": 4,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_label_opacity",
+      "label": "Cupom label opac x100",
+      "default": 80,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "coupon_label_font_size",
+      "label": "Cupom label size (px)",
+      "default": 12,
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_label_font_weight",
+      "label": "Cupom label weight",
+      "default": 500,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_border_width",
+      "label": "Cupom borda (px)",
+      "default": 2,
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "coupon_code_border_color",
+      "label": "Cupom borda cor",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_border_opacity",
+      "label": "Cupom opac (x100)",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_padding_y_mobile",
+      "label": "Cupom pad Y mob (px)",
+      "default": 8,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_padding_x_mobile",
+      "label": "Cupom pad X mob (px)",
+      "default": 18,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_radius",
+      "label": "Cupom radius (px)",
+      "default": 4,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_font_weight",
+      "label": "Cupom weight",
+      "default": 900,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_font_size_mobile",
+      "label": "Cupom size mob (px)",
+      "default": 18,
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_letter_spacing",
+      "label": "Cupom space (x100)",
+      "default": 5,
+      "min": 0,
+      "max": 20,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_padding_y_desktop",
+      "label": "Cupom pad Y desk (px)",
+      "default": 5,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_padding_x_desktop",
+      "label": "Cupom pad X desk (px)",
+      "default": 12,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "coupon_code_font_size_desktop",
+      "label": "Cupom size desk (px)",
+      "default": 12,
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_bg_opacity",
+      "label": "Copy bg opac (x100)",
+      "default": 15,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_bg_hover_opacity",
+      "label": "Copy hover opac x100",
+      "default": 25,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_padding_y_mobile",
+      "label": "Copy pad Y mob (px)",
+      "default": 8,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_padding_x_mobile",
+      "label": "Copy pad X mob (px)",
+      "default": 12,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_radius",
+      "label": "Copy radius (px)",
+      "default": 4,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_font_size_mobile",
+      "label": "Copy size mob (px)",
+      "default": 16,
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_font_weight",
+      "label": "Copy weight",
+      "default": 600,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_transition_s",
+      "label": "Copy trans (x100)",
+      "default": 20,
+      "min": 0,
+      "max": 200,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_padding_y_desktop",
+      "label": "Copy pad Y desk (px)",
+      "default": 5,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_padding_x_desktop",
+      "label": "Copy pad X desk (px)",
+      "default": 8,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_font_size_desktop",
+      "label": "Copy size desk (px)",
+      "default": 11,
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_svg_size",
+      "label": "Copy SVG size (px)",
+      "default": 14,
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "copy_btn_gap",
+      "label": "Copy gap (px)",
+      "default": 4,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "right_gap",
+      "label": "Gap col dir (px)",
+      "default": 12,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "countdown_label_font_size",
+      "label": "Count label size (px)",
+      "default": 20,
+      "min": 10,
+      "max": 60,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "countdown_label_font_weight",
+      "label": "Count label weight",
+      "default": 800,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "color",
+      "id": "countdown_label_color",
+      "label": "Count label cor",
+      "default": "#CCFD3F"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg",
+      "label": "CTA background",
+      "default": "#FF8800"
+    },
+    {
+      "type": "color",
+      "id": "cta_bg_hover",
+      "label": "CTA hover bg",
+      "default": "#FFA43B"
+    },
+    {
+      "type": "color",
+      "id": "cta_text_color",
+      "label": "CTA texto cor",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "cta_radius",
+      "label": "CTA radius (px)",
+      "default": 50,
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cta_padding_y",
+      "label": "CTA pad Y (px)",
+      "default": 16,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cta_padding_x_mobile",
+      "label": "CTA pad X mob (px)",
+      "default": 40,
+      "min": 0,
+      "max": 120,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cta_padding_x_sm",
+      "label": "CTA pad X ≥640 (px)",
+      "default": 56,
+      "min": 0,
+      "max": 160,
+      "step": 2,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cta_gap",
+      "label": "CTA gap (px)",
+      "default": 8,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cta_transition_s",
+      "label": "CTA trans (x100)",
+      "default": 30,
+      "min": 0,
+      "max": 200,
+      "step": 5
+    },
+    {
+      "type": "range",
+      "id": "cta_hover_scale",
+      "label": "CTA hover scale x100",
+      "default": 105,
+      "min": 100,
+      "max": 150,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "cta_max_width",
+      "label": "CTA max-width (px)",
+      "default": 320,
+      "min": 100,
+      "max": 600,
+      "step": 10,
+      "unit": "px"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA link"
+    },
+    {
+      "type": "range",
+      "id": "shine_opacity",
+      "label": "Shine opac (x100)",
+      "default": 30,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "shine_skew_deg",
+      "label": "Shine skew (deg)",
+      "default": -20,
+      "min": -60,
+      "max": 60,
+      "step": 2,
+      "unit": "deg"
+    },
+    {
+      "type": "range",
+      "id": "shine_width_pct",
+      "label": "Shine width (%)",
+      "default": 50,
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "shine_anim_duration_s",
+      "label": "Shine duração (s)",
+      "default": 10,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "unit": "s"
+    },
+    {
+      "type": "select",
+      "id": "shine_anim_timing",
+      "label": "Shine easing",
+      "default": "ease-in-out",
+      "options": [
+        {"value": "linear", "label": "linear"},
+        {"value": "ease", "label": "ease"},
+        {"value": "ease-in", "label": "ease-in"},
+        {"value": "ease-out", "label": "ease-out"},
+        {"value": "ease-in-out", "label": "ease-in-out"}
+      ]
+    },
+    {
+      "type": "range",
+      "id": "timer_gap",
+      "label": "Timer gap (px)",
+      "default": 4,
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "timer_number_font_size",
+      "label": "Timer num size (px)",
+      "default": 34,
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "timer_number_font_weight",
+      "label": "Timer num weight",
+      "default": 900,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "timer_label_font_size",
+      "label": "Timer label size (px)",
+      "default": 10,
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "timer_label_font_weight",
+      "label": "Timer label weight",
+      "default": 500,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "timer_label_letter_spacing",
+      "label": "Timer space (x100)",
+      "default": 5,
+      "min": 0,
+      "max": 20,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "timer_label_opacity",
+      "label": "Timer opac (x100)",
+      "default": 80,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "timer_sep_font_size",
+      "label": "Timer sep size (px)",
+      "default": 14,
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "timer_sep_font_weight",
+      "label": "Timer sep weight",
+      "default": 900,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "timer_sep_margin_x",
+      "label": "Timer sep marg (px)",
+      "default": 5,
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cart_gap",
+      "label": "Cart gap (px)",
+      "default": 8,
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cart_font_size",
+      "label": "Cart size (px)",
+      "default": 16,
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cart_font_weight",
+      "label": "Cart weight",
+      "default": 700,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "cart_border_width",
+      "label": "Cart border (px)",
+      "default": 1,
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "cart_border_color",
+      "label": "Cart border cor",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "cart_border_opacity",
+      "label": "Cart opac (x100)",
+      "default": 30,
+      "min": 0,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "cart_padding_top",
+      "label": "Cart pad-top (px)",
+      "default": 8,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cart_svg_size",
+      "label": "Cart SVG size (px)",
+      "default": 16,
+      "min": 8,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "countdown_hours",
+      "label": "Countdown (horas)",
+      "default": 24,
+      "min": 1,
+      "max": 24,
+      "step": 1,
+      "unit": "h"
+    },
+    {
+      "type": "number",
+      "id": "free_shipping_min",
+      "label": "Frete grátis mín (R$)",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "copied_reset_ms",
+      "label": "Reset copiado (ms)",
+      "default": 2000,
+      "min": 500,
+      "max": 6000,
+      "step": 100,
+      "unit": "ms"
+    },
+    {
+      "type": "text",
+      "id": "badge_primary_text_initial",
+      "label": "Badge 1° HTML",
+      "default": "Oferta 24h ⌚"
+    },
+    {
+      "type": "text",
+      "id": "badge_secondary_text_initial",
+      "label": "Badge 2° HTML",
+      "default": "COMPRE 2 LEVE 3"
+    },
+    {
+      "type": "text",
+      "id": "product_name_initial",
+      "label": "Nome produto HTML",
+      "default": "Laranja Moro Morosil®"
+    },
+    {
+      "type": "text",
+      "id": "old_price_initial",
+      "label": "Preço antigo HTML",
+      "default": "R$ 499,50"
+    },
+    {
+      "type": "text",
+      "id": "new_price_initial",
+      "label": "Novo preço HTML",
+      "default": "R$ 197,90"
+    },
+    {
+      "type": "text",
+      "id": "installments_initial",
+      "label": "Parcelamento HTML",
+      "default": "ou até 10x de R$ 23,19"
+    },
+    {
+      "type": "text",
+      "id": "coupon_label_initial",
+      "label": "Label cupom HTML",
+      "default": "USE O CUPOM:"
+    },
+    {
+      "type": "text",
+      "id": "coupon_code_initial",
+      "label": "Cupom HTML",
+      "default": "CONSUMIDOR"
+    },
+    {
+      "type": "text",
+      "id": "coupon_extra_initial",
+      "label": "Cupom extra HTML",
+      "default": "+20% OFF com cupom"
+    },
+    {
+      "type": "text",
+      "id": "countdown_label_initial",
+      "label": "Count label HTML",
+      "default": "Compre em até"
+    },
+    {
+      "type": "text",
+      "id": "timer_initial_hours",
+      "label": "Horas inicial HTML",
+      "default": "23"
+    },
+    {
+      "type": "text",
+      "id": "timer_initial_minutes",
+      "label": "Min inicial HTML",
+      "default": "59"
+    },
+    {
+      "type": "text",
+      "id": "timer_initial_seconds",
+      "label": "Seg inicial HTML",
+      "default": "38"
+    },
+    {
+      "type": "text",
+      "id": "cta_text_desktop_initial",
+      "label": "CTA desktop HTML",
+      "default": "Comprar Agora"
+    },
+    {
+      "type": "text",
+      "id": "cta_text_mobile_initial",
+      "label": "CTA mobile HTML",
+      "default": "Comprar Agora"
+    },
+    {
+      "type": "text",
+      "id": "copy_btn_title_initial",
+      "label": "Copy title HTML",
+      "default": "Copiar cupom"
+    },
+    {
+      "type": "text",
+      "id": "copy_btn_text_initial",
+      "label": "Copy text HTML",
+      "default": "Copiar"
+    },
+    {
+      "type": "text",
+      "id": "badge_primary_text",
+      "label": "Badge 1° JS",
+      "default": "Oferta 24h"
+    },
+    {
+      "type": "text",
+      "id": "badge_secondary_text",
+      "label": "Badge 2° JS",
+      "default": "COMPRE 2 LEVE 3"
+    },
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Nome produto JS",
+      "default": "Laranja Moro Morosil®"
+    },
+    {
+      "type": "text",
+      "id": "old_price",
+      "label": "Preço antigo JS",
+      "default": "R$ 299,70"
+    },
+    {
+      "type": "text",
+      "id": "new_price",
+      "label": "Novo preço JS",
+      "default": "R$ 197,90"
+    },
+    {
+      "type": "text",
+      "id": "installments",
+      "label": "Parcelamento JS",
+      "default": "ou até 10x de R$ 23,19"
+    },
+    {
+      "type": "text",
+      "id": "coupon_label",
+      "label": "Label cupom JS",
+      "default": "USE O CUPOM:"
+    },
+    {
+      "type": "text",
+      "id": "coupon_code",
+      "label": "Cupom JS",
+      "default": "CONSUMIDOR"
+    },
+    {
+      "type": "text",
+      "id": "coupon_extra_text",
+      "label": "Cupom extra JS",
+      "default": "+20%OFF com cupom"
+    },
+    {
+      "type": "text",
+      "id": "countdown_label",
+      "label": "Count label JS",
+      "default": "Compre em até"
+    },
+    {
+      "type": "text",
+      "id": "timer_label_hours",
+      "label": "Timer horas label",
+      "default": "Horas"
+    },
+    {
+      "type": "text",
+      "id": "timer_label_minutes",
+      "label": "Timer min label",
+      "default": "Min"
+    },
+    {
+      "type": "text",
+      "id": "timer_label_seconds",
+      "label": "Timer seg label",
+      "default": "Seg"
+    },
+    {
+      "type": "text",
+      "id": "shipping_badge_text",
+      "label": "Badge frete grátis",
+      "default": "FRETE GRÁTIS"
+    },
+    {
+      "type": "text",
+      "id": "copied_text",
+      "label": "Texto copiado",
+      "default": "Copiado!"
+    },
+    {
+      "type": "text",
+      "id": "old_price_prefix_text",
+      "label": "Prefixo old price",
+      "default": "de"
+    },
+    {
+      "type": "text",
+      "id": "new_price_prefix_text",
+      "label": "Prefixo new price",
+      "default": "por"
+    },
+    {
+      "type": "text",
+      "id": "countdown_storage_key",
+      "label": "localStorage key",
+      "default": "promo-banner-countdown-end"
+    },
+    {
+      "type": "range",
+      "id": "old_price_row_gap",
+      "label": "Gap old price (px)",
+      "default": 8,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "new_price_row_gap",
+      "label": "Gap new price (px)",
+      "default": 8,
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "badge_primary_shadow_x",
+      "label": "Badge 1° shad X (px)",
+      "default": 0,
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "product_name_shadow_x",
+      "label": "Nome shad X (px)",
+      "default": 0,
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "new_price_value_shadow_x",
+      "label": "Price shad X (px)",
+      "default": 0,
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "img_drop_shadow_x",
+      "label": "Img shad X (px)",
+      "default": 0,
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "cta_font_weight",
+      "label": "CTA font-weight",
+      "default": 800,
+      "min": 100,
+      "max": 900,
+      "step": 100
+    },
+    {
+      "type": "range",
+      "id": "countdown_tick_ms",
+      "label": "Countdown tick (ms)",
+      "default": 1000,
+      "min": 100,
+      "max": 5000,
+      "step": 50,
+      "unit": "ms"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Archfy Section Ravick"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1489 @@
+{% if section.settings.standalone_page %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="icon" href="./favicon.png" type="image/png"/>
+<link rel="preload" as="image" href="{% if section.settings.hero_product_image %}{{ section.settings.hero_product_image | image_url: width: 480 }}{% else %}./assets/saco-produto-jejoom.webp{% endif %}"/>
+<title>Jejoom Denavita | Shot Matinal para Acelerar o Metabolismo e Emagrecer</title>
+<meta name="description" content="Jejoom é o shot matinal em pó sabor tangerina com Curcumina, L-Cisteína, Vitamina C e Zinco. Acelere o metabolismo, combata o inchaço e emagreça de verdade."/>
+<meta name="keywords" content="jejoom, shot matinal, emagrecer, metabolismo, curcumina, denavita, suplemento natural, queimar gordura, desinchar"/>
+<meta name="author" content="Denavita"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://jejoom.denavita.com.br"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://jejoom.denavita.com.br"/>
+<meta property="og:title" content="Jejoom Denavita | Shot Matinal para Emagrecer"/>
+<meta property="og:description" content="Shot matinal em pó com 7 ativos poderosos que aceleram o metabolismo e potencializam o emagrecimento. Sabor tangerina."/>
+<meta property="og:locale" content="pt_BR"/>
+<meta property="og:site_name" content="Denavita"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Jejoom Denavita | Shot Matinal para Emagrecer"/>
+<meta name="twitter:description" content="Shot matinal em pó com 7 ativos poderosos que aceleram o metabolismo e potencializam o emagrecimento. Sabor tangerina."/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Jejoom Shot Matinal Denavita","description":"Shot matinal em pó sabor tangerina com Curcumina, L-Cisteína, Vitamina C, Vitamina E, Zinco, Selênio e Antocianinas.","brand":{"@type":"Brand","name":"Denavita"},"offers":{"@type":"Offer","availability":"https://schema.org/InStock","priceCurrency":"BRL"}}
+</script>
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-262158423"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-262158423');</script>
+<!-- Facebook Pixel -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1120227461949168');fbq('track','PageView');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet"/></noscript>
+{% endif %}
+<style>
+/* ═══ MÓDULO: DesignSystem ═══
+   ID: M18
+   ORIGEM: index.css + tailwind.config.ts
+   DEPENDE DE: nenhum
+   RECEBE: nenhum
+   EXPÕE: variáveis CSS, classes utilitárias
+   ESTADO: nenhum
+═══ */
+:root {
+  --primary: 82,99%,35%;
+  --primary-dark: 82,99%,28%;
+  --primary-light: 82,60%,90%;
+  --primary-foreground: 0,0%,100%;
+  --secondary: 0,85%,52%;
+  --secondary-foreground: 0,0%,100%;
+  --secondary-light: 0,90%,95%;
+  --foreground: 220,20%,15%;
+  --background: 0,0%,100%;
+  --muted: 220,15%,96%;
+  --muted-foreground: 220,10%,45%;
+  --accent: 0,85%,52%;
+  --accent-light: 0,90%,95%;
+  --border: 220,15%,90%;
+  --destructive-foreground: 0,0%,100%;
+  --footer-bg: 100,98%,13%;
+  --radius: 0.75rem;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{overflow-x:hidden;max-width:100vw;}
+body{font-family:'Inter',sans-serif;color:hsl(var(--foreground));background:hsl(var(--background));-webkit-font-smoothing:antialiased;line-height:1.5;}
+h1,h2,h3,h4,h5,h6{font-family:'Poppins',sans-serif;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;height:auto;display:block;}
+button{cursor:pointer;border:none;background:none;font-family:inherit;}
+.container{width:100%;max-width:1400px;margin:0 auto;padding:0 1rem;}
+/* Colors */
+.text-white{color:#fff;}.text-foreground{color:hsl(var(--foreground));}
+.text-muted-fg{color:hsl(var(--muted-foreground));}
+.text-primary{color:hsl(var(--primary));}
+.text-secondary{color:hsl(var(--secondary));}
+.bg-white{background:#fff;}.bg-primary{background:hsl(var(--primary));}
+.bg-secondary{background:hsl(var(--secondary));}
+.bg-muted{background:hsl(var(--muted));}
+/* Gradients */
+.bg-gradient-hero{background:linear-gradient(135deg,hsl(140,65%,33%) 0%,hsl(140,65%,22%) 100%);}
+.bg-gradient-red{background:linear-gradient(135deg,hsl(0,85%,52%) 0%,hsl(350,80%,45%) 100%);}
+.bg-gradient-subtle{background:linear-gradient(180deg,#fff 0%,hsl(var(--muted)) 100%);}
+.bg-gradient-green-light{background:linear-gradient(180deg,hsl(82,40%,95%) 0%,hsl(82,40%,90%) 100%);}
+.bg-footer{background:#1a3e01;}
+.bg-red-50{background:hsl(var(--secondary-light));}
+.bg-secondary-light{background:hsl(var(--secondary-light));}
+.bg-primary-light{background:hsl(var(--primary-light));}
+.bg-accent-light{background:hsl(var(--accent-light));}
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;border-radius:9999px;font-weight:700;transition:all .2s;position:relative;overflow:hidden;}
+.btn-primary{background:hsl(var(--primary));color:#fff;padding:0.75rem 2rem;font-size:1.125rem;}
+.btn-primary:hover{background:hsl(var(--primary-dark));}
+.btn-outline{background:rgba(255,255,255,0.8);color:hsl(var(--foreground));border:1px solid hsl(var(--border));padding:0.5rem 1.5rem;font-size:0.875rem;}
+.btn-outline:hover{background:#fff;}
+.btn-icon{width:2.5rem;height:2.5rem;border-radius:9999px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,0.1);display:flex;align-items:center;justify-content:center;border:1px solid hsl(var(--border));}
+.btn-shine::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent);animation:shine 2.5s infinite;}
+.btn-pulse{animation:pulse-glow 2s ease-in-out infinite;}
+@keyframes shine{0%{left:-100%}50%,100%{left:100%}}
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 0 hsla(82,99%,35%,0.4)}50%{box-shadow:0 0 0 15px hsla(82,99%,35%,0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.animate-float{animation:float 3s ease-in-out infinite;will-change:transform;}
+/* Scroll animations */
+@keyframes scroll-subhero{0%{transform:translateX(0)}100%{transform:translateX(-25%)}}
+@keyframes scroll-horizontal{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.animate-scroll-subhero{animation:scroll-subhero 15s linear infinite;width:max-content;will-change:transform;}
+.animate-scroll-videos{animation:scroll-horizontal 60s linear infinite;width:max-content;will-change:transform;}
+.animate-scroll-videos:hover{animation-play-state:paused;}
+.animate-scroll-left{animation:scroll-horizontal 60s linear infinite;width:max-content;will-change:transform;}
+.animate-scroll-left:hover{animation-play-state:paused;}
+/* Content-visibility for below-fold sections */
+[data-anim-section]{content-visibility:auto;contain-intrinsic-size:auto 600px;}
+/* Entrance animations */
+.anim-target{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease-out,transform 0.6s ease-out;}
+.anim-target.anim-left{transform:translateX(-30px);}
+.anim-target.anim-right{transform:translateX(30px);}
+.anim-target.anim-scale{transform:scale(0.8);}
+.anim-target.visible{opacity:1;transform:translateY(0) translateX(0) scale(1);}
+/* Sparkle */
+@keyframes sparkle{0%,100%{opacity:0;transform:scale(0.4)}25%{opacity:0.8;transform:scale(1)}50%{opacity:0.3;transform:scale(0.7)}75%{opacity:0.9;transform:scale(1.1)}}
+.sparkle-dot{position:absolute;border-radius:50%;pointer-events:none;animation:sparkle var(--dur) ease-in-out infinite;animation-delay:var(--delay);}
+/* Orange float */
+@keyframes orange-float-1{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+@keyframes orange-float-2{0%,100%{transform:translateY(0) rotate(5deg)}50%{transform:translateY(6px) rotate(-5deg)}}
+@keyframes orange-float-3{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(10px) rotate(-8deg)}}
+@keyframes orange-float-4{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-6px) rotate(10deg)}}
+.orange-float-1{animation:orange-float-1 4s ease-in-out infinite;}
+.orange-float-2{animation:orange-float-2 3.8s ease-in-out infinite 0.5s;}
+.orange-float-3{animation:orange-float-3 5s ease-in-out infinite 0.3s;}
+.orange-float-4{animation:orange-float-4 4.5s ease-in-out infinite 0.8s;}
+.orange-float-5{animation:orange-float-1 5.5s ease-in-out infinite 0.2s;}
+.orange-float-bg-1{animation:orange-float-3 6s ease-in-out infinite 0.4s;}
+.orange-float-bg-2{animation:orange-float-4 5s ease-in-out infinite 1s;}
+/* Layout helpers */
+.flex{display:flex;}.flex-col{flex-direction:column;}.items-center{align-items:center;}.items-start{align-items:flex-start;}
+.justify-center{justify-content:center;}.justify-between{justify-content:space-between;}.justify-end{justify-content:flex-end;}
+.gap-1{gap:0.25rem;}.gap-2{gap:0.5rem;}.gap-3{gap:0.75rem;}.gap-4{gap:1rem;}.gap-6{gap:1.5rem;}.gap-8{gap:2rem;}.gap-12{gap:3rem;}
+.grid{display:grid;}.text-center{text-align:center;}.text-left{text-align:left;}.text-right{text-align:right;}
+.relative{position:relative;}.absolute{position:absolute;}.fixed{position:fixed;}
+.z-10{z-index:10;}.z-20{z-index:20;}.z-50{z-index:50;}
+.overflow-hidden{overflow:hidden;}.shrink-0{flex-shrink:0;}
+.w-full{width:100%;}.h-full{height:100%;}.mx-auto{margin-left:auto;margin-right:auto;}
+.rounded-full{border-radius:9999px;}.rounded-xl{border-radius:calc(var(--radius) + 4px);}.rounded-2xl{border-radius:calc(var(--radius) + 8px);}.rounded-3xl{border-radius:calc(var(--radius) + 16px);}
+.font-bold{font-weight:700;}.font-semibold{font-weight:600;}.font-medium{font-weight:500;}
+.text-xs{font-size:0.75rem;}.text-sm{font-size:0.875rem;}.text-base{font-size:1rem;}.text-lg{font-size:1.125rem;}.text-xl{font-size:1.25rem;}.text-2xl{font-size:1.5rem;}.text-3xl{font-size:1.875rem;}.text-4xl{font-size:2.25rem;}
+.leading-tight{line-height:1.25;}
+.mb-1{margin-bottom:0.25rem;}.mb-2{margin-bottom:0.5rem;}.mb-3{margin-bottom:0.75rem;}.mb-4{margin-bottom:1rem;}.mb-6{margin-bottom:1.5rem;}.mb-8{margin-bottom:2rem;}.mb-16{margin-bottom:4rem;}
+.mt-4{margin-top:1rem;}.mt-8{margin-top:2rem;}.mt-12{margin-top:3rem;}
+.p-3{padding:0.75rem;}.p-4{padding:1rem;}.p-5{padding:1.25rem;}.p-6{padding:1.5rem;}.p-8{padding:2rem;}
+.px-3{padding-left:0.75rem;padding-right:0.75rem;}.px-4{padding-left:1rem;padding-right:1rem;}.px-6{padding-left:1.5rem;padding-right:1.5rem;}.px-8{padding-left:2rem;padding-right:2rem;}
+.py-2{padding-top:0.5rem;padding-bottom:0.5rem;}.py-3{padding-top:0.75rem;padding-bottom:0.75rem;}.py-4{padding-top:1rem;padding-bottom:1rem;}.py-5{padding-top:1.25rem;padding-bottom:1.25rem;}.py-6{padding-top:1.5rem;padding-bottom:1.5rem;}
+.pt-4{padding-top:1rem;}.pb-0{padding-bottom:0;}
+.space-y-2>*+*{margin-top:0.5rem;}.space-y-4>*+*{margin-top:1rem;}.space-y-6>*+*{margin-top:1.5rem;}.space-y-8>*+*{margin-top:2rem;}
+.inline-flex{display:inline-flex;}.inline-block{display:inline-block;}
+.line-through{text-decoration:line-through;}
+.whitespace-nowrap{white-space:nowrap;}
+.pointer-events-none{pointer-events:none;}
+.drop-shadow-lg{filter:drop-shadow(0 10px 8px rgba(0,0,0,.04)) drop-shadow(0 4px 3px rgba(0,0,0,.1));}
+.backdrop-blur-sm{backdrop-filter:blur(4px);}.backdrop-blur-md{backdrop-filter:blur(12px);}.backdrop-blur{backdrop-filter:blur(8px);}
+.transition-all{transition:all .3s;}.transition-transform{transition:transform .3s;}.transition-colors{transition:color .2s,background .2s;}
+.object-cover{object-fit:cover;}.object-contain{object-fit:contain;}
+.snap-x{scroll-snap-type:x mandatory;}.snap-center{scroll-snap-align:center;}
+.scrollbar-hide{scrollbar-width:none;-ms-overflow-style:none;}.scrollbar-hide::-webkit-scrollbar{display:none;}
+.border-t{border-top:1px solid;}.border-l-4{border-left:4px solid;}
+.shadow-lg{box-shadow:0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -4px rgba(0,0,0,.1);}
+.shadow-xl{box-shadow:0 20px 25px -5px rgba(0,0,0,.1),0 8px 10px -6px rgba(0,0,0,.1);}
+/* Icon base */
+.icon{display:inline-block;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.icon-fill{fill:currentColor;stroke:none;}
+/* Section spacing */
+.section-py{padding-top:5rem;padding-bottom:5rem;}
+/* Accordion */
+.accordion-content{max-height:0;overflow:hidden;transition:max-height 0.3s ease-out;}
+.accordion-content.open{max-height:500px;}
+.accordion-trigger svg.chevron{transition:transform 0.2s;}
+.accordion-trigger.open svg.chevron{transform:rotate(180deg);}
+/* Modal */
+.modal-overlay{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.modal-overlay.active{opacity:1;pointer-events:auto;}
+.modal-content{position:relative;max-width:48rem;width:95%;background:#000;border-radius:var(--radius);overflow:hidden;}
+/* Sticky footer */
+.sticky-footer{position:fixed;bottom:0;left:0;right:0;z-index:50;background:#fff;border-top:1px solid hsl(var(--border));box-shadow:0 -4px 20px rgba(0,0,0,0.1);transform:translateY(100%);opacity:0;transition:transform 0.3s,opacity 0.3s;will-change:transform,opacity;}
+.sticky-footer.visible{transform:translateY(0);opacity:1;}
+.dropdown-menu{position:absolute;bottom:100%;margin-bottom:0.5rem;background:#fff;border-radius:var(--radius);box-shadow:0 20px 25px -5px rgba(0,0,0,.1);border:1px solid hsl(var(--border));overflow:hidden;z-index:50;width:280px;opacity:0;transform:translateY(10px);pointer-events:none;transition:opacity 0.2s,transform 0.2s;}
+.dropdown-menu.open{opacity:1;transform:translateY(0);pointer-events:auto;}
+/* WhatsApp */
+.whatsapp-btn{position:fixed;bottom:6rem;right:1rem;z-index:50;width:3.5rem;height:3.5rem;background:#25D366;border-radius:9999px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,0.15);transition:transform 0.2s,background 0.2s;}
+.whatsapp-btn:hover{background:#20BD5A;transform:scale(1.1);}
+/* Responsive */
+@media(min-width:768px){
+  .container{padding:0 1.5rem;}
+  .md-hidden{display:none!important;}
+  .md-block{display:block!important;}
+  .md-flex{display:flex!important;}
+  .md-grid{display:grid!important;}
+  .md-grid-2{grid-template-columns:repeat(2,1fr);}
+  .md-grid-3{grid-template-columns:repeat(3,1fr);}
+  .section-py{padding-top:7rem;padding-bottom:7rem;}
+  .text-md-4xl{font-size:2.25rem;}.text-md-5xl{font-size:3rem;}
+  .text-md-xl{font-size:1.25rem;}
+}
+@media(min-width:1024px){
+  .lg-grid-2{grid-template-columns:repeat(2,1fr);}
+  .lg-grid-3{grid-template-columns:repeat(3,1fr);}
+  .lg-text-left{text-align:left;}
+  .lg-items-end{align-items:flex-end;}
+  .text-lg-5xl{font-size:3rem;}.text-lg-6xl{font-size:3.75rem;}
+}
+@media(max-width:767px){
+  .sm-only-hidden{display:none!important;}
+}
+/* Kit cards */
+.kit-card{border-radius:calc(var(--radius)+16px);padding:1.5rem;position:relative;}
+.kit-card.popular{background:hsl(var(--primary));border:2px solid hsl(var(--primary));box-shadow:0 0 0 4px hsla(var(--primary),0.2);}
+.kit-card.best-value{background:#fff;border:2px solid hsl(var(--secondary));box-shadow:0 0 0 4px hsla(var(--secondary),0.2);}
+.kit-card.default{background:#fff;border:1px solid hsl(var(--border));}
+.kit-badge{position:absolute;top:-1rem;left:50%;transform:translateX(-50%);font-size:0.75rem;font-weight:700;padding:0.5rem 1rem;border-radius:9999px;display:flex;align-items:center;gap:0.375rem;white-space:nowrap;}
+/* Star rating */
+.star-filled{color:#facc15;fill:#facc15;}
+.star-empty{color:hsl(var(--muted));fill:none;}
+/* Benefits card hover */
+@media(min-width:768px){.benefit-card:hover{background:rgba(255,255,255,0.6);transform:translateY(-8px);}}
+</style>
+{% if section.settings.standalone_page %}
+</head>
+<body>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1120227461949168&ev=PageView&noscript=1"/></noscript>
+{% endif %}
+<main style="overflow:hidden">
+
+<!-- ═══ SECTION: SubHero ═══ -->
+<section class="bg-gradient-red" style="padding:0.75rem 0;overflow:hidden">
+<div class="animate-scroll-subhero flex">
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">100% Natural</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Milhares de clientes satisfeitas</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Shot matinal em pó</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Frete Rápido</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Sabor delicioso de tangerina</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">100% Natural</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Milhares de clientes satisfeitas</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Shot matinal em pó</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Frete Rápido</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Sabor delicioso de tangerina</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">100% Natural</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Milhares de clientes satisfeitas</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Shot matinal em pó</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Frete Rápido</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Sabor delicioso de tangerina</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">100% Natural</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Milhares de clientes satisfeitas</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Shot matinal em pó</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Frete Rápido</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+<span class="flex items-center shrink-0"><span class="text-white font-semibold text-sm whitespace-nowrap px-4">Sabor delicioso de tangerina</span><span style="color:rgba(255,255,255,0.6);margin:0 0.5rem">•</span></span>
+</div>
+</section>
+
+<!-- ═══ SECTION: Hero ═══ -->
+<section id="inicio" class="relative bg-gradient-hero" style="min-height:100vh;overflow:hidden">
+<svg class="absolute z-20" style="bottom:-1px;left:0;width:100%;height:80px" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="white"/></svg>
+<div class="container relative z-10" style="padding-top:100px;padding-bottom:80px">
+<div class="grid gap-8 items-center" style="grid-template-columns:1fr" id="hero-grid">
+
+<div class="text-center anim-target" id="hero-content" style="max-width:350px;margin:0 auto">
+<div class="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6" style="background:rgba(255,255,255,0.2);backdrop-filter:blur(4px)">
+<svg class="icon" width="16" height="16" viewBox="0 0 24 24"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 8l.5 1.5L21 10l-1.5.5L19 12l-.5-1.5L17 10l1.5-.5z"/></svg>
+<span class="text-sm text-white font-medium">Jejoom - Shot Matinal Denavita</span>
+</div>
+<h1 class="text-4xl font-bold text-white leading-tight mb-6" style="font-family:'Poppins',sans-serif">Acorde, tome seu shot e <span style="color:#fcc603">queime gordura o dia todo.</span></h1>
+<p class="text-lg text-white mb-8" style="opacity:0.9;max-width:36rem;margin-left:auto;margin-right:auto">O shot matinal mais potente para desinchar, desintoxicar e acelerar o metabolismo. Sabor tangerina com ativos que potencializam o emagrecimento logo nas primeiras horas do dia.</p>
+<a href="#ofertas" class="btn btn-primary btn-pulse btn-shine" onclick="trackCTAClick('Quero desinchar agora','hero')" style="font-size:1.125rem;padding:0.75rem 2rem;gap:0.5rem">
+Quero desinchar agora
+<svg class="icon" width="20" height="20" viewBox="0 0 24 24" style="stroke:#fff"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+</a>
+</div>
+
+<div class="relative flex justify-center anim-target anim-scale" id="hero-image-wrap">
+<div class="relative">
+<div class="absolute" style="inset:0;background:rgba(250,204,0,0.4);border-radius:50%;filter:blur(80px);transform:scale(0.9)"></div>
+<div class="absolute" style="inset:0;background:rgba(245,191,50,0.25);border-radius:50%;filter:blur(120px);transform:scale(1.1)"></div>
+<!-- Sparkles -->
+<div id="sparkle-container" style="position:absolute;inset:0;pointer-events:none;z-index:3"></div>
+<!-- Floating oranges - foreground -->
+<img src="{% if section.settings.orange_1 %}{{ section.settings.orange_1 | image_url: width: 100 }}{% else %}./assets/laranja-1.webp{% endif %}" alt="" class="absolute orange-float-1 pointer-events-none drop-shadow-lg" style="left:-2.5rem;top:25%;width:5rem;z-index:15"/>
+<img src="{% if section.settings.orange_3 %}{{ section.settings.orange_3 | image_url: width: 80 }}{% else %}./assets/laranja-3.webp{% endif %}" alt="" class="absolute orange-float-2 pointer-events-none drop-shadow-lg" style="right:-1.5rem;bottom:15%;width:4rem;z-index:15"/>
+<!-- Mid-ground -->
+<img src="{% if section.settings.orange_2 %}{{ section.settings.orange_2 | image_url: width: 70 }}{% else %}./assets/laranja-2.webp{% endif %}" alt="" class="absolute orange-float-3 pointer-events-none" style="right:0;top:10%;width:3.5rem;z-index:5"/>
+<img src="{% if section.settings.orange_4 %}{{ section.settings.orange_4 | image_url: width: 70 }}{% else %}./assets/laranja-4.webp{% endif %}" alt="" class="absolute orange-float-4 pointer-events-none" style="left:5%;bottom:5%;width:3.5rem;z-index:5"/>
+<img src="{% if section.settings.orange_1 %}{{ section.settings.orange_1 | image_url: width: 60 }}{% else %}./assets/laranja-1.webp{% endif %}" alt="" class="absolute orange-float-5 pointer-events-none" style="left:25%;top:-1.5rem;width:3rem;z-index:5"/>
+<!-- Background with blur -->
+<img src="{% if section.settings.orange_2 %}{{ section.settings.orange_2 | image_url: width: 40 }}{% else %}./assets/laranja-2.webp{% endif %}" alt="" class="absolute orange-float-bg-1 pointer-events-none" style="left:-1rem;top:5%;width:2rem;z-index:1;filter:blur(1px);opacity:0.8"/>
+<img src="{% if section.settings.orange_4 %}{{ section.settings.orange_4 | image_url: width: 40 }}{% else %}./assets/laranja-4.webp{% endif %}" alt="" class="absolute orange-float-bg-2 pointer-events-none" style="right:20%;bottom:-2rem;width:2rem;z-index:1;filter:blur(1px);opacity:0.8"/>
+<!-- Product -->
+<img src="{% if section.settings.hero_product_image %}{{ section.settings.hero_product_image | image_url: width: 480 }}{% else %}./assets/saco-produto-jejoom.webp{% endif %}" alt="Jejoom Shot Matinal Denavita" class="relative animate-float" style="z-index:10;width:20rem;height:auto" loading="eager"/>
+<!-- Badge -->
+<div class="absolute z-20" style="right:-1rem;top:4rem;background:#fff;border-radius:1rem;padding:1rem;text-align:center">
+<span class="text-3xl font-bold text-secondary">Reduz</span>
+<p class="text-xs text-muted-fg">Inchaço e retenção</p>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ═══ SECTION: WhyItWorks ═══ -->
+<section class="relative overflow-hidden bg-white" style="padding-top:5rem;padding-bottom:0;margin-top:-1px" data-anim-section>
+<div class="container relative z-10">
+<div class="text-center mb-16 anim-target">
+<span class="inline-block bg-primary-light text-primary font-semibold text-sm px-4 py-2 rounded-full mb-4">CIÊNCIA COMPROVADA</span>
+<h2 class="text-3xl font-bold text-foreground mb-4" style="font-family:'Poppins',sans-serif">Entenda por que o Jejoom funciona</h2>
+<p class="text-lg text-muted-fg" style="max-width:42rem;margin:0 auto">Não é mágica: é ciência. Veja como o shot matinal ataca a raiz do problema</p>
+</div>
+<div class="grid gap-12 items-center" id="why-grid" style="grid-template-columns:1fr">
+
+<!-- Mobile: Accordion -->
+<div class="anim-target anim-left md-hidden" id="why-accordion">
+<div class="space-y-4" id="why-cards-mobile">
+<div class="bg-secondary-light rounded-xl overflow-hidden" style="border-left:4px solid hsl(var(--secondary))">
+<button class="accordion-trigger flex items-center gap-4 w-full p-4 text-left" onclick="toggleAccordion(this)">
+<div style="width:2.5rem;height:2.5rem;background:hsl(var(--secondary));border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" style="stroke:#fff"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+<h3 class="text-base font-bold text-foreground" style="flex:1">Metabolismo Travado e Inchaço</h3>
+<svg class="icon chevron" width="20" height="20" viewBox="0 0 24 24" style="stroke:hsl(var(--secondary))"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+<div class="accordion-content"><p class="text-muted-fg text-sm" style="padding:0 1rem 1rem 4.5rem">O corpo acumula toxinas e inflama, travando o emagrecimento. O Jejoom combina Curcumina e L-Cisteína para desinflamar o organismo e destravar a queima de gordura logo pela manhã.</p></div>
+</div>
+<div class="bg-secondary-light rounded-xl overflow-hidden" style="border-left:4px solid hsl(var(--secondary))">
+<button class="accordion-trigger flex items-center gap-4 w-full p-4 text-left" onclick="toggleAccordion(this)">
+<div style="width:2.5rem;height:2.5rem;background:hsl(var(--secondary));border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" style="stroke:#fff"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-2-3.92-2-6.5 0 2.58-.93 4.36-2 6.5-.5 1-.5 1.62-.5 3a2.5 2.5 0 0 0 2.5 2.5z"/><path d="M12.5 18.5A2.5 2.5 0 0 0 15 16c0-.88-.25-1.43-.5-2-.53-1.21-1-2.35-1-4.5 0 2.15-.47 3.29-1 4.5-.25.57-.5 1.12-.5 2a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+<h3 class="text-base font-bold text-foreground" style="flex:1">O Poder do Shot Matinal</h3>
+<svg class="icon chevron" width="20" height="20" viewBox="0 0 24 24" style="stroke:hsl(var(--secondary))"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+<div class="accordion-content"><p class="text-muted-fg text-sm" style="padding:0 1rem 1rem 4.5rem">Tomar o Jejoom em jejum ativa o metabolismo nas primeiras horas do dia. A combinação de antocianinas e compostos fenólicos acelera a termogênese natural e potencializa a queima calórica.</p></div>
+</div>
+<div class="bg-secondary-light rounded-xl overflow-hidden" style="border-left:4px solid hsl(var(--secondary))">
+<button class="accordion-trigger flex items-center gap-4 w-full p-4 text-left" onclick="toggleAccordion(this)">
+<div style="width:2.5rem;height:2.5rem;background:hsl(var(--secondary));border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" style="stroke:#fff"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.6 4.5-1.1 8.5c-.5.7-1.1 1.3-1.7 1.8"/><path d="M14.7 14.7a7 7 0 0 1-9.4-9.4"/></svg></div>
+<h3 class="text-base font-bold text-foreground" style="flex:1">Fórmula Antioxidante Completa</h3>
+<svg class="icon chevron" width="20" height="20" viewBox="0 0 24 24" style="stroke:hsl(var(--secondary))"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+<div class="accordion-content"><p class="text-muted-fg text-sm" style="padding:0 1rem 1rem 4.5rem">Com Vitamina C, Vitamina E, Selênio e Zinco, o Jejoom combate os radicais livres, fortalece a imunidade e protege as células, tudo isso com sabor delicioso de tangerina.</p></div>
+</div>
+</div>
+</div>
+
+<!-- Desktop: Cards -->
+<div class="anim-target anim-left" style="display:none" id="why-cards-desktop">
+<div class="space-y-6">
+<div class="bg-secondary-light p-6" style="border-left:4px solid hsl(var(--secondary));border-radius:0 0.75rem 0.75rem 0">
+<div class="flex items-start gap-4">
+<div style="width:3rem;height:3rem;background:hsl(var(--secondary));border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" style="stroke:#fff"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+<div><h3 class="text-xl font-bold text-foreground mb-2">Metabolismo Travado e Inchaço</h3><p class="text-muted-fg">O corpo acumula toxinas e inflama, travando o emagrecimento. O Jejoom combina Curcumina e L-Cisteína para desinflamar o organismo e destravar a queima de gordura logo pela manhã.</p></div>
+</div>
+</div>
+<div class="bg-secondary-light p-6" style="border-left:4px solid hsl(var(--secondary));border-radius:0 0.75rem 0.75rem 0">
+<div class="flex items-start gap-4">
+<div style="width:3rem;height:3rem;background:hsl(var(--secondary));border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" style="stroke:#fff"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-2-3.92-2-6.5 0 2.58-.93 4.36-2 6.5-.5 1-.5 1.62-.5 3a2.5 2.5 0 0 0 2.5 2.5z"/><path d="M12.5 18.5A2.5 2.5 0 0 0 15 16c0-.88-.25-1.43-.5-2-.53-1.21-1-2.35-1-4.5 0 2.15-.47 3.29-1 4.5-.25.57-.5 1.12-.5 2a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+<div><h3 class="text-xl font-bold text-foreground mb-2">O Poder do Shot Matinal</h3><p class="text-muted-fg">Tomar o Jejoom em jejum ativa o metabolismo nas primeiras horas do dia. A combinação de antocianinas e compostos fenólicos acelera a termogênese natural e potencializa a queima calórica.</p></div>
+</div>
+</div>
+<div class="bg-secondary-light p-6" style="border-left:4px solid hsl(var(--secondary));border-radius:0 0.75rem 0.75rem 0">
+<div class="flex items-start gap-4">
+<div style="width:3rem;height:3rem;background:hsl(var(--secondary));border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg class="icon" width="24" height="24" viewBox="0 0 24 24" style="stroke:#fff"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.6 4.5-1.1 8.5c-.5.7-1.1 1.3-1.7 1.8"/><path d="M14.7 14.7a7 7 0 0 1-9.4-9.4"/></svg></div>
+<div><h3 class="text-xl font-bold text-foreground mb-2">Fórmula Antioxidante Completa</h3><p class="text-muted-fg">Com Vitamina C, Vitamina E, Selênio e Zinco, o Jejoom combate os radicais livres, fortalece a imunidade e protege as células, tudo isso com sabor delicioso de tangerina.</p></div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Celebrity photo -->
+<div class="anim-target anim-right relative flex flex-col items-center" style="align-self:flex-end" id="why-image">
+<img src="{% if section.settings.why_it_works_image %}{{ section.settings.why_it_works_image | image_url: width: 850 }}{% else %}./assets/larimorga-jejoom.webp{% endif %}" alt="Modelos com Jejoom Denavita" style="max-height:600px;object-fit:contain;object-position:bottom" loading="lazy"/>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ═══ SECTION: BenefitsGrid ═══ -->
+<section class="bg-gradient-green-light relative overflow-hidden section-py" data-anim-section>
+<svg class="absolute pointer-events-none" style="inset:0;width:100%;height:100%" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
+<path d="M-80 150 C200 50,450 300,750 180 S1150 350,1500 200" stroke="hsl(82,99%,35%)" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+<path d="M-40 650 C280 530,520 720,820 580 S1180 740,1480 630" stroke="hsl(0,85%,52%)" stroke-opacity="0.07" stroke-width="1.5" fill="none"/>
+<path d="M1440 350 C1150 280,850 450,550 320 S200 470,-50 400" stroke="hsl(0,85%,52%)" stroke-opacity="0.06" stroke-width="1" fill="none"/>
+</svg>
+<div class="container relative z-10">
+<div class="text-center mb-16 anim-target">
+<span class="inline-block bg-white text-primary font-semibold text-sm px-4 py-2 rounded-full mb-4 shadow-lg" style="box-shadow:0 1px 3px rgba(0,0,0,0.1)">BENEFÍCIOS</span>
+<h2 class="text-3xl font-bold text-foreground mb-4">O que o Jejoom faz pelo seu corpo</h2>
+<p class="text-lg text-muted-fg" style="max-width:42rem;margin:0 auto">Resultados reais que você percebe no espelho e nas roupas</p>
+</div>
+
+<!-- Mobile -->
+<div class="md-hidden" id="benefits-mobile">
+<div class="grid gap-4" id="benefits-mobile-list"></div>
+<div class="text-center mt-6" id="benefits-toggle-wrap">
+<button class="btn btn-outline" id="benefits-toggle" onclick="toggleBenefits()">Ver mais benefícios <svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="margin-left:0.5rem"><path d="M6 9l6 6 6-6"/></svg></button>
+</div>
+</div>
+
+<!-- Desktop -->
+<div style="display:none" class="md-grid gap-6" id="benefits-desktop"></div>
+</div>
+</section>
+
+<!-- ═══ SECTION: WhoIsItFor ═══ -->
+<section class="relative overflow-hidden bg-white section-py" data-anim-section>
+<div class="absolute" style="inset:0;overflow:hidden"><div class="absolute bg-secondary-light" style="top:0;right:0;width:50%;height:100%;transform:skewX(12deg);transform-origin:top right"></div></div>
+<div class="container relative z-10" style="padding-bottom:50px">
+<div class="grid gap-12 items-center" id="whoisitfor-grid" style="grid-template-columns:1fr">
+<div class="anim-target anim-left flex flex-col items-center">
+<div class="w-full" style="max-width:700px;margin:0 auto">
+<img src="{% if section.settings.who_is_it_for_image %}{{ section.settings.who_is_it_for_image | image_url: width: 700 }}{% else %}./assets/larifoto-certo.webp{% endif %}" alt="Mulheres satisfeitas com Jejoom" class="w-full object-contain" loading="lazy"/>
+</div>
+</div>
+<div class="anim-target anim-right">
+<div class="text-center" id="whoisitfor-header">
+<span class="inline-block bg-secondary text-white font-semibold text-sm px-4 py-2 rounded-full mb-4">VOCÊ SE IDENTIFICA?</span>
+<h2 class="text-3xl font-bold text-foreground mb-8">Isso soa familiar?</h2>
+</div>
+<div class="space-y-4" id="targets-list"></div>
+</div>
+</div>
+<div class="anim-target text-center mt-12" style="max-width:48rem;margin-left:auto;margin-right:auto">
+<p class="text-lg text-foreground font-medium mb-6">Marcou <span class="text-primary font-bold">1 item</span>? O Jejoom pode te ajudar. <span class="text-secondary font-bold">Marcou todos? É hora de virar o jogo.</span></p>
+<a href="#ofertas" class="btn btn-primary btn-shine" style="font-size:1.125rem;padding:0.75rem 2rem;gap:0.5rem">Quero Começar Agora! <svg class="icon" width="20" height="20" viewBox="0 0 24 24" style="stroke:#fff"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+</div>
+</div>
+<svg class="absolute" style="bottom:-1px;left:0;width:100%;height:80px;z-index:5" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="hsl(0,85%,52%)"/></svg>
+</section>
+
+<!-- ═══ SECTION: ScienceHero ═══ -->
+<section class="relative overflow-hidden bg-secondary" style="padding-top:2rem;padding-bottom:4rem" data-anim-section>
+<div class="absolute" style="inset:0">
+<svg class="absolute pointer-events-none" style="top:0;left:0;width:100%;height:100%" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
+<path d="M-100 200 C200 50,500 350,800 180 S1200 400,1540 250" stroke="white" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+<path d="M-50 350 C250 150,450 500,750 300 S1100 550,1500 380" stroke="white" stroke-opacity="0.06" stroke-width="1.5" fill="none"/>
+<path d="M-80 500 C180 380,400 620,720 450 S1050 650,1480 520" stroke="white" stroke-opacity="0.04" stroke-width="1" fill="none"/>
+<path d="M1440 100 C1200 250,900 80,600 220 S200 50,-50 180" stroke="white" stroke-opacity="0.07" stroke-width="1.5" fill="none"/>
+</svg>
+<img src="{% if section.settings.orange_1 %}{{ section.settings.orange_1 | image_url: width: 70 }}{% else %}./assets/laranja-1.webp{% endif %}" alt="" class="absolute orange-float-1 pointer-events-none" style="top:10%;left:6%;width:3.5rem"/>
+<img src="{% if section.settings.orange_2 %}{{ section.settings.orange_2 | image_url: width: 60 }}{% else %}./assets/laranja-2.webp{% endif %}" alt="" class="absolute orange-float-3 pointer-events-none" style="top:20%;right:5%;width:3rem"/>
+<img src="{% if section.settings.orange_4 %}{{ section.settings.orange_4 | image_url: width: 50 }}{% else %}./assets/laranja-4.webp{% endif %}" alt="" class="absolute orange-float-4 pointer-events-none" style="bottom:30%;left:8%;width:2.5rem"/>
+<img src="{% if section.settings.orange_3 %}{{ section.settings.orange_3 | image_url: width: 60 }}{% else %}./assets/laranja-3.webp{% endif %}" alt="" class="absolute orange-float-2 pointer-events-none" style="top:50%;right:10%;width:3rem"/>
+<svg class="absolute" style="bottom:0;left:0;width:100%;height:80px" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="white"/></svg>
+</div>
+<div class="container relative z-10" style="padding:1rem 1rem 2rem">
+<div class="text-center mb-16 anim-target">
+<div class="inline-flex items-center gap-2 rounded-full px-4 py-2 mb-6" style="background:rgba(255,255,255,0.2);backdrop-filter:blur(4px)">
+<svg class="icon" width="20" height="20" viewBox="0 0 24 24" style="stroke:#fff"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/></svg>
+<span class="text-sm text-white font-semibold">CIÊNCIA</span>
+</div>
+<h2 class="text-2xl font-bold text-white mb-3">Fórmula com 7 ativos poderosos</h2>
+<p class="text-base text-white" style="opacity:0.8;max-width:42rem;margin:0 auto">Cada ingrediente foi selecionado para trabalhar em sinergia e potencializar o emagrecimento</p>
+</div>
+
+<!-- Mobile ingredients -->
+<div class="md-hidden space-y-3 mb-8" id="ingredients-mobile"></div>
+<!-- Desktop ingredients -->
+<div style="display:none;max-width:56rem;margin:0 auto" class="md-grid gap-6 mb-16" id="ingredients-desktop"></div>
+
+<!-- Study card -->
+<div class="anim-target bg-white rounded-2xl p-6" style="max-width:56rem;margin:0 auto">
+<div class="flex items-center gap-2 mb-3">
+<svg class="icon" width="20" height="20" viewBox="0 0 24 24" style="stroke:hsl(var(--primary))"><path d="M4.5 3h15M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/></svg>
+<span class="text-xs font-bold text-primary" style="text-transform:uppercase;letter-spacing:0.05em">Benefícios Comprovados</span>
+</div>
+<h3 class="text-xl font-bold text-foreground mb-4">Jejoom - Fórmula Cientificamente Desenvolvida</h3>
+<div class="grid gap-2 mb-4" style="grid-template-columns:repeat(3,1fr)">
+<div class="text-center p-3 bg-primary-light rounded-xl"><p class="text-xl font-bold text-primary">7 ativos</p><p class="text-xs text-muted-fg">Em uma fórmula</p></div>
+<div class="text-center p-3 bg-primary-light rounded-xl"><p class="text-xl font-bold text-primary">1 dose</p><p class="text-xs text-muted-fg">Por dia</p></div>
+<div class="text-center p-3 bg-primary-light rounded-xl"><p class="text-xl font-bold text-primary">30 dias</p><p class="text-xs text-muted-fg">De tratamento</p></div>
+</div>
+<p class="text-sm text-muted-fg mb-3">O Jejoom combina 7 ativos de alta performance em uma única fórmula: antocianinas, compostos fenólicos, curcumina, L-cisteína, selênio, vitamina C, vitamina E e zinco. Juntos, eles desinflamam o corpo, aceleram o metabolismo e potencializam o emagrecimento.</p>
+<p class="text-xs text-muted-fg" style="opacity:0.7;font-style:italic">Fonte: Composição baseada em estudos sobre os ativos individuais</p>
+</div>
+
+<!-- Bottom badges -->
+<div class="flex items-center justify-center gap-2 mt-8 anim-target" style="flex-wrap:wrap" id="science-badges">
+<div class="flex items-center gap-2 rounded-full px-3 py-1.5" style="background:rgba(255,255,255,0.2);backdrop-filter:blur(8px)"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" style="stroke:#fff"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.6 4.5-1.1 8.5"/></svg><span class="text-xs text-white font-medium">100% Natural</span></div>
+<div class="flex items-center gap-2 rounded-full px-3 py-1.5" style="background:rgba(255,255,255,0.2);backdrop-filter:blur(8px)"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" style="stroke:#fff"><path d="M4.5 3h15M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/></svg><span class="text-xs text-white font-medium">Testado em Laboratório</span></div>
+<div class="flex items-center gap-2 rounded-full px-3 py-1.5" style="background:rgba(255,255,255,0.2);backdrop-filter:blur(8px)"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" style="stroke:#fff"><path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/></svg><span class="text-xs text-white font-medium">Sem Efeitos Colaterais</span></div>
+<div class="flex items-center gap-2 rounded-full px-3 py-1.5" style="background:rgba(255,255,255,0.2);backdrop-filter:blur(8px)"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" style="stroke:#fff"><circle cx="12" cy="12" r="8"/><path d="M12 4v4M12 16v4M4 12h4M16 12h4"/></svg><span class="text-xs text-white font-medium">Fórmula Exclusiva</span></div>
+</div>
+</div>
+</section>
+
+<!-- ═══ SECTION: Timeline ═══ -->
+<section id="transformacao" class="relative overflow-hidden bg-white section-py" data-anim-section>
+<div class="absolute" style="inset:0;opacity:0.05"><div class="absolute" style="inset:0;background-image:radial-gradient(circle at 1px 1px,currentColor 1px,transparent 0);background-size:40px 40px"></div></div>
+<div class="container relative z-10">
+<div class="text-center mb-16 anim-target">
+<span class="inline-block bg-primary-light text-primary font-semibold text-sm px-4 py-2 rounded-full mb-4">TRANSFORMAÇÃO</span>
+<h2 class="text-3xl font-bold text-foreground mb-4">Sua jornada de transformação</h2>
+<p class="text-lg text-muted-fg" style="max-width:42rem;margin:0 auto">Veja o que esperar a cada fase do tratamento com Jejoom</p>
+</div>
+
+<!-- Mobile carousel -->
+<div class="md-hidden relative" id="timeline-mobile">
+<button class="btn-icon absolute z-10" style="left:0;top:50%;transform:translateY(-50%)" onclick="scrollTimeline(-1)"><svg class="icon" width="20" height="20" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+<button class="btn-icon absolute z-10" style="right:0;top:50%;transform:translateY(-50%)" onclick="scrollTimeline(1)"><svg class="icon" width="20" height="20" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div style="overflow:hidden;padding:1rem 0">
+<div class="flex gap-4 px-8 scrollbar-hide snap-x" id="timeline-scroll" style="overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none"></div>
+</div>
+</div>
+
+<!-- Desktop grid -->
+<div style="display:none" class="md-grid gap-8" id="timeline-desktop"></div>
+</div>
+</section>
+
+<!-- ═══ SECTION: Testimonials ═══ -->
+<section id="resultados" class="relative overflow-hidden bg-gradient-green-light section-py" data-anim-section>
+<svg class="absolute pointer-events-none" style="inset:0;width:100%;height:100%" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
+<path d="M-50 80 C300 200,500 30,800 150 S1200 50,1500 120" stroke="hsl(0,85%,52%)" stroke-opacity="0.1" stroke-width="2" fill="none"/>
+<path d="M-30 700 C250 580,550 750,850 620 S1150 780,1480 680" stroke="hsl(82,99%,35%)" stroke-opacity="0.08" stroke-width="1.5" fill="none"/>
+</svg>
+<div class="container relative z-10">
+<div class="text-center mb-16 anim-target">
+<span class="inline-block bg-secondary text-white font-semibold text-sm px-4 py-2 rounded-full mb-4">RESULTADOS REAIS</span>
+<h2 class="text-3xl font-bold text-foreground mb-4">Elas já destravaram o metabolismo</h2>
+<p class="text-lg text-muted-fg" style="max-width:42rem;margin:0 auto">Milhares de mulheres como você que decidiram dar o primeiro passo.</p>
+</div>
+
+<!-- Video carousel -->
+<div class="anim-target relative mb-16">
+<h3 class="text-xl font-bold text-foreground mb-6 text-center">Vídeos de Depoimentos</h3>
+<button class="btn-icon absolute z-10" style="left:0;top:50%;margin-top:1rem;transform:translateY(-50%)" onclick="scrollVideos(-1)"><svg class="icon" width="20" height="20" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+<button class="btn-icon absolute z-10" style="right:0;top:50%;margin-top:1rem;transform:translateY(-50%)" onclick="scrollVideos(1)"><svg class="icon" width="20" height="20" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div style="overflow:hidden;padding:1rem 0">
+<div class="animate-scroll-videos flex gap-4" id="video-carousel"></div>
+</div>
+</div>
+
+<!-- Written testimonials -->
+<div class="anim-target relative">
+<button class="btn-icon absolute z-10 md-hidden" style="left:0;top:50%;transform:translateY(-50%)" onclick="scrollWritten(-1)"><svg class="icon" width="20" height="20" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+<button class="btn-icon absolute z-10 md-hidden" style="right:0;top:50%;transform:translateY(-50%)" onclick="scrollWritten(1)"><svg class="icon" width="20" height="20" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+<div style="overflow:hidden;padding:1rem 0">
+<div class="animate-scroll-left flex gap-6" id="written-carousel"></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Video Modal -->
+<div class="modal-overlay" id="video-modal" onclick="closeVideoModal(event)">
+<div class="modal-content">
+<button onclick="closeVideoModal()" style="position:absolute;right:0.75rem;top:0.75rem;z-index:50;background:rgba(255,255,255,0.2);backdrop-filter:blur(8px);border-radius:9999px;padding:0.5rem;color:#fff;cursor:pointer" aria-label="Fechar"><svg class="icon" width="20" height="20" viewBox="0 0 24 24" style="stroke:#fff"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+<video id="modal-video" class="w-full" style="max-height:80vh;object-fit:contain" controls></video>
+</div>
+</div>
+
+<!-- ═══ SECTION: Pricing ═══ -->
+<section id="ofertas" class="relative overflow-hidden bg-red-50 section-py" data-anim-section>
+<div class="container relative z-10">
+<div class="text-center mb-16 anim-target">
+<span class="inline-block bg-primary text-white font-semibold text-sm px-4 py-2 rounded-full mb-4">OFERTA ESPECIAL</span>
+<h2 class="text-3xl font-bold text-foreground mb-4">Comece sua transformação agora</h2>
+<p class="text-lg text-muted-fg" style="max-width:42rem;margin:0 auto">Escolha o kit ideal para sua jornada, quanto maior, melhor o resultado</p>
+</div>
+<div class="grid gap-6" id="pricing-grid" style="max-width:72rem;margin:0 auto"></div>
+</div>
+</section>
+
+<!-- ═══ SECTION: HowToUse ═══ -->
+<section class="relative overflow-hidden bg-gradient-subtle section-py" data-anim-section>
+<div class="container relative z-10">
+<div class="text-center mb-16 anim-target">
+<span class="inline-block bg-primary-light text-primary font-semibold text-sm px-4 py-2 rounded-full mb-4">SIMPLES ASSIM</span>
+<h2 class="text-3xl font-bold text-foreground mb-4">Só 1 shot por dia</h2>
+</div>
+<div class="grid gap-12 items-center" id="howto-grid" style="max-width:64rem;margin:0 auto;grid-template-columns:1fr">
+<div class="anim-target anim-left relative flex justify-center">
+<svg class="absolute pointer-events-none" style="inset:-3rem;width:calc(100% + 6rem);height:calc(100% + 6rem);z-index:-1" viewBox="0 0 400 400" fill="none">
+<path d="M50 80 C120 20,280 20,350 80" stroke="hsl(82,99%,35%)" stroke-opacity="0.15" stroke-width="2" fill="none"/>
+<path d="M30 200 C30 100,100 30,200 30" stroke="hsl(82,99%,35%)" stroke-opacity="0.1" stroke-width="1.5" fill="none"/>
+<path d="M370 200 C370 300,300 370,200 370" stroke="hsl(82,99%,35%)" stroke-opacity="0.1" stroke-width="1.5" fill="none"/>
+</svg>
+<div class="relative overflow-hidden" style="width:16rem;height:16rem;border-radius:9999px">
+<img src="{% if section.settings.how_to_use_image %}{{ section.settings.how_to_use_image | image_url: width: 320 }}{% else %}./assets/mao-sache-scoop.webp{% endif %}" alt="Como preparar o Jejoom" class="w-full h-full object-cover"/>
+</div>
+</div>
+<div class="space-y-8" id="howto-steps">
+<div class="anim-target anim-right flex items-start gap-4">
+<div class="relative shrink-0"><div style="width:4rem;height:4rem;border-radius:9999px;background:hsl(var(--secondary));display:flex;align-items:center;justify-content:center"><svg class="icon" width="28" height="28" viewBox="0 0 24 24" style="stroke:#fff"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg></div><div style="position:absolute;top:-0.25rem;right:-0.25rem;width:1.5rem;height:1.5rem;border-radius:9999px;background:hsl(var(--destructive-foreground));color:hsl(var(--secondary));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem">1</div></div>
+<div style="padding-top:0.5rem"><h3 class="text-xl font-bold text-foreground mb-1">Ao Acordar</h3><p class="text-muted-fg">Dilua 1 dosador (6g) em um copo de água</p></div>
+</div>
+<div class="anim-target anim-right flex items-start gap-4">
+<div class="relative shrink-0"><div style="width:4rem;height:4rem;border-radius:9999px;background:hsl(var(--secondary));display:flex;align-items:center;justify-content:center"><svg class="icon" width="28" height="28" viewBox="0 0 24 24" style="stroke:#fff"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div><div style="position:absolute;top:-0.25rem;right:-0.25rem;width:1.5rem;height:1.5rem;border-radius:9999px;background:hsl(var(--destructive-foreground));color:hsl(var(--secondary));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem">2</div></div>
+<div style="padding-top:0.5rem"><h3 class="text-xl font-bold text-foreground mb-1">Em Jejum</h3><p class="text-muted-fg">Tome o shot antes da primeira refeição do dia</p></div>
+</div>
+<div class="anim-target anim-right flex items-start gap-4">
+<div class="relative shrink-0"><div style="width:4rem;height:4rem;border-radius:9999px;background:hsl(var(--secondary));display:flex;align-items:center;justify-content:center"><svg class="icon" width="28" height="28" viewBox="0 0 24 24" style="stroke:#fff"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2 2 4-4"/></svg></div><div style="position:absolute;top:-0.25rem;right:-0.25rem;width:1.5rem;height:1.5rem;border-radius:9999px;background:hsl(var(--destructive-foreground));color:hsl(var(--secondary));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.75rem">3</div></div>
+<div style="padding-top:0.5rem"><h3 class="text-xl font-bold text-foreground mb-1">Todos os Dias</h3><p class="text-muted-fg">Use diariamente para melhores resultados</p></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ SECTION: FAQ ═══ -->
+<section id="faq" class="relative overflow-hidden bg-white section-py" data-anim-section>
+<svg class="absolute pointer-events-none" style="inset:0;width:100%;height:100%" viewBox="0 0 1440 600" fill="none" preserveAspectRatio="none">
+<path d="M1300 -20 C1200 80,1350 200,1480 150" stroke="hsl(82,99%,35%)" stroke-opacity="0.1" stroke-width="2" fill="none"/>
+<path d="M-50 500 C100 420,250 550,400 480" stroke="hsl(82,99%,35%)" stroke-opacity="0.06" stroke-width="1" fill="none"/>
+</svg>
+<div class="container relative z-10">
+<div class="text-center mb-12 anim-target">
+<div class="inline-flex items-center gap-2 bg-accent-light font-semibold text-sm px-4 py-2 rounded-full mb-4" style="color:hsl(var(--accent))">
+<svg class="icon" width="16" height="16" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/><path d="M12 8v2M12 14h.01"/></svg>
+TIRE SUAS DÚVIDAS
+</div>
+<h2 class="text-3xl font-bold text-foreground mb-4">Ainda tem perguntas?</h2>
+</div>
+<div class="anim-target" style="max-width:48rem;margin:0 auto">
+<div class="space-y-4" id="faq-list"></div>
+</div>
+</div>
+</section>
+
+<!-- ═══ SECTION: Footer ═══ -->
+<footer class="bg-footer text-white relative overflow-hidden">
+<svg class="absolute" style="top:-1px;left:0;width:100%;height:80px" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 50C300 0 450 120 800 50C1150 -20 1300 80 1440 50V0H0Z" fill="white"/></svg>
+<div class="container" style="padding-top:6rem;padding-bottom:1.5rem">
+
+<!-- Mobile Footer -->
+<div class="md-hidden" id="footer-mobile">
+<div class="text-center mb-6"><img src="{% if section.settings.logo_image %}{{ section.settings.logo_image | image_url: width: 200 }}{% else %}./assets/logo-denavita.png{% endif %}" alt="Denavita" style="height:3.5rem;margin:0 auto"/></div>
+<div class="grid gap-4 mb-6 text-sm" style="grid-template-columns:1fr 1fr">
+<div>
+<h4 class="font-bold mb-2 text-xs" style="text-transform:uppercase;letter-spacing:0.05em">Links Úteis</h4>
+<ul class="space-y-1"><li><a href="#inicio" style="color:rgba(255,255,255,0.7);font-size:0.75rem" class="transition-colors">Início</a></li><li><a href="#transformacao" style="color:rgba(255,255,255,0.7);font-size:0.75rem" class="transition-colors">Como Funciona</a></li><li><a href="#resultados" style="color:rgba(255,255,255,0.7);font-size:0.75rem" class="transition-colors">Depoimentos</a></li><li><a href="#faq" style="color:rgba(255,255,255,0.7);font-size:0.75rem" class="transition-colors">FAQ</a></li><li><a href="#ofertas" style="color:rgba(255,255,255,0.7);font-size:0.75rem" class="transition-colors">Comprar</a></li></ul>
+</div>
+<div>
+<h4 class="font-bold mb-2 text-xs" style="text-transform:uppercase;letter-spacing:0.05em">Institucional</h4>
+<ul class="space-y-1"><li><a href="https://www.denavita.com.br/pages/politica-de-privacidade" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.7);font-size:0.75rem">Privacidade</a></li><li><a href="https://www.denavita.com.br/pages/termos-e-condicoes" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.7);font-size:0.75rem">Termos de Uso</a></li><li><a href="https://www.denavita.com.br/pages/politica-de-trocas-e-devolucoes" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.7);font-size:0.75rem">Trocas</a></li></ul>
+</div>
+</div>
+<div class="text-center mb-4 text-xs">
+<div class="flex justify-center gap-4" style="flex-wrap:wrap;color:rgba(255,255,255,0.7)">
+<a href="/cdn-cgi/l/email-protection#275446446743424946514e53460944484a" class="flex items-center gap-1 transition-colors"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" style="stroke:hsl(var(--primary-light))"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg> <span class="__cf_email__" data-cfemail="057664664561606b64736c71642b666a68">[email&#160;protected]</span></a>
+<a href="https://w.app/vart0d" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 transition-colors"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" style="stroke:hsl(var(--primary-light))"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (11) 92066-4623</a>
+</div>
+<p style="color:rgba(255,255,255,0.5);margin-top:0.25rem">Seg a Sex, 9h às 18h</p>
+</div>
+<div class="flex justify-center gap-3 mb-4">
+<a href="https://www.instagram.com/denavita_oficial" target="_blank" rel="noopener noreferrer" style="width:2.25rem;height:2.25rem;background:rgba(255,255,255,0.1);border-radius:9999px;display:flex;align-items:center;justify-content:center" class="transition-colors"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:#fff"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="#fff" stroke="none"/></svg></a>
+<a href="https://www.tiktok.com/@denavita.oficial" target="_blank" rel="noopener noreferrer" style="width:2.25rem;height:2.25rem;background:rgba(255,255,255,0.1);border-radius:9999px;display:flex;align-items:center;justify-content:center" class="transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
+<a href="https://www.facebook.com/profile.php?id=100090027781076" target="_blank" rel="noopener noreferrer" style="width:2.25rem;height:2.25rem;background:rgba(255,255,255,0.1);border-radius:9999px;display:flex;align-items:center;justify-content:center" class="transition-colors"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:#fff"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+</div>
+<div class="flex justify-center mb-6">
+<a href="https://w.app/vart0d" target="_blank" rel="noopener noreferrer" class="btn font-semibold px-5 py-2.5 text-white text-sm" style="background:#25D366;border-radius:9999px;gap:0.5rem"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:#fff"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg> Fale Conosco</a>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem;margin-bottom:1rem">
+<img src="{% if section.settings.payment_icons_image %}{{ section.settings.payment_icons_image | image_url: width: 300 }}{% else %}./assets/icones-pagamentos.svg{% endif %}" alt="Formas de pagamento" style="height:1.5rem;margin:0 auto 0.75rem"/>
+<div class="flex justify-center gap-4 text-xs" style="color:rgba(255,255,255,0.7)">
+<span class="flex items-center gap-1"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" style="stroke:hsl(var(--primary-light))"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg> Compra Segura</span>
+<span class="flex items-center gap-1"><svg class="icon" width="12" height="12" viewBox="0 0 24 24" style="stroke:hsl(var(--primary-light))"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Entrega Brasil</span>
+</div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem;margin-bottom:1rem">
+<p style="color:rgba(255,255,255,0.4);font-size:10px;text-align:center;line-height:1.6">Gestantes, idosos, crianças, lactantes e pessoas com doenças devem consultar médico antes do consumo. Produto autorizado RDC 240/2018, código 4300041, conforme ANVISA.</p>
+</div>
+<div class="text-center" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem">
+<p style="color:rgba(255,255,255,0.5);font-size:10px" id="copyright-mobile"></p>
+</div>
+</div>
+
+<!-- Desktop Footer -->
+<div style="display:none" class="md-block" id="footer-desktop">
+<div class="grid gap-6 mb-8" style="grid-template-columns:repeat(4,1fr)">
+<div>
+<div class="mb-3"><img src="{% if section.settings.logo_image %}{{ section.settings.logo_image | image_url: width: 200 }}{% else %}./assets/logo-denavita.png{% endif %}" alt="Denavita" style="height:2rem"/></div>
+<p style="color:rgba(255,255,255,0.7);font-size:0.875rem;margin-bottom:1rem">Acreditamos que o consumo de vitaminas e suplementos é fundamental para uma vida com mais vitalidade e energia.</p>
+<div class="flex gap-3">
+<a href="https://www.instagram.com/denavita_oficial" target="_blank" rel="noopener noreferrer" style="width:2rem;height:2rem;background:rgba(255,255,255,0.1);border-radius:9999px;display:flex;align-items:center;justify-content:center" class="transition-colors"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:#fff"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/></svg></a>
+<a href="https://www.tiktok.com/@denavita.oficial" target="_blank" rel="noopener noreferrer" style="width:2rem;height:2rem;background:rgba(255,255,255,0.1);border-radius:9999px;display:flex;align-items:center;justify-content:center" class="transition-colors"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
+<a href="https://www.facebook.com/profile.php?id=100090027781076" target="_blank" rel="noopener noreferrer" style="width:2rem;height:2rem;background:rgba(255,255,255,0.1);border-radius:9999px;display:flex;align-items:center;justify-content:center" class="transition-colors"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:#fff"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+<a href="https://w.app/vart0d" target="_blank" rel="noopener noreferrer" style="width:2rem;height:2rem;background:#25D366;border-radius:9999px;display:flex;align-items:center;justify-content:center" class="transition-colors"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:#fff"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></svg></a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-3">Links Úteis</h4>
+<ul class="space-y-1" style="font-size:0.875rem"><li><a href="#inicio" style="color:rgba(255,255,255,0.7)" class="transition-colors">Início</a></li><li><a href="#transformacao" style="color:rgba(255,255,255,0.7)" class="transition-colors">Como Funciona</a></li><li><a href="#resultados" style="color:rgba(255,255,255,0.7)" class="transition-colors">Depoimentos</a></li><li><a href="#faq" style="color:rgba(255,255,255,0.7)" class="transition-colors">Perguntas Frequentes</a></li><li><a href="#ofertas" style="color:rgba(255,255,255,0.7)" class="transition-colors">Comprar Agora</a></li></ul>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-3">Institucional</h4>
+<ul class="space-y-1" style="font-size:0.875rem"><li><a href="https://www.denavita.com.br/pages/politica-de-privacidade" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.7)" class="transition-colors">Política de Privacidade</a></li><li><a href="https://www.denavita.com.br/pages/termos-e-condicoes" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.7)" class="transition-colors">Termos de Uso</a></li><li><a href="https://www.denavita.com.br/pages/politica-de-trocas-e-devolucoes" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.7)" class="transition-colors">Política de Trocas</a></li></ul>
+</div>
+<div>
+<h4 class="font-bold text-sm mb-3">Contato</h4>
+<ul class="space-y-2" style="font-size:0.875rem">
+<li class="flex items-center gap-2" style="color:rgba(255,255,255,0.7)"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:hsl(var(--primary-light))"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg><a href="/cdn-cgi/l/email-protection#d3a0b2b093b7b6bdb2a5baa7b2fdb0bcbe" class="transition-colors"><span class="__cf_email__" data-cfemail="a7d4c6c4e7c3c2c9c6d1ced3c689c4c8ca">[email&#160;protected]</span></a></li>
+<li class="flex items-center gap-2" style="color:rgba(255,255,255,0.7)"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:hsl(var(--primary-light))"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="https://w.app/vart0d" target="_blank" rel="noopener noreferrer" class="transition-colors">(11) 92066-4623</a></li>
+<li class="flex items-center gap-2" style="color:rgba(255,255,255,0.7)"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:hsl(var(--primary-light))"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Seg-Sex, 9h às 18h</span></li>
+</ul>
+</div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;margin-bottom:1.5rem">
+<div class="flex items-center justify-center gap-6 mb-4" style="flex-wrap:wrap">
+<div class="flex items-center gap-2"><span class="text-xs" style="color:rgba(255,255,255,0.7)">Pagamento:</span><img src="{% if section.settings.payment_icons_image %}{{ section.settings.payment_icons_image | image_url: width: 300 }}{% else %}./assets/icones-pagamentos.svg{% endif %}" alt="Formas de pagamento" style="height:1.5rem"/></div>
+<div class="flex items-center gap-1.5"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:hsl(var(--primary-light))"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg><span class="text-xs" style="color:rgba(255,255,255,0.7)">Compra Segura</span></div>
+<div class="flex items-center gap-1.5"><svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:hsl(var(--primary-light))"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span class="text-xs" style="color:rgba(255,255,255,0.7)">Entrega Brasil</span></div>
+</div>
+<p style="color:rgba(255,255,255,0.4);font-size:10px;text-align:center;max-width:56rem;margin:0 auto;line-height:1.6"><span style="color:hsl(var(--primary-light));font-weight:500">Advertência:</span> Gestantes, idosos, crianças, lactantes e pessoas com doenças devem consultar médico antes do consumo. Produto autorizado RDC 240/2018, código 4300041, conforme ANVISA.</p>
+</div>
+<div class="text-center" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem">
+<p style="color:rgba(255,255,255,0.5);font-size:0.75rem" id="copyright-desktop"></p>
+</div>
+</div>
+
+</div>
+</footer>
+
+<!-- ═══ Sticky Footer ═══ -->
+<div class="sticky-footer" id="sticky-footer">
+<div class="container py-3">
+<div class="flex items-center justify-between gap-2" style="max-width:56rem;margin:0 auto">
+<div class="sm-only-hidden shrink-0" id="sticky-product-info">
+<p class="font-bold text-foreground text-sm">Jejoom</p>
+<div class="flex items-center gap-2"><p class="text-xs text-muted-fg">Shot Matinal Denavita</p><span class="text-xs text-secondary font-medium flex items-center gap-1" id="sticky-shipping" style="font-size:10px;display:none"><svg class="icon" width="12" height="12" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Frete Grátis</span></div>
+</div>
+<div class="relative" style="flex:1;min-width:0;max-width:180px">
+<button onclick="toggleStickyDropdown()" class="w-full flex items-center justify-between gap-1 px-3 py-2 bg-muted rounded-xl text-sm font-medium text-foreground transition-colors" id="sticky-variant-btn">
+<span class="truncate" id="sticky-variant-name">2 Unidades</span>
+<svg class="icon chevron" width="14" height="14" viewBox="0 0 24 24" id="sticky-chevron"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+<div class="dropdown-menu" id="sticky-dropdown"></div>
+</div>
+<div class="sm-only-hidden text-right shrink-0">
+<div class="flex items-center gap-1.5 justify-end">
+<span class="text-xs text-muted-fg line-through whitespace-nowrap" id="sticky-original-price"></span>
+<span class="font-semibold rounded-full" id="sticky-discount" style="font-size:9px;background:hsl(var(--secondary));color:#fff;padding:0.125rem 0.25rem"></span>
+</div>
+<p class="font-bold text-primary whitespace-nowrap" style="font-size:1.125rem" id="sticky-price"></p>
+</div>
+<a class="btn btn-primary btn-shine shrink-0 text-sm whitespace-nowrap" style="padding:0.75rem 1rem;gap:0.375rem" id="sticky-buy-btn" target="_blank" rel="noopener noreferrer">
+<svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="stroke:#fff"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+<span id="sticky-buy-label">Comprar</span>
+</a>
+</div>
+</div>
+</div>
+
+<!-- WhatsApp Button -->
+<a href="https://wa.me/5511920664623" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Fale conosco pelo WhatsApp" id="whatsapp-btn">
+<svg width="28" height="28" viewBox="0 0 32 32" fill="#fff"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.128 6.744 3.046 9.378L1.054 31.29l6.122-1.958C9.722 30.89 12.76 32 16.004 32 24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.528 22.614c-.396 1.116-1.954 2.042-3.21 2.312-.86.182-1.982.328-5.762-1.238-4.836-2.004-7.95-6.912-8.19-7.23-.232-.318-1.942-2.586-1.942-4.932 0-2.346 1.23-3.498 1.666-3.976.396-.434 1.04-.624 1.66-.624.2 0 .38.01.542.018.478.02.716.05 1.032.798.394.934 1.356 3.28 1.474 3.52.12.24.24.554.074.872-.158.318-.278.516-.556.796-.278.28-.586.626-.834.838-.278.24-.566.5-.244.98.322.478 1.432 2.362 3.074 3.828 2.114 1.886 3.894 2.47 4.446 2.744.396.198.868.158 1.204-.198.424-.452.948-1.2 1.48-1.938.38-.524.858-.59 1.294-.432.44.15 2.784 1.312 3.262 1.55.478.24.796.358.914.554.116.198.116 1.134-.28 2.252z"/></svg>
+</a>
+
+</main>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ═══ MÓDULO: GA4Tracking ═══
+   ID: M15
+   ORIGEM: src/lib/gtag.ts
+   DEPENDE DE: nenhum
+   RECEBE: eventName, params
+   EXPÕE: trackEvent, trackPurchaseClick, trackCTAClick
+   ESTADO: nenhum
+═══ */
+var PAGE_TITLE = 'JEJOOM - LP LOVABLE';
+function trackEvent(eventName, params) {
+  if (typeof window.gtag === 'function') {
+    var p = Object.assign({}, params || {}, { page_title: PAGE_TITLE });
+    window.gtag('event', eventName, p);
+  }
+}
+function trackPurchaseClick(kitName, price, url) {
+  trackEvent('begin_checkout', { currency: 'BRL', value: price, items: [{ item_name: kitName }] });
+  trackEvent('purchase', { currency: 'BRL', value: price, transaction_id: '' + Date.now(), items: [{ item_name: kitName }] });
+  trackEvent('cta_click', { button_label: kitName, link_url: url });
+}
+function trackCTAClick(label, section) {
+  trackEvent('cta_click', { button_label: label, section: section });
+}
+/* ═══ CHECKPOINT [M15] GA4 Tracking ✓ — trackEvent, trackPurchaseClick, trackCTAClick ═══ */
+
+/* ═══ MÓDULO: FacebookPixel ═══
+   ID: M16
+   ORIGEM: index.html inline script
+   DEPENDE DE: nenhum
+   RECEBE: nenhum
+   EXPÕE: nenhum (loaded in head)
+   ESTADO: nenhum
+═══ */
+// Already loaded in <head>
+/* ═══ CHECKPOINT [M16] Facebook Pixel ✓ — Init + PageView in head ═══ */
+
+/* ═══ MÓDULO: ScrollAnimations ═══
+   ID: M17
+   ORIGEM: framer-motion useInView
+   DEPENDE DE: M18
+   RECEBE: DOM elements with .anim-target
+   EXPÕE: initAnimations
+   ESTADO: IntersectionObserver instances
+═══ */
+function initAnimations() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '-50px' });
+  document.querySelectorAll('.anim-target').forEach(function(el) { observer.observe(el); });
+}
+/* ═══ CHECKPOINT [M17] Scroll Animations ✓ — IntersectionObserver entrance ═══ */
+
+/* ═══ MÓDULO: SVGIconSystem ═══
+   ID: M19
+   ORIGEM: lucide-react icons
+   DEPENDE DE: nenhum
+   RECEBE: icon name, size, color
+   EXPÕE: iconSVG
+   ESTADO: nenhum
+═══ */
+var iconPaths = {
+  flame: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-2-3.92-2-6.5 0 2.58-.93 4.36-2 6.5-.5 1-.5 1.62-.5 3a2.5 2.5 0 0 0 2.5 2.5z"/><path d="M12.5 18.5A2.5 2.5 0 0 0 15 16c0-.88-.25-1.43-.5-2-.53-1.21-1-2.35-1-4.5 0 2.15-.47 3.29-1 4.5-.25.57-.5 1.12-.5 2a2.5 2.5 0 0 0 2.5 2.5z"/>',
+  heart: '<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  zap: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  brain: '<path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M12 5v13"/>',
+  coffee: '<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/>',
+  scale: '<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1ZM2 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1ZM7 21h10M12 3v18M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>',
+  utensils: '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+  clock: '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+  check: '<polyline points="20 6 9 17 4 12"/>',
+  checkCircle: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+  trendingUp: '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+  trophy: '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>',
+  star: '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+  gift: '<polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/>',
+  truck: '<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
+  flaskConical: '<path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/>',
+  sparkles: '<path d="M12 3l1.5 4.5L18 9l-4.5 1.5L12 15l-1.5-4.5L6 9l4.5-1.5z"/><path d="M19 8l.5 1.5L21 10l-1.5.5L19 12l-.5-1.5L17 10l1.5-.5z"/>'
+};
+function iconSVG(name, size, color) {
+  size = size || 24;
+  color = color || 'currentColor';
+  return '<svg class="icon" width="'+size+'" height="'+size+'" viewBox="0 0 24 24" style="stroke:'+color+'">'+(iconPaths[name]||'')+'</svg>';
+}
+/* ═══ CHECKPOINT [M19] SVG Icon System ✓ — Icon paths and renderer ═══ */
+
+/* ═══ MÓDULO: DataAndState ═══
+   ID: M18b
+   ORIGEM: component data arrays
+   DEPENDE DE: nenhum
+   RECEBE: nenhum
+   EXPÕE: all data arrays, state variables
+   ESTADO: showAllBenefits, selectedVariant, isDropdownOpen, stickyVisible
+═══ */
+var benefits = [
+  { icon: 'flame', title: 'Acelera o Metabolismo', desc: 'Curcumina e compostos fenólicos ativam a termogênese logo pela manhã*' },
+  { icon: 'heart', title: 'Combate o Inchaço', desc: 'Ação anti-inflamatória e antioxidante que reduz a retenção de líquidos*' },
+  { icon: 'shield', title: 'Fortalece a Imunidade', desc: 'Vitamina C, Selênio e Zinco protegem suas células e fortalecem as defesas*' },
+  { icon: 'zap', title: 'Queima de Gordura', desc: 'Antocianinas e L-Cisteína potencializam a oxidação de gordura corporal*' },
+  { icon: 'brain', title: 'Proteção Antioxidante', desc: 'Vitamina E e Selênio combatem radicais livres e o envelhecimento precoce*' },
+  { icon: 'coffee', title: 'Prático e Saboroso', desc: '1 dosador por dia com delicioso sabor de tangerina, simples e rápido*' }
+];
+var targets = [
+  { text: 'Já tentou de tudo e o peso não sai', icon: 'scale' },
+  { text: 'Sente que seu metabolismo está travado', icon: 'flame' },
+  { text: 'Vive inchada e com sensação de inflamação', icon: 'heart' },
+  { text: 'Quer emagrecer sem sofrer ou passar fome', icon: 'utensils' },
+  { text: 'Tem mais de 35 anos e sente o corpo diferente', icon: 'clock' },
+  { text: 'Precisa de mais energia e disposição no dia a dia', icon: 'zap' }
+];
+var ingredients = [
+  { icon: 'flaskConical', name: 'Curcumina + L-Cisteína', desc: 'Desinflamam o organismo e destravaram o metabolismo' },
+  { icon: 'sparkles', name: 'Vitamina C + Zinco + Selênio', desc: 'Antioxidantes que fortalecem a imunidade' },
+  { icon: 'flame', name: 'Antocianinas + Vitamina E', desc: 'Combatem radicais livres e protegem as células' }
+];
+var timelineSteps = [
+  { icon: 'clock', period: 'Primeiros 7 Dias', title: 'Desinchaço e Disposição', desc: 'Nos primeiros dias você já sente o corpo mais leve, menos inchado. A disposição aumenta e a energia pela manhã melhora visivelmente.' },
+  { icon: 'trendingUp', period: '2 a 4 Semanas', title: 'Metabolismo Acelerado', desc: 'O metabolismo entra em ritmo. As medidas começam a diminuir, o intestino funciona melhor e as roupas ficam mais confortáveis.' },
+  { icon: 'trophy', period: 'Uso Contínuo', title: 'Resultados Consolidados', desc: 'Menos gordura, mais definição e equilíbrio no corpo. A transformação se consolida com uso diário do shot matinal.' }
+];
+var videoTestimonials = [
+  { id:1, url:'{% if section.settings.video_1_url != blank %}{{ section.settings.video_1_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/2cae47ccd2864e0ead0b003d8f69317f/2cae47ccd2864e0ead0b003d8f69317f.HD-1080p-7.2Mbps-57913254.mp4?v=0{% endif %}' },
+  { id:2, url:'{% if section.settings.video_2_url != blank %}{{ section.settings.video_2_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/21747f9f83f44a9abc31b025e39276f6/21747f9f83f44a9abc31b025e39276f6.HD-1080p-7.2Mbps-57913249.mp4?v=0{% endif %}' },
+  { id:3, url:'{% if section.settings.video_3_url != blank %}{{ section.settings.video_3_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/4d6655019ccc4734acb6cfc75287103b/4d6655019ccc4734acb6cfc75287103b.HD-1080p-7.2Mbps-57913395.mp4?v=0{% endif %}' },
+  { id:4, url:'{% if section.settings.video_4_url != blank %}{{ section.settings.video_4_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/303d4962faac46aaae326716ad203d50/303d4962faac46aaae326716ad203d50.HD-1080p-7.2Mbps-57913246.mp4?v=0{% endif %}' }
+];
+var writtenTestimonials = [
+  { name:'Maria Clara', text:'Perdi 6kg em 2 meses com o Jejoom! Meu corpo desinchei muito rápido e minha disposição voltou. Acordo com energia!', rating:5 },
+  { name:'Ana Paula', text:'Minha barriga finalmente desinchei! Em 3 semanas já vi diferença. Super prático tomar o shot pela manhã!', rating:4 },
+  { name:'Fernanda Silva', text:'Adoro o sabor de tangerina! Finalmente um suplemento gostoso de tomar. Perdi 5kg e ganhei muito mais disposição!', rating:5 },
+  { name:'Juliana Costa', text:'Produto maravilhoso! Minha energia melhorou muito e o inchaço reduziu bastante.', rating:4 },
+  { name:'Patricia Lima', text:'Nunca pensei que fosse conseguir emagrecer assim! O Jejoom mudou minha rotina matinal.', rating:5 },
+  { name:'Carla Santos', text:'Excelente! Além de ajudar no peso, me sinto muito mais disposta. O sabor é delicioso!', rating:4 }
+];
+var kits = [
+  { id:1,name:'1 Unidade',capsules:'180g - 30 doses',duration:'1 mês',originalPrice:139.90,price:127.90,discount:9,installment:42.63,perPot:127.90,cashback:19.18,popular:false,bestValue:false,freeShipping:false,checkoutUrl:'https://seguro.denavita.com.br/r/NM00BESKUH',img:'{% if section.settings.kit_1_image %}{{ section.settings.kit_1_image | image_url: width: 300 }}{% else %}./assets/sku-jejoom-1.webp{% endif %}' },
+  { id:2,name:'2 Unidades',capsules:'360g - 60 doses',duration:'2 meses',originalPrice:279.80,price:239.80,discount:14,installment:79.93,perPot:119.90,cashback:35.97,popular:true,bestValue:false,freeShipping:true,checkoutUrl:'https://seguro.denavita.com.br/r/4IPLFGJWFT',img:'{% if section.settings.kit_2_image %}{{ section.settings.kit_2_image | image_url: width: 300 }}{% else %}./assets/sku-jejoom-2.webp{% endif %}' },
+  { id:3,name:'3 Unidades',capsules:'540g - 90 doses',duration:'3 meses',originalPrice:419.70,price:329.90,discount:21,installment:109.96,perPot:109.96,cashback:49.48,popular:false,bestValue:true,freeShipping:true,checkoutUrl:'https://seguro.denavita.com.br/r/OYU0IRXXWM',img:'{% if section.settings.kit_3_image %}{{ section.settings.kit_3_image | image_url: width: 300 }}{% else %}./assets/sku-jejoom-3.webp{% endif %}' }
+];
+var faqs = [
+  { q:'O que é o Jejoom?', a:'O Jejoom é um suplemento alimentar em pó sabor tangerina, desenvolvido para ser consumido como um shot matinal. Sua fórmula combina 7 ativos poderosos: curcumina, L-cisteína, vitamina C, vitamina E, zinco, selênio e antocianinas, que juntos aceleram o metabolismo e potencializam o emagrecimento.' },
+  { q:'Como devo consumir o Jejoom?', a:'Dilua 1 dosador (6g) em um copo de água e tome pela manhã, preferencialmente em jejum, antes da primeira refeição. A embalagem rende 30 porções.' },
+  { q:'Em quanto tempo verei resultados?', a:'Nos primeiros dias você já sente o corpo mais leve e menos inchado. Para resultados visíveis no emagrecimento, recomendamos o uso contínuo por pelo menos 30 dias. Os resultados se consolidam a partir de 90 dias de uso.' },
+  { q:'Tem contraindicações?', a:'O produto não é indicado para menores de 19 anos, gestantes, lactantes ou pessoas com condições médicas específicas. Nesses casos, consulte um médico antes de iniciar o uso.' },
+  { q:'O Jejoom é natural?', a:'Sim! O Jejoom é formulado com ingredientes naturais e antioxidantes de alta qualidade. Não contém corantes artificiais.' },
+  { q:'Como é feita a entrega?', a:'Enviamos para todo o Brasil via transportadora ou Correios. O prazo médio de entrega é de 5 a 15 dias úteis. Você receberá o código de rastreio para acompanhar seu pedido.' },
+  { q:'A compra é segura?', a:'Sim! Utilizamos a mesma tecnologia de segurança dos grandes bancos. Seu pagamento é processado por plataformas certificadas e você tem garantia de satisfação.' },
+  { q:'Posso parcelar minha compra?', a:'Sim! Você pode parcelar em até 3x sem juros no cartão de crédito. Também aceitamos PIX com desconto.' }
+];
+var showAllBenefits = false;
+var selectedVariantIdx = 1;
+var stickyDropdownOpen = false;
+
+/* State helpers */
+function fmt(v) { return 'R$ ' + v.toFixed(2).replace('.', ','); }
+function starsHTML(rating) {
+  var h = '';
+  for (var i = 0; i < 5; i++) {
+    h += '<svg width="16" height="16" viewBox="0 0 24 24" class="' + (i < rating ? 'star-filled' : 'star-empty') + '" style="stroke:currentColor;stroke-width:2;fill:' + (i < rating ? '#facc15' : 'none') + '"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+  }
+  return h;
+}
+
+/* ═══ MÓDULO: DOMRenderers ═══
+   ID: M18c
+   ORIGEM: all React component render functions
+   DEPENDE DE: M18b, M19
+   RECEBE: DOM container IDs
+   EXPÕE: render functions
+   ESTADO: nenhum
+═══ */
+
+function renderBenefitsMobile() {
+  var list = document.getElementById('benefits-mobile-list');
+  var items = showAllBenefits ? benefits : benefits.slice(0, 3);
+  list.innerHTML = items.map(function(b) {
+    return '<div class="anim-target visible" style="background:rgba(255,255,255,0.5);backdrop-filter:blur(12px);border-radius:1rem;padding:1.25rem;border:1px solid rgba(255,255,255,0.5)"><div class="flex items-start gap-4"><div style="width:3rem;height:3rem;background:hsl(var(--secondary));border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+iconSVG(b.icon,24,'#fff')+'</div><div><h3 class="text-lg font-bold text-foreground mb-1">'+b.title+'</h3><p class="text-sm text-muted-fg">'+b.desc+'</p></div></div></div>';
+  }).join('');
+  var btn = document.getElementById('benefits-toggle');
+  if (showAllBenefits) {
+    btn.innerHTML = 'Ver menos <svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="margin-left:0.5rem"><path d="M18 15l-6-6-6 6"/></svg>';
+  } else {
+    btn.innerHTML = 'Ver mais benefícios <svg class="icon" width="16" height="16" viewBox="0 0 24 24" style="margin-left:0.5rem"><path d="M6 9l6 6 6-6"/></svg>';
+  }
+}
+
+function renderBenefitsDesktop() {
+  var el = document.getElementById('benefits-desktop');
+  el.innerHTML = benefits.map(function(b) {
+    return '<div class="benefit-card anim-target" style="background:rgba(255,255,255,0.5);backdrop-filter:blur(12px);border-radius:1rem;padding:1.5rem;border:1px solid rgba(255,255,255,0.5);transition:all 0.3s"><div style="width:4rem;height:4rem;background:hsl(var(--secondary));border-radius:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem">'+iconSVG(b.icon,32,'#fff')+'</div><h3 class="text-xl font-bold text-foreground mb-2">'+b.title+'</h3><p class="text-muted-fg">'+b.desc+'</p></div>';
+  }).join('');
+}
+
+function renderTargets() {
+  var el = document.getElementById('targets-list');
+  el.innerHTML = targets.map(function(t) {
+    return '<div class="flex items-center gap-4 bg-white rounded-xl p-4 anim-target"><div style="width:2.5rem;height:2.5rem;background:hsl(var(--primary-light));border-radius:9999px;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+iconSVG(t.icon,20,'hsl(var(--primary))')+'</div>'+iconSVG('checkCircle',24,'hsl(var(--primary))')+'<p class="text-foreground font-medium">'+t.text+'</p></div>';
+  }).join('');
+}
+
+function renderIngredients() {
+  var mob = document.getElementById('ingredients-mobile');
+  mob.innerHTML = ingredients.map(function(ing) {
+    return '<div class="anim-target flex items-center gap-4" style="background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border-radius:0.75rem;padding:1rem;border:1px solid rgba(255,255,255,0.2)"><div style="width:3.5rem;height:3.5rem;background:#fff;border-radius:0.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+iconSVG(ing.icon,28,'hsl(var(--secondary))')+'</div><div><h3 class="text-base font-bold text-white">'+ing.name+'</h3><p class="text-sm" style="color:rgba(255,255,255,0.7)">'+ing.desc+'</p></div></div>';
+  }).join('');
+  var desk = document.getElementById('ingredients-desktop');
+  desk.innerHTML = ingredients.map(function(ing) {
+    return '<div class="anim-target" style="background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);border-radius:1rem;padding:1.5rem;border:1px solid rgba(255,255,255,0.2);transition:all 0.3s;text-align:center"><div class="flex flex-col items-center"><div style="width:5rem;height:5rem;background:#fff;border-radius:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;transition:transform 0.3s">'+iconSVG(ing.icon,40,'hsl(var(--secondary))')+'</div><h3 class="text-xl font-bold text-white mb-2">'+ing.name+'</h3><p class="text-sm" style="color:rgba(255,255,255,0.7)">'+ing.desc+'</p></div></div>';
+  }).join('');
+}
+
+function renderTimeline() {
+  var scroll = document.getElementById('timeline-scroll');
+  scroll.innerHTML = timelineSteps.map(function(s, i) {
+    return '<div class="shrink-0 snap-center anim-target" style="width:18rem"><div class="bg-secondary-light rounded-2xl p-6 h-full" style="border:1px solid hsla(var(--secondary),0.2)"><div class="flex items-center gap-3 mb-4"><div style="width:3rem;height:3rem;background:hsl(var(--secondary));border-radius:9999px;display:flex;align-items:center;justify-content:center">'+iconSVG(s.icon,24,'#fff')+'</div><span class="text-sm font-bold text-secondary">ETAPA '+(i+1)+'</span></div><span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3" style="background:hsla(var(--secondary),0.2);color:hsl(var(--secondary))">'+s.period+'</span><h3 class="text-lg font-bold text-foreground mb-2">'+s.title+'</h3><p class="text-sm text-muted-fg">'+s.desc+'</p></div></div>';
+  }).join('');
+  var desk = document.getElementById('timeline-desktop');
+  desk.innerHTML = timelineSteps.map(function(s, i) {
+    return '<div class="anim-target"><div class="bg-secondary-light rounded-2xl p-8 h-full" style="border:1px solid hsla(var(--secondary),0.2)"><div style="width:4rem;height:4rem;background:hsl(var(--secondary));border-radius:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem">'+iconSVG(s.icon,32,'#fff')+'</div><span class="inline-block px-3 py-1 rounded-full text-xs font-bold mb-3" style="background:hsla(var(--secondary),0.2);color:hsl(var(--secondary))">'+s.period+'</span><h3 class="text-xl font-bold text-foreground mb-3">'+s.title+'</h3><p class="text-muted-fg">'+s.desc+'</p></div></div>';
+  }).join('');
+}
+
+function renderVideoCarousel() {
+  var el = document.getElementById('video-carousel');
+  var allVids = videoTestimonials.concat(videoTestimonials);
+  el.innerHTML = allVids.map(function(v) {
+    return '<div class="relative rounded-2xl overflow-hidden shrink-0" style="width:14rem;cursor:pointer" onclick="openVideoModal(\''+v.url+'\')"><video data-src="'+v.url+'" style="width:100%;height:24rem;object-fit:cover;border-radius:1rem" loop muted playsinline preload="none"></video><div class="absolute flex items-center justify-center" style="inset:0"><div style="width:3.5rem;height:3.5rem;background:rgba(255,255,255,0.9);border-radius:9999px;display:flex;align-items:center;justify-content:center"><svg width="24" height="24" viewBox="0 0 24 24" fill="hsl(var(--primary))" stroke="hsl(var(--primary))" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg></div></div></div>';
+  }).join('');
+  // Lazy load videos when visible
+  var videoObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var video = entry.target;
+        if (video.dataset.src && !video.src) {
+          video.src = video.dataset.src;
+          video.play().catch(function(){});
+        }
+        videoObs.unobserve(video);
+      }
+    });
+  }, { rootMargin: '200px' });
+  el.querySelectorAll('video[data-src]').forEach(function(v) { videoObs.observe(v); });
+}
+
+function renderWrittenCarousel() {
+  var el = document.getElementById('written-carousel');
+  var all = writtenTestimonials.concat(writtenTestimonials, writtenTestimonials);
+  el.innerHTML = all.map(function(t) {
+    return '<div class="bg-white rounded-2xl p-6 shrink-0" style="width:24rem"><div class="flex items-center gap-1 mb-3">'+starsHTML(t.rating)+'</div><svg width="32" height="32" viewBox="0 0 24 24" style="stroke:hsla(var(--primary),0.2);fill:none;stroke-width:2;margin-bottom:0.5rem"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><p class="text-muted-fg mb-4 text-sm">'+t.text+'</p><p class="font-bold text-foreground text-sm">'+t.name+'</p></div>';
+  }).join('');
+}
+
+function renderPricing() {
+  var el = document.getElementById('pricing-grid');
+  el.innerHTML = kits.map(function(kit) {
+    var cls = kit.popular ? 'popular' : kit.bestValue ? 'best-value' : 'default';
+    var textCls = kit.popular ? 'text-white' : 'text-foreground';
+    var mutedCls = kit.popular ? 'color:rgba(255,255,255,0.8)' : 'color:hsl(var(--muted-foreground))';
+    var checkColor = kit.popular ? '#fff' : kit.bestValue ? 'hsl(var(--secondary))' : 'hsl(var(--primary))';
+    var scale = kit.bestValue ? 'transform:scale(1.05);margin:-1rem 0;z-index:1' : '';
+    var badge = '';
+    if (kit.popular) badge = '<div class="kit-badge" style="background:#facc15;color:hsl(var(--foreground))">'+iconSVG('star',14,'hsl(var(--foreground))')+' MAIS VENDIDO</div>';
+    if (kit.bestValue) badge = '<div class="kit-badge" style="background:hsl(var(--secondary));color:#fff">'+iconSVG('star',14,'#fff')+' MAIOR ECONOMIA</div>';
+    return '<div class="kit-card anim-target '+cls+'" style="'+scale+'">'+badge+'<div class="relative flex justify-center mb-6 pt-4"><img src="'+kit.img+'" alt="'+kit.name+'" style="height:'+(kit.bestValue?'14rem':'12rem')+';object-fit:contain" loading="lazy"/></div><div class="text-center mb-4"><h3 class="text-xl font-bold '+textCls+'">'+kit.name+'</h3><p class="text-sm" style="'+mutedCls+'">'+kit.capsules+' • '+kit.duration+'</p></div><div class="text-center mb-4"><div class="flex items-center justify-center gap-2 mb-1"><span class="line-through text-sm" style="'+(kit.popular?'color:rgba(255,255,255,0.6)':mutedCls)+'">'+fmt(kit.originalPrice)+'</span><span class="font-bold text-sm" style="'+(kit.popular?'color:#fff;background:rgba(255,255,255,0.2);padding:0.125rem 0.5rem;border-radius:0.25rem':'color:hsl(var(--secondary))')+'">-'+kit.discount+'%</span></div><p class="text-4xl font-bold '+textCls+'">'+fmt(kit.price)+'</p><p class="text-sm mt-1" style="'+mutedCls+'">ou 3x de '+fmt(kit.installment)+' sem juros</p></div><div style="border-radius:0.75rem;padding:0.75rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;'+(kit.popular?'background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2)':kit.bestValue?'background:hsla(var(--secondary),0.1);border:1px solid hsla(var(--secondary),0.3)':'border:1px solid hsl(var(--border))')+'"><span class="text-sm" style="'+mutedCls+'">Preço por unidade:</span><span class="font-bold" style="'+(kit.popular?'color:#fff':'color:hsl(var(--secondary))')+'">'+fmt(kit.perPot)+'</span></div><div class="space-y-2 mb-4">'+(kit.freeShipping?'<div class="flex items-center gap-2">'+iconSVG('check',16,checkColor)+'<span class="text-sm '+textCls+'">Frete Grátis</span></div>':'')+'<div class="flex items-center gap-2">'+iconSVG('check',16,checkColor)+'<span class="text-sm '+textCls+'">100% Natural</span></div><div class="flex items-center gap-2">'+iconSVG('check',16,checkColor)+'<span class="text-sm '+textCls+'">Satisfação Garantida</span></div><div class="flex items-center gap-2">'+iconSVG('gift',16,kit.popular?'#fff':'hsl(var(--secondary))')+'<span class="text-sm font-medium" style="'+(kit.popular?'color:#fff':'color:hsl(var(--secondary))')+'">Cashback de '+fmt(kit.cashback)+'</span></div></div><a href="'+kit.checkoutUrl+'" target="_blank" rel="noopener noreferrer" onclick="trackPurchaseClick(\''+kit.name+'\','+kit.price+',\''+kit.checkoutUrl+'\')" class="btn btn-shine w-full" style="padding:0.75rem;font-size:1.125rem;font-weight:700;border-radius:9999px;'+(kit.popular?'background:#fff;color:hsl(var(--primary))':'background:hsl(var(--primary));color:#fff')+'">Comprar Agora</a><div class="flex items-center justify-center gap-2 mt-4" style="'+(kit.popular?'color:rgba(255,255,255,0.7)':mutedCls)+'">'+iconSVG('truck',16,'currentColor')+'<span class="text-xs">Entrega em 3-7 dias úteis</span></div></div>';
+  }).join('');
+}
+
+function renderFAQ() {
+  var el = document.getElementById('faq-list');
+  el.innerHTML = faqs.map(function(f, i) {
+    return '<div class="rounded-xl px-6" style="background:hsla(var(--muted),0.5)"><button class="accordion-trigger w-full flex items-center justify-between text-left font-semibold text-foreground py-5 transition-colors" onclick="toggleAccordion(this)" style="gap:1rem"><span>'+f.q+'</span><svg class="icon chevron shrink-0" width="16" height="16" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="accordion-content"><p class="text-muted-fg" style="padding-bottom:1.25rem">'+f.a+'</p></div></div>';
+  }).join('');
+}
+
+function renderStickyDropdown() {
+  var el = document.getElementById('sticky-dropdown');
+  el.innerHTML = kits.map(function(kit, i) {
+    var sel = i === selectedVariantIdx;
+    return '<button onclick="selectStickyVariant('+i+')" class="w-full flex items-center justify-between px-3 py-2.5 text-sm transition-colors" style="'+(sel?'background:hsla(var(--primary),0.1)':'')+'"><div class="flex flex-col items-start" style="gap:0.125rem"><div class="flex items-center gap-1.5"><span class="font-semibold text-xs" style="color:'+(sel?'hsl(var(--primary))':'hsl(var(--foreground))')+'">'+kit.name+'</span>'+(kit.popular?'<span style="font-size:9px;background:hsla(var(--secondary),0.1);color:hsl(var(--secondary));padding:0.125rem 0.25rem;border-radius:0.25rem">Mais Vendido</span>':'')+(kit.bestValue?'<span style="font-size:9px;background:hsla(var(--secondary),0.1);color:hsl(var(--secondary));padding:0.125rem 0.25rem;border-radius:0.25rem">Maior Economia</span>':'')+'</div><div class="flex items-center gap-1.5"><span style="font-size:10px;color:hsl(var(--muted-foreground))">'+kit.capsules+'</span>'+(kit.freeShipping?'<span style="font-size:9px;color:hsl(var(--secondary));font-weight:500">• Frete Grátis</span>':'')+'</div></div><div class="text-right"><p class="font-bold text-xs" style="color:'+(sel?'hsl(var(--primary))':'hsl(var(--foreground))')+'">'+fmt(kit.price)+'</p><p style="font-size:10px;color:hsl(var(--muted-foreground))" class="line-through">'+fmt(kit.originalPrice)+'</p></div></button>';
+  }).join('');
+}
+
+function updateStickyUI() {
+  var kit = kits[selectedVariantIdx];
+  var disc = Math.round((1 - kit.price / kit.originalPrice) * 100);
+  document.getElementById('sticky-variant-name').textContent = kit.name;
+  document.getElementById('sticky-original-price').textContent = fmt(kit.originalPrice);
+  document.getElementById('sticky-discount').textContent = '-' + disc + '%';
+  document.getElementById('sticky-price').textContent = fmt(kit.price);
+  document.getElementById('sticky-buy-btn').href = kit.checkoutUrl;
+  document.getElementById('sticky-buy-btn').onclick = function() { trackPurchaseClick(kit.name, kit.price, kit.checkoutUrl); };
+  var ship = document.getElementById('sticky-shipping');
+  ship.style.display = kit.freeShipping ? 'flex' : 'none';
+  // Mobile: show price in button
+  var label = document.getElementById('sticky-buy-label');
+  if (window.innerWidth < 640) {
+    label.textContent = fmt(kit.price);
+  } else {
+    label.textContent = 'Comprar';
+  }
+}
+
+/* ═══ MÓDULO: Interactions ═══
+   ID: M18d
+   ORIGEM: event handlers across components
+   DEPENDE DE: M18b, M18c
+   RECEBE: user events
+   EXPÕE: toggle/scroll/modal functions
+   ESTADO: modifies M18b state
+═══ */
+function toggleAccordion(trigger) {
+  var content = trigger.nextElementSibling;
+  var isOpen = content.classList.contains('open');
+  // Close all siblings
+  var parent = trigger.closest('.space-y-4') || trigger.closest('[class*="space-y"]');
+  if (parent) {
+    parent.querySelectorAll('.accordion-content.open').forEach(function(c) { c.classList.remove('open'); });
+    parent.querySelectorAll('.accordion-trigger.open').forEach(function(t) { t.classList.remove('open'); });
+  }
+  if (!isOpen) {
+    content.classList.add('open');
+    trigger.classList.add('open');
+  }
+}
+
+function toggleBenefits() {
+  showAllBenefits = !showAllBenefits;
+  renderBenefitsMobile();
+}
+
+function scrollTimeline(dir) {
+  var el = document.getElementById('timeline-scroll');
+  el.scrollBy({ left: dir * 280, behavior: 'smooth' });
+}
+function scrollVideos(dir) {
+  var el = document.getElementById('video-carousel');
+  el.parentElement.style.overflow = 'auto';
+  el.style.animation = 'none';
+  el.parentElement.scrollBy({ left: dir * 250, behavior: 'smooth' });
+}
+function scrollWritten(dir) {
+  var el = document.getElementById('written-carousel');
+  el.parentElement.style.overflow = 'auto';
+  el.style.animation = 'none';
+  el.parentElement.scrollBy({ left: dir * 300, behavior: 'smooth' });
+}
+
+function openVideoModal(url) {
+  var modal = document.getElementById('video-modal');
+  var video = document.getElementById('modal-video');
+  video.src = url;
+  modal.classList.add('active');
+  video.play();
+}
+function closeVideoModal(e) {
+  if (e && e.target !== document.getElementById('video-modal') && !e.target.closest('button')) return;
+  var modal = document.getElementById('video-modal');
+  var video = document.getElementById('modal-video');
+  video.pause();
+  video.src = '';
+  modal.classList.remove('active');
+}
+
+function toggleStickyDropdown() {
+  stickyDropdownOpen = !stickyDropdownOpen;
+  document.getElementById('sticky-dropdown').classList.toggle('open', stickyDropdownOpen);
+  document.getElementById('sticky-chevron').style.transform = stickyDropdownOpen ? 'rotate(180deg)' : '';
+}
+function selectStickyVariant(idx) {
+  selectedVariantIdx = idx;
+  stickyDropdownOpen = false;
+  document.getElementById('sticky-dropdown').classList.remove('open');
+  document.getElementById('sticky-chevron').style.transform = '';
+  updateStickyUI();
+  renderStickyDropdown();
+}
+
+/* Scroll listener for sticky footer (throttled) */
+var _stickyTicking = false;
+function handleStickyScroll() {
+  if (_stickyTicking) return;
+  _stickyTicking = true;
+  requestAnimationFrame(function() {
+    var footer = document.querySelector('footer');
+    var footerTop = footer ? footer.getBoundingClientRect().top : Infinity;
+    var vis = window.scrollY > 500 && footerTop >= window.innerHeight;
+    document.getElementById('sticky-footer').classList.toggle('visible', vis);
+    _stickyTicking = false;
+  });
+}
+
+/* Sparkle generation */
+function generateSparkles() {
+  var container = document.getElementById('sparkle-container');
+  if (!container) return;
+  for (var i = 0; i < 14; i++) {
+    var angle = (i / 14) * Math.PI * 2;
+    var rx = 45 + (i % 2) * 10;
+    var ry = 42 + (i % 2) * 8;
+    var left = 50 + Math.cos(angle) * rx;
+    var top = 50 + Math.sin(angle) * ry;
+    var size = Math.random() * 6 + 4;
+    var delay = Math.random() * 4;
+    var dur = Math.random() * 2 + 2;
+    var dot = document.createElement('div');
+    dot.className = 'sparkle-dot';
+    dot.style.cssText = 'left:'+left+'%;top:'+top+'%;width:'+size+'px;height:'+size+'px;--dur:'+dur+'s;--delay:'+delay+'s;background:radial-gradient(circle,rgba(252,198,3,0.95) 0%,rgba(252,198,3,0.4) 50%,transparent 100%);box-shadow:0 0 '+size+'px rgba(252,198,3,0.5),0 0 '+(size*2)+'px rgba(252,198,3,0.15)';
+    container.appendChild(dot);
+  }
+}
+
+/* Responsive layout adjustments */
+function handleResize() {
+  var w = window.innerWidth;
+  var md = w >= 768;
+  var lg = w >= 1024;
+  // Hero grid
+  document.getElementById('hero-grid').style.gridTemplateColumns = lg ? '1fr 1fr' : '1fr';
+  if (lg) {
+    document.getElementById('hero-content').style.maxWidth = 'none';
+    document.getElementById('hero-content').style.textAlign = 'left';
+    document.getElementById('hero-content').style.margin = '0';
+  } else {
+    document.getElementById('hero-content').style.maxWidth = '350px';
+    document.getElementById('hero-content').style.textAlign = 'center';
+    document.getElementById('hero-content').style.margin = '0 auto';
+  }
+  // Why grid
+  document.getElementById('why-grid').style.gridTemplateColumns = lg ? '1fr 1fr' : '1fr';
+  document.getElementById('why-cards-desktop').style.display = md ? 'block' : 'none';
+  document.getElementById('why-accordion').style.display = md ? 'none' : 'block';
+  // Why image responsive
+  var whyImg = document.getElementById('why-image');
+  if (whyImg) {
+    var img = whyImg.querySelector('img');
+    if (img) img.style.maxHeight = lg ? '850px' : md ? '750px' : '600px';
+  }
+  // Benefits
+  document.getElementById('benefits-mobile').style.display = md ? 'none' : 'block';
+  document.getElementById('benefits-desktop').style.display = md ? 'grid' : 'none';
+  if (md) document.getElementById('benefits-desktop').style.gridTemplateColumns = lg ? 'repeat(3,1fr)' : 'repeat(2,1fr)';
+  // WhoIsItFor grid
+  document.getElementById('whoisitfor-grid').style.gridTemplateColumns = lg ? '1fr 1fr' : '1fr';
+  if (lg) document.getElementById('whoisitfor-header').style.textAlign = 'left';
+  else document.getElementById('whoisitfor-header').style.textAlign = 'center';
+  // Ingredients
+  document.getElementById('ingredients-mobile').style.display = md ? 'none' : 'block';
+  document.getElementById('ingredients-desktop').style.display = md ? 'grid' : 'none';
+  if (md) document.getElementById('ingredients-desktop').style.gridTemplateColumns = 'repeat(3,1fr)';
+  // Timeline
+  document.getElementById('timeline-mobile').style.display = md ? 'none' : 'block';
+  document.getElementById('timeline-desktop').style.display = md ? 'grid' : 'none';
+  if (md) document.getElementById('timeline-desktop').style.gridTemplateColumns = lg ? 'repeat(3,1fr)' : 'repeat(3,1fr)';
+  // Pricing grid
+  document.getElementById('pricing-grid').style.gridTemplateColumns = md ? 'repeat(3,1fr)' : '1fr';
+  // HowTo grid
+  document.getElementById('howto-grid').style.gridTemplateColumns = md ? '1fr 1fr' : '1fr';
+  // Footer
+  document.getElementById('footer-mobile').style.display = md ? 'none' : 'block';
+  document.getElementById('footer-desktop').style.display = md ? 'block' : 'none';
+  // Hero section padding
+  var heroContainer = document.querySelector('#inicio .container');
+  if (md) {
+    heroContainer.style.paddingTop = '7rem';
+    heroContainer.style.paddingBottom = '10rem';
+  } else {
+    heroContainer.style.paddingTop = '100px';
+    heroContainer.style.paddingBottom = '80px';
+  }
+  // Product image size
+  var prodImg = document.querySelector('#hero-image-wrap img.animate-float');
+  if (prodImg) {
+    if (lg) prodImg.style.width = '30rem';
+    else if (md) prodImg.style.width = '26.25rem';
+    else prodImg.style.width = '20rem';
+  }
+  // Sticky buy label
+  updateStickyUI();
+}
+
+/* Copyright */
+function setCopyright() {
+  var year = new Date().getFullYear();
+  var m = document.getElementById('copyright-mobile');
+  var d = document.getElementById('copyright-desktop');
+  if (m) m.textContent = '© ' + year + ' Denavita. Todos os direitos reservados.';
+  if (d) d.textContent = '© ' + year + ' Denavita. Todos os direitos reservados. • *Os resultados podem variar de pessoa para pessoa.';
+}
+
+/* ═══ MÓDULO: ValidationSystem ═══
+   ID: M20
+   ORIGEM: Axioma OP₇
+   DEPENDE DE: todos os módulos
+   RECEBE: nenhum
+   EXPÕE: __VALIDATE_INTEGRITY__
+   ESTADO: nenhum
+═══ */
+function __VALIDATE_INTEGRITY__() {
+  var results = [];
+  function assert(module, test, description) {
+    try {
+      var pass = test();
+      results.push({ module: module, description: description, status: pass ? '✅' : '❌' });
+    } catch(e) {
+      results.push({ module: module, description: description, status: '💥 ERRO: ' + e.message });
+    }
+  }
+  assert('M01', function(){ return document.querySelector('.animate-scroll-subhero') !== null; }, 'SubHero marquee exists');
+  assert('M02', function(){ return document.getElementById('inicio') !== null && document.querySelector('.animate-float') !== null; }, 'Hero section with product image');
+  assert('M02', function(){ return document.querySelectorAll('.sparkle-dot').length >= 10; }, 'Sparkle dots generated');
+  assert('M03', function(){ return document.getElementById('why-cards-desktop') !== null; }, 'WhyItWorks cards exist');
+  assert('M04', function(){ return document.getElementById('benefits-desktop').children.length === 6; }, 'All 6 benefits rendered desktop');
+  assert('M05', function(){ return document.getElementById('targets-list').children.length === 6; }, 'All 6 target items rendered');
+  assert('M06', function(){ return document.getElementById('ingredients-mobile').children.length === 3; }, 'All 3 ingredients rendered');
+  assert('M07', function(){ return document.getElementById('timeline-scroll').children.length === 3; }, 'Timeline steps rendered');
+  assert('M08', function(){ return document.getElementById('video-carousel').children.length >= 4; }, 'Video carousel populated');
+  assert('M08', function(){ return document.getElementById('written-carousel').children.length >= 6; }, 'Written testimonials populated');
+  assert('M09', function(){ return document.getElementById('pricing-grid').children.length === 3; }, '3 pricing kits rendered');
+  assert('M10', function(){ return document.getElementById('howto-steps').children.length === 3; }, 'How-to steps exist');
+  assert('M11', function(){ return document.getElementById('faq-list').children.length === 8; }, '8 FAQ items rendered');
+  assert('M12', function(){ return document.querySelector('footer') !== null; }, 'Footer exists');
+  assert('M13', function(){ return document.getElementById('sticky-footer') !== null; }, 'Sticky footer exists');
+  assert('M13', function(){ return typeof selectStickyVariant === 'function'; }, 'Variant selector functional');
+  assert('M14', function(){ return document.getElementById('whatsapp-btn') !== null; }, 'WhatsApp button exists');
+  assert('M15', function(){ return typeof trackEvent === 'function' && typeof trackPurchaseClick === 'function'; }, 'GA4 tracking functions exist');
+  assert('M17', function(){ return document.querySelectorAll('.anim-target').length > 0; }, 'Animation targets present');
+  assert('M18', function(){ return getComputedStyle(document.documentElement).getPropertyValue('--primary').trim() !== ''; }, 'CSS custom properties set');
+  console.table(results);
+  var failures = results.filter(function(r) { return r.status !== '✅'; });
+  if (failures.length === 0) {
+    console.log('%c✅ TODOS OS INVARIANTES PASSARAM', 'color:green;font-size:16px');
+  } else {
+    console.log('%c❌ ' + failures.length + ' FALHA(S) DETECTADA(S)', 'color:red;font-size:16px');
+  }
+  return results;
+}
+/* ═══ CHECKPOINT [M20] Validation System ✓ — __VALIDATE_INTEGRITY__() ═══ */
+
+/* ═══ INIT ═══ */
+document.addEventListener('DOMContentLoaded', function() {
+  generateSparkles();
+  renderBenefitsMobile();
+  renderBenefitsDesktop();
+  renderTargets();
+  renderIngredients();
+  renderTimeline();
+  renderVideoCarousel();
+  renderWrittenCarousel();
+  renderPricing();
+  renderFAQ();
+  renderStickyDropdown();
+  updateStickyUI();
+  setCopyright();
+  initAnimations();
+  handleResize();
+  var _resizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(_resizeTimer);
+    _resizeTimer = setTimeout(handleResize, 100);
+  });
+  window.addEventListener('scroll', handleStickyScroll, { passive: true });
+  // Close dropdown on outside click
+  document.addEventListener('click', function(e) {
+    if (stickyDropdownOpen && !e.target.closest('#sticky-dropdown') && !e.target.closest('#sticky-variant-btn')) {
+      stickyDropdownOpen = false;
+      document.getElementById('sticky-dropdown').classList.remove('open');
+      document.getElementById('sticky-chevron').style.transform = '';
+    }
+  });
+});
+</script>
+{% if section.settings.standalone_page %}
+</body>
+</html>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Archfy LP Jejoom Imagens",
+  "tag": "section",
+  "class": "jejoom-lp",
+  "settings": [
+    {
+      "type": "header",
+      "content": "⚙️ Modo de Exibição"
+    },
+    {
+      "type": "checkbox",
+      "id": "standalone_page",
+      "label": "Página Standalone (HTML completo)",
+      "default": true,
+      "info": "ATIVADO: Renderiza como página HTML completa isolada (com DOCTYPE, head, meta tags, GA4, Facebook Pixel, fonts). DESATIVADO: Funciona como seção dentro do tema Shopify (sem tags HTML/head/body duplicadas)."
+    },
+    {
+      "type": "header",
+      "content": "🎯 Hero — Imagem Principal"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_product_image",
+      "label": "Imagem do Produto (Hero)",
+      "info": "Imagem principal do produto exibida no topo. Recomendado: 480x600px, fundo transparente (.webp ou .png)"
+    },
+    {
+      "type": "header",
+      "content": "🍊 Hero — Laranjas Decorativas"
+    },
+    {
+      "type": "image_picker",
+      "id": "orange_1",
+      "label": "Laranja 1",
+      "info": "Laranja flutuante decorativa. Recomendado: 100x100px (.webp ou .png com transparência)"
+    },
+    {
+      "type": "image_picker",
+      "id": "orange_2",
+      "label": "Laranja 2",
+      "info": "Laranja flutuante decorativa"
+    },
+    {
+      "type": "image_picker",
+      "id": "orange_3",
+      "label": "Laranja 3",
+      "info": "Laranja flutuante decorativa"
+    },
+    {
+      "type": "image_picker",
+      "id": "orange_4",
+      "label": "Laranja 4",
+      "info": "Laranja flutuante decorativa"
+    },
+    {
+      "type": "header",
+      "content": "📸 Seções — Imagens de Conteúdo"
+    },
+    {
+      "type": "image_picker",
+      "id": "why_it_works_image",
+      "label": "Foto — Por que Funciona",
+      "info": "Foto exibida na seção 'Entenda por que o Jejoom funciona'. Recomendado: 850x1000px"
+    },
+    {
+      "type": "image_picker",
+      "id": "who_is_it_for_image",
+      "label": "Foto — Para quem é",
+      "info": "Foto exibida na seção 'Isso soa familiar?'. Recomendado: 700x700px"
+    },
+    {
+      "type": "image_picker",
+      "id": "how_to_use_image",
+      "label": "Foto — Como Usar",
+      "info": "Foto exibida na seção 'Só 1 shot por dia'. Recomendado: 320x320px, circular"
+    },
+    {
+      "type": "header",
+      "content": "🏷️ Kits — Imagens de Produto"
+    },
+    {
+      "type": "image_picker",
+      "id": "kit_1_image",
+      "label": "Imagem Kit 1 Unidade",
+      "info": "Imagem do kit de 1 unidade na seção de preços. Recomendado: 300x400px, fundo transparente"
+    },
+    {
+      "type": "image_picker",
+      "id": "kit_2_image",
+      "label": "Imagem Kit 2 Unidades",
+      "info": "Imagem do kit de 2 unidades (Mais Vendido). Recomendado: 300x400px"
+    },
+    {
+      "type": "image_picker",
+      "id": "kit_3_image",
+      "label": "Imagem Kit 3 Unidades",
+      "info": "Imagem do kit de 3 unidades (Maior Economia). Recomendado: 300x400px"
+    },
+    {
+      "type": "header",
+      "content": "🦶 Footer — Logo e Pagamentos"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_image",
+      "label": "Logo da Marca",
+      "info": "Logo exibido no rodapé (mobile e desktop). Recomendado: 200x60px (.png com transparência)"
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_icons_image",
+      "label": "Ícones de Pagamento",
+      "info": "Ícones das bandeiras de pagamento aceitas. Recomendado: 300x30px (.svg ou .png)"
+    },
+    {
+      "type": "header",
+      "content": "🎬 Vídeos — Depoimentos"
+    },
+    {
+      "type": "text",
+      "id": "video_1_url",
+      "label": "URL Vídeo Depoimento 1",
+      "info": "Cole a URL do vídeo hospedado em Shopify Files (.mp4). Ex: https://cdn.shopify.com/...mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_2_url",
+      "label": "URL Vídeo Depoimento 2",
+      "info": "Cole a URL do vídeo hospedado em Shopify Files (.mp4)"
+    },
+    {
+      "type": "text",
+      "id": "video_3_url",
+      "label": "URL Vídeo Depoimento 3",
+      "info": "Cole a URL do vídeo hospedado em Shopify Files (.mp4)"
+    },
+    {
+      "type": "text",
+      "id": "video_4_url",
+      "label": "URL Vídeo Depoimento 4",
+      "info": "Cole a URL do vídeo hospedado em Shopify Files (.mp4)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Archfy LP Jejoom Imagens",
+      "category": "Landing Page"
+    }
+  ]
+}
+{% endschema %}

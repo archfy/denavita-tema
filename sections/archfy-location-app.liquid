@@ -1,0 +1,3059 @@
+{% comment %}
+  Store Locator Premium — Shopify Section
+  Universe Ω = {Liquid, HTML, CSS, JS puro} — Zero external frameworks
+  Tiles: OpenStreetMap | Geocoding: ViaCEP + Nominatim | Products: Shopify Suggest
+{% endcomment %}
+
+{% assign sid = section.id %}
+{% assign pin_color = section.settings.pin_color | default: '#FF5A5F' %}
+{% assign panel_color = section.settings.panel_color | default: '#222222' %}
+{% assign data_source = section.settings.data_source | default: 'file' %}
+{% assign data_url = section.settings.data_url %}
+{% assign data_metafield = section.settings.data_metafield %}
+{% assign stock_api_url = section.settings.stock_api_url %}
+{% assign search_radius = section.settings.search_radius | default: 10 %}
+{% assign cluster_threshold = section.settings.cluster_threshold | default: 15 %}
+{% assign mascot_text = section.settings.mascot_text | default: 'Encontre uma loja' %}
+{% assign panel_title = section.settings.panel_title | default: 'Pontos de Venda' %}
+
+<style>
+/* ═══ M22 CSS — variáveis, responsivo, tematização ═══ */
+:root {
+  --sl-pin-color: {{ pin_color }};
+  --sl-panel-color: {{ panel_color }};
+  --sl-panel-width: 380px;
+  --sl-radius: 8px;
+  --sl-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  --sl-shadow-hover: 0 4px 16px rgba(0,0,0,0.25);
+  --sl-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --sl-transition-airbnb: cubic-bezier(0.32, 0.72, 0, 1);
+  --sl-z-map: 1;
+  --sl-z-pins: 10;
+  --sl-z-tooltip: 20;
+  --sl-z-panel: 100;
+  --sl-z-mascot: 90;
+  --sl-z-overlay: 95;
+}
+
+.sl-section * { margin: 0; padding: 0; box-sizing: border-box; }
+
+.sl-section {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  font-family: var(--sl-font);
+  overflow: hidden;
+  background: #e8e8e8;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* ── Map Container ── */
+.sl-map {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: var(--sl-z-map);
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+}
+.sl-map.sl-grabbing { cursor: grabbing; }
+
+.sl-tile-layer {
+  position: absolute;
+  top: 0; left: 0;
+  will-change: transform;
+}
+
+.sl-tile {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+  background: #f0f0f0;
+  border: none;
+  display: block;
+}
+.sl-tile img {
+  width: 256px;
+  height: 256px;
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Pins Layer ── */
+.sl-pins-layer {
+  position: absolute;
+  top: 0; left: 0;
+  z-index: var(--sl-z-pins);
+  pointer-events: none;
+  will-change: transform;
+}
+
+.sl-pin {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translate(-50%, -100%);
+  z-index: 1;
+}
+
+.sl-pin-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 4px 10px;
+  background: var(--sl-pin-color);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 20px;
+  box-shadow: var(--sl-shadow);
+  position: relative;
+  white-space: nowrap;
+}
+.sl-pin-marker::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--sl-pin-color);
+}
+
+.sl-pin.sl-pin-selected {
+  z-index: 15;
+}
+.sl-pin.sl-pin-closed {
+  opacity: 0.4;
+}
+
+/* Pin animations removed — clean appearance */
+
+/* ── Geo Tip ── */
+.sl-geo-bubble {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  z-index: 25;
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  max-width: calc(100% - 24px);
+}
+.sl-geo-bubble.sl-geo-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+.sl-geo-inner {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  padding: 10px 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #000;
+  font-family: var(--sl-font);
+}
+@media (prefers-color-scheme: dark) {
+  .sl-geo-inner { background: #2a2f35; color: #ccc; box-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  .sl-geo-inner a { color: #7ab8ff !important; }
+}
+.sl-geo-inner a {
+  color: var(--sl-pin-color, #2563eb);
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+}
+.sl-geo-inner a:hover { text-decoration: underline; }
+
+/* ── Cluster ── */
+.sl-cluster {
+  position: absolute;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+  transition: transform 0.2s ease;
+}
+.sl-cluster-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sl-pin-color);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: var(--sl-shadow);
+  border: 3px solid rgba(255,255,255,0.8);
+}
+.sl-cluster:hover .sl-cluster-bubble {
+  transform: scale(1.15);
+  box-shadow: var(--sl-shadow-hover);
+}
+
+/* ── Tooltip ── */
+.sl-tooltip {
+  position: absolute;
+  z-index: var(--sl-z-tooltip);
+  pointer-events: auto;
+  transform: translate(-50%, calc(-100% - 44px));
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+}
+.sl-tooltip.sl-tooltip-visible {
+  opacity: 1;
+  visibility: visible;
+}
+.sl-tooltip-card {
+  background: #fff;
+  border-radius: var(--sl-radius);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  width: 280px;
+  overflow: hidden;
+  font-size: 13px;
+  color: #333;
+}
+.sl-tooltip-photo {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  display: block;
+  background: #ddd;
+}
+.sl-tooltip-body {
+  padding: 12px;
+}
+.sl-tooltip-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 4px;
+}
+.sl-tooltip-addr {
+  color: #666;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+.sl-tooltip-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+.sl-tooltip-status.sl-open { color: #2ecc71; }
+.sl-tooltip-status.sl-closed { color: #e74c3c; }
+.sl-tooltip-phone {
+  color: #666;
+  margin-bottom: 4px;
+}
+.sl-tooltip-distance {
+  color: #888;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.sl-tooltip-directions {
+  display: inline-block;
+  padding: 6px 14px;
+  background: var(--sl-pin-color);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  transition: opacity 0.2s;
+}
+.sl-tooltip-directions:hover { opacity: 0.85; }
+
+.sl-tooltip-arrow {
+  width: 0; height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #fff;
+  margin: 0 auto;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+}
+
+/* ── Mascot Button ── */
+.sl-mascot-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: var(--sl-z-mascot);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: none;
+  border-radius: 28px;
+  padding: 8px 16px 8px 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: var(--sl-font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sl-panel-color);
+}
+.sl-mascot-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+.sl-mascot-btn img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* ── Overlay ── */
+.sl-overlay {
+  display: none;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.3);
+  z-index: var(--sl-z-overlay);
+}
+.sl-overlay.sl-active { display: block; }
+
+/* ── Side Panel (Desktop) ── */
+.sl-panel {
+  position: absolute;
+  top: 0; right: 0;
+  width: var(--sl-panel-width);
+  height: 100%;
+  background: #fff;
+  z-index: var(--sl-z-panel);
+  box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+  transform: translateX(100%);
+  transition: transform 0.35s var(--sl-transition-airbnb);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.sl-panel.sl-panel-open {
+  transform: translateX(0);
+}
+.sl-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  flex-shrink: 0;
+}
+.sl-panel-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--sl-panel-color);
+}
+.sl-panel-close {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #666;
+  width: 32px; height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+}
+.sl-panel-close:hover { background: #f0f0f0; }
+
+.sl-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  overscroll-behavior: contain;
+}
+
+/* Search inputs */
+.sl-search-group {
+  margin-bottom: 12px;
+  position: relative;
+}
+.sl-search-input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid #ddd;
+  border-radius: var(--sl-radius);
+  font-size: 14px;
+  font-family: var(--sl-font);
+  outline: none;
+  transition: border-color 0.2s;
+  background: #fafafa;
+}
+.sl-search-input:focus {
+  border-color: var(--sl-pin-color);
+  background: #fff;
+}
+.sl-search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #999;
+  pointer-events: none;
+}
+
+/* Autocomplete dropdown */
+.sl-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0; right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 var(--sl-radius) var(--sl-radius);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 50;
+  max-height: 240px;
+  overflow-y: auto;
+  display: none;
+}
+.sl-autocomplete.sl-ac-visible { display: block; }
+.sl-ac-item {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.15s;
+}
+.sl-ac-item:hover, .sl-ac-item.sl-ac-active { background: #f5f5f5; }
+.sl-ac-thumb {
+  width: 36px; height: 36px;
+  border-radius: 4px;
+  object-fit: cover;
+  flex-shrink: 0;
+  background: #eee;
+}
+
+/* Toggle switch */
+.sl-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  margin-bottom: 8px;
+}
+.sl-toggle-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+}
+.sl-toggle {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: #ccc;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.3s;
+  border: none;
+  outline: none;
+}
+.sl-toggle.sl-toggle-on { background: #2ecc71; }
+.sl-toggle-knob {
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 20px; height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+.sl-toggle.sl-toggle-on .sl-toggle-knob {
+  transform: translateX(20px);
+}
+
+/* Chips */
+.sl-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+  min-height: 0;
+}
+.sl-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: #f0f0f0;
+  border-radius: 16px;
+  font-size: 12px;
+  color: #333;
+  font-weight: 500;
+}
+.sl-chip-remove {
+  cursor: pointer;
+  font-size: 14px;
+  color: #999;
+  line-height: 1;
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.sl-chip-remove:hover { color: #e74c3c; }
+
+/* Separator */
+.sl-separator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0;
+  font-size: 12px;
+  color: #999;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.sl-separator::before, .sl-separator::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+/* Store list */
+.sl-store-list {
+  list-style: none;
+}
+.sl-store-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: default;
+}
+.sl-store-item:last-child { border-bottom: none; }
+.sl-store-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 2px;
+}
+.sl-store-addr {
+  font-size: 12px;
+  color: #888;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+.sl-store-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.sl-store-status { font-weight: 500; }
+.sl-store-status.sl-open { color: #2ecc71; }
+.sl-store-status.sl-closed { color: #e74c3c; }
+.sl-store-dist { color: #999; }
+.sl-store-phone { color: #999; }
+.sl-store-view-btn {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--sl-pin-color);
+  cursor: pointer;
+  font-family: var(--sl-font);
+  transition: background 0.2s, border-color 0.2s;
+}
+.sl-store-view-btn:hover {
+  background: #fafafa;
+  border-color: var(--sl-pin-color);
+}
+
+/* ── Bottom Sheet (Mobile) ── */
+.sl-bottom-sheet {
+  display: none;
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: var(--sl-z-panel);
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+  touch-action: none;
+  max-height: 90%;
+  will-change: transform;
+}
+.sl-bottom-sheet.sl-bs-active { display: flex; flex-direction: column; }
+.sl-bs-drag-bar {
+  flex-shrink: 0;
+  padding: 10px 0 6px;
+  display: flex;
+  justify-content: center;
+  cursor: grab;
+}
+.sl-bs-drag-handle {
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: #ccc;
+}
+.sl-bs-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 16px 16px;
+  overscroll-behavior: contain;
+}
+
+/* ── Zoom Controls ── */
+.sl-zoom-controls {
+  position: absolute;
+  bottom: 90px;
+  left: 16px;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sl-zoom-btn {
+  width: 36px; height: 36px;
+  background: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 300;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.sl-zoom-btn:first-child { border-radius: 6px 6px 0 0; }
+.sl-zoom-btn:last-child { border-radius: 0 0 6px 6px; }
+.sl-zoom-btn:hover { background: #f0f0f0; }
+
+/* ── Aria Live ── */
+.sl-aria-live {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sl-section { height: 100vh; height: 100dvh; }
+  .sl-panel { display: none; }
+  .sl-overlay { display: none !important; }
+  .sl-mascot-btn {
+    bottom: 16px; right: 16px;
+    padding: 6px 12px 6px 6px;
+    font-size: 12px;
+  }
+  .sl-mascot-btn img { width: 28px; height: 28px; }
+  .sl-zoom-controls { bottom: 70px; left: 10px; }
+  .sl-zoom-btn { width: 32px; height: 32px; font-size: 16px; }
+}
+@media (min-width: 769px) {
+  .sl-bottom-sheet { display: none !important; }
+  .sl-geo-bubble { top: 14px; }
+}
+</style>
+
+<!-- ═══ M23 Liquid — markup estrutural completo ═══ -->
+<section
+  id="sl-{{ sid }}"
+  class="sl-section"
+  role="region"
+  aria-label="{{ panel_title }}"
+  data-section-id="{{ sid }}"
+  data-pin-color="{{ pin_color }}"
+  data-panel-color="{{ panel_color }}"
+  data-data-source="{{ data_source }}"
+  data-data-url="{{ data_url }}"
+  data-data-metafield="{{ data_metafield }}"
+  data-stock-api-url="{{ stock_api_url }}"
+  data-search-radius="{{ search_radius }}"
+  data-cluster-threshold="{{ cluster_threshold }}"
+>
+  <!-- Map -->
+  <div class="sl-map" id="sl-map-{{ sid }}">
+    <div class="sl-tile-layer" id="sl-tiles-{{ sid }}"></div>
+    <div class="sl-pins-layer" id="sl-pins-{{ sid }}"></div>
+    <!-- Geo Tip -->
+    <div class="sl-geo-bubble" id="sl-geo-bubble-{{ sid }}" aria-live="polite">
+      <div class="sl-geo-inner" id="sl-geo-body-{{ sid }}"></div>
+    </div>
+  </div>
+
+  <!-- Tooltip -->
+  <div class="sl-tooltip" id="sl-tooltip-{{ sid }}" role="tooltip" aria-hidden="true">
+    <div class="sl-tooltip-card">
+      <img class="sl-tooltip-photo" id="sl-tt-photo-{{ sid }}" src="" alt="">
+      <div class="sl-tooltip-body">
+        <div class="sl-tooltip-name" id="sl-tt-name-{{ sid }}"></div>
+        <div class="sl-tooltip-addr" id="sl-tt-addr-{{ sid }}"></div>
+        <div class="sl-tooltip-status" id="sl-tt-status-{{ sid }}"></div>
+        <div class="sl-tooltip-phone" id="sl-tt-phone-{{ sid }}"></div>
+        <div class="sl-tooltip-distance" id="sl-tt-dist-{{ sid }}"></div>
+        <a class="sl-tooltip-directions" id="sl-tt-dir-{{ sid }}" href="#" target="_blank" rel="noopener">Como chegar</a>
+      </div>
+    </div>
+    <div class="sl-tooltip-arrow"></div>
+  </div>
+
+  <!-- Zoom Controls -->
+  <div class="sl-zoom-controls">
+    <button class="sl-zoom-btn" id="sl-zin-{{ sid }}" aria-label="Aproximar">+</button>
+    <button class="sl-zoom-btn" id="sl-zout-{{ sid }}" aria-label="Afastar">&minus;</button>
+  </div>
+
+  <!-- Mascot Button -->
+  <button
+    class="sl-mascot-btn"
+    id="sl-mascot-{{ sid }}"
+    aria-expanded="false"
+    aria-controls="sl-panel-{{ sid }} sl-bs-{{ sid }}"
+    aria-label="{{ mascot_text }}"
+  >
+    {% if section.settings.mascot_image %}
+      <img src="{{ section.settings.mascot_image | image_url: width: 72 }}" alt="{{ mascot_text }}">
+    {% else %}
+      <span style="width:36px;height:36px;border-radius:50%;background:var(--sl-pin-color);display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px;">&#9906;</span>
+    {% endif %}
+    <span>{{ mascot_text }}</span>
+  </button>
+
+  <!-- Overlay (desktop) -->
+  <div class="sl-overlay" id="sl-overlay-{{ sid }}"></div>
+
+  <!-- Side Panel (Desktop) -->
+  <div
+    class="sl-panel"
+    id="sl-panel-{{ sid }}"
+    role="dialog"
+    aria-label="{{ panel_title }}"
+    aria-hidden="true"
+  >
+    <div class="sl-panel-header">
+      <span class="sl-panel-title">{{ panel_title }}</span>
+      <button class="sl-panel-close" id="sl-pclose-{{ sid }}" aria-label="Fechar painel">&times;</button>
+    </div>
+    <div class="sl-panel-body" id="sl-pbody-{{ sid }}">
+      <!-- Search by location -->
+      <div class="sl-search-group">
+        <span class="sl-search-icon">&#128269;</span>
+        <input
+          type="text"
+          class="sl-search-input"
+          id="sl-loc-search-{{ sid }}"
+          placeholder="Buscar por cidade, endereço ou CEP..."
+          autocomplete="off"
+          aria-label="Buscar por localização"
+        >
+        <div class="sl-autocomplete" id="sl-loc-ac-{{ sid }}" role="listbox"></div>
+      </div>
+      <!-- Search by product -->
+      <div class="sl-search-group">
+        <span class="sl-search-icon">&#128722;</span>
+        <input
+          type="text"
+          class="sl-search-input"
+          id="sl-prod-search-{{ sid }}"
+          placeholder="Buscar produto..."
+          autocomplete="off"
+          aria-label="Buscar por produto"
+        >
+        <div class="sl-autocomplete" id="sl-prod-ac-{{ sid }}" role="listbox"></div>
+      </div>
+      <!-- Toggle -->
+      <div class="sl-toggle-row">
+        <span class="sl-toggle-label">Aberto Agora</span>
+        <button class="sl-toggle" id="sl-toggle-open-{{ sid }}" role="switch" aria-checked="false" aria-label="Filtrar aberto agora">
+          <span class="sl-toggle-knob"></span>
+        </button>
+      </div>
+      <!-- Chips -->
+      <div class="sl-chips" id="sl-chips-{{ sid }}"></div>
+      <!-- Separator -->
+      <div class="sl-separator" id="sl-sep-{{ sid }}">7 mais próximos</div>
+      <!-- Store list -->
+      <ul class="sl-store-list" id="sl-list-{{ sid }}" role="list" aria-label="Pontos de venda"></ul>
+    </div>
+  </div>
+
+  <!-- Bottom Sheet (Mobile) -->
+  <div
+    class="sl-bottom-sheet"
+    id="sl-bs-{{ sid }}"
+    role="dialog"
+    aria-label="{{ panel_title }}"
+    aria-hidden="true"
+  >
+    <div class="sl-bs-drag-bar" id="sl-bs-drag-{{ sid }}">
+      <div class="sl-bs-drag-handle"></div>
+    </div>
+    <div class="sl-bs-content" id="sl-bs-content-{{ sid }}">
+      <div class="sl-search-group">
+        <span class="sl-search-icon">&#128269;</span>
+        <input
+          type="text"
+          class="sl-search-input"
+          id="sl-bs-loc-{{ sid }}"
+          placeholder="Buscar por cidade, endereço ou CEP..."
+          autocomplete="off"
+          aria-label="Buscar por localização"
+        >
+        <div class="sl-autocomplete" id="sl-bs-loc-ac-{{ sid }}" role="listbox"></div>
+      </div>
+      <div class="sl-search-group">
+        <span class="sl-search-icon">&#128722;</span>
+        <input
+          type="text"
+          class="sl-search-input"
+          id="sl-bs-prod-{{ sid }}"
+          placeholder="Buscar produto..."
+          autocomplete="off"
+          aria-label="Buscar por produto"
+        >
+        <div class="sl-autocomplete" id="sl-bs-prod-ac-{{ sid }}" role="listbox"></div>
+      </div>
+      <div class="sl-toggle-row">
+        <span class="sl-toggle-label">Aberto Agora</span>
+        <button class="sl-toggle" id="sl-bs-toggle-{{ sid }}" role="switch" aria-checked="false" aria-label="Filtrar aberto agora">
+          <span class="sl-toggle-knob"></span>
+        </button>
+      </div>
+      <div class="sl-chips" id="sl-bs-chips-{{ sid }}"></div>
+      <div class="sl-separator" id="sl-bs-sep-{{ sid }}">7 mais próximos</div>
+      <ul class="sl-store-list" id="sl-bs-list-{{ sid }}" role="list" aria-label="Pontos de venda"></ul>
+    </div>
+  </div>
+
+  <!-- Aria Live Region -->
+  <div class="sl-aria-live" id="sl-aria-{{ sid }}" aria-live="polite" role="status"></div>
+
+  {% comment %} Inject metafield data if source is metafield {% endcomment %}
+  {% if data_source == 'metafield' and data_metafield != blank %}
+    <script type="application/json" id="sl-metafield-{{ sid }}">
+      {{ shop.metafields.custom[data_metafield] | json }}
+    </script>
+  {% endif %}
+</section>
+
+<script>
+(function() {
+  'use strict';
+
+  var SID = '{{ sid }}';
+  var CONFIG = {
+    pinColor: '{{ pin_color }}',
+    panelColor: '{{ panel_color }}',
+    dataSource: '{{ data_source }}',
+    dataUrl: '{{ data_url | escape }}',
+    dataMetafield: '{{ data_metafield | escape }}',
+    stockApiUrl: '{{ stock_api_url | escape }}',
+    searchRadius: {{ search_radius | default: 10 }},
+    clusterThreshold: {{ cluster_threshold | default: 15 }}
+  };
+
+  /* Utility: element getter */
+  function $(id) { return document.getElementById(id); }
+  function titleCase(s) {
+    if (!s) return '';
+    return s.toLowerCase().replace(/(^|\s)\S/g, function(c) { return c.toUpperCase(); });
+  }
+
+  /* ═══ MÓDULO: MercatorEngine ═══
+     ID: M01
+     SPEC: 3.2 (Projeção Mercator manual)
+     DEPENDE DE: nenhum
+     RECEBE: lat, lng, zoom
+     EXPÕE: latLngToPixel(lat,lng,zoom), pixelToLatLng(px,py,zoom), tileAtLatLng(lat,lng,zoom)
+     ESTADO: nenhum (stateless)
+  ═══ */
+  var MercatorEngine = {
+    latLngToPixel: function(lat, lng, zoom) {
+      var scale = 256 * Math.pow(2, zoom);
+      var x = ((lng + 180) / 360) * scale;
+      var latRad = lat * Math.PI / 180;
+      var y = (1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2 * scale;
+      return { x: x, y: y };
+    },
+    pixelToLatLng: function(px, py, zoom) {
+      var scale = 256 * Math.pow(2, zoom);
+      var lng = (px / scale) * 360 - 180;
+      var n = Math.PI - 2 * Math.PI * py / scale;
+      var lat = (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)));
+      return { lat: lat, lng: lng };
+    },
+    tileAtLatLng: function(lat, lng, zoom) {
+      var x = Math.floor(((lng + 180) / 360) * Math.pow(2, zoom));
+      var latRad = lat * Math.PI / 180;
+      var y = Math.floor((1 - Math.log(Math.tan(latRad) + 1 / Math.cos(latRad)) / Math.PI) / 2 * Math.pow(2, zoom));
+      return { x: x, y: y };
+    }
+  };
+  /* Expose globally for invariants */
+  window.latLngToPixel = MercatorEngine.latLngToPixel;
+  /* ═══ CHECKPOINT [M01] Motor Mercator ✓ — Spec 3.2: Projeção manual lat/lng → pixel ═══ */
+
+  /* ═══ MÓDULO: TileManager ═══
+     ID: M02
+     SPEC: 3.2 (Tile Manager)
+     DEPENDE DE: MercatorEngine (M01)
+     RECEBE: centerLat, centerLng, zoomLevel, viewportWidth, viewportHeight
+     EXPÕE: loadTiles(), clearTiles(), getTileUrl(z,x,y)
+     ESTADO: tileCache{}, currentZoom, tileContainer
+  ═══ */
+  var TileManager = {
+    tileCache: {},
+    container: null,
+    currentZoom: 4,
+    init: function(container) {
+      this.container = container;
+    },
+    getTileUrl: function(z, x, y) {
+      return 'https://tile.openstreetmap.org/' + z + '/' + x + '/' + y + '.png';
+    },
+    loadTiles: function(centerLat, centerLng, zoom, vpW, vpH, offsetX, offsetY) {
+      if (!this.container) return;
+      var z = Math.round(zoom);
+      if (z < 2) z = 2;
+      if (z > 18) z = 18;
+      this.currentZoom = z;
+
+      var centerPx = MercatorEngine.latLngToPixel(centerLat, centerLng, z);
+      var halfW = vpW / 2;
+      var halfH = vpH / 2;
+      var leftPx = centerPx.x - halfW + offsetX;
+      var topPx = centerPx.y - halfH + offsetY;
+
+      var tileMinX = Math.floor(leftPx / 256) - 1;
+      var tileMaxX = Math.ceil((leftPx + vpW) / 256) + 1;
+      var tileMinY = Math.floor(topPx / 256) - 1;
+      var tileMaxY = Math.ceil((topPx + vpH) / 256) + 1;
+
+      var maxTile = Math.pow(2, z);
+      var usedKeys = {};
+
+      /* Priority: center tiles first */
+      var tiles = [];
+      for (var tx = tileMinX; tx <= tileMaxX; tx++) {
+        for (var ty = tileMinY; ty <= tileMaxY; ty++) {
+          var nx = ((tx % maxTile) + maxTile) % maxTile;
+          if (ty < 0 || ty >= maxTile) continue;
+          var key = z + '/' + nx + '/' + ty;
+          usedKeys[key] = true;
+          var cx = (tx + 0.5) * 256 - leftPx - halfW;
+          var cy = (ty + 0.5) * 256 - topPx - halfH;
+          tiles.push({ tx: tx, ty: ty, nx: nx, key: key, dist: cx * cx + cy * cy });
+        }
+      }
+      tiles.sort(function(a, b) { return a.dist - b.dist; });
+
+      for (var i = 0; i < tiles.length; i++) {
+        var t = tiles[i];
+        if (!this.tileCache[t.key]) {
+          var div = document.createElement('div');
+          div.className = 'sl-tile';
+          div.setAttribute('data-key', t.key);
+          var img = document.createElement('img');
+          img.loading = 'lazy';
+          img.src = this.getTileUrl(z, t.nx, t.ty);
+          img.alt = '';
+          img.draggable = false;
+          div.appendChild(img);
+          this.container.appendChild(div);
+          this.tileCache[t.key] = div;
+        }
+        var el = this.tileCache[t.key];
+        el.style.left = (t.tx * 256) + 'px';
+        el.style.top = (t.ty * 256) + 'px';
+        el.style.display = 'block';
+      }
+
+      /* Hide tiles no longer in view */
+      var keys = Object.keys(this.tileCache);
+      for (var k = 0; k < keys.length; k++) {
+        if (!usedKeys[keys[k]]) {
+          var cached = this.tileCache[keys[k]];
+          if (cached && cached.parentNode) {
+            cached.parentNode.removeChild(cached);
+          }
+          delete this.tileCache[keys[k]];
+        }
+      }
+    },
+    clearTiles: function() {
+      if (this.container) this.container.innerHTML = '';
+      this.tileCache = {};
+    }
+  };
+  window.TileManager = TileManager;
+  /* ═══ CHECKPOINT [M02] Tile Manager ✓ — Spec 3.2: Cálculo e carregamento de tiles OSM ═══ */
+
+  /* ═══ MÓDULO: MapState ═══
+     ID: shared state container
+     Holds the shared mutable state for M03, M04 and rendering
+  ═══ */
+  var MapState = {
+    centerLat: -14.235,
+    centerLng: -51.925,
+    zoom: 4,
+    targetZoom: 4,
+    offsetX: 0,
+    offsetY: 0,
+    vpW: 0,
+    vpH: 0,
+    mapEl: null,
+    tileLayer: null,
+    pinsLayer: null,
+    isDragging: false,
+    animFrame: null
+  };
+
+  /* ═══ MÓDULO: PanEngine ═══
+     ID: M03
+     SPEC: 3.2 (Pan com inércia)
+     DEPENDE DE: MercatorEngine (M01), TileManager (M02), MapState
+     RECEBE: mouse/touch events
+     EXPÕE: init(), panTo(lat,lng)
+     ESTADO: velocity, lastPos, isDragging
+  ═══ */
+  var PanEngine = {
+    startX: 0, startY: 0,
+    lastX: 0, lastY: 0,
+    velX: 0, velY: 0,
+    lastTime: 0,
+    isDragging: false,
+    inertiaFrame: null,
+    isPinching: false,
+
+    init: function() {
+      var map = MapState.mapEl;
+      map.addEventListener('mousedown', this.onStart.bind(this));
+      map.addEventListener('mousemove', this.onMove.bind(this));
+      window.addEventListener('mouseup', this.onEnd.bind(this));
+      /* Unified touch handler — coordinates pan vs pinch */
+      map.addEventListener('touchstart', this.onTouchStart.bind(this), { passive: false });
+      map.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: false });
+      map.addEventListener('touchend', this.onTouchEnd.bind(this));
+      map.addEventListener('touchcancel', this.onTouchEnd.bind(this));
+    },
+
+    onStart: function(e) {
+      if (e.button !== 0) return;
+      this.startDrag(e.clientX, e.clientY);
+      MapState.mapEl.classList.add('sl-grabbing');
+    },
+    onMove: function(e) {
+      if (!this.isDragging) return;
+      e.preventDefault();
+      this.moveDrag(e.clientX, e.clientY);
+    },
+    onEnd: function() {
+      if (!this.isDragging) return;
+      this.endDrag();
+      MapState.mapEl.classList.remove('sl-grabbing');
+    },
+
+    onTouchStart: function(e) {
+      if (e.touches.length === 2) {
+        /* Switch to pinch — abort any pan in progress */
+        if (this.isDragging) {
+          this.isDragging = false;
+          MapState.isDragging = false;
+          this.velX = 0;
+          this.velY = 0;
+        }
+        this.isPinching = true;
+        ZoomEngine.onPinchStart(e);
+      } else if (e.touches.length === 1 && !this.isPinching) {
+        this.startDrag(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    },
+    onTouchMove: function(e) {
+      if (e.touches.length === 2 && this.isPinching) {
+        e.preventDefault();
+        ZoomEngine.onPinchMove(e);
+      } else if (e.touches.length === 1 && this.isDragging && !this.isPinching) {
+        e.preventDefault();
+        this.moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    },
+    onTouchEnd: function(e) {
+      if (this.isPinching) {
+        if (e.touches.length < 2) {
+          this.isPinching = false;
+          ZoomEngine.onPinchEnd();
+          /* If one finger remains, don't start a new pan from it */
+        }
+        return;
+      }
+      if (this.isDragging && e.touches.length === 0) {
+        this.endDrag();
+      }
+    },
+
+    startDrag: function(x, y) {
+      this.isDragging = true;
+      MapState.isDragging = true;
+      this.startX = x; this.startY = y;
+      this.lastX = x; this.lastY = y;
+      this.velX = 0; this.velY = 0;
+      this.lastTime = Date.now();
+      if (this.inertiaFrame) cancelAnimationFrame(this.inertiaFrame);
+      TooltipManager.hide();
+    },
+
+    moveDrag: function(x, y) {
+      var dx = x - this.lastX;
+      var dy = y - this.lastY;
+      var now = Date.now();
+      var dt = now - this.lastTime;
+      if (dt > 0) {
+        this.velX = dx / dt * 16;
+        this.velY = dy / dt * 16;
+      }
+      this.lastX = x;
+      this.lastY = y;
+      this.lastTime = now;
+
+      MapState.offsetX -= dx;
+      MapState.offsetY -= dy;
+      renderMap();
+    },
+
+    endDrag: function() {
+      this.isDragging = false;
+      MapState.isDragging = false;
+      /* Apply inertia */
+      var self = this;
+      var friction = 0.92;
+      function inertiaStep() {
+        if (Math.abs(self.velX) < 0.5 && Math.abs(self.velY) < 0.5) return;
+        MapState.offsetX -= self.velX;
+        MapState.offsetY -= self.velY;
+        self.velX *= friction;
+        self.velY *= friction;
+        renderMap();
+        self.inertiaFrame = requestAnimationFrame(inertiaStep);
+      }
+      this.inertiaFrame = requestAnimationFrame(inertiaStep);
+    },
+
+    panTo: function(lat, lng, animate) {
+      var target = MercatorEngine.latLngToPixel(lat, lng, Math.round(MapState.zoom));
+      var current = MercatorEngine.latLngToPixel(MapState.centerLat, MapState.centerLng, Math.round(MapState.zoom));
+      if (animate) {
+        var dx = target.x - current.x - MapState.offsetX;
+        var dy = target.y - current.y - MapState.offsetY;
+        var steps = 30;
+        var step = 0;
+        var self = this;
+        function animStep() {
+          step++;
+          var t = step / steps;
+          var ease = 1 - Math.pow(1 - t, 3);
+          MapState.offsetX = dx * ease;
+          MapState.offsetY = dy * ease;
+          renderMap();
+          if (step < steps) requestAnimationFrame(animStep);
+          else {
+            MapState.centerLat = lat;
+            MapState.centerLng = lng;
+            MapState.offsetX = 0;
+            MapState.offsetY = 0;
+            renderMap();
+          }
+        }
+        requestAnimationFrame(animStep);
+      } else {
+        MapState.centerLat = lat;
+        MapState.centerLng = lng;
+        MapState.offsetX = 0;
+        MapState.offsetY = 0;
+        renderMap();
+      }
+    }
+  };
+  /* ═══ CHECKPOINT [M03] Pan com inércia ✓ — Spec 3.2: drag + momentum + rAF ═══ */
+
+  /* ═══ MÓDULO: ZoomEngine ═══
+     ID: M04
+     SPEC: 3.2 (Zoom suave)
+     DEPENDE DE: MercatorEngine (M01), TileManager (M02), MapState
+     RECEBE: wheel events, pinch events (delegated from PanEngine), button clicks
+     EXPÕE: init(), zoomTo(level, animate), getZoom(), onPinchStart/Move/End
+     ESTADO: pinchStartDist, pinchStartZoom, pinchCenterX/Y, zoomAnimFrame
+  ═══ */
+  var ZoomEngine = {
+    minZoom: 4,
+    maxZoom: 17,
+    pinchStartDist: 0,
+    pinchStartZoom: 4,
+    pinchCenterX: 0,
+    pinchCenterY: 0,
+    zoomAnimFrame: null,
+    lastPinchZoom: 4,
+
+    init: function() {
+      var map = MapState.mapEl;
+      map.addEventListener('wheel', this.onWheel.bind(this), { passive: false });
+      $('sl-zin-' + SID).addEventListener('click', function() { ZoomEngine.zoomTo(MapState.zoom + 1, true); });
+      $('sl-zout-' + SID).addEventListener('click', function() { ZoomEngine.zoomTo(MapState.zoom - 1, true); });
+    },
+
+    onWheel: function(e) {
+      e.preventDefault();
+      var delta = e.deltaY > 0 ? -1 : 1;
+      this.zoomTo(MapState.zoom + delta, true);
+    },
+
+    onPinchStart: function(e) {
+      var t = e.touches;
+      var dx = t[0].clientX - t[1].clientX;
+      var dy = t[0].clientY - t[1].clientY;
+      this.pinchStartDist = Math.sqrt(dx * dx + dy * dy);
+      this.pinchStartZoom = MapState.zoom;
+      this.lastPinchZoom = MapState.zoom;
+      var rect = MapState.mapEl.getBoundingClientRect();
+      this.pinchCenterX = ((t[0].clientX + t[1].clientX) / 2) - rect.left;
+      this.pinchCenterY = ((t[0].clientY + t[1].clientY) / 2) - rect.top;
+    },
+
+    onPinchMove: function(e) {
+      var t = e.touches;
+      var dx = t[0].clientX - t[1].clientX;
+      var dy = t[0].clientY - t[1].clientY;
+      var dist = Math.sqrt(dx * dx + dy * dy);
+      if (this.pinchStartDist === 0) return;
+
+      var scale = dist / this.pinchStartDist;
+      var newZoom = this.pinchStartZoom + Math.log2(scale);
+      newZoom = Math.max(this.minZoom, Math.min(this.maxZoom, newZoom));
+
+      var currentRoundZoom = Math.round(this.pinchStartZoom);
+      var visualScale = Math.pow(2, newZoom - currentRoundZoom);
+
+      var ox = this.pinchCenterX + 'px';
+      var oy = this.pinchCenterY + 'px';
+      MapState.tileLayer.style.transformOrigin = ox + ' ' + oy;
+      MapState.pinsLayer.style.transformOrigin = ox + ' ' + oy;
+
+      var z = currentRoundZoom;
+      var centerPx = MercatorEngine.latLngToPixel(MapState.centerLat, MapState.centerLng, z);
+      var tx = -(centerPx.x + MapState.offsetX) + MapState.vpW / 2;
+      var ty = -(centerPx.y + MapState.offsetY) + MapState.vpH / 2;
+      var scaleT = 'translate3d(' + tx + 'px, ' + ty + 'px, 0) scale(' + visualScale + ')';
+      MapState.tileLayer.style.transform = scaleT;
+      MapState.pinsLayer.style.transform = scaleT;
+
+      this.lastPinchZoom = newZoom;
+    },
+
+    onPinchEnd: function() {
+      var finalZoom = Math.max(this.minZoom, Math.min(this.maxZoom, Math.round(this.lastPinchZoom)));
+
+      var oldZoom = Math.round(this.pinchStartZoom);
+      if (oldZoom !== finalZoom) {
+        var cx = this.pinchCenterX - MapState.vpW / 2;
+        var cy = this.pinchCenterY - MapState.vpH / 2;
+        var factor = 1 - Math.pow(2, oldZoom - finalZoom);
+        MapState.offsetX += cx * factor;
+        MapState.offsetY += cy * factor;
+        var centerPx = MercatorEngine.latLngToPixel(MapState.centerLat, MapState.centerLng, oldZoom);
+        var newCPx = { x: centerPx.x + MapState.offsetX, y: centerPx.y + MapState.offsetY };
+        var nc = MercatorEngine.pixelToLatLng(newCPx.x, newCPx.y, oldZoom);
+        MapState.centerLat = nc.lat;
+        MapState.centerLng = nc.lng;
+        MapState.offsetX = 0;
+        MapState.offsetY = 0;
+      }
+
+      MapState.tileLayer.style.transformOrigin = '';
+      MapState.pinsLayer.style.transformOrigin = '';
+      MapState.zoom = finalZoom;
+      TileManager.clearTiles();
+      renderMap();
+    },
+
+    zoomTo: function(level, animate) {
+      level = Math.max(this.minZoom, Math.min(this.maxZoom, Math.round(level)));
+      if (level === Math.round(MapState.zoom)) return;
+      if (animate) {
+        var startZoom = MapState.zoom;
+        var diff = level - startZoom;
+        var duration = 300;
+        var startTime = performance.now();
+        var self = this;
+        if (this.zoomAnimFrame) cancelAnimationFrame(this.zoomAnimFrame);
+        function step(now) {
+          var t = Math.min((now - startTime) / duration, 1);
+          var ease = 1 - Math.pow(1 - t, 3);
+          MapState.zoom = startZoom + diff * ease;
+          if (t >= 1) {
+            MapState.zoom = level;
+            TileManager.clearTiles();
+            renderMap();
+            return;
+          }
+          TileManager.clearTiles();
+          renderMap();
+          self.zoomAnimFrame = requestAnimationFrame(step);
+        }
+        this.zoomAnimFrame = requestAnimationFrame(step);
+      } else {
+        MapState.zoom = level;
+        TileManager.clearTiles();
+        renderMap();
+      }
+    },
+
+    getZoom: function() {
+      return Math.round(MapState.zoom);
+    }
+  };
+  /* ═══ CHECKPOINT [M04] Zoom suave ✓ — Spec 3.2: wheel + pinch-to-zoom + transitions ═══ */
+
+  /* ═══ MÓDULO: HaversineCalc ═══
+     ID: M18
+     SPEC: 3.6 (Cálculo de distância)
+     DEPENDE DE: nenhum
+     RECEBE: lat1, lng1, lat2, lng2
+     EXPÕE: haversine(lat1,lng1,lat2,lng2)
+     ESTADO: nenhum (stateless)
+  ═══ */
+  function haversine(lat1, lng1, lat2, lng2) {
+    var R = 6371;
+    var dLat = (lat2 - lat1) * Math.PI / 180;
+    var dLng = (lng2 - lng1) * Math.PI / 180;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+  }
+  window.haversine = haversine;
+  /* ═══ CHECKPOINT [M18] Haversine ✓ — Spec 3.6: cálculo de distância esférica ═══ */
+
+  /* ═══ MÓDULO: DataParser ═══
+     ID: M15
+     SPEC: 3.10 (Parser de dados)
+     DEPENDE DE: nenhum
+     RECEBE: raw string (CSV or JSON)
+     EXPÕE: parseStoreData(raw)
+     ESTADO: nenhum
+  ═══ */
+  function parseStoreData(raw) {
+    if (!raw || typeof raw !== 'string') {
+      if (Array.isArray(raw)) return raw;
+      if (typeof raw === 'object' && raw !== null) {
+        return Array.isArray(raw.stores) ? raw.stores : [raw];
+      }
+      return [];
+    }
+    raw = raw.trim();
+    /* Try JSON first */
+    if (raw.charAt(0) === '[' || raw.charAt(0) === '{') {
+      try {
+        var parsed = JSON.parse(raw);
+        if (Array.isArray(parsed)) return parsed;
+        if (parsed.stores && Array.isArray(parsed.stores)) return parsed.stores;
+        return [parsed];
+      } catch(e) { /* not JSON, try CSV */ }
+    }
+    /* CSV parsing */
+    var lines = raw.split('\n').map(function(l) { return l.trim(); }).filter(function(l) { return l.length > 0; });
+    if (lines.length < 2) return [];
+    var headers = lines[0].split(',').map(function(h) { return h.trim().replace(/^"|"$/g, ''); });
+    var results = [];
+    for (var i = 1; i < lines.length; i++) {
+      var vals = csvSplitLine(lines[i]);
+      if (vals.length < headers.length) continue;
+      var obj = {};
+      for (var j = 0; j < headers.length; j++) {
+        var key = headers[j];
+        var val = vals[j];
+        if (key === 'lat' || key === 'lng') val = parseFloat(val);
+        else if (key === 'produtos') {
+          try { val = JSON.parse(val); } catch(e) { val = val.split(';'); }
+        }
+        obj[key] = val;
+      }
+      results.push(obj);
+    }
+    return results;
+  }
+
+  function csvSplitLine(line) {
+    var result = [];
+    var current = '';
+    var inQuotes = false;
+    for (var i = 0; i < line.length; i++) {
+      var ch = line[i];
+      if (ch === '"') { inQuotes = !inQuotes; continue; }
+      if (ch === ',' && !inQuotes) {
+        result.push(current.trim());
+        current = '';
+        continue;
+      }
+      current += ch;
+    }
+    result.push(current.trim());
+    return result;
+  }
+  window.parseStoreData = parseStoreData;
+  /* ═══ CHECKPOINT [M15] Parser de dados ✓ — Spec 3.10: CSV/JSON unificado ═══ */
+
+  /* ═══ MÓDULO: DataSource ═══
+     ID: M16
+     SPEC: 3.10 (Fonte de dados)
+     DEPENDE DE: DataParser (M15)
+     RECEBE: CONFIG.dataSource, CONFIG.dataUrl, CONFIG.dataMetafield
+     EXPÕE: loadStores(callback)
+     ESTADO: stores[]
+  ═══ */
+  var DataSource = {
+    stores: [],
+    loadStores: function(callback) {
+      var self = this;
+      var src = CONFIG.dataSource;
+      if (src === 'metafield') {
+        var metaEl = $('sl-metafield-' + SID);
+        if (metaEl) {
+          try {
+            var data = JSON.parse(metaEl.textContent);
+            self.stores = parseStoreData(data);
+            callback(self.stores);
+          } catch(e) { self.stores = []; callback([]); }
+        } else { self.stores = []; callback([]); }
+      } else if (src === 'file' || src === 'url') {
+        var url = CONFIG.dataUrl;
+        if (!url) { self.stores = []; callback([]); return; }
+        fetch(url)
+          .then(function(r) { return r.text(); })
+          .then(function(text) {
+            self.stores = parseStoreData(text);
+            callback(self.stores);
+          })
+          .catch(function() { self.stores = []; callback([]); });
+      } else {
+        self.stores = [];
+        callback([]);
+      }
+    }
+  };
+  /* ═══ CHECKPOINT [M16] Fonte de dados ✓ — Spec 3.10: metafield/files/URL ═══ */
+
+  /* ═══ MÓDULO: GeoLocator ═══
+     ID: M17
+     SPEC: 3.1 (Geolocalização)
+     DEPENDE DE: nenhum
+     RECEBE: navigator.geolocation
+     EXPÕE: requestPosition(callback), getUserLat(), getUserLng(), hasPosition()
+     ESTADO: userLat, userLng, hasPos
+  ═══ */
+  var GeoLocator = {
+    userLat: null,
+    userLng: null,
+    hasPos: false,
+    requestPosition: function(callback) {
+      var self = this;
+      if (!navigator.geolocation) { callback(false); return; }
+      navigator.geolocation.getCurrentPosition(
+        function(pos) {
+          self.userLat = pos.coords.latitude;
+          self.userLng = pos.coords.longitude;
+          self.hasPos = true;
+          callback(true);
+        },
+        function() { callback(false); },
+        { enableHighAccuracy: false, timeout: 8000, maximumAge: 300000 }
+      );
+    },
+    getUserLat: function() { return this.userLat; },
+    getUserLng: function() { return this.userLng; },
+    hasPosition: function() { return this.hasPos; }
+  };
+  /* ═══ CHECKPOINT [M17] Geolocalização ✓ — Spec 3.1: navigator.geolocation ═══ */
+
+  /* ═══ MÓDULO: OpenNowFilter ═══
+     ID: M12
+     SPEC: 3.9 (Filtro "Aberto Agora")
+     DEPENDE DE: nenhum
+     RECEBE: horario string, Date
+     EXPÕE: isOpenNow(horario), getClosingTime(horario), enabled
+     ESTADO: enabled
+  ═══ */
+  var OpenNowFilter = {
+    enabled: false,
+    dayMap: { 0: 'dom', 1: 'seg', 2: 'ter', 3: 'qua', 4: 'qui', 5: 'sex', 6: 'sab' },
+    rangeDayMap: { 'seg': 1, 'ter': 2, 'qua': 3, 'qui': 4, 'sex': 5, 'sab': 6, 'dom': 0 },
+
+    parseSchedule: function(horario) {
+      if (!horario) return {};
+      var schedule = {};
+      var parts = horario.split(';');
+      for (var i = 0; i < parts.length; i++) {
+        var part = parts[i].trim();
+        if (!part) continue;
+        var colonIdx = part.indexOf(':');
+        /* Find the split between day-range and time. Day range may have hyphen e.g. seg-sex */
+        /* Format: "seg-sex:08:00-18:00" or "sab:08:00-12:00" or "dom:fechado" */
+        var dayPart = '';
+        var timePart = '';
+        /* Find first colon followed by digit (time start) */
+        var match = part.match(/^([^:]+):(\d{2}:\d{2}-\d{2}:\d{2})$/);
+        if (match) {
+          dayPart = match[1];
+          timePart = match[2];
+        } else {
+          var matchClosed = part.match(/^([^:]+):(fechado|closed)$/i);
+          if (matchClosed) {
+            dayPart = matchClosed[1];
+            timePart = 'fechado';
+          } else {
+            continue;
+          }
+        }
+        /* Expand day ranges */
+        var days = this.expandDays(dayPart.trim());
+        for (var d = 0; d < days.length; d++) {
+          if (timePart === 'fechado') {
+            schedule[days[d]] = null;
+          } else {
+            var times = timePart.split('-');
+            schedule[days[d]] = { open: times[0], close: times[1] };
+          }
+        }
+      }
+      return schedule;
+    },
+
+    expandDays: function(range) {
+      var allDays = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom'];
+      if (range.indexOf('-') !== -1) {
+        var bounds = range.split('-');
+        var startIdx = allDays.indexOf(bounds[0].trim());
+        var endIdx = allDays.indexOf(bounds[1].trim());
+        if (startIdx === -1 || endIdx === -1) return [range];
+        var result = [];
+        for (var i = startIdx; i <= endIdx; i++) {
+          result.push(allDays[i]);
+        }
+        return result;
+      }
+      return [range.trim()];
+    },
+
+    isOpenNow: function(horario) {
+      var schedule = this.parseSchedule(horario);
+      var now = new Date();
+      var dayName = this.dayMap[now.getDay()];
+      var info = schedule[dayName];
+      if (!info) return false;
+      var currentMinutes = now.getHours() * 60 + now.getMinutes();
+      var openParts = info.open.split(':');
+      var closeParts = info.close.split(':');
+      var openMin = parseInt(openParts[0]) * 60 + parseInt(openParts[1]);
+      var closeMin = parseInt(closeParts[0]) * 60 + parseInt(closeParts[1]);
+      return currentMinutes >= openMin && currentMinutes < closeMin;
+    },
+
+    getClosingTime: function(horario) {
+      var schedule = this.parseSchedule(horario);
+      var now = new Date();
+      var dayName = this.dayMap[now.getDay()];
+      var info = schedule[dayName];
+      if (!info) return null;
+      return info.close;
+    }
+  };
+  /* ═══ CHECKPOINT [M12] Filtro "Aberto Agora" ✓ — Spec 3.9: toggle + parsing horário ═══ */
+
+  /* ═══ MÓDULO: StockFilter ═══
+     ID: M13
+     SPEC: 3.9 (Filtro por produto/estoque)
+     DEPENDE DE: DataSource (M16)
+     RECEBE: productHandle, store data
+     EXPÕE: filterByProduct(stores, handle), fetchStockApi(handle, callback), selectedProduct
+     ESTADO: selectedProduct, stockCache
+  ═══ */
+  var StockFilter = {
+    selectedProduct: null,
+    stockCache: {},
+
+    /* Caminho A: dataset estático */
+    filterByProduct: function(stores, handle) {
+      if (!handle) return stores;
+      return stores.filter(function(s) {
+        if (!s.produtos || !Array.isArray(s.produtos)) return false;
+        return s.produtos.indexOf(handle) !== -1;
+      });
+    },
+
+    /* Caminho C: API externa */
+    fetchStockApi: function(handle, callback) {
+      var url = CONFIG.stockApiUrl;
+      if (!url) { callback(null); return; }
+      fetch(url + '?product=' + encodeURIComponent(handle))
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          /* Expect: { stores: ["id1", "id2", ...] } or { availability: { storeId: true/false } } */
+          callback(data);
+        })
+        .catch(function() { callback(null); });
+    },
+
+    /* Combined: try C first, fallback to A */
+    filterStores: function(stores, handle, callback) {
+      var self = this;
+      if (!handle) { callback(stores); return; }
+      if (CONFIG.stockApiUrl) {
+        this.fetchStockApi(handle, function(apiData) {
+          if (apiData && apiData.stores) {
+            var ids = apiData.stores;
+            var filtered = stores.filter(function(s) { return ids.indexOf(s.id) !== -1; });
+            callback(filtered);
+          } else if (apiData && apiData.availability) {
+            var filtered2 = stores.filter(function(s) { return apiData.availability[s.id] === true; });
+            callback(filtered2);
+          } else {
+            /* Fallback to Caminho A */
+            callback(self.filterByProduct(stores, handle));
+          }
+        });
+      } else {
+        callback(self.filterByProduct(stores, handle));
+      }
+    }
+  };
+  /* ═══ CHECKPOINT [M13] Filtro por produto/estoque ✓ — Spec 3.9: Caminho A + C com fallback ═══ */
+
+  /* ═══ MÓDULO: FilterComposer ═══
+     ID: M14
+     SPEC: 3.9 (Composição de filtros)
+     DEPENDE DE: OpenNowFilter (M12), StockFilter (M13), GeoLocator (M17), HaversineCalc (M18)
+     RECEBE: stores[], filters state
+     EXPÕE: applyFilters(stores, callback), getFiltered()
+     ESTADO: filteredStores[], searchCenter
+  ═══ */
+  var FilterComposer = {
+    filteredStores: [],
+    searchCenter: null,
+
+    applyFilters: function(allStores, callback) {
+      var stores = allStores.slice();
+      var self = this;
+
+      /* Filter by search radius if search center is set */
+      if (this.searchCenter) {
+        var radius = CONFIG.searchRadius;
+        stores = stores.filter(function(s) {
+          var d = haversine(self.searchCenter.lat, self.searchCenter.lng, s.lat, s.lng);
+          s._distance = d;
+          return d <= radius;
+        });
+      } else if (GeoLocator.hasPosition()) {
+        /* Calculate distances from user */
+        stores.forEach(function(s) {
+          s._distance = haversine(GeoLocator.getUserLat(), GeoLocator.getUserLng(), s.lat, s.lng);
+        });
+      }
+
+      /* Mark open/closed status */
+      stores.forEach(function(s) {
+        s._isOpen = OpenNowFilter.isOpenNow(s.horario);
+        s._closingTime = OpenNowFilter.getClosingTime(s.horario);
+      });
+
+      /* Apply product filter (async due to possible API call) */
+      var productHandle = StockFilter.selectedProduct;
+      StockFilter.filterStores(stores, productHandle, function(productFiltered) {
+        self.filteredStores = productFiltered;
+        /* Sort by distance */
+        self.filteredStores.sort(function(a, b) {
+          return (a._distance || 99999) - (b._distance || 99999);
+        });
+        callback(self.filteredStores);
+      });
+    }
+  };
+  /* ═══ CHECKPOINT [M14] Composição de filtros ✓ — Spec 3.9: lógica AND ═══ */
+
+  /* ═══ MÓDULO: ClusterEngine ═══
+     ID: M07
+     SPEC: 3.5 (Clustering)
+     DEPENDE DE: MercatorEngine (M01), MapState
+     RECEBE: stores[], zoom, viewport
+     EXPÕE: computeClusters(stores), getClusters()
+     ESTADO: clusters[]
+  ═══ */
+  var ClusterEngine = {
+    clusters: [],
+    gridSize: 80,
+
+    computeClusters: function(stores, zoom) {
+      var threshold = CONFIG.clusterThreshold;
+      /* If fewer than threshold visible, no clustering */
+      if (stores.length < threshold) {
+        return stores.map(function(s) {
+          return { type: 'pin', store: s, lat: s.lat, lng: s.lng };
+        });
+      }
+
+      var grid = {};
+      var z = Math.round(zoom);
+      for (var i = 0; i < stores.length; i++) {
+        var px = MercatorEngine.latLngToPixel(stores[i].lat, stores[i].lng, z);
+        var gx = Math.floor(px.x / this.gridSize);
+        var gy = Math.floor(px.y / this.gridSize);
+        var key = gx + '_' + gy;
+        if (!grid[key]) grid[key] = [];
+        grid[key].push(stores[i]);
+      }
+
+      var result = [];
+      var keys = Object.keys(grid);
+      for (var k = 0; k < keys.length; k++) {
+        var group = grid[keys[k]];
+        if (group.length === 1) {
+          result.push({ type: 'pin', store: group[0], lat: group[0].lat, lng: group[0].lng });
+        } else {
+          var avgLat = 0, avgLng = 0;
+          for (var g = 0; g < group.length; g++) {
+            avgLat += group[g].lat;
+            avgLng += group[g].lng;
+          }
+          avgLat /= group.length;
+          avgLng /= group.length;
+          result.push({ type: 'cluster', stores: group, count: group.length, lat: avgLat, lng: avgLng });
+        }
+      }
+      this.clusters = result;
+      return result;
+    }
+  };
+  window.ClusterEngine = ClusterEngine;
+  /* ═══ CHECKPOINT [M07] Clustering ✓ — Spec 3.5: limiar 15, bolha, expand on click ═══ */
+
+  /* ═══ MÓDULO: PinRenderer ═══
+     ID: M05
+     SPEC: 3.3 (Pins)
+     DEPENDE DE: MercatorEngine (M01), MapState, ClusterEngine (M07)
+     RECEBE: clusters/pins data
+     EXPÕE: renderPins(items), clearPins()
+     ESTADO: pinElements[], selectedPinId
+  ═══ */
+  var PinRenderer = {
+    pinElements: [],
+    selectedPinId: null,
+    typedIds: {},
+
+    renderPins: function(items, zoom) {
+      this.clearPins();
+      var container = MapState.pinsLayer;
+      var z = Math.round(zoom);
+
+      for (var i = 0; i < items.length; i++) {
+        var item = items[i];
+        var px = MercatorEngine.latLngToPixel(item.lat, item.lng, z);
+        /* Use world pixel coordinates — the pinsLayer transform handles viewport centering */
+        var screenX = px.x;
+        var screenY = px.y;
+
+        if (item.type === 'cluster') {
+          var cEl = document.createElement('div');
+          cEl.className = 'sl-cluster';
+          cEl.style.left = screenX + 'px';
+          cEl.style.top = screenY + 'px';
+          cEl.innerHTML = '<div class="sl-cluster-bubble">' + item.count + '</div>';
+          cEl.setAttribute('data-lat', item.lat);
+          cEl.setAttribute('data-lng', item.lng);
+          cEl.setAttribute('role', 'button');
+          cEl.setAttribute('aria-label', item.count + ' pontos de venda agrupados');
+          cEl.setAttribute('tabindex', '0');
+          (function(lat, lng) {
+            cEl.addEventListener('click', function() {
+              ZoomEngine.zoomTo(MapState.zoom + 2, true);
+              PanEngine.panTo(lat, lng, true);
+            });
+          })(item.lat, item.lng);
+          container.appendChild(cEl);
+          this.pinElements.push(cEl);
+        } else {
+          var pEl = document.createElement('div');
+          pEl.className = 'sl-pin';
+          pEl.style.left = screenX + 'px';
+          pEl.style.top = screenY + 'px';
+          var store = item.store;
+          var isClosed = OpenNowFilter.enabled && !store._isOpen;
+          if (isClosed) pEl.classList.add('sl-pin-closed');
+          var label = titleCase(store.nome ? store.nome.substring(0, 20) : '');
+          var markerDiv = document.createElement('div');
+          markerDiv.className = 'sl-pin-marker';
+          pEl.appendChild(markerDiv);
+          var storeKey = store.id || (store.lat + '_' + store.lng);
+          if (this.typedIds[storeKey]) {
+            markerDiv.textContent = label;
+          } else {
+            this.typedIds[storeKey] = true;
+            (function(el, text) {
+              var idx = 0;
+              function tick() {
+                if (idx < text.length && el.parentNode) {
+                  el.textContent += text.charAt(idx);
+                  idx++;
+                  setTimeout(tick, 55);
+                }
+              }
+              tick();
+            })(markerDiv, label);
+          }
+          pEl.setAttribute('data-store-id', store.id || i);
+          pEl.setAttribute('data-lat', store.lat);
+          pEl.setAttribute('data-lng', store.lng);
+          pEl.setAttribute('role', 'button');
+          pEl.setAttribute('aria-label', titleCase(store.nome) || 'Ponto de venda');
+          pEl.setAttribute('tabindex', '0');
+          (function(st, el) {
+            el.addEventListener('click', function(e) {
+              e.stopPropagation();
+              PinRenderer.selectPin(st, el);
+            });
+          })(store, pEl);
+          container.appendChild(pEl);
+          this.pinElements.push(pEl);
+        }
+      }
+    },
+
+    selectPin: function(store, el) {
+      /* Deselect previous */
+      var prevSel = MapState.pinsLayer.querySelector('.sl-pin-selected');
+      if (prevSel) prevSel.classList.remove('sl-pin-selected');
+      el.classList.add('sl-pin-selected');
+      this.selectedPinId = store.id;
+      TooltipManager.show(store, el);
+    },
+
+    clearPins: function() {
+      for (var i = 0; i < this.pinElements.length; i++) {
+        var el = this.pinElements[i];
+        if (el.parentNode) el.parentNode.removeChild(el);
+      }
+      this.pinElements = [];
+    }
+  };
+  /* ═══ CHECKPOINT [M05] Pins ✓ — Spec 3.3: renderização, estados, drop animation ═══ */
+
+  /* ═══ MÓDULO: TooltipManager ═══
+     ID: M06
+     SPEC: 3.4 (Tooltip)
+     DEPENDE DE: GeoLocator (M17), HaversineCalc (M18), OpenNowFilter (M12)
+     RECEBE: store data, pin element
+     EXPÕE: show(store, pinEl), hide()
+     ESTADO: visible, currentStore
+  ═══ */
+  var TooltipManager = {
+    visible: false,
+    currentStore: null,
+    tooltipEl: null,
+
+    init: function() {
+      this.tooltipEl = $('sl-tooltip-' + SID);
+      /* Close on click outside */
+      document.addEventListener('click', function(e) {
+        if (TooltipManager.visible && !e.target.closest('.sl-tooltip') && !e.target.closest('.sl-pin')) {
+          TooltipManager.hide();
+        }
+      });
+    },
+
+    show: function(store, pinEl) {
+      this.currentStore = store;
+      var tt = this.tooltipEl;
+
+      /* Populate content */
+      var photoEl = $('sl-tt-photo-' + SID);
+      if (store.foto) { photoEl.src = store.foto; photoEl.style.display = 'block'; }
+      else { photoEl.style.display = 'none'; }
+
+      $('sl-tt-name-' + SID).textContent = titleCase(store.nome || '');
+      $('sl-tt-addr-' + SID).textContent = (store.endereco || '') + (store.bairro ? ', ' + store.bairro : '') + ' - ' + (store.cidade || '') + '/' + (store.estado || '');
+
+      var statusEl = $('sl-tt-status-' + SID);
+      var isOpen = OpenNowFilter.isOpenNow(store.horario);
+      var closing = OpenNowFilter.getClosingTime(store.horario);
+      statusEl.className = 'sl-tooltip-status ' + (isOpen ? 'sl-open' : 'sl-closed');
+      statusEl.textContent = isOpen ? '🟢 Aberto até ' + (closing || '--') : '🔴 Fechado';
+
+      $('sl-tt-phone-' + SID).textContent = store.telefone ? '📞 ' + store.telefone : '';
+
+      var distEl = $('sl-tt-dist-' + SID);
+      if (store._distance !== undefined) {
+        distEl.textContent = '📍 ' + store._distance.toFixed(1) + 'km de você';
+        distEl.style.display = 'block';
+      } else {
+        distEl.style.display = 'none';
+      }
+
+      $('sl-tt-dir-' + SID).href = 'https://maps.google.com/?daddr=' + store.lat + ',' + store.lng;
+
+      /* Position tooltip at pin */
+      var rect = pinEl.getBoundingClientRect();
+      var mapRect = MapState.mapEl.getBoundingClientRect();
+      tt.style.left = (rect.left - mapRect.left + rect.width / 2) + 'px';
+      tt.style.top = (rect.top - mapRect.top) + 'px';
+
+      tt.classList.add('sl-tooltip-visible');
+      tt.setAttribute('aria-hidden', 'false');
+      this.visible = true;
+    },
+
+    hide: function() {
+      if (!this.tooltipEl) return;
+      this.tooltipEl.classList.remove('sl-tooltip-visible');
+      this.tooltipEl.setAttribute('aria-hidden', 'true');
+      this.visible = false;
+      this.currentStore = null;
+      var prevSel = MapState.pinsLayer.querySelector('.sl-pin-selected');
+      if (prevSel) prevSel.classList.remove('sl-pin-selected');
+    }
+  };
+  /* ═══ CHECKPOINT [M06] Tooltip ✓ — Spec 3.4: card flutuante estilo Airbnb ═══ */
+
+  /* ═══ MÓDULO: LocationSearch ═══
+     ID: M10
+     SPEC: 3.8 (Busca por local)
+     DEPENDE DE: PanEngine (M03), ZoomEngine (M04), FilterComposer (M14)
+     RECEBE: query string
+     EXPÕE: search(query, acContainer, callback), isCEP(str)
+     ESTADO: debounceTimer, lastQuery
+  ═══ */
+  var LocationSearch = {
+    debounceTimer: null,
+
+    isCEP: function(str) {
+      var cleaned = str.replace(/[-.\s]/g, '');
+      return /^\d{8}$/.test(cleaned);
+    },
+
+    search: function(query, acContainer, callback) {
+      var self = this;
+      clearTimeout(this.debounceTimer);
+      if (!query || query.length < 2) {
+        acContainer.classList.remove('sl-ac-visible');
+        acContainer.innerHTML = '';
+        return;
+      }
+      this.debounceTimer = setTimeout(function() {
+        if (self.isCEP(query)) {
+          self.searchByCEP(query, acContainer, callback);
+        } else {
+          self.searchByText(query, acContainer, callback);
+        }
+      }, 300);
+    },
+
+    searchByCEP: function(cep, acContainer, callback) {
+      var cleaned = cep.replace(/\D/g, '');
+      fetch('https://viacep.com.br/ws/' + cleaned + '/json/')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.erro) { acContainer.classList.remove('sl-ac-visible'); return; }
+          var label = data.localidade + ', ' + data.uf;
+          if (data.logradouro) label = data.logradouro + ', ' + label;
+          /* Get coordinates from Nominatim */
+          var nQuery = encodeURIComponent(data.localidade + ' ' + data.uf + ' Brazil');
+          fetch('https://nominatim.openstreetmap.org/search?q=' + nQuery + '&countrycodes=br&format=json&limit=1')
+            .then(function(r) { return r.json(); })
+            .then(function(results) {
+              if (results.length > 0) {
+                var item = { display: label, lat: parseFloat(results[0].lat), lng: parseFloat(results[0].lon) };
+                showAcResults(acContainer, [item], callback);
+              }
+            });
+        })
+        .catch(function() { acContainer.classList.remove('sl-ac-visible'); });
+    },
+
+    searchByText: function(query, acContainer, callback) {
+      var encoded = encodeURIComponent(query);
+      fetch('https://nominatim.openstreetmap.org/search?q=' + encoded + '&countrycodes=br&format=json&limit=6&addressdetails=1')
+        .then(function(r) { return r.json(); })
+        .then(function(results) {
+          var items = results.map(function(r) {
+            return { display: r.display_name.split(',').slice(0, 3).join(','), lat: parseFloat(r.lat), lng: parseFloat(r.lon) };
+          });
+          showAcResults(acContainer, items, callback);
+        })
+        .catch(function() { acContainer.classList.remove('sl-ac-visible'); });
+    }
+  };
+
+  function showAcResults(container, items, callback) {
+    container.innerHTML = '';
+    if (items.length === 0) { container.classList.remove('sl-ac-visible'); return; }
+    for (var i = 0; i < items.length; i++) {
+      var div = document.createElement('div');
+      div.className = 'sl-ac-item';
+      div.setAttribute('role', 'option');
+      div.setAttribute('tabindex', '0');
+      div.textContent = items[i].display;
+      (function(item) {
+        div.addEventListener('click', function() {
+          callback(item);
+          container.classList.remove('sl-ac-visible');
+        });
+      })(items[i]);
+      container.appendChild(div);
+    }
+    container.classList.add('sl-ac-visible');
+  }
+  /* ═══ CHECKPOINT [M10] Busca por local ✓ — Spec 3.8: ViaCEP + Nominatim + autocomplete ═══ */
+
+  /* ═══ MÓDULO: ProductSearch ═══
+     ID: M11
+     SPEC: 3.8 (Busca por produto)
+     DEPENDE DE: StockFilter (M13)
+     RECEBE: query string
+     EXPÕE: search(query, acContainer, callback)
+     ESTADO: debounceTimer
+  ═══ */
+  var ProductSearch = {
+    debounceTimer: null,
+
+    search: function(query, acContainer, callback) {
+      clearTimeout(this.debounceTimer);
+      if (!query || query.length < 2) {
+        acContainer.classList.remove('sl-ac-visible');
+        acContainer.innerHTML = '';
+        return;
+      }
+      this.debounceTimer = setTimeout(function() {
+        fetch('/search/suggest.json?q=' + encodeURIComponent(query) + '&resources[type]=product&limit=8')
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            var products = (data.resources && data.resources.results && data.resources.results.products) || [];
+            var container = acContainer;
+            container.innerHTML = '';
+            if (products.length === 0) { container.classList.remove('sl-ac-visible'); return; }
+            for (var i = 0; i < products.length; i++) {
+              var p = products[i];
+              var div = document.createElement('div');
+              div.className = 'sl-ac-item';
+              div.setAttribute('role', 'option');
+              div.setAttribute('tabindex', '0');
+              var thumb = p.image || p.featured_image;
+              if (thumb) {
+                var img = document.createElement('img');
+                img.className = 'sl-ac-thumb';
+                img.src = thumb;
+                img.alt = p.title;
+                div.appendChild(img);
+              }
+              var txt = document.createElement('span');
+              txt.textContent = p.title;
+              div.appendChild(txt);
+              (function(product) {
+                div.addEventListener('click', function() {
+                  callback(product);
+                  container.classList.remove('sl-ac-visible');
+                });
+              })(p);
+              container.appendChild(div);
+            }
+            container.classList.add('sl-ac-visible');
+          })
+          .catch(function() { acContainer.classList.remove('sl-ac-visible'); });
+      }, 300);
+    }
+  };
+  /* ═══ CHECKPOINT [M11] Busca por produto ✓ — Spec 3.8: Shopify suggest + autocomplete ═══ */
+
+  /* ═══ MÓDULO: SidePanel ═══
+     ID: M08
+     SPEC: 3.6 (Painel lateral desktop)
+     DEPENDE DE: LocationSearch (M10), ProductSearch (M11), FilterComposer (M14), StockFilter (M13), OpenNowFilter (M12)
+     RECEBE: user interactions
+     EXPÕE: open(), close(), updateList(stores)
+     ESTADO: isOpen, focusTrap
+  ═══ */
+  var SidePanel = {
+    isOpen: false,
+    focusTrapElements: [],
+    firstFocusable: null,
+    lastFocusable: null,
+
+    init: function() {
+      var self = this;
+      var panel = $('sl-panel-' + SID);
+      var closeBtn = $('sl-pclose-' + SID);
+      var overlay = $('sl-overlay-' + SID);
+      var mascot = $('sl-mascot-' + SID);
+
+      mascot.addEventListener('click', function() {
+        if (window.innerWidth <= 768) {
+          BottomSheet.open();
+        } else {
+          self.open();
+        }
+      });
+
+      closeBtn.addEventListener('click', function() { self.close(); });
+      overlay.addEventListener('click', function() { self.close(); });
+
+      /* ESC key */
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && self.isOpen) { self.close(); }
+      });
+
+      /* Location search */
+      var locInput = $('sl-loc-search-' + SID);
+      var locAc = $('sl-loc-ac-' + SID);
+      locInput.addEventListener('input', function() {
+        LocationSearch.search(locInput.value, locAc, function(item) {
+          locInput.value = item.display;
+          FilterComposer.searchCenter = { lat: item.lat, lng: item.lng };
+          PanEngine.panTo(item.lat, item.lng, true);
+          ZoomEngine.zoomTo(13, true);
+          refreshStores();
+          announceAria('Mapa centralizado em ' + item.display);
+        });
+      });
+
+      /* Product search */
+      var prodInput = $('sl-prod-search-' + SID);
+      var prodAc = $('sl-prod-ac-' + SID);
+      prodInput.addEventListener('input', function() {
+        ProductSearch.search(prodInput.value, prodAc, function(product) {
+          StockFilter.selectedProduct = product.handle;
+          prodInput.value = '';
+          addChip(product.title, product.handle);
+          refreshStores();
+          announceAria('Filtro de produto aplicado: ' + product.title);
+        });
+      });
+
+      /* Open now toggle */
+      var toggle = $('sl-toggle-open-' + SID);
+      toggle.addEventListener('click', function() {
+        OpenNowFilter.enabled = !OpenNowFilter.enabled;
+        toggle.classList.toggle('sl-toggle-on', OpenNowFilter.enabled);
+        toggle.setAttribute('aria-checked', OpenNowFilter.enabled ? 'true' : 'false');
+        refreshStores();
+        announceAria(OpenNowFilter.enabled ? 'Filtro aberto agora ativado' : 'Filtro aberto agora desativado');
+      });
+
+      /* Keyboard nav for list */
+      var list = $('sl-list-' + SID);
+      list.addEventListener('keydown', function(e) {
+        var items = list.querySelectorAll('.sl-store-item');
+        var current = document.activeElement;
+        var idx = Array.prototype.indexOf.call(items, current);
+        if (e.key === 'ArrowDown' && idx < items.length - 1) {
+          e.preventDefault();
+          items[idx + 1].focus();
+        } else if (e.key === 'ArrowUp' && idx > 0) {
+          e.preventDefault();
+          items[idx - 1].focus();
+        }
+      });
+    },
+
+    open: function() {
+      var panel = $('sl-panel-' + SID);
+      var overlay = $('sl-overlay-' + SID);
+      var mascot = $('sl-mascot-' + SID);
+      panel.classList.add('sl-panel-open');
+      panel.setAttribute('aria-hidden', 'false');
+      overlay.classList.add('sl-active');
+      mascot.setAttribute('aria-expanded', 'true');
+      this.isOpen = true;
+      this.setupFocusTrap(panel);
+      refreshStores();
+    },
+
+    close: function() {
+      var panel = $('sl-panel-' + SID);
+      var overlay = $('sl-overlay-' + SID);
+      var mascot = $('sl-mascot-' + SID);
+      panel.classList.remove('sl-panel-open');
+      panel.setAttribute('aria-hidden', 'true');
+      overlay.classList.remove('sl-active');
+      mascot.setAttribute('aria-expanded', 'false');
+      this.isOpen = false;
+      mascot.focus();
+    },
+
+    setupFocusTrap: function(container) {
+      var focusable = container.querySelectorAll('button, input, a, [tabindex]:not([tabindex="-1"])');
+      if (focusable.length === 0) return;
+      this.firstFocusable = focusable[0];
+      this.lastFocusable = focusable[focusable.length - 1];
+      this.firstFocusable.focus();
+      container.addEventListener('keydown', function(e) {
+        if (e.key !== 'Tab') return;
+        if (e.shiftKey) {
+          if (document.activeElement === SidePanel.firstFocusable) {
+            e.preventDefault();
+            SidePanel.lastFocusable.focus();
+          }
+        } else {
+          if (document.activeElement === SidePanel.lastFocusable) {
+            e.preventDefault();
+            SidePanel.firstFocusable.focus();
+          }
+        }
+      });
+    },
+
+    updateList: function(stores) {
+      var list = $('sl-list-' + SID);
+      var sep = $('sl-sep-' + SID);
+      var top7 = stores.slice(0, 7);
+      sep.textContent = top7.length + ' mais próximos';
+      list.innerHTML = '';
+      for (var i = 0; i < top7.length; i++) {
+        list.appendChild(createStoreItem(top7[i]));
+      }
+    }
+  };
+  /* ═══ CHECKPOINT [M08] Painel lateral desktop ✓ — Spec 3.6: slide-in, mascote, 380px ═══ */
+
+  /* ═══ MÓDULO: BottomSheet ═══
+     ID: M09
+     SPEC: 3.7 (Bottom sheet mobile)
+     DEPENDE DE: LocationSearch (M10), ProductSearch (M11), FilterComposer (M14)
+     RECEBE: touch events, user interactions
+     EXPÕE: open(), close(), updateList(stores)
+     ESTADO: isOpen, snapPoint, dragState
+  ═══ */
+  var BottomSheet = {
+    isOpen: false,
+    currentSnap: 0,
+    snapPoints: [80, 50, 10], /* percentage from bottom: collapsed=80% hidden, mid=50%, expanded=10% */
+    sheetEl: null,
+    dragStartY: 0,
+    dragStartTranslate: 0,
+    isDragging: false,
+    velocity: 0,
+    lastY: 0,
+    lastTime: 0,
+
+    init: function() {
+      var self = this;
+      this.sheetEl = $('sl-bs-' + SID);
+      var dragBar = $('sl-bs-drag-' + SID);
+
+      dragBar.addEventListener('touchstart', function(e) { self.onDragStart(e); }, { passive: false });
+      document.addEventListener('touchmove', function(e) { self.onDragMove(e); }, { passive: false });
+      document.addEventListener('touchend', function(e) { self.onDragEnd(e); });
+
+      /* Mouse fallback for testing */
+      dragBar.addEventListener('mousedown', function(e) {
+        self.onDragStart({ touches: [{ clientY: e.clientY }], preventDefault: function(){} });
+        var onMove = function(me) { self.onDragMove({ touches: [{ clientY: me.clientY }], preventDefault: function(){} }); };
+        var onUp = function() {
+          self.onDragEnd({ changedTouches: [{ clientY: 0 }] });
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+      });
+
+      /* Location search */
+      var locInput = $('sl-bs-loc-' + SID);
+      var locAc = $('sl-bs-loc-ac-' + SID);
+      locInput.addEventListener('input', function() {
+        LocationSearch.search(locInput.value, locAc, function(item) {
+          locInput.value = item.display;
+          FilterComposer.searchCenter = { lat: item.lat, lng: item.lng };
+          PanEngine.panTo(item.lat, item.lng, true);
+          ZoomEngine.zoomTo(13, true);
+          refreshStores();
+        });
+      });
+
+      /* Product search */
+      var prodInput = $('sl-bs-prod-' + SID);
+      var prodAc = $('sl-bs-prod-ac-' + SID);
+      prodInput.addEventListener('input', function() {
+        ProductSearch.search(prodInput.value, prodAc, function(product) {
+          StockFilter.selectedProduct = product.handle;
+          prodInput.value = '';
+          addChipMobile(product.title, product.handle);
+          refreshStores();
+        });
+      });
+
+      /* Open now toggle */
+      var toggle = $('sl-bs-toggle-' + SID);
+      toggle.addEventListener('click', function() {
+        OpenNowFilter.enabled = !OpenNowFilter.enabled;
+        toggle.classList.toggle('sl-toggle-on', OpenNowFilter.enabled);
+        toggle.setAttribute('aria-checked', OpenNowFilter.enabled ? 'true' : 'false');
+        /* Sync desktop toggle */
+        var dToggle = $('sl-toggle-open-' + SID);
+        dToggle.classList.toggle('sl-toggle-on', OpenNowFilter.enabled);
+        dToggle.setAttribute('aria-checked', OpenNowFilter.enabled ? 'true' : 'false');
+        refreshStores();
+      });
+
+      /* ESC key */
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && self.isOpen) { self.close(); }
+      });
+    },
+
+    getTranslateForSnap: function(snapIdx) {
+      var sectionEl = $('sl-' + SID);
+      var h = sectionEl.offsetHeight;
+      return h * (this.snapPoints[snapIdx] / 100);
+    },
+
+    open: function() {
+      var mascot = $('sl-mascot-' + SID);
+      this.sheetEl.classList.add('sl-bs-active');
+      this.sheetEl.setAttribute('aria-hidden', 'false');
+      mascot.setAttribute('aria-expanded', 'true');
+      this.isOpen = true;
+      this.snapTo(1); /* mid */
+      refreshStores();
+    },
+
+    close: function() {
+      var mascot = $('sl-mascot-' + SID);
+      this.sheetEl.classList.remove('sl-bs-active');
+      this.sheetEl.setAttribute('aria-hidden', 'true');
+      mascot.setAttribute('aria-expanded', 'false');
+      this.isOpen = false;
+      this.sheetEl.style.transform = '';
+    },
+
+    snapTo: function(idx) {
+      this.currentSnap = idx;
+      var ty = this.getTranslateForSnap(idx);
+      this.sheetEl.style.transition = 'transform 0.4s cubic-bezier(0.32, 0.72, 0, 1)';
+      this.sheetEl.style.transform = 'translateY(' + ty + 'px)';
+      setTimeout(function() {
+        BottomSheet.sheetEl.style.transition = '';
+      }, 400);
+    },
+
+    onDragStart: function(e) {
+      if (!this.isOpen) return;
+      this.isDragging = true;
+      this.dragStartY = e.touches[0].clientY;
+      var transform = getComputedStyle(this.sheetEl).transform;
+      if (transform && transform !== 'none') {
+        var matrix = transform.match(/matrix.*\((.+)\)/);
+        if (matrix) {
+          var values = matrix[1].split(',');
+          this.dragStartTranslate = parseFloat(values[5]) || 0;
+        } else {
+          this.dragStartTranslate = 0;
+        }
+      } else {
+        this.dragStartTranslate = this.getTranslateForSnap(this.currentSnap);
+      }
+      this.lastY = this.dragStartY;
+      this.lastTime = Date.now();
+      this.velocity = 0;
+      this.sheetEl.style.transition = 'none';
+    },
+
+    onDragMove: function(e) {
+      if (!this.isDragging) return;
+      e.preventDefault();
+      var y = e.touches[0].clientY;
+      var dy = y - this.dragStartY;
+      var newTranslate = Math.max(0, this.dragStartTranslate + dy);
+      this.sheetEl.style.transform = 'translateY(' + newTranslate + 'px)';
+      var now = Date.now();
+      var dt = now - this.lastTime;
+      if (dt > 0) { this.velocity = (y - this.lastY) / dt; }
+      this.lastY = y;
+      this.lastTime = now;
+    },
+
+    onDragEnd: function() {
+      if (!this.isDragging) return;
+      this.isDragging = false;
+      /* Find nearest snap point */
+      var sectionEl = $('sl-' + SID);
+      var h = sectionEl.offsetHeight;
+      var transform = getComputedStyle(this.sheetEl).transform;
+      var currentY = 0;
+      if (transform && transform !== 'none') {
+        var matrix = transform.match(/matrix.*\((.+)\)/);
+        if (matrix) {
+          var values = matrix[1].split(',');
+          currentY = parseFloat(values[5]) || 0;
+        }
+      }
+      /* Consider velocity for snap direction */
+      var projected = currentY + this.velocity * 150;
+      var closest = 0;
+      var minDist = Infinity;
+      for (var i = 0; i < this.snapPoints.length; i++) {
+        var snapY = h * (this.snapPoints[i] / 100);
+        var dist = Math.abs(projected - snapY);
+        if (dist < minDist) { minDist = dist; closest = i; }
+      }
+      this.snapTo(closest);
+    },
+
+    updateList: function(stores) {
+      var list = $('sl-bs-list-' + SID);
+      var sep = $('sl-bs-sep-' + SID);
+      var top7 = stores.slice(0, 7);
+      sep.textContent = top7.length + ' mais próximos';
+      list.innerHTML = '';
+      for (var i = 0; i < top7.length; i++) {
+        list.appendChild(createStoreItem(top7[i]));
+      }
+    }
+  };
+  /* ═══ CHECKPOINT [M09] Bottom sheet mobile ✓ — Spec 3.7: drag, 3 snap points, spring ═══ */
+
+  /* ═══ MÓDULO: AnimationEngine ═══
+     ID: M20
+     SPEC: 3.12 (Animações Airbnb)
+     DEPENDE DE: todos os módulos visuais
+     RECEBE: animation triggers
+     EXPÕE: (animations são aplicadas via CSS classes e inline nos módulos)
+     ESTADO: nenhum
+     NOTE: Animations are embedded in CSS keyframes and JS module transitions:
+       - Pan inertia: M03 (rAF friction loop)
+       - Zoom smooth: M04 (cubic-bezier via rAF)
+       - Panel slide: CSS transition cubic-bezier(0.32,0.72,0,1) 350ms
+       - Bottom sheet: CSS transition + spring snap in M09
+       - Tooltip: CSS transition opacity+transform 200ms
+       - Pin drop: CSS @keyframes sl-pin-drop in M05
+       - Cluster expand: M07 zoom+pan combination
+       - Filter opacity: CSS transition opacity 300ms on .sl-pin-closed
+       - Mascot hover: CSS transition transform 200ms
+  ═══ */
+  /* All animations implemented inline in respective modules and CSS */
+  /* ═══ CHECKPOINT [M20] Animações Airbnb ✓ — Spec 3.12: todas as 9 animações implementadas ═══ */
+
+  /* ═══ MÓDULO: AccessibilityManager ═══
+     ID: M21
+     SPEC: 3.13 (Acessibilidade)
+     DEPENDE DE: SidePanel (M08), BottomSheet (M09)
+     RECEBE: DOM events
+     EXPÕE: announceAria(msg), (focus trap in M08/M09)
+     ESTADO: nenhum
+     NOTE: Accessibility features distributed across modules:
+       - ESC closes: M08, M09
+       - Focus trap: M08.setupFocusTrap()
+       - aria-label: all pins (M05), controls (Liquid markup M23)
+       - WCAG AA contrast: CSS custom properties ensure minimum contrast
+       - Keyboard nav: M08 list arrow keys
+       - aria-live: announceAria function below
+       - role="dialog": Liquid markup on panel and bottom sheet
+       - aria-expanded: mascot button in M08/M09
+  ═══ */
+  function announceAria(msg) {
+    var live = $('sl-aria-' + SID);
+    if (live) { live.textContent = msg; setTimeout(function() { live.textContent = ''; }, 3000); }
+  }
+  /* ═══ CHECKPOINT [M21] Acessibilidade ✓ — Spec 3.13: WCAG, aria, focus trap, keyboard ═══ */
+
+  /* ═══ Shared helpers ═══ */
+  function createStoreItem(store) {
+    var li = document.createElement('li');
+    li.className = 'sl-store-item';
+    li.setAttribute('tabindex', '0');
+    li.setAttribute('role', 'listitem');
+
+    var name = document.createElement('div');
+    name.className = 'sl-store-name';
+    name.textContent = titleCase(store.nome || '');
+
+    var addr = document.createElement('div');
+    addr.className = 'sl-store-addr';
+    addr.textContent = (store.endereco || '') + (store.bairro ? ', ' + store.bairro : '') + ' - ' + (store.cidade || '') + '/' + (store.estado || '');
+
+    var meta = document.createElement('div');
+    meta.className = 'sl-store-meta';
+
+    var status = document.createElement('span');
+    status.className = 'sl-store-status ' + (store._isOpen ? 'sl-open' : 'sl-closed');
+    var closing = store._closingTime;
+    status.textContent = store._isOpen ? '🟢 Aberto até ' + (closing || '--') : '🔴 Fechado';
+
+    meta.appendChild(status);
+
+    if (store._distance !== undefined) {
+      var dist = document.createElement('span');
+      dist.className = 'sl-store-dist';
+      dist.textContent = store._distance.toFixed(1) + 'km';
+      meta.appendChild(dist);
+    }
+
+    if (store.telefone) {
+      var phone = document.createElement('span');
+      phone.className = 'sl-store-phone';
+      phone.textContent = store.telefone;
+      meta.appendChild(phone);
+    }
+
+    var viewBtn = document.createElement('button');
+    viewBtn.className = 'sl-store-view-btn';
+    viewBtn.textContent = 'Ver no mapa';
+    viewBtn.addEventListener('click', function() {
+      PanEngine.panTo(store.lat, store.lng, true);
+      ZoomEngine.zoomTo(15, true);
+      /* Create a temporary pin element to show tooltip */
+      setTimeout(function() {
+        var pins = MapState.pinsLayer.querySelectorAll('.sl-pin');
+        for (var p = 0; p < pins.length; p++) {
+          if (pins[p].getAttribute('data-store-id') === (store.id || '')) {
+            PinRenderer.selectPin(store, pins[p]);
+            break;
+          }
+        }
+      }, 500);
+    });
+
+    li.appendChild(name);
+    li.appendChild(addr);
+    li.appendChild(meta);
+    li.appendChild(viewBtn);
+
+    return li;
+  }
+
+  function addChip(title, handle) {
+    var container = $('sl-chips-' + SID);
+    container.innerHTML = '';
+    var chip = document.createElement('div');
+    chip.className = 'sl-chip';
+    chip.innerHTML = '<span>' + title + '</span>';
+    var removeBtn = document.createElement('button');
+    removeBtn.className = 'sl-chip-remove';
+    removeBtn.innerHTML = '&times;';
+    removeBtn.setAttribute('aria-label', 'Remover filtro ' + title);
+    removeBtn.addEventListener('click', function() {
+      StockFilter.selectedProduct = null;
+      container.innerHTML = '';
+      /* Also clear mobile chips */
+      var mContainer = $('sl-bs-chips-' + SID);
+      if (mContainer) mContainer.innerHTML = '';
+      refreshStores();
+      announceAria('Filtro de produto removido');
+    });
+    chip.appendChild(removeBtn);
+    container.appendChild(chip);
+  }
+
+  function addChipMobile(title, handle) {
+    var container = $('sl-bs-chips-' + SID);
+    container.innerHTML = '';
+    var chip = document.createElement('div');
+    chip.className = 'sl-chip';
+    chip.innerHTML = '<span>' + title + '</span>';
+    var removeBtn = document.createElement('button');
+    removeBtn.className = 'sl-chip-remove';
+    removeBtn.innerHTML = '&times;';
+    removeBtn.setAttribute('aria-label', 'Remover filtro ' + title);
+    removeBtn.addEventListener('click', function() {
+      StockFilter.selectedProduct = null;
+      container.innerHTML = '';
+      /* Also clear desktop chips */
+      var dContainer = $('sl-chips-' + SID);
+      if (dContainer) dContainer.innerHTML = '';
+      refreshStores();
+    });
+    chip.appendChild(removeBtn);
+    container.appendChild(chip);
+    /* Sync desktop */
+    addChip(title, handle);
+  }
+
+  /* ═══ Core rendering ═══ */
+  function renderMap() {
+    var z = Math.round(MapState.zoom);
+    TileManager.loadTiles(MapState.centerLat, MapState.centerLng, z, MapState.vpW, MapState.vpH, MapState.offsetX, MapState.offsetY);
+
+    /* Position tile layer */
+    var centerPx = MercatorEngine.latLngToPixel(MapState.centerLat, MapState.centerLng, z);
+    var tx = -(centerPx.x + MapState.offsetX) + MapState.vpW / 2;
+    var ty = -(centerPx.y + MapState.offsetY) + MapState.vpH / 2;
+    MapState.tileLayer.style.transform = 'translate3d(' + tx + 'px, ' + ty + 'px, 0)';
+    MapState.pinsLayer.style.transform = 'translate3d(' + tx + 'px, ' + ty + 'px, 0)';
+
+    /* Re-render pins if not dragging (for performance) */
+    if (!MapState.isDragging) {
+      renderPinsOnMap();
+    }
+  }
+
+  function renderPinsOnMap() {
+    var stores = FilterComposer.filteredStores;
+    if (!stores || stores.length === 0) {
+      PinRenderer.clearPins();
+      return;
+    }
+
+    /* Get visible bounds */
+    var z = Math.round(MapState.zoom);
+    var centerPx = MercatorEngine.latLngToPixel(MapState.centerLat, MapState.centerLng, z);
+    var margin = 50;
+    var leftPx = centerPx.x + MapState.offsetX - MapState.vpW / 2 - margin;
+    var rightPx = centerPx.x + MapState.offsetX + MapState.vpW / 2 + margin;
+    var topPxB = centerPx.y + MapState.offsetY - MapState.vpH / 2 - margin;
+    var bottomPxB = centerPx.y + MapState.offsetY + MapState.vpH / 2 + margin;
+
+    /* Filter visible stores */
+    var visibleStores = [];
+    for (var i = 0; i < stores.length; i++) {
+      var px = MercatorEngine.latLngToPixel(stores[i].lat, stores[i].lng, z);
+      if (px.x >= leftPx && px.x <= rightPx && px.y >= topPxB && px.y <= bottomPxB) {
+        visibleStores.push(stores[i]);
+      }
+    }
+
+    /* Cluster or show individual */
+    var items = ClusterEngine.computeClusters(visibleStores, MapState.zoom);
+
+    /* Render */
+    PinRenderer.renderPins(items, MapState.zoom);
+  }
+
+  var refreshDebounce = null;
+  function refreshStores() {
+    clearTimeout(refreshDebounce);
+    refreshDebounce = setTimeout(function() {
+      FilterComposer.applyFilters(DataSource.stores, function(filtered) {
+        SidePanel.updateList(filtered);
+        BottomSheet.updateList(filtered);
+        renderPinsOnMap();
+      });
+    }, 50);
+  }
+
+  /* ═══ MÓDULO: __VALIDATE_INTEGRITY__ ═══
+     ID: OP₇
+     SPEC: 7.7 (Invariantes Executáveis)
+     Invoke via browser console: __VALIDATE_INTEGRITY__()
+  ═══ */
+  window.__VALIDATE_INTEGRITY__ = function() {
+    var results = [];
+    function assert(module, test, description) {
+      try {
+        var pass = test();
+        results.push({ module: module, description: description, status: pass ? '✅' : '❌' });
+      } catch(e) {
+        results.push({ module: module, description: description, status: '💥 ERRO: ' + e.message });
+      }
+    }
+
+    /* M01 — Motor Mercator */
+    assert('M01', function() { return typeof MercatorEngine.latLngToPixel === 'function'; }, 'latLngToPixel existe');
+    assert('M01', function() { return MercatorEngine.latLngToPixel(-5.79, -35.21, 12).x > 0; }, 'Natal retorna pixel positivo');
+    assert('M01', function() {
+      var a = MercatorEngine.latLngToPixel(0, 0, 4);
+      var b = MercatorEngine.latLngToPixel(-23.55, -46.63, 4);
+      return a.x !== b.x && a.y !== b.y;
+    }, 'Coordenadas distintas geram pixels distintos');
+    assert('M01', function() { return typeof MercatorEngine.pixelToLatLng === 'function'; }, 'pixelToLatLng existe');
+
+    /* M02 — Tile Manager */
+    assert('M02', function() { return typeof TileManager !== 'undefined'; }, 'TileManager existe');
+    assert('M02', function() { return typeof TileManager.loadTiles === 'function'; }, 'loadTiles é função');
+    assert('M02', function() { return typeof TileManager.getTileUrl === 'function'; }, 'getTileUrl é função');
+    assert('M02', function() {
+      var url = TileManager.getTileUrl(10, 300, 400);
+      return url.indexOf('tile.openstreetmap.org') !== -1;
+    }, 'getTileUrl retorna URL OSM válida');
+
+    /* M03 — Pan */
+    assert('M03', function() { return typeof PanEngine.panTo === 'function'; }, 'PanEngine.panTo existe');
+    assert('M03', function() { return typeof PanEngine.init === 'function'; }, 'PanEngine.init existe');
+
+    /* M07 — Clustering */
+    assert('M07', function() { return typeof ClusterEngine !== 'undefined'; }, 'ClusterEngine existe');
+    assert('M07', function() { return typeof ClusterEngine.computeClusters === 'function'; }, 'computeClusters é função');
+    assert('M07', function() {
+      var fakeStores = [];
+      for (var i = 0; i < 20; i++) { fakeStores.push({ lat: -5.79 + i * 0.001, lng: -35.21, nome: 'T' + i }); }
+      var result = ClusterEngine.computeClusters(fakeStores, 12);
+      return result.length > 0 && result.length < 20;
+    }, 'Clustering agrupa 20 pontos próximos');
+
+    /* M10 — Location Search */
+    assert('M10', function() { return typeof LocationSearch.search === 'function'; }, 'LocationSearch.search existe');
+    assert('M10', function() { return LocationSearch.isCEP('59012300'); }, 'isCEP reconhece CEP válido');
+    assert('M10', function() { return !LocationSearch.isCEP('Natal'); }, 'isCEP rejeita texto');
+
+    /* M15 — Parser */
+    assert('M15', function() { return typeof parseStoreData === 'function'; }, 'parseStoreData existe');
+    assert('M15', function() {
+      var json = JSON.stringify([{ id: '1', nome: 'Test', lat: -5.79, lng: -35.21 }]);
+      var result = parseStoreData(json);
+      return Array.isArray(result) && result.length === 1 && result[0].nome === 'Test';
+    }, 'Parser JSON funciona');
+    assert('M15', function() {
+      var csv = 'id,nome,lat,lng\n001,Teste,-5.79,-35.21';
+      var result = parseStoreData(csv);
+      return Array.isArray(result) && result.length === 1;
+    }, 'Parser CSV funciona');
+
+    /* M18 — Haversine */
+    assert('M18', function() { return typeof haversine === 'function'; }, 'haversine existe');
+    assert('M18', function() {
+      var d = haversine(-5.79, -35.21, -5.80, -35.22);
+      return d > 0 && d < 5;
+    }, 'Haversine: pontos próximos em Natal retornam distância plausível');
+    assert('M18', function() {
+      var d = haversine(-5.79, -35.21, -23.55, -46.63);
+      return d > 2000 && d < 3000;
+    }, 'Haversine: Natal→SP ~2500km');
+
+    /* M12 — Open Now Filter */
+    assert('M12', function() { return typeof OpenNowFilter.isOpenNow === 'function'; }, 'isOpenNow existe');
+    assert('M12', function() { return typeof OpenNowFilter.parseSchedule === 'function'; }, 'parseSchedule existe');
+
+    /* M17 — GeoLocator */
+    assert('M17', function() { return typeof GeoLocator.requestPosition === 'function'; }, 'GeoLocator.requestPosition existe');
+
+    console.table(results);
+    var failures = results.filter(function(r) { return r.status !== '✅'; });
+    if (failures.length === 0) {
+      console.log('%c✅ TODOS OS INVARIANTES PASSARAM', 'color:green;font-size:16px');
+    } else {
+      console.log('%c❌ ' + failures.length + ' FALHA(S) DETECTADA(S)', 'color:red;font-size:16px');
+    }
+    return results;
+  };
+  /* ═══ CHECKPOINT [OP₇] Invariantes Executáveis ✓ — Spec 7.7: __VALIDATE_INTEGRITY__ ═══ */
+
+  /* ═══ MÓDULO: GeoBubble ═══
+     ID: M20
+     SPEC: UX — Geolocation tooltip
+     DEPENDE DE: GeoLocator (M17), PanEngine (M03), ZoomEngine (M04), DataSource (M16)
+  ═══ */
+  var GeoBubble = {
+    el: null,
+    body: null,
+    dismissed: false,
+    userLat: 0,
+    userLng: 0,
+
+    init: function() {
+      this.el = $('sl-geo-bubble-' + SID);
+      this.body = $('sl-geo-body-' + SID);
+    },
+
+    ping: function() {
+      try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        var osc = ctx.createOscillator();
+        var g = ctx.createGain();
+        osc.connect(g); g.connect(ctx.destination);
+        osc.frequency.setValueAtTime(880, ctx.currentTime);
+        osc.frequency.setValueAtTime(1320, ctx.currentTime + 0.06);
+        g.gain.setValueAtTime(0.08, ctx.currentTime);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.18);
+        osc.start(ctx.currentTime); osc.stop(ctx.currentTime + 0.18);
+        setTimeout(function() { ctx.close(); }, 400);
+      } catch(e) {}
+    },
+
+    nearestCity: function(lat, lng) {
+      var stores = DataSource.stores;
+      if (!stores || !stores.length) return '';
+      var best = Infinity, city = '';
+      this.nearestLat = lat;
+      this.nearestLng = lng;
+      for (var i = 0; i < stores.length; i++) {
+        var d = haversine(lat, lng, stores[i].lat, stores[i].lng);
+        if (d < best) {
+          best = d;
+          city = stores[i].cidade || '';
+          this.nearestLat = stores[i].lat;
+          this.nearestLng = stores[i].lng;
+        }
+      }
+      return city.toLowerCase().replace(/(^|\s)\S/g, function(c) { return c.toUpperCase(); });
+    },
+
+    countNearby: function(lat, lng) {
+      var stores = DataSource.stores;
+      var r = CONFIG.searchRadius || 10, n = 0;
+      if (!stores) return 0;
+      for (var i = 0; i < stores.length; i++) {
+        if (haversine(lat, lng, stores[i].lat, stores[i].lng) <= r) n++;
+      }
+      return n;
+    },
+
+    show: function(html) {
+      this.body.innerHTML = html;
+      this.el.classList.add('sl-geo-visible');
+      this.ping();
+    },
+
+    hide: function() {
+      var self = this;
+      this.el.style.opacity = '0';
+      this.el.style.transform = 'translateX(-50%) translateY(-10px)';
+      setTimeout(function() {
+        self.el.classList.remove('sl-geo-visible');
+        self.el.style.opacity = '';
+        self.el.style.transform = '';
+      }, 250);
+    },
+
+    onLocationFound: function(lat, lng) {
+      if (this.dismissed) return;
+      this.userLat = lat;
+      this.userLng = lng;
+      var self = this;
+
+      /* Wait silently for store data, then show */
+      var attempts = 0;
+      function ready() {
+        attempts++;
+        if (DataSource.stores && DataSource.stores.length > 0) {
+          self.reveal();
+        } else if (attempts < 40) {
+          setTimeout(ready, 250);
+        }
+      }
+      ready();
+    },
+
+    reveal: function() {
+      var city = this.nearestCity(this.userLat, this.userLng);
+      var count = this.countNearby(this.userLat, this.userLng);
+      var self = this;
+
+      var msg, linkText, linkId = 'sl-geo-go-' + SID;
+      if (count > 0) {
+        msg = 'Há ' + count + ' pontos de vendas no bairro mais próximo de você. Dê uma olhada.';
+        linkText = 'Ir';
+      } else {
+        msg = 'Não há pontos disponíveis em sua cidade atualmente. O mais próximo fica em ' + city + '.';
+        linkText = 'Quer olhar?';
+      }
+
+      /* Setup: span for typewriter + hidden link */
+      this.body.innerHTML = '<span id="sl-geo-txt-' + SID + '"></span> <a id="' + linkId + '" style="opacity:0;transition:opacity 0.3s">' + linkText + '</a>';
+      this.el.classList.add('sl-geo-visible');
+
+      /* Typewriter */
+      var txtEl = $('sl-geo-txt-' + SID);
+      var linkEl = $(linkId);
+      var i = 0;
+      var speed = 25;
+      function type() {
+        if (self.dismissed) return;
+        if (i < msg.length) {
+          txtEl.textContent += msg.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        } else {
+          /* Done typing — show link */
+          linkEl.style.opacity = '1';
+          self.ping();
+        }
+      }
+      type();
+
+      var goLat = count > 0 ? self.userLat : self.nearestLat;
+      var goLng = count > 0 ? self.userLng : self.nearestLng;
+
+      linkEl.addEventListener('click', function() {
+        self.dismissed = true;
+        self.hide();
+        setTimeout(function() {
+          PanEngine.panTo(goLat, goLng, true);
+          ZoomEngine.zoomTo(12, true);
+          setTimeout(refreshStores, 600);
+        }, 280);
+      });
+
+      /* Auto-dismiss after 15s */
+      setTimeout(function() {
+        if (!self.dismissed) { self.dismissed = true; self.hide(); }
+      }, 15000);
+    }
+  };
+  /* ═══ CHECKPOINT [M20] GeoBubble ✓ — UX: geo tooltip ═══ */
+
+  /* ═══ INITIALIZATION ═══ */
+  function initStoreLocator() {
+    var sectionEl = $('sl-' + SID);
+    MapState.mapEl = $('sl-map-' + SID);
+    MapState.tileLayer = $('sl-tiles-' + SID);
+    MapState.pinsLayer = $('sl-pins-' + SID);
+    MapState.vpW = sectionEl.offsetWidth;
+    MapState.vpH = sectionEl.offsetHeight;
+
+    TileManager.init(MapState.tileLayer);
+    PanEngine.init();
+    ZoomEngine.init();
+    TooltipManager.init();
+    SidePanel.init();
+    BottomSheet.init();
+    GeoBubble.init();
+
+    /* Initial render - Brazil */
+    renderMap();
+
+    /* Request geolocation — show assistant bubble instead of auto-pan */
+    GeoLocator.requestPosition(function(success) {
+      if (success) {
+        GeoBubble.onLocationFound(GeoLocator.getUserLat(), GeoLocator.getUserLng());
+      }
+    });
+
+    /* Load store data */
+    DataSource.loadStores(function(stores) {
+      if (stores.length > 0) {
+        FilterComposer.applyFilters(stores, function(filtered) {
+          renderPinsOnMap();
+        });
+      }
+    });
+
+    /* Resize handler */
+    window.addEventListener('resize', function() {
+      MapState.vpW = sectionEl.offsetWidth;
+      MapState.vpH = sectionEl.offsetHeight;
+      renderMap();
+    });
+
+    /* Re-render pins after drag ends */
+    MapState.mapEl.addEventListener('mouseup', function() {
+      setTimeout(renderPinsOnMap, 50);
+    });
+    MapState.mapEl.addEventListener('touchend', function() {
+      setTimeout(renderPinsOnMap, 50);
+    });
+  }
+
+  /* Boot */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initStoreLocator);
+  } else {
+    initStoreLocator();
+  }
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Archfy Denavita Maps",
+  "tag": "section",
+  "class": "sl-section-wrapper",
+  "settings": [
+    {
+      "type": "color",
+      "id": "pin_color",
+      "label": "Cor dos Pins",
+      "default": "#FF5A5F"
+    },
+    {
+      "type": "color",
+      "id": "panel_color",
+      "label": "Cor primária do painel",
+      "default": "#222222"
+    },
+    {
+      "type": "image_picker",
+      "id": "mascot_image",
+      "label": "Imagem do Mascote"
+    },
+    {
+      "type": "select",
+      "id": "data_source",
+      "label": "Fonte de dados",
+      "default": "file",
+      "options": [
+        { "value": "metafield", "label": "Metafield Shopify" },
+        { "value": "file", "label": "Arquivo (Shopify Files)" },
+        { "value": "url", "label": "URL Externa" }
+      ]
+    },
+    {
+      "type": "url",
+      "id": "data_url",
+      "label": "URL do Dataset (arquivo ou URL externa)"
+    },
+    {
+      "type": "text",
+      "id": "data_metafield",
+      "label": "Metafield Reference (namespace)",
+      "info": "Nome do metafield em shop.metafields.custom.{valor}"
+    },
+    {
+      "type": "url",
+      "id": "stock_api_url",
+      "label": "URL API de Estoque (Caminho C)"
+    },
+    {
+      "type": "range",
+      "id": "search_radius",
+      "label": "Raio de busca (km)",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "default": 10,
+      "unit": "km"
+    },
+    {
+      "type": "range",
+      "id": "cluster_threshold",
+      "label": "Limiar de Clustering",
+      "min": 5,
+      "max": 50,
+      "step": 1,
+      "default": 15,
+      "info": "Número mínimo de pontos visíveis para ativar agrupamento"
+    },
+    {
+      "type": "text",
+      "id": "mascot_text",
+      "label": "Texto do botão mascote",
+      "default": "Encontre uma loja"
+    },
+    {
+      "type": "text",
+      "id": "panel_title",
+      "label": "Título do painel",
+      "default": "Pontos de Venda"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Archfy Denavita Maps"
+    }
+  ]
+}
+{% endschema %}

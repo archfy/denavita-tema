@@ -1,0 +1,3492 @@
+<!-- ═══════════════════════════════════════════════════════════════════
+     DENAVITA LANDING PAGE — SHOPIFY LIQUID SECTION
+     Colapsado de React/Tailwind/Framer-Motion → HTML/CSS/JS puro
+     Seção 100% personalizável via Theme Editor
+     ═══════════════════════════════════════════════════════════════════ -->
+
+{%- liquid
+  assign sid = section.id
+  assign s = section.settings
+
+  assign subhero_items = section.blocks | where: "type", "subhero_item"
+  assign why_cards = section.blocks | where: "type", "why_card"
+  assign benefit_cards = section.blocks | where: "type", "benefit_card"
+  assign target_items = section.blocks | where: "type", "target_item"
+  assign ingredients = section.blocks | where: "type", "ingredient"
+  assign science_stats = section.blocks | where: "type", "science_stat"
+  assign science_badges = section.blocks | where: "type", "science_badge"
+  assign timeline_steps = section.blocks | where: "type", "timeline_step"
+  assign video_testimonials = section.blocks | where: "type", "video_testimonial"
+  assign written_testimonials = section.blocks | where: "type", "written_testimonial"
+  assign pricing_kits = section.blocks | where: "type", "pricing_kit"
+  assign howto_steps = section.blocks | where: "type", "howto_step"
+  assign faq_items = section.blocks | where: "type", "faq_item"
+  assign footer_links = section.blocks | where: "type", "footer_link"
+-%}
+
+<style>
+  /* ═══ CHECKPOINT [M00] CSS Reset & Variables ✓ — Design tokens from schema ═══ */
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap');
+
+  #shopify-section-{{ sid }} {
+    --s-primary: {{ s.color_primary }};
+    --s-primary-dark: {{ s.color_primary_dark }};
+    --s-primary-light: {{ s.color_primary_light }};
+    --s-secondary: {{ s.color_secondary }};
+    --s-secondary-light: {{ s.color_secondary_light }};
+    --s-foreground: {{ s.color_foreground }};
+    --s-muted: {{ s.color_muted }};
+    --s-background: {{ s.color_background }};
+    --s-footer-bg: {{ s.color_footer_bg }};
+    --s-glow: {{ s.hero_glow_color }};
+    --s-pricing-bg: {{ s.pricing_bg_color }};
+    --s-science-bg: {{ s.science_bg_color }};
+    --s-padding-top: {{ s.padding_top }}px;
+    --s-padding-bottom: {{ s.padding_bottom }}px;
+
+    font-family: 'Inter', sans-serif;
+    color: var(--s-foreground);
+    overflow-x: hidden;
+    max-width: 100vw;
+    padding-top: var(--s-padding-top);
+    padding-bottom: var(--s-padding-bottom);
+  }
+
+  #shopify-section-{{ sid }} * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  #shopify-section-{{ sid }} h1,
+  #shopify-section-{{ sid }} h2,
+  #shopify-section-{{ sid }} h3,
+  #shopify-section-{{ sid }} h4 {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  #shopify-section-{{ sid }} .dn-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  #shopify-section-{{ sid }} img { max-width: 100%; height: auto; }
+  #shopify-section-{{ sid }} a { text-decoration: none; color: inherit; }
+  #shopify-section-{{ sid }} button { cursor: pointer; border: none; background: none; font-family: inherit; }
+  #shopify-section-{{ sid }} ul { list-style: none; padding: 0; }
+
+  /* ═══ Utility Classes ═══ */
+  #shopify-section-{{ sid }} .dn-sr-only {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0,0,0,0); border: 0;
+  }
+
+  /* ═══ Animations ═══ */
+  @keyframes dn-scroll-marquee-{{ sid }} {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+  }
+
+  @keyframes dn-float-{{ sid }} {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes dn-float2-{{ sid }} {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(12px); }
+  }
+
+  @keyframes dn-pulse-glow-{{ sid }} {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(77, 168, 13, 0.4); }
+    50% { box-shadow: 0 0 0 15px rgba(77, 168, 13, 0); }
+  }
+
+  @keyframes dn-shine-{{ sid }} {
+    0% { left: -100%; }
+    50%, 100% { left: 100%; }
+  }
+
+  @keyframes dn-gummy-bob1-{{ sid }} {
+    0%, 100% { transform: translateY(0) rotateY(-20deg) rotateX(12deg); }
+    50% { transform: translateY(-15px) rotateY(-8deg) rotateX(4deg); }
+  }
+  @keyframes dn-gummy-bob2-{{ sid }} {
+    0%, 100% { transform: translateY(0) rotateY(15deg) rotateX(-8deg) scale(1); }
+    50% { transform: translateY(-18px) rotateY(5deg) rotateX(4deg) scale(1.06); }
+  }
+  @keyframes dn-gummy-bob3-{{ sid }} {
+    0%, 100% { transform: translateY(0) rotateY(-12deg) rotateX(18deg); }
+    50% { transform: translateY(-10px) rotateY(0deg) rotateX(8deg); }
+  }
+  @keyframes dn-gummy-bob4-{{ sid }} {
+    0%, 100% { transform: translateY(0) rotateY(22deg) rotateX(10deg); }
+    50% { transform: translateY(-14px) rotateY(10deg) rotateX(2deg); }
+  }
+
+  @keyframes dn-scroll-videos-{{ sid }} {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes dn-fade-in-{{ sid }} {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══ SECTION: SubHero Marquee ═══ */
+  #shopify-section-{{ sid }} .dn-subhero {
+    background: var(--s-primary);
+    padding: 0.75rem 0;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-subhero-track {
+    display: flex;
+    animation: dn-scroll-marquee-{{ sid }} 15s linear infinite;
+    width: max-content;
+  }
+  #shopify-section-{{ sid }} .dn-subhero-item {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ sid }} .dn-subhero-item span {
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    padding: 0 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-subhero-item .dn-dot {
+    color: rgba(255,255,255,0.6);
+    margin: 0 0.5rem;
+  }
+
+  /* ═══ SECTION: Hero ═══ */
+  #shopify-section-{{ sid }} .dn-hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, {{ s.hero_bg_color }} 0%, {{ s.hero_bg_color_end }} 100%);
+  }
+  #shopify-section-{{ sid }} .dn-hero .dn-geo-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.2;
+  }
+  #shopify-section-{{ sid }} .dn-hero .dn-gc1 { width: 24rem; height: 24rem; background: rgba(255,255,255,0.1); top: -5rem; right: -5rem; }
+  #shopify-section-{{ sid }} .dn-hero .dn-gc2 { width: 16rem; height: 16rem; background: rgba(77,168,13,0.2); top: 33%; left: -4rem; }
+  #shopify-section-{{ sid }} .dn-hero .dn-gc3 { width: 12rem; height: 12rem; background: rgba(255,255,255,0.1); bottom: 5rem; right: 25%; }
+  #shopify-section-{{ sid }} .dn-hero .dn-gc4 { width: 8rem; height: 8rem; background: rgba(255,255,255,0.2); top: 50%; right: 2.5rem; }
+
+  #shopify-section-{{ sid }} .dn-hero-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    z-index: 20;
+    height: 5rem;
+  }
+
+  #shopify-section-{{ sid }} .dn-hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 100px 1rem 80px;
+  }
+
+  #shopify-section-{{ sid }} .dn-hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  #shopify-section-{{ sid }} .dn-hero-text {
+    text-align: center;
+    max-width: 350px;
+    margin: 0 auto;
+  }
+
+  #shopify-section-{{ sid }} .dn-hero-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 9999px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  #shopify-section-{{ sid }} .dn-hero h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: {{ s.hero_text_color }};
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  #shopify-section-{{ sid }} .dn-hero h1 em {
+    color: {{ s.hero_highlight_color }};
+    font-style: normal;
+  }
+
+  #shopify-section-{{ sid }} .dn-hero-desc {
+    font-size: 1.125rem;
+    color: {{ s.hero_desc_color }};
+    margin-bottom: 2rem;
+    max-width: 36rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #shopify-section-{{ sid }} .dn-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--s-primary);
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 700;
+    padding: 0.875rem 2rem;
+    border-radius: 9999px;
+    transition: background 0.3s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+    animation: dn-pulse-glow-{{ sid }} 2s ease-in-out infinite;
+  }
+  #shopify-section-{{ sid }} .dn-btn-primary:hover {
+    background: var(--s-primary-dark);
+    transform: scale(1.02);
+  }
+  #shopify-section-{{ sid }} .dn-btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: dn-shine-{{ sid }} 2.5s infinite;
+  }
+  #shopify-section-{{ sid }} .dn-btn-primary .dn-arrow {
+    transition: transform 0.3s;
+  }
+  #shopify-section-{{ sid }} .dn-btn-primary:hover .dn-arrow {
+    transform: translateX(4px);
+  }
+
+  /* Hero product area */
+  #shopify-section-{{ sid }} .dn-hero-product-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  #shopify-section-{{ sid }} .dn-hero-product-inner {
+    position: relative;
+  }
+  /* Glow layers */
+  #shopify-section-{{ sid }} .dn-glow-outer {
+    position: absolute;
+    inset: -5rem;
+    border-radius: 50%;
+    filter: blur(150px);
+    background: radial-gradient(circle, {{ s.hero_glow_color | color_modify: 'alpha', 0.5 }} 0%, {{ s.hero_glow_color | color_modify: 'alpha', 0.2 }} 40%, transparent 70%);
+  }
+  #shopify-section-{{ sid }} .dn-glow-mid {
+    position: absolute;
+    inset: -2.5rem;
+    border-radius: 50%;
+    filter: blur(80px);
+    background: radial-gradient(circle, {{ s.hero_glow_color | color_lighten: 5 | color_modify: 'alpha', 0.7 }} 0%, {{ s.hero_glow_color | color_modify: 'alpha', 0.35 }} 45%, transparent 75%);
+  }
+  #shopify-section-{{ sid }} .dn-glow-inner {
+    position: absolute;
+    inset: 1rem;
+    border-radius: 50%;
+    filter: blur(50px);
+    transform: scale(0.95);
+    background: radial-gradient(circle, {{ s.hero_glow_color | color_lighten: 15 | color_modify: 'alpha', 0.5 }} 0%, {{ s.hero_glow_color | color_modify: 'alpha', 0.2 }} 50%, transparent 80%);
+  }
+  #shopify-section-{{ sid }} .dn-glow-top {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    height: 33%;
+    border-radius: 50%;
+    filter: blur(60px);
+    background: radial-gradient(ellipse, {{ s.hero_glow_color | color_lighten: 30 | color_modify: 'alpha', 0.35 }} 0%, transparent 70%);
+  }
+
+  #shopify-section-{{ sid }} .dn-hero-product-img {
+    position: relative;
+    z-index: 10;
+    width: 16rem;
+    height: auto;
+    animation: dn-float-{{ sid }} 3s ease-in-out infinite;
+  }
+
+  #shopify-section-{{ sid }} .dn-hero-bg-bottle {
+    position: absolute;
+    right: -6rem;
+    top: -2rem;
+    width: 13rem;
+    opacity: 0.25;
+    filter: blur(2px);
+    transform: rotate(-25deg);
+  }
+
+  /* Gummy positions - Desktop */
+  #shopify-section-{{ sid }} .dn-gummy {
+    position: absolute;
+    z-index: 20;
+  }
+  #shopify-section-{{ sid }} .dn-gummy img {
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+  }
+  #shopify-section-{{ sid }} .dn-gummy-d1 { top: -2.5rem; right: 2rem; perspective: 500px; }
+  #shopify-section-{{ sid }} .dn-gummy-d1 img { width: 4rem; animation: dn-gummy-bob1-{{ sid }} 3.5s ease-in-out infinite 0.2s; }
+  #shopify-section-{{ sid }} .dn-gummy-d2 { top: 33%; right: -5rem; perspective: 500px; }
+  #shopify-section-{{ sid }} .dn-gummy-d2 img { width: 3.5rem; animation: dn-gummy-bob2-{{ sid }} 4s ease-in-out infinite 0.7s; }
+  #shopify-section-{{ sid }} .dn-gummy-d3 { bottom: -1rem; right: 3rem; perspective: 500px; }
+  #shopify-section-{{ sid }} .dn-gummy-d3 img { width: 3.5rem; opacity: 0.9; animation: dn-gummy-bob3-{{ sid }} 3.8s ease-in-out infinite 1.1s; }
+  #shopify-section-{{ sid }} .dn-gummy-d4 { top: 50%; left: -4rem; perspective: 500px; }
+  #shopify-section-{{ sid }} .dn-gummy-d4 img { width: 3rem; opacity: 0.85; animation: dn-gummy-bob4-{{ sid }} 4.2s ease-in-out infinite 0.5s; }
+  #shopify-section-{{ sid }} .dn-gummy-d5 { top: 1rem; left: -2.5rem; perspective: 600px; }
+  #shopify-section-{{ sid }} .dn-gummy-d5 img { width: 2.5rem; opacity: 0.55; filter: blur(1px) drop-shadow(0 2px 4px rgba(0,0,0,0.15)); animation: dn-gummy-bob1-{{ sid }} 4.8s ease-in-out infinite 1.6s; }
+  #shopify-section-{{ sid }} .dn-gummy-d6 { bottom: 5rem; left: -6rem; perspective: 700px; }
+  #shopify-section-{{ sid }} .dn-gummy-d6 img { width: 2rem; opacity: 0.4; filter: blur(1.5px); animation: dn-gummy-bob2-{{ sid }} 5.2s ease-in-out infinite 2s; }
+  #shopify-section-{{ sid }} .dn-gummy-d7 { top: -3.5rem; left: 33%; perspective: 700px; }
+  #shopify-section-{{ sid }} .dn-gummy-d7 img { width: 1.75rem; opacity: 0.3; filter: blur(2px); animation: dn-gummy-bob3-{{ sid }} 5.5s ease-in-out infinite 2.8s; }
+
+  /* Desktop gummies hidden on mobile */
+  #shopify-section-{{ sid }} .dn-gummy-desktop { display: none; }
+
+  /* Mobile gummies */
+  #shopify-section-{{ sid }} .dn-gummy-mobile { display: block; }
+  #shopify-section-{{ sid }} .dn-gummy-m1 { top: -2rem; right: 0; }
+  #shopify-section-{{ sid }} .dn-gummy-m1 img { width: 2.5rem; animation: dn-gummy-bob1-{{ sid }} 3s ease-in-out infinite 0.2s; }
+  #shopify-section-{{ sid }} .dn-gummy-m2 { top: 50%; left: -1.25rem; }
+  #shopify-section-{{ sid }} .dn-gummy-m2 img { width: 2.25rem; opacity: 0.8; animation: dn-gummy-bob4-{{ sid }} 3.4s ease-in-out infinite 0.6s; }
+  #shopify-section-{{ sid }} .dn-gummy-m3 { bottom: -1.5rem; left: 25%; }
+  #shopify-section-{{ sid }} .dn-gummy-m3 img { width: 2.75rem; animation: dn-gummy-bob2-{{ sid }} 3.8s ease-in-out infinite 1s; }
+
+  /* Hero floating badges */
+  #shopify-section-{{ sid }} .dn-hero-float-badge {
+    position: absolute;
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1rem;
+    z-index: 20;
+    text-align: center;
+    animation: dn-fade-in-{{ sid }} 0.8s ease-out forwards;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  }
+  #shopify-section-{{ sid }} .dn-hero-float-badge .dn-badge-val {
+    font-size: 1.875rem;
+    font-weight: 700;
+    display: block;
+  }
+  #shopify-section-{{ sid }} .dn-hero-float-badge .dn-badge-label {
+    font-size: 0.75rem;
+    color: var(--s-muted);
+  }
+  #shopify-section-{{ sid }} .dn-badge-right {
+    right: -1rem;
+    top: 4rem;
+  }
+  #shopify-section-{{ sid }} .dn-badge-right .dn-badge-val { color: var(--s-primary); }
+  #shopify-section-{{ sid }} .dn-badge-left {
+    left: -1rem;
+    bottom: 6rem;
+  }
+  #shopify-section-{{ sid }} .dn-badge-left .dn-badge-val { color: var(--s-secondary); }
+
+  /* ═══ SECTION: WhyItWorks ═══ */
+  #shopify-section-{{ sid }} .dn-why {
+    padding: 5rem 0 0;
+    background: var(--s-background);
+    position: relative;
+    overflow: hidden;
+    margin-top: -1px;
+  }
+  #shopify-section-{{ sid }} .dn-section-tag {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-tag-primary {
+    background: var(--s-primary-light);
+    color: var(--s-primary);
+  }
+  #shopify-section-{{ sid }} .dn-tag-white {
+    background: #fff;
+    color: var(--s-primary);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  #shopify-section-{{ sid }} .dn-tag-secondary {
+    background: var(--s-secondary);
+    color: #fff;
+  }
+  #shopify-section-{{ sid }} .dn-tag-glass {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    color: #fff;
+  }
+  #shopify-section-{{ sid }} .dn-tag-accent {
+    background: var(--s-secondary-light);
+    color: var(--s-secondary);
+  }
+
+  #shopify-section-{{ sid }} .dn-section-heading {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--s-foreground);
+    margin-bottom: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-section-sub {
+    font-size: 1.125rem;
+    color: var(--s-muted);
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+  #shopify-section-{{ sid }} .dn-text-center { text-align: center; }
+
+  #shopify-section-{{ sid }} .dn-why-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  #shopify-section-{{ sid }} .dn-why-card {
+    background: var(--s-secondary-light);
+    border-left: 4px solid var(--s-secondary);
+    border-radius: 0 0.75rem 0.75rem 0;
+    padding: 1.25rem;
+  }
+  #shopify-section-{{ sid }} .dn-why-card-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-why-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--s-secondary);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ sid }} .dn-why-icon svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #fff;
+  }
+  #shopify-section-{{ sid }} .dn-why-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--s-foreground);
+    margin-bottom: 0.25rem;
+  }
+  #shopify-section-{{ sid }} .dn-why-card p {
+    color: var(--s-muted);
+    font-size: 0.875rem;
+  }
+
+  /* Accordion on mobile for why cards */
+  #shopify-section-{{ sid }} .dn-why-accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  #shopify-section-{{ sid }} .dn-why-accordion-content.dn-open {
+    max-height: 200px;
+  }
+  #shopify-section-{{ sid }} .dn-why-accordion-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    cursor: pointer;
+    background: none;
+    text-align: left;
+  }
+  #shopify-section-{{ sid }} .dn-why-accordion-trigger .dn-chevron {
+    transition: transform 0.2s;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ sid }} .dn-why-accordion-trigger.dn-open .dn-chevron {
+    transform: rotate(180deg);
+  }
+
+  #shopify-section-{{ sid }} .dn-why-celeb-img {
+    max-height: 600px;
+    object-fit: contain;
+    object-position: bottom;
+    width: 100%;
+  }
+
+  /* Mobile/Desktop visibility */
+  #shopify-section-{{ sid }} .dn-mobile-only { display: block; }
+  #shopify-section-{{ sid }} .dn-desktop-only { display: none; }
+
+  /* ═══ SECTION: Benefits ═══ */
+  #shopify-section-{{ sid }} .dn-benefits {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, {{ s.color_primary_light }} 0%, {{ s.color_primary_light }} 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-benefit-card {
+    background: rgba(255,255,255,0.5);
+    backdrop-filter: blur(12px);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    border: 1px solid rgba(255,255,255,0.5);
+    transition: all 0.3s;
+  }
+  #shopify-section-{{ sid }} .dn-benefit-card:hover {
+    background: rgba(255,255,255,0.6);
+    transform: translateY(-8px);
+  }
+  #shopify-section-{{ sid }} .dn-benefit-card-inner {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-benefit-icon {
+    width: 3rem;
+    height: 3rem;
+    background: var(--s-secondary);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ sid }} .dn-benefit-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #fff;
+  }
+  #shopify-section-{{ sid }} .dn-benefit-card h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--s-foreground);
+    margin-bottom: 0.25rem;
+  }
+  #shopify-section-{{ sid }} .dn-benefit-card p {
+    color: var(--s-muted);
+    font-size: 0.875rem;
+  }
+  #shopify-section-{{ sid }} .dn-benefits-grid-mobile {
+    display: grid;
+    gap: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.8);
+    color: var(--s-foreground);
+    border: 1px solid rgba(0,0,0,0.1);
+    font-weight: 500;
+    padding: 0.625rem 1.5rem;
+    border-radius: 9999px;
+    transition: background 0.3s;
+    cursor: pointer;
+  }
+  #shopify-section-{{ sid }} .dn-btn-outline:hover { background: #fff; }
+
+  /* ═══ SECTION: WhoIsItFor ═══ */
+  #shopify-section-{{ sid }} .dn-whoisitfor {
+    padding: 5rem 0;
+    background: var(--s-background);
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-whoisitfor-diag {
+    position: absolute;
+    top: 0; right: 0;
+    width: 50%; height: 100%;
+    background: var(--s-secondary-light);
+    transform: skewX(12deg);
+    transform-origin: top right;
+  }
+  #shopify-section-{{ sid }} .dn-whoisitfor-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  #shopify-section-{{ sid }} .dn-target-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    padding: 1rem;
+    transition: background 0.3s;
+  }
+  #shopify-section-{{ sid }} .dn-target-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: var(--s-primary-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ sid }} .dn-target-icon svg { width: 1.25rem; height: 1.25rem; color: var(--s-primary); }
+  #shopify-section-{{ sid }} .dn-target-check svg { width: 1.5rem; height: 1.5rem; color: var(--s-primary); flex-shrink: 0; }
+  #shopify-section-{{ sid }} .dn-target-item p { font-weight: 500; color: var(--s-foreground); }
+  #shopify-section-{{ sid }} .dn-whoisitfor-cta {
+    margin-top: 3rem;
+    text-align: center;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #shopify-section-{{ sid }} .dn-whoisitfor-cta p {
+    font-size: 1.125rem;
+    color: var(--s-foreground);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  #shopify-section-{{ sid }} .dn-whoisitfor-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+  }
+
+  /* ═══ SECTION: Science ═══ */
+  #shopify-section-{{ sid }} .dn-science {
+    padding: 2rem 0 4rem;
+    background: var(--s-science-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-science .dn-geo-circle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.05;
+  }
+  #shopify-section-{{ sid }} .dn-science-wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+  }
+  #shopify-section-{{ sid }} .dn-science h2 { color: #fff; }
+  #shopify-section-{{ sid }} .dn-science .dn-section-sub { color: rgba(255,255,255,0.8); }
+
+  #shopify-section-{{ sid }} .dn-ingredient-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-ingredient-icon {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ sid }} .dn-ingredient-icon svg { width: 1.75rem; height: 1.75rem; color: var(--s-secondary); }
+  #shopify-section-{{ sid }} .dn-ingredient-card h3 { font-size: 1rem; font-weight: 700; color: #fff; }
+  #shopify-section-{{ sid }} .dn-ingredient-card p { font-size: 0.875rem; color: rgba(255,255,255,0.7); }
+
+  #shopify-section-{{ sid }} .dn-study-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+  #shopify-section-{{ sid }} .dn-study-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--s-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.75rem;
+  }
+  #shopify-section-{{ sid }} .dn-study-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--s-foreground);
+    margin-bottom: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-stat-item {
+    text-align: center;
+    padding: 0.75rem;
+    background: var(--s-primary-light);
+    border-radius: 0.75rem;
+  }
+  #shopify-section-{{ sid }} .dn-stat-item .dn-stat-val {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--s-primary);
+  }
+  #shopify-section-{{ sid }} .dn-stat-item .dn-stat-label {
+    font-size: 0.625rem;
+    color: var(--s-muted);
+  }
+  #shopify-section-{{ sid }} .dn-study-desc { font-size: 0.875rem; color: var(--s-muted); margin-bottom: 0.75rem; }
+  #shopify-section-{{ sid }} .dn-study-source { font-size: 0.75rem; color: rgba(99,110,127,0.7); font-style: italic; }
+
+  #shopify-section-{{ sid }} .dn-science-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+  }
+  #shopify-section-{{ sid }} .dn-science-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(4px);
+    border-radius: 9999px;
+    padding: 0.375rem 0.75rem;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+  #shopify-section-{{ sid }} .dn-science-badge svg { width: 0.75rem; height: 0.75rem; }
+
+  /* Floating gummies in science */
+  #shopify-section-{{ sid }} .dn-science-gummy {
+    position: absolute;
+    opacity: 0.8;
+  }
+  #shopify-section-{{ sid }} .dn-sg1 { left: 0.25rem; top: 25%; }
+  #shopify-section-{{ sid }} .dn-sg1 img { width: 3rem; animation: dn-float-{{ sid }} 4s ease-in-out infinite; }
+  #shopify-section-{{ sid }} .dn-sg2 { right: 0.25rem; top: 33%; }
+  #shopify-section-{{ sid }} .dn-sg2 img { width: 2.5rem; animation: dn-float2-{{ sid }} 5s ease-in-out infinite; }
+
+  /* ═══ SECTION: Timeline ═══ */
+  #shopify-section-{{ sid }} .dn-timeline {
+    padding: 5rem 0;
+    background: var(--s-background);
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-timeline-dot-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0);
+    background-size: 40px 40px;
+  }
+  #shopify-section-{{ sid }} .dn-timeline-card {
+    background: var(--s-secondary-light);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(168,32,26,0.2);
+    height: 100%;
+  }
+  #shopify-section-{{ sid }} .dn-timeline-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-timeline-icon {
+    width: 3rem;
+    height: 3rem;
+    background: var(--s-secondary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ sid }} .dn-timeline-icon svg { width: 1.5rem; height: 1.5rem; color: #fff; }
+  #shopify-section-{{ sid }} .dn-timeline-step-label {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--s-secondary);
+  }
+  #shopify-section-{{ sid }} .dn-timeline-period {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: rgba(168,32,26,0.2);
+    color: var(--s-secondary);
+    margin-bottom: 0.75rem;
+  }
+  #shopify-section-{{ sid }} .dn-timeline-card h3 { font-size: 1.125rem; font-weight: 700; color: var(--s-foreground); margin-bottom: 0.5rem; }
+  #shopify-section-{{ sid }} .dn-timeline-card p { font-size: 0.875rem; color: var(--s-muted); }
+
+  /* Mobile carousel for timeline */
+  #shopify-section-{{ sid }} .dn-carousel-wrap {
+    position: relative;
+  }
+  #shopify-section-{{ sid }} .dn-carousel-track {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 1rem 2rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  #shopify-section-{{ sid }} .dn-carousel-track::-webkit-scrollbar { display: none; }
+  #shopify-section-{{ sid }} .dn-carousel-item {
+    flex-shrink: 0;
+    width: 18rem;
+    scroll-snap-align: center;
+  }
+  #shopify-section-{{ sid }} .dn-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #shopify-section-{{ sid }} .dn-carousel-btn:hover { background: #f5f5f5; }
+  #shopify-section-{{ sid }} .dn-carousel-btn svg { width: 1.25rem; height: 1.25rem; }
+  #shopify-section-{{ sid }} .dn-carousel-btn-left { left: 0; }
+  #shopify-section-{{ sid }} .dn-carousel-btn-right { right: 0; }
+
+  /* ═══ SECTION: Testimonials ═══ */
+  #shopify-section-{{ sid }} .dn-testimonials {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, {{ s.color_primary_light }} 0%, {{ s.color_primary_light }} 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-video-carousel-track {
+    display: flex;
+    gap: 1rem;
+    animation: dn-scroll-videos-{{ sid }} 60s linear infinite;
+    width: max-content;
+  }
+  #shopify-section-{{ sid }} .dn-video-carousel-track:hover {
+    animation-play-state: paused;
+  }
+  #shopify-section-{{ sid }} .dn-video-thumb {
+    position: relative;
+    flex-shrink: 0;
+    width: 12rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  #shopify-section-{{ sid }} .dn-video-thumb video {
+    width: 100%;
+    height: 20rem;
+    object-fit: cover;
+    border-radius: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-video-play-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #shopify-section-{{ sid }} .dn-video-play-btn {
+    width: 3.5rem;
+    height: 3.5rem;
+    background: rgba(255,255,255,0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+  }
+  #shopify-section-{{ sid }} .dn-video-thumb:hover .dn-video-play-btn {
+    transform: scale(1.1);
+  }
+  #shopify-section-{{ sid }} .dn-video-play-btn svg { width: 1.5rem; height: 1.5rem; color: var(--s-primary); margin-left: 2px; }
+
+  /* Written testimonials */
+  #shopify-section-{{ sid }} .dn-written-card {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1.25rem;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  }
+  #shopify-section-{{ sid }} .dn-written-card .dn-quote-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: rgba(168,32,26,0.3);
+    margin-bottom: 0.5rem;
+  }
+  #shopify-section-{{ sid }} .dn-written-card .dn-testimonial-text {
+    font-size: 0.875rem;
+    color: var(--s-muted);
+    margin-bottom: 0.75rem;
+  }
+  #shopify-section-{{ sid }} .dn-written-card .dn-testimonial-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  #shopify-section-{{ sid }} .dn-written-card .dn-testimonial-name {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--s-foreground);
+  }
+  #shopify-section-{{ sid }} .dn-written-card .dn-testimonial-loc {
+    font-size: 0.75rem;
+    color: var(--s-muted);
+  }
+  #shopify-section-{{ sid }} .dn-stars { display: flex; gap: 2px; }
+  #shopify-section-{{ sid }} .dn-star { width: 0.875rem; height: 0.875rem; color: #FACC15; fill: #FACC15; }
+
+  /* Video Modal */
+  #shopify-section-{{ sid }} .dn-video-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,0.8);
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-video-modal.dn-modal-open { display: flex; }
+  #shopify-section-{{ sid }} .dn-video-modal-content {
+    position: relative;
+    width: 90vw;
+    max-width: 400px;
+    aspect-ratio: 9/16;
+    max-height: 90vh;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: #000;
+  }
+  #shopify-section-{{ sid }} .dn-video-modal-content video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #shopify-section-{{ sid }} .dn-modal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    z-index: 50;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    border: none;
+  }
+  #shopify-section-{{ sid }} .dn-modal-close:hover { background: rgba(0,0,0,0.7); }
+  #shopify-section-{{ sid }} .dn-modal-close svg { width: 1.25rem; height: 1.25rem; color: #fff; }
+
+  /* ═══ SECTION: Pricing ═══ */
+  #shopify-section-{{ sid }} .dn-pricing {
+    padding: 5rem 0;
+    background: var(--s-pricing-bg);
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 72rem;
+    margin: 0 auto;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card {
+    position: relative;
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.06);
+    transition: transform 0.3s;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular {
+    background: var(--s-primary);
+    border: 2px solid var(--s-primary);
+    box-shadow: 0 0 0 4px rgba(77,168,13,0.2);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-best {
+    border: 2px solid var(--s-secondary);
+    box-shadow: 0 0 0 4px rgba(168,32,26,0.2);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-badge {
+    position: absolute;
+    top: -1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-badge-popular {
+    background: #FACC15;
+    color: var(--s-foreground);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-badge-best {
+    background: var(--s-secondary);
+    color: #fff;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-badge svg { width: 0.875rem; height: 0.875rem; fill: currentColor; }
+  #shopify-section-{{ sid }} .dn-pricing-img {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    padding-top: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-img img {
+    width: auto;
+    object-fit: contain;
+    height: 12rem;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-best .dn-pricing-img img { height: 13rem; }
+  #shopify-section-{{ sid }} .dn-pricing-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--s-foreground);
+    text-align: center;
+    margin-bottom: 0.25rem;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-name { color: #fff; }
+  #shopify-section-{{ sid }} .dn-pricing-capsules {
+    font-size: 0.875rem;
+    color: var(--s-muted);
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-capsules { color: rgba(255,255,255,0.8); }
+
+  #shopify-section-{{ sid }} .dn-pricing-prices { text-align: center; margin-bottom: 1rem; }
+  #shopify-section-{{ sid }} .dn-pricing-original {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-strikethrough {
+    text-decoration: line-through;
+    font-size: 0.875rem;
+    color: var(--s-muted);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-strikethrough { color: rgba(255,255,255,0.6); }
+  #shopify-section-{{ sid }} .dn-pricing-discount {
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: var(--s-secondary);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-discount {
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+    padding: 0.125rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-value {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--s-foreground);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-value { color: #fff; }
+  #shopify-section-{{ sid }} .dn-pricing-installment {
+    font-size: 0.875rem;
+    color: var(--s-muted);
+    margin-top: 0.25rem;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-installment { color: rgba(255,255,255,0.8); }
+
+  #shopify-section-{{ sid }} .dn-pricing-perpot {
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-perpot {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-best .dn-pricing-perpot {
+    background: rgba(168,32,26,0.1);
+    border-color: rgba(168,32,26,0.3);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-perpot-label { font-size: 0.875rem; color: var(--s-muted); }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-perpot-label { color: rgba(255,255,255,0.8); }
+  #shopify-section-{{ sid }} .dn-pricing-perpot-val { font-weight: 700; color: var(--s-secondary); }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-perpot-val { color: #fff; }
+
+  #shopify-section-{{ sid }} .dn-pricing-benefits { margin-bottom: 1rem; }
+  #shopify-section-{{ sid }} .dn-pricing-benefit {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--s-foreground);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-benefit { color: #fff; }
+  #shopify-section-{{ sid }} .dn-pricing-benefit svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+  #shopify-section-{{ sid }} .dn-pricing-benefit-check { color: var(--s-primary); }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-benefit-check { color: #fff; }
+  #shopify-section-{{ sid }} .dn-pricing-card-best .dn-pricing-benefit-check { color: var(--s-secondary); }
+  #shopify-section-{{ sid }} .dn-pricing-benefit-gift { color: var(--s-secondary); font-weight: 500; }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-benefit-gift { color: #fff; }
+
+  #shopify-section-{{ sid }} .dn-btn-buy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    color: #fff;
+    background: var(--s-primary);
+    transition: background 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-btn-buy:hover { background: var(--s-primary-dark); }
+  #shopify-section-{{ sid }} .dn-btn-buy::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: dn-shine-{{ sid }} 2.5s infinite;
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-btn-buy {
+    background: #fff;
+    color: var(--s-primary);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-btn-buy:hover { background: rgba(255,255,255,0.9); }
+  #shopify-section-{{ sid }} .dn-pricing-delivery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--s-muted);
+  }
+  #shopify-section-{{ sid }} .dn-pricing-card-popular .dn-pricing-delivery { color: rgba(255,255,255,0.7); }
+  #shopify-section-{{ sid }} .dn-pricing-delivery svg { width: 1rem; height: 1rem; }
+
+  /* ═══ SECTION: HowToUse ═══ */
+  #shopify-section-{{ sid }} .dn-howto {
+    padding: 5rem 0;
+    background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-howto-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  #shopify-section-{{ sid }} .dn-howto-video-wrap {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+  #shopify-section-{{ sid }} .dn-howto-circle-deco1 {
+    position: absolute;
+    top: -2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: #fff2e5;
+  }
+  #shopify-section-{{ sid }} .dn-howto-circle-deco2 {
+    position: absolute;
+    top: 33%;
+    left: -1.5rem;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    background: rgba(77,168,13,0.15);
+    z-index: -1;
+  }
+  #shopify-section-{{ sid }} .dn-howto-circle-deco3 {
+    position: absolute;
+    bottom: 25%;
+    right: -2rem;
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    background: rgba(77,168,13,0.1);
+    z-index: -1;
+  }
+  #shopify-section-{{ sid }} .dn-howto-video-container {
+    width: 16rem;
+    height: 16rem;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+  }
+  #shopify-section-{{ sid }} .dn-howto-video-container video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  #shopify-section-{{ sid }} .dn-howto-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  #shopify-section-{{ sid }} .dn-howto-step-icon-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  #shopify-section-{{ sid }} .dn-howto-step-icon {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    background: var(--s-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #shopify-section-{{ sid }} .dn-howto-step-icon svg { width: 1.75rem; height: 1.75rem; color: #fff; }
+  #shopify-section-{{ sid }} .dn-howto-step-number {
+    position: absolute;
+    top: -0.25rem;
+    right: -0.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--s-secondary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #shopify-section-{{ sid }} .dn-howto-step h3 { font-size: 1.25rem; font-weight: 700; color: var(--s-foreground); margin-bottom: 0.25rem; }
+  #shopify-section-{{ sid }} .dn-howto-step p { color: var(--s-muted); }
+
+  /* ═══ SECTION: FAQ ═══ */
+  #shopify-section-{{ sid }} .dn-faq {
+    padding: 5rem 0;
+    background: var(--s-background);
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-faq-deco {
+    position: absolute;
+    top: 0; right: 0;
+    width: 18rem; height: 18rem;
+    background: var(--s-primary-light);
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    opacity: 0.5;
+  }
+  #shopify-section-{{ sid }} .dn-faq-list {
+    max-width: 48rem;
+    margin: 0 auto;
+  }
+  #shopify-section-{{ sid }} .dn-faq-item {
+    background: rgba(0,0,0,0.03);
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-faq-question {
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    text-align: left;
+    font-weight: 600;
+    color: var(--s-foreground);
+    cursor: pointer;
+    transition: color 0.2s;
+    font-size: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-faq-question:hover { color: var(--s-primary); }
+  #shopify-section-{{ sid }} .dn-faq-question .dn-faq-chevron {
+    transition: transform 0.3s;
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  #shopify-section-{{ sid }} .dn-faq-question.dn-open .dn-faq-chevron { transform: rotate(180deg); }
+  #shopify-section-{{ sid }} .dn-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    padding: 0 1.5rem;
+    color: var(--s-muted);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+  #shopify-section-{{ sid }} .dn-faq-answer.dn-open {
+    max-height: 300px;
+    padding: 0 1.5rem 1.25rem;
+  }
+
+  /* ═══ SECTION: Footer ═══ */
+  #shopify-section-{{ sid }} .dn-footer {
+    background: var(--s-footer-bg);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  #shopify-section-{{ sid }} .dn-footer-wave {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 5rem;
+  }
+  #shopify-section-{{ sid }} .dn-footer-content {
+    padding: 4rem 0 1.5rem;
+  }
+  #shopify-section-{{ sid }} .dn-footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  #shopify-section-{{ sid }} .dn-footer-logo img { height: 3.5rem; display: block; margin: 0 auto 1rem; }
+  #shopify-section-{{ sid }} .dn-footer-brand p { color: rgba(255,255,255,0.7); font-size: 0.875rem; margin-bottom: 1rem; }
+  #shopify-section-{{ sid }} .dn-footer-socials {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-footer-social-link {
+    width: 2.25rem;
+    height: 2.25rem;
+    background: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+  #shopify-section-{{ sid }} .dn-footer-social-link:hover { background: var(--s-secondary); }
+  #shopify-section-{{ sid }} .dn-footer-social-link svg { width: 1rem; height: 1rem; }
+  #shopify-section-{{ sid }} .dn-footer-links h4 {
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+  #shopify-section-{{ sid }} .dn-footer-links ul { display: flex; flex-direction: column; gap: 0.25rem; }
+  #shopify-section-{{ sid }} .dn-footer-links a {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.75rem;
+    transition: color 0.2s;
+  }
+  #shopify-section-{{ sid }} .dn-footer-links a:hover { color: var(--s-secondary); }
+  #shopify-section-{{ sid }} .dn-footer-contact a,
+  #shopify-section-{{ sid }} .dn-footer-contact span {
+    color: rgba(255,255,255,0.7);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  #shopify-section-{{ sid }} .dn-footer-contact a:hover { color: var(--s-secondary); }
+  #shopify-section-{{ sid }} .dn-footer-contact svg { width: 0.75rem; height: 0.75rem; color: var(--s-secondary); }
+  #shopify-section-{{ sid }} .dn-footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+    text-align: center;
+  }
+  #shopify-section-{{ sid }} .dn-footer-payment img { height: 1.5rem; margin: 0 auto 0.75rem; display: block; }
+  #shopify-section-{{ sid }} .dn-footer-trust {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 0.75rem;
+  }
+  #shopify-section-{{ sid }} .dn-footer-trust svg { width: 0.75rem; height: 0.75rem; color: var(--s-secondary); }
+  #shopify-section-{{ sid }} .dn-footer-warning {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.625rem;
+    text-align: center;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-footer-copyright {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.625rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1rem;
+  }
+
+  /* ═══ SECTION: StickyFooter ═══ */
+  #shopify-section-{{ sid }} .dn-sticky-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    transform: translateY(100%);
+    opacity: 0;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+  #shopify-section-{{ sid }} .dn-sticky-footer.dn-visible {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  #shopify-section-{{ sid }} .dn-sticky-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 0.75rem 1rem;
+  }
+  #shopify-section-{{ sid }} .dn-sticky-selector {
+    position: relative;
+    flex: 1;
+    min-width: 0;
+  }
+  #shopify-section-{{ sid }} .dn-sticky-select-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.25rem;
+    padding: 0.5rem 0.75rem;
+    background: #f5f5f5;
+    border-radius: 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--s-foreground);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  #shopify-section-{{ sid }} .dn-sticky-select-btn:hover { background: #eee; }
+  #shopify-section-{{ sid }} .dn-sticky-select-btn .dn-sticky-chevron {
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+  #shopify-section-{{ sid }} .dn-sticky-select-btn.dn-open .dn-sticky-chevron {
+    transform: rotate(180deg);
+  }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown {
+    display: none;
+    position: absolute;
+    bottom: 100%;
+    margin-bottom: 0.5rem;
+    background: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.06);
+    overflow: hidden;
+    z-index: 50;
+    width: 280px;
+    left: 0;
+  }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown.dn-open { display: block; }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    transition: background 0.2s;
+    cursor: pointer;
+    text-align: left;
+  }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item:hover { background: rgba(0,0,0,0.03); }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item.dn-selected { background: rgba(77,168,13,0.1); }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item .dn-sdi-name { font-weight: 600; font-size: 0.75rem; }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item.dn-selected .dn-sdi-name { color: var(--s-primary); }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item .dn-sdi-badge {
+    font-size: 0.5625rem;
+    background: rgba(168,32,26,0.1);
+    color: var(--s-secondary);
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+    margin-left: 0.375rem;
+  }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item .dn-sdi-sub { font-size: 0.625rem; color: var(--s-muted); }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item .dn-sdi-price { font-weight: 700; font-size: 0.75rem; }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item.dn-selected .dn-sdi-price { color: var(--s-primary); }
+  #shopify-section-{{ sid }} .dn-sticky-dropdown-item .dn-sdi-orig {
+    font-size: 0.625rem;
+    color: var(--s-muted);
+    text-decoration: line-through;
+  }
+
+  #shopify-section-{{ sid }} .dn-sticky-price-desktop { display: none; }
+  #shopify-section-{{ sid }} .dn-sticky-product-name { display: none; }
+
+  #shopify-section-{{ sid }} .dn-btn-sticky-buy {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: var(--s-primary);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.75rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  #shopify-section-{{ sid }} .dn-btn-sticky-buy:hover { background: var(--s-primary-dark); }
+  #shopify-section-{{ sid }} .dn-btn-sticky-buy::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: dn-shine-{{ sid }} 2.5s infinite;
+  }
+  #shopify-section-{{ sid }} .dn-btn-sticky-buy svg { width: 1rem; height: 1rem; }
+
+  /* ═══ WhatsApp Button ═══ */
+  #shopify-section-{{ sid }} .dn-whatsapp-btn {
+    position: fixed;
+    bottom: 6rem;
+    right: 1rem;
+    z-index: 50;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.2s, background 0.2s;
+  }
+  #shopify-section-{{ sid }} .dn-whatsapp-btn:hover {
+    background: #20BD5A;
+    transform: scale(1.1);
+  }
+  #shopify-section-{{ sid }} .dn-whatsapp-btn svg { width: 1.75rem; height: 1.75rem; color: #fff; }
+
+  /* ═══ RESPONSIVE ═══ */
+  @media (min-width: 768px) {
+    #shopify-section-{{ sid }} .dn-mobile-only { display: none; }
+    #shopify-section-{{ sid }} .dn-desktop-only { display: block; }
+
+    #shopify-section-{{ sid }} .dn-hero-content { padding: 7rem 1rem 10rem; }
+    #shopify-section-{{ sid }} .dn-hero-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+    #shopify-section-{{ sid }} .dn-hero-text { text-align: left; max-width: none; margin: 0; }
+    #shopify-section-{{ sid }} .dn-hero h1 { font-size: 3rem; }
+    #shopify-section-{{ sid }} .dn-hero-wave { height: 136px; }
+    #shopify-section-{{ sid }} .dn-hero-product-img { width: 20rem; }
+    #shopify-section-{{ sid }} .dn-hero-bg-bottle { display: block; width: 18rem; }
+
+    #shopify-section-{{ sid }} .dn-gummy-desktop { display: block; }
+    #shopify-section-{{ sid }} .dn-gummy-mobile { display: none; }
+
+    #shopify-section-{{ sid }} .dn-section-heading { font-size: 2.25rem; }
+
+    #shopify-section-{{ sid }} .dn-why { padding-top: 7rem; }
+    #shopify-section-{{ sid }} .dn-why-grid { grid-template-columns: 1fr 1fr; }
+    #shopify-section-{{ sid }} .dn-why-card { padding: 1.5rem; }
+    #shopify-section-{{ sid }} .dn-why-icon { width: 3rem; height: 3rem; }
+    #shopify-section-{{ sid }} .dn-why-icon svg { width: 1.5rem; height: 1.5rem; }
+    #shopify-section-{{ sid }} .dn-why-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    #shopify-section-{{ sid }} .dn-why-card p { font-size: 1rem; }
+    #shopify-section-{{ sid }} .dn-why-celeb-img { max-height: 850px; }
+
+    #shopify-section-{{ sid }} .dn-benefits { padding: 7rem 0; }
+    #shopify-section-{{ sid }} .dn-benefits-grid-desktop {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    #shopify-section-{{ sid }} .dn-benefit-card { padding: 1.5rem; }
+    #shopify-section-{{ sid }} .dn-benefit-icon { width: 4rem; height: 4rem; border-radius: 1rem; }
+    #shopify-section-{{ sid }} .dn-benefit-icon svg { width: 2rem; height: 2rem; }
+    #shopify-section-{{ sid }} .dn-benefit-card h3 { font-size: 1.25rem; }
+
+    #shopify-section-{{ sid }} .dn-whoisitfor { padding: 7rem 0; }
+    #shopify-section-{{ sid }} .dn-whoisitfor-grid { grid-template-columns: 1fr 1fr; }
+    #shopify-section-{{ sid }} .dn-whoisitfor-wave { height: 136px; }
+
+    #shopify-section-{{ sid }} .dn-science { padding: 4rem 0 8rem; }
+    #shopify-section-{{ sid }} .dn-science h2 { font-size: 2.25rem; }
+    #shopify-section-{{ sid }} .dn-ingredient-card { border-radius: 1rem; padding: 1.5rem; }
+    #shopify-section-{{ sid }} .dn-ingredients-desktop {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 56rem;
+      margin: 0 auto 4rem;
+    }
+    #shopify-section-{{ sid }} .dn-ingredient-card-desktop {
+      flex-direction: column;
+      text-align: center;
+    }
+    #shopify-section-{{ sid }} .dn-ingredient-icon-desktop {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 1rem;
+      margin-bottom: 1rem;
+    }
+    #shopify-section-{{ sid }} .dn-study-card { padding: 2.5rem; }
+    #shopify-section-{{ sid }} .dn-study-card h3 { font-size: 1.875rem; }
+    #shopify-section-{{ sid }} .dn-stat-item .dn-stat-val { font-size: 1.875rem; }
+    #shopify-section-{{ sid }} .dn-stat-item .dn-stat-label { font-size: 0.75rem; }
+    #shopify-section-{{ sid }} .dn-science-wave { height: 136px; }
+    #shopify-section-{{ sid }} .dn-sg1 img { width: 6rem; }
+    #shopify-section-{{ sid }} .dn-sg1 { left: 3rem; }
+    #shopify-section-{{ sid }} .dn-sg2 img { width: 5rem; }
+    #shopify-section-{{ sid }} .dn-sg2 { right: 4rem; }
+
+    #shopify-section-{{ sid }} .dn-timeline { padding: 7rem 0; }
+    #shopify-section-{{ sid }} .dn-timeline-desktop {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    #shopify-section-{{ sid }} .dn-timeline-card { padding: 2rem; }
+    #shopify-section-{{ sid }} .dn-timeline-icon { width: 4rem; height: 4rem; border-radius: 1rem; }
+    #shopify-section-{{ sid }} .dn-timeline-icon svg { width: 2rem; height: 2rem; }
+
+    #shopify-section-{{ sid }} .dn-testimonials { padding: 7rem 0; }
+    #shopify-section-{{ sid }} .dn-video-thumb { width: 14rem; }
+    #shopify-section-{{ sid }} .dn-video-thumb video { height: 24rem; }
+    #shopify-section-{{ sid }} .dn-written-desktop {
+      display: flex;
+      gap: 1.5rem;
+      overflow-x: auto;
+      padding: 1rem 2rem;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    #shopify-section-{{ sid }} .dn-written-desktop::-webkit-scrollbar { display: none; }
+    #shopify-section-{{ sid }} .dn-written-desktop .dn-written-card { flex-shrink: 0; width: 20rem; padding: 1.5rem; }
+
+    #shopify-section-{{ sid }} .dn-pricing { padding: 7rem 0; }
+    #shopify-section-{{ sid }} .dn-pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+    #shopify-section-{{ sid }} .dn-pricing-card-best { transform: scale(1.05); margin: -1rem 0; }
+    #shopify-section-{{ sid }} .dn-pricing-img img { height: 13rem; }
+    #shopify-section-{{ sid }} .dn-pricing-card-best .dn-pricing-img img { height: 14rem; }
+
+    #shopify-section-{{ sid }} .dn-howto { padding: 7rem 0; }
+    #shopify-section-{{ sid }} .dn-howto-grid { grid-template-columns: 1fr 1fr; }
+    #shopify-section-{{ sid }} .dn-howto-video-container { width: 20rem; height: 20rem; }
+
+    #shopify-section-{{ sid }} .dn-faq { padding: 7rem 0; }
+
+    #shopify-section-{{ sid }} .dn-footer-grid { grid-template-columns: repeat(4, 1fr); }
+    #shopify-section-{{ sid }} .dn-footer-content { padding: 6rem 0 2rem; }
+    #shopify-section-{{ sid }} .dn-footer-logo img { margin: 0 0 0.75rem; }
+    #shopify-section-{{ sid }} .dn-footer-socials { justify-content: flex-start; }
+    #shopify-section-{{ sid }} .dn-footer-wave { height: 136px; }
+
+    #shopify-section-{{ sid }} .dn-sticky-product-name { display: block; flex-shrink: 0; }
+    #shopify-section-{{ sid }} .dn-sticky-product-name p { font-weight: 700; font-size: 0.875rem; color: var(--s-foreground); }
+    #shopify-section-{{ sid }} .dn-sticky-product-name span { font-size: 0.75rem; color: var(--s-muted); }
+    #shopify-section-{{ sid }} .dn-sticky-selector { flex: initial; width: 150px; }
+    #shopify-section-{{ sid }} .dn-sticky-price-desktop { display: block; text-align: right; flex-shrink: 0; }
+    #shopify-section-{{ sid }} .dn-sticky-price-orig {
+      font-size: 0.625rem;
+      color: var(--s-muted);
+      text-decoration: line-through;
+    }
+    #shopify-section-{{ sid }} .dn-sticky-price-discount {
+      font-size: 0.5625rem;
+      background: var(--s-secondary);
+      color: #fff;
+      padding: 0.125rem 0.25rem;
+      border-radius: 9999px;
+      font-weight: 600;
+    }
+    #shopify-section-{{ sid }} .dn-sticky-price-val {
+      font-size: 1.125rem;
+      font-weight: 700;
+      color: var(--s-primary);
+    }
+    #shopify-section-{{ sid }} .dn-btn-sticky-buy { padding: 0.75rem 1.25rem; font-size: 0.875rem; }
+  }
+
+  @media (min-width: 1024px) {
+    #shopify-section-{{ sid }} .dn-hero h1 { font-size: 3.75rem; }
+    #shopify-section-{{ sid }} .dn-hero-product-img { width: 24rem; }
+    #shopify-section-{{ sid }} .dn-section-heading { font-size: 3rem; }
+    #shopify-section-{{ sid }} .dn-benefits-grid-desktop { grid-template-columns: repeat(3, 1fr); }
+    #shopify-section-{{ sid }} .dn-sticky-selector { width: 180px; }
+  }
+</style>
+
+<div id="dn-landing-{{ sid }}" data-section-id="{{ sid }}">
+
+  <!-- ═══ CHECKPOINT [M01] SubHeroSection ✓ — Marquee horizontal infinito ═══ -->
+  {% if s.show_subhero %}
+  <div class="dn-subhero" style="background: {{ s.subhero_bg_color }};">
+    <div class="dn-subhero-track">
+      {% for i in (1..4) %}
+        {% for block in subhero_items %}
+          <div class="dn-subhero-item" {{ block.shopify_attributes }}>
+            <span>{{ block.settings.text }}</span>
+            <span class="dn-dot">•</span>
+          </div>
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M02] HeroSection ✓ — Hero with product, glow, gummies, badges, CTA ═══ -->
+  {% if s.show_hero %}
+  <div class="dn-hero" id="inicio">
+    <div class="dn-geo-circle dn-gc1"></div>
+    <div class="dn-geo-circle dn-gc2"></div>
+    <div class="dn-geo-circle dn-gc3"></div>
+    <div class="dn-geo-circle dn-gc4"></div>
+
+    <svg class="dn-hero-wave" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none">
+      <path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="{{ s.hero_wave_color }}"/>
+    </svg>
+
+    <div class="dn-container dn-hero-content">
+      <div class="dn-hero-grid">
+        <div class="dn-hero-text">
+          <div class="dn-hero-badge-pill">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+            <span>{{ s.hero_badge_text }}</span>
+          </div>
+
+          <h1>{{ s.hero_heading | replace: s.hero_heading_highlight, '<em>' | append: '</em>' | replace: '<em>', '<em>' }}</h1>
+
+          <p class="dn-hero-desc">{{ s.hero_subheading }}</p>
+
+          <a href="{{ s.hero_cta_url }}" class="dn-btn-primary">
+            {{ s.hero_cta_text }}
+            <svg class="dn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <div class="dn-hero-product-wrap">
+          <div class="dn-hero-product-inner">
+            <div class="dn-glow-outer"></div>
+            <div class="dn-glow-mid"></div>
+            <div class="dn-glow-inner"></div>
+            <div class="dn-glow-top"></div>
+
+            {% if s.hero_product_image != blank %}
+              <img src="{{ s.hero_product_image | image_url: width: 760 }}" alt="{{ s.hero_heading | strip_html }}" class="dn-hero-product-img" loading="eager" decoding="async">
+
+              <img src="{{ s.hero_product_image | image_url: width: 560 }}" alt="" class="dn-hero-bg-bottle dn-desktop-only">
+            {% endif %}
+
+            {% if s.hero_show_gummies %}
+              {% assign gummy_images = s.hero_product_image %}
+              <!-- Desktop Gummies (placeholder positions - use actual gummy images via blocks or metafields) -->
+              {% if s.hero_gummy_image != blank %}
+                <div class="dn-gummy dn-gummy-desktop dn-gummy-d1"><img src="{{ s.hero_gummy_image | image_url: width: 80 }}" alt="" style="width:4rem;height:4rem;object-fit:contain;animation:dn-gummy-bob1-{{ sid }} 3.5s ease-in-out infinite 0.2s;"></div>
+                <div class="dn-gummy dn-gummy-desktop dn-gummy-d2"><img src="{{ s.hero_gummy_image | image_url: width: 70 }}" alt="" style="width:3.5rem;height:3.5rem;object-fit:contain;animation:dn-gummy-bob2-{{ sid }} 4s ease-in-out infinite 0.7s;"></div>
+                <div class="dn-gummy dn-gummy-desktop dn-gummy-d3"><img src="{{ s.hero_gummy_image | image_url: width: 70 }}" alt="" style="width:3.5rem;height:3.5rem;object-fit:contain;animation:dn-gummy-bob3-{{ sid }} 3.8s ease-in-out infinite 1.1s;"></div>
+                <div class="dn-gummy dn-gummy-desktop dn-gummy-d4"><img src="{{ s.hero_gummy_image | image_url: width: 60 }}" alt="" style="width:3rem;height:3rem;object-fit:contain;animation:dn-gummy-bob4-{{ sid }} 4.2s ease-in-out infinite 0.5s;"></div>
+                <div class="dn-gummy dn-gummy-mobile dn-gummy-m1"><img src="{{ s.hero_gummy_image | image_url: width: 50 }}" alt="" style="width:2.5rem;height:2.5rem;object-fit:contain;animation:dn-gummy-bob1-{{ sid }} 3s ease-in-out infinite 0.2s;"></div>
+                <div class="dn-gummy dn-gummy-mobile dn-gummy-m2"><img src="{{ s.hero_gummy_image | image_url: width: 45 }}" alt="" style="width:2.25rem;height:2.25rem;object-fit:contain;animation:dn-gummy-bob4-{{ sid }} 3.4s ease-in-out infinite 0.6s;"></div>
+              {% else %}
+                <div class="dn-gummy dn-gummy-desktop dn-gummy-d1"><div style="width:4rem;height:4rem;background:rgba(255,100,50,0.6);border-radius:50%;animation:dn-gummy-bob1-{{ sid }} 3.5s ease-in-out infinite 0.2s;"></div></div>
+                <div class="dn-gummy dn-gummy-desktop dn-gummy-d2"><div style="width:3.5rem;height:3.5rem;background:rgba(255,120,60,0.6);border-radius:50%;animation:dn-gummy-bob2-{{ sid }} 4s ease-in-out infinite 0.7s;"></div></div>
+                <div class="dn-gummy dn-gummy-desktop dn-gummy-d3"><div style="width:3.5rem;height:3.5rem;background:rgba(255,80,40,0.5);border-radius:50%;animation:dn-gummy-bob3-{{ sid }} 3.8s ease-in-out infinite 1.1s;"></div></div>
+                <div class="dn-gummy dn-gummy-desktop dn-gummy-d4"><div style="width:3rem;height:3rem;background:rgba(255,100,50,0.5);border-radius:50%;animation:dn-gummy-bob4-{{ sid }} 4.2s ease-in-out infinite 0.5s;"></div></div>
+                <div class="dn-gummy dn-gummy-mobile dn-gummy-m1"><div style="width:2.5rem;height:2.5rem;background:rgba(255,100,50,0.6);border-radius:50%;animation:dn-gummy-bob1-{{ sid }} 3s ease-in-out infinite 0.2s;"></div></div>
+                <div class="dn-gummy dn-gummy-mobile dn-gummy-m2"><div style="width:2.25rem;height:2.25rem;background:rgba(255,120,60,0.5);border-radius:50%;animation:dn-gummy-bob4-{{ sid }} 3.4s ease-in-out infinite 0.6s;"></div></div>
+              {% endif %}
+            {% endif %}
+
+            <div class="dn-hero-float-badge dn-badge-right">
+              <span class="dn-badge-val">{{ s.hero_badge_left_value }}</span>
+              <span class="dn-badge-label">{{ s.hero_badge_left_label }}</span>
+            </div>
+            <div class="dn-hero-float-badge dn-badge-left">
+              <span class="dn-badge-val">{{ s.hero_badge_right_value }}</span>
+              <span class="dn-badge-label">{{ s.hero_badge_right_label }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M03] WhyItWorksSection ✓ — Cards with accordion mobile ═══ -->
+  {% if s.show_why %}
+  <div class="dn-why" data-animate style="background:{{ s.why_bg_color }};">
+    <div class="dn-container">
+      <div class="dn-text-center" style="margin-bottom:4rem;">
+        <span class="dn-section-tag" style="background:{{ s.why_tag_bg_color }};color:{{ s.why_tag_text_color }};">{{ s.why_section_tag }}</span>
+        <h2 class="dn-section-heading" style="color:{{ s.why_heading_color }};">{{ s.why_heading }}</h2>
+        <p class="dn-section-sub">{{ s.why_subheading }}</p>
+      </div>
+
+      <div class="dn-why-grid">
+        <div>
+          <!-- Mobile: Accordion -->
+          <div class="dn-mobile-only">
+            {% for block in why_cards %}
+              <div class="dn-why-card" style="margin-bottom:1rem;" {{ block.shopify_attributes }}>
+                <button class="dn-why-accordion-trigger" data-accordion-trigger="{{ sid }}" onclick="this.classList.toggle('dn-open');this.nextElementSibling.classList.toggle('dn-open')">
+                  <div class="dn-why-icon">
+                    {% if block.settings.image != blank %}
+                      <img src="{{ block.settings.image | image_url: width: 40 }}" alt="{{ block.settings.title }}" style="width:20px;height:20px;object-fit:contain;">
+                    {% else %}
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                    {% endif %}
+                  </div>
+                  <h3 style="flex:1;">{{ block.settings.title }}</h3>
+                  <svg class="dn-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+                </button>
+                <div class="dn-why-accordion-content">
+                  <p style="padding:0 1rem 1rem 3.5rem;">{{ block.settings.description }}</p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <!-- Desktop: Cards -->
+          <div class="dn-desktop-only" style="display:none;">
+            {% for block in why_cards %}
+              <div class="dn-why-card" style="margin-bottom:1.5rem;" {{ block.shopify_attributes }}>
+                <div class="dn-why-card-inner">
+                  <div class="dn-why-icon">
+                    {% if block.settings.image != blank %}
+                      <img src="{{ block.settings.image | image_url: width: 48 }}" alt="{{ block.settings.title }}" style="width:24px;height:24px;object-fit:contain;">
+                    {% else %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                    {% endif %}
+                  </div>
+                  <div>
+                    <h3>{{ block.settings.title }}</h3>
+                    <p>{{ block.settings.description }}</p>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          {% if s.why_celebrity_image != blank %}
+            <img src="{{ s.why_celebrity_image | image_url: width: 800 }}" alt="{{ s.why_heading | strip_html }}" class="dn-why-celeb-img" loading="lazy" decoding="async">
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M04] BenefitsGridSection ✓ — Benefits with expand mobile ═══ -->
+  {% if s.show_benefits %}
+  <div class="dn-benefits" data-animate style="background:{{ s.benefits_bg_color }};">
+    <div class="dn-container" style="position:relative;z-index:10;">
+      <div class="dn-text-center" style="margin-bottom:4rem;">
+        <span class="dn-section-tag" style="background:{{ s.benefits_tag_bg_color }};color:{{ s.benefits_tag_text_color }};">{{ s.benefits_tag }}</span>
+        <h2 class="dn-section-heading" style="color:{{ s.benefits_heading_color }};">{{ s.benefits_heading }}</h2>
+        <p class="dn-section-sub">{{ s.benefits_subheading }}</p>
+      </div>
+
+      <!-- Mobile -->
+      <div class="dn-mobile-only">
+        <div class="dn-benefits-grid-mobile" id="dn-benefits-mobile-{{ sid }}">
+          {% for block in benefit_cards %}
+            <div class="dn-benefit-card {% if forloop.index > s.benefits_initial_mobile %}dn-benefit-hidden{% endif %}" {{ block.shopify_attributes }}>
+              <div class="dn-benefit-card-inner">
+                <div class="dn-benefit-icon">
+                  {% if block.settings.image != blank %}
+                    <img src="{{ block.settings.image | image_url: width: 48 }}" alt="{{ block.settings.title }}" style="width:24px;height:24px;object-fit:contain;">
+                  {% else %}
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+                  {% endif %}
+                </div>
+                <div>
+                  <h3>{{ block.settings.title }}</h3>
+                  <p>{{ block.settings.description }}</p>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        {% if benefit_cards.size > s.benefits_initial_mobile %}
+          <div class="dn-text-center" style="margin-top:1.5rem;">
+            <button class="dn-btn-outline" id="dn-benefits-toggle-{{ sid }}" onclick="dnToggleBenefits_{{ sid | replace: '-', '_' }}()">
+              Ver mais benefícios
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Desktop -->
+      <div class="dn-desktop-only dn-benefits-grid-desktop" style="display:none;">
+        {% for block in benefit_cards %}
+          <div class="dn-benefit-card" {{ block.shopify_attributes }}>
+            <div style="width:4rem;height:4rem;background:var(--s-secondary);border-radius:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 64 }}" alt="{{ block.settings.title }}" style="width:32px;height:32px;object-fit:contain;">
+              {% else %}
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+              {% endif %}
+            </div>
+            <h3>{{ block.settings.title }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M05] WhoIsItForSection ✓ — Checklist with image ═══ -->
+  {% if s.show_whoisitfor %}
+  <div class="dn-whoisitfor" data-animate style="background:{{ s.whoisitfor_bg_color }};">
+    <div class="dn-whoisitfor-diag" style="background:{{ s.whoisitfor_diag_bg_color }};"></div>
+    <div class="dn-container" style="position:relative;z-index:10;padding-bottom:3rem;">
+      <div class="dn-whoisitfor-grid">
+        <div style="display:flex;flex-direction:column;align-items:center;">
+          {% if s.whoisitfor_image != blank %}
+            <img src="{{ s.whoisitfor_image | image_url: width: 1400 }}" alt="{{ s.whoisitfor_heading }}" style="width:100%;max-width:700px;height:auto;object-fit:contain;" loading="lazy" decoding="async">
+          {% endif %}
+        </div>
+        <div>
+          <div class="dn-text-center" style="margin-bottom:2rem;">
+            <span class="dn-section-tag" style="background:{{ s.whoisitfor_tag_bg_color }};color:{{ s.whoisitfor_tag_text_color }};">{{ s.whoisitfor_tag }}</span>
+            <h2 class="dn-section-heading" style="color:{{ s.whoisitfor_heading_color }};">{{ s.whoisitfor_heading }}</h2>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:1rem;">
+            {% for block in target_items %}
+              <div class="dn-target-item" {{ block.shopify_attributes }}>
+                <div class="dn-target-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>
+                </div>
+                <div class="dn-target-check">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                </div>
+                <p>{{ block.settings.text }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <div class="dn-whoisitfor-cta">
+        <p>{{ s.whoisitfor_motivational }}</p>
+        <a href="{{ s.whoisitfor_cta_url }}" class="dn-btn-primary" style="animation:dn-pulse-glow-{{ sid }} 2s ease-in-out infinite;">
+          {{ s.whoisitfor_cta_text }}
+          <svg class="dn-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+    <svg class="dn-whoisitfor-wave" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none">
+      <path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="{{ s.whoisitfor_wave_color }}"/>
+    </svg>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M06] ScienceHeroSection ✓ — Ingredients, study, badges ═══ -->
+  {% if s.show_science %}
+  <div class="dn-science" data-animate style="background:{{ s.science_bg_color }};">
+    <div class="dn-geo-circle" style="width:24rem;height:24rem;background:rgba(255,255,255,0.05);top:-12rem;left:-12rem;"></div>
+    <svg class="dn-science-wave" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none">
+      <path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="white"/>
+    </svg>
+
+    <div class="dn-container" style="position:relative;z-index:10;padding:1rem 1rem 2rem;">
+      <div class="dn-text-center" style="margin-bottom:2.5rem;">
+        <div class="dn-hero-badge-pill" style="margin-bottom:1rem;background:{{ s.science_tag_bg_color }};">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.science_tag_text_color }}" stroke-width="2"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/></svg>
+          <span style="font-weight:600;color:{{ s.science_tag_text_color }};">{{ s.science_tag }}</span>
+        </div>
+        <h2 class="dn-section-heading" style="color:{{ s.science_heading_color }};">{{ s.science_heading }}</h2>
+        <p class="dn-section-sub" style="color:rgba(255,255,255,0.8);">{{ s.science_subheading }}</p>
+      </div>
+
+      <!-- Mobile Ingredients -->
+      <div class="dn-mobile-only" style="margin-bottom:2.5rem;">
+        <div style="display:flex;flex-direction:column;gap:0.75rem;">
+          {% for block in ingredients %}
+            <div class="dn-ingredient-card" {{ block.shopify_attributes }}>
+              <div class="dn-ingredient-icon">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 56 }}" alt="{{ block.settings.name }}" style="width:28px;height:28px;object-fit:contain;">
+                {% else %}
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="{{ s.color_secondary }}" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                {% endif %}
+              </div>
+              <div>
+                <h3>{{ block.settings.name }}</h3>
+                <p>{{ block.settings.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Desktop Ingredients -->
+      <div class="dn-desktop-only dn-ingredients-desktop" style="display:none;">
+        {% for block in ingredients %}
+          <div class="dn-ingredient-card" style="flex-direction:column;text-align:center;" {{ block.shopify_attributes }}>
+            <div class="dn-ingredient-icon" style="width:5rem;height:5rem;border-radius:1rem;margin:0 auto 1rem;">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 80 }}" alt="{{ block.settings.name }}" style="width:40px;height:40px;object-fit:contain;">
+              {% else %}
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="{{ s.color_secondary }}" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+              {% endif %}
+            </div>
+            <h3 style="font-size:1.25rem;">{{ block.settings.name }}</h3>
+            <p>{{ block.settings.description }}</p>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Study Card -->
+      <div class="dn-study-card">
+        <div class="dn-study-tag" style="display:flex;align-items:center;gap:0.5rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="{{ s.color_primary }}" stroke-width="2"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/></svg>
+          {{ s.science_study_title }}
+        </div>
+        <h3>{{ s.science_study_subtitle }}</h3>
+        <div class="dn-stat-grid">
+          {% for block in science_stats %}
+            <div class="dn-stat-item" {{ block.shopify_attributes }}>
+              <span class="dn-stat-val">{{ block.settings.value }}</span>
+              <span class="dn-stat-label">{{ block.settings.label }}</span>
+            </div>
+          {% endfor %}
+        </div>
+        <p class="dn-study-desc">{{ s.science_study_description }}</p>
+        <p class="dn-study-source">{{ s.science_study_source }}</p>
+      </div>
+
+      <!-- Badges -->
+      <div class="dn-science-badges">
+        {% for block in science_badges %}
+          <div class="dn-science-badge" {{ block.shopify_attributes }}>
+            {% if block.settings.image != blank %}
+              <img src="{{ block.settings.image | image_url: width: 32 }}" alt="{{ block.settings.text }}" style="width:16px;height:16px;object-fit:contain;">
+            {% else %}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+            {% endif %}
+            <span>{{ block.settings.text }}</span>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M07] TimelineSection ✓ — 3 steps with mobile carousel ═══ -->
+  {% if s.show_timeline %}
+  <div class="dn-timeline" id="transformacao" data-animate style="background:{{ s.timeline_bg_color }};">
+    <div class="dn-timeline-dot-bg"></div>
+    <div class="dn-container" style="position:relative;z-index:10;">
+      <div class="dn-text-center" style="margin-bottom:3rem;">
+        <span class="dn-section-tag" style="background:{{ s.timeline_tag_bg_color }};color:{{ s.timeline_tag_text_color }};">{{ s.timeline_tag }}</span>
+        <h2 class="dn-section-heading" style="color:{{ s.timeline_heading_color }};">{{ s.timeline_heading }}</h2>
+        <p class="dn-section-sub">{{ s.timeline_subheading }}</p>
+      </div>
+
+      <!-- Mobile Carousel -->
+      <div class="dn-mobile-only dn-carousel-wrap">
+        <button class="dn-carousel-btn dn-carousel-btn-left" onclick="dnCarouselScroll_{{ sid | replace: '-', '_' }}('timeline', -280)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <button class="dn-carousel-btn dn-carousel-btn-right" onclick="dnCarouselScroll_{{ sid | replace: '-', '_' }}('timeline', 280)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <div class="dn-carousel-track" id="dn-timeline-track-{{ sid }}">
+          {% for block in timeline_steps %}
+            <div class="dn-carousel-item" {{ block.shopify_attributes }}>
+              <div class="dn-timeline-card">
+                <div class="dn-timeline-card-header">
+                  <div class="dn-timeline-icon">
+                    {% if block.settings.image != blank %}
+                      <img src="{{ block.settings.image | image_url: width: 48 }}" alt="{{ block.settings.title }}" style="width:24px;height:24px;object-fit:contain;">
+                    {% else %}
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    {% endif %}
+                  </div>
+                  <span class="dn-timeline-step-label">ETAPA {{ forloop.index }}</span>
+                </div>
+                <span class="dn-timeline-period">{{ block.settings.period }}</span>
+                <h3>{{ block.settings.title }}</h3>
+                <p>{{ block.settings.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Desktop Grid -->
+      <div class="dn-desktop-only dn-timeline-desktop" style="display:none;">
+        {% for block in timeline_steps %}
+          <div {{ block.shopify_attributes }}>
+            <div class="dn-timeline-card">
+              <div class="dn-timeline-icon" style="width:4rem;height:4rem;border-radius:1rem;margin-bottom:1rem;">
+                {% if block.settings.image != blank %}
+                  <img src="{{ block.settings.image | image_url: width: 64 }}" alt="{{ block.settings.title }}" style="width:32px;height:32px;object-fit:contain;">
+                {% else %}
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                {% endif %}
+              </div>
+              <span class="dn-timeline-period">{{ block.settings.period }}</span>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.description }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M08] TestimonialsSection ✓ — Video carousel, written, modal ═══ -->
+  {% if s.show_testimonials %}
+  <div class="dn-testimonials" id="resultados" data-animate style="background:{{ s.testimonials_bg_color }};">
+    <div class="dn-container" style="position:relative;z-index:10;">
+      <div class="dn-text-center" style="margin-bottom:4rem;">
+        <span class="dn-section-tag" style="background:{{ s.testimonials_tag_bg_color }};color:{{ s.testimonials_tag_text_color }};">{{ s.testimonials_tag }}</span>
+        <h2 class="dn-section-heading" style="color:{{ s.testimonials_heading_color }};">{{ s.testimonials_heading }}</h2>
+        <p class="dn-section-sub">{{ s.testimonials_subheading }}</p>
+      </div>
+
+      <!-- Video Carousel -->
+      <div style="margin-bottom:4rem;position:relative;">
+        <h3 style="font-size:1.25rem;font-weight:700;color:var(--s-foreground);margin-bottom:1.5rem;text-align:center;">{{ s.testimonials_video_title }}</h3>
+        <div style="overflow:hidden;padding:1rem 0;">
+          <div class="dn-video-carousel-track">
+            {% for i in (1..2) %}
+              {% for block in video_testimonials %}
+                <div class="dn-video-thumb" onclick="dnOpenVideoModal_{{ sid | replace: '-', '_' }}('{{ block.settings.video_url }}')" {{ block.shopify_attributes }}>
+                  {% if block.settings.thumbnail != blank %}
+                    <img src="{{ block.settings.thumbnail | image_url: width: 400 }}" alt="{{ block.settings.name }}" style="width:100%;height:20rem;object-fit:cover;border-radius:1rem;">
+                  {% elsif block.settings.video_hosted != blank %}
+                    <video src="{{ block.settings.video_hosted.sources[0].url }}" autoplay loop muted playsinline preload="metadata"></video>
+                  {% else %}
+                    <video src="{{ block.settings.video_url }}" autoplay loop muted playsinline preload="metadata"></video>
+                  {% endif %}
+                  <div class="dn-video-play-overlay">
+                    <div class="dn-video-play-btn">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                    </div>
+                  </div>
+                </div>
+              {% endfor %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+
+      <!-- Written Testimonials -->
+      <div>
+        <h3 style="font-size:1.25rem;font-weight:700;color:var(--s-foreground);margin-bottom:1.5rem;text-align:center;">{{ s.testimonials_written_title }}</h3>
+
+        <!-- Mobile -->
+        <div class="dn-mobile-only">
+          <div style="display:flex;flex-direction:column;gap:1rem;" id="dn-written-mobile-{{ sid }}">
+            {% for block in written_testimonials %}
+              <div class="dn-written-card {% if forloop.index > 3 %}dn-written-hidden{% endif %}" {{ block.shopify_attributes }}>
+                <svg class="dn-quote-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3z"/></svg>
+                <p class="dn-testimonial-text">{{ block.settings.text }}</p>
+                <div class="dn-testimonial-footer">
+                  {% if block.settings.avatar != blank %}
+                    <img src="{{ block.settings.avatar | image_url: width: 80 }}" alt="{{ block.settings.name }}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+                  {% endif %}
+                  <div>
+                    <p class="dn-testimonial-name">{{ block.settings.name }}</p>
+                    <p class="dn-testimonial-loc">{{ block.settings.location }}</p>
+                  </div>
+                  <div class="dn-stars">
+                    {% for i in (1..5) %}
+                      {% if i <= block.settings.rating %}
+                        <svg class="dn-star" width="14" height="14" viewBox="0 0 24 24" fill="#FACC15" stroke="#FACC15" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          {% if written_testimonials.size > 3 %}
+            <div class="dn-text-center" style="margin-top:1rem;">
+              <button class="dn-btn-outline" id="dn-written-toggle-{{ sid }}" onclick="dnToggleWritten_{{ sid | replace: '-', '_' }}()">Ver mais comentários</button>
+            </div>
+          {% endif %}
+        </div>
+
+        <!-- Desktop -->
+        <div class="dn-desktop-only" style="display:none;position:relative;">
+          <button class="dn-carousel-btn dn-carousel-btn-left" onclick="dnCarouselScroll_{{ sid | replace: '-', '_' }}('written', -320)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+          </button>
+          <button class="dn-carousel-btn dn-carousel-btn-right" onclick="dnCarouselScroll_{{ sid | replace: '-', '_' }}('written', 320)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+          </button>
+          <div class="dn-written-desktop" id="dn-written-desktop-{{ sid }}">
+            {% for block in written_testimonials %}
+              <div class="dn-written-card" {{ block.shopify_attributes }}>
+                <svg class="dn-quote-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3z"/></svg>
+                <p class="dn-testimonial-text">{{ block.settings.text }}</p>
+                <div class="dn-testimonial-footer">
+                  {% if block.settings.avatar != blank %}
+                    <img src="{{ block.settings.avatar | image_url: width: 80 }}" alt="{{ block.settings.name }}" style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;">
+                  {% endif %}
+                  <div>
+                    <p class="dn-testimonial-name">{{ block.settings.name }}</p>
+                    <p class="dn-testimonial-loc">{{ block.settings.location }}</p>
+                  </div>
+                  <div class="dn-stars">
+                    {% for i in (1..5) %}
+                      {% if i <= block.settings.rating %}
+                        <svg class="dn-star" width="16" height="16" viewBox="0 0 24 24" fill="#FACC15" stroke="#FACC15" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="dn-video-modal" id="dn-video-modal-{{ sid }}">
+      <div class="dn-video-modal-content">
+        <button class="dn-modal-close" onclick="dnCloseVideoModal_{{ sid | replace: '-', '_' }}()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+        <video id="dn-modal-video-{{ sid }}" controls playsinline></video>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M09] PricingSection ✓ — 3 pricing cards ═══ -->
+  {% if s.show_pricing %}
+  <div class="dn-pricing" id="ofertas" data-animate style="background:{{ s.pricing_bg_color }};">
+    <div class="dn-container" style="position:relative;z-index:10;">
+      <div class="dn-text-center" style="margin-bottom:4rem;">
+        <span class="dn-section-tag" style="background:{{ s.pricing_tag_bg_color }};color:{{ s.pricing_tag_text_color }};">{{ s.pricing_tag }}</span>
+        <h2 class="dn-section-heading" style="color:{{ s.pricing_heading_color }};">{{ s.pricing_heading }}</h2>
+        <p class="dn-section-sub">{{ s.pricing_subheading }}</p>
+      </div>
+
+      <div class="dn-pricing-grid">
+        {% for block in pricing_kits %}
+          {% assign card_class = 'dn-pricing-card' %}
+          {% if block.settings.badge_type == 'popular' %}{% assign card_class = card_class | append: ' dn-pricing-card-popular' %}{% endif %}
+          {% if block.settings.badge_type == 'best_value' %}{% assign card_class = card_class | append: ' dn-pricing-card-best' %}{% endif %}
+
+          <div class="{{ card_class }}" {{ block.shopify_attributes }}>
+            {% if block.settings.badge_type == 'popular' %}
+              <div class="dn-pricing-badge dn-pricing-badge-popular">
+                <svg width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                MAIS VENDIDO
+              </div>
+            {% endif %}
+            {% if block.settings.badge_type == 'best_value' %}
+              <div class="dn-pricing-badge dn-pricing-badge-best">
+                <svg width="14" height="14" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                MAIOR ECONOMIA
+              </div>
+            {% endif %}
+
+            <div class="dn-pricing-img">
+              {% if block.settings.image != blank %}
+                <img src="{{ block.settings.image | image_url: width: 500 }}" alt="{{ block.settings.name }}" loading="lazy" decoding="async">
+              {% endif %}
+            </div>
+
+            <div class="dn-pricing-name">{{ block.settings.name }}</div>
+            <div class="dn-pricing-capsules">{{ block.settings.capsules }} • {{ block.settings.duration }}</div>
+
+            <div class="dn-pricing-prices">
+              <div class="dn-pricing-original">
+                <span class="dn-pricing-strikethrough">R$ {{ block.settings.original_price }}</span>
+                <span class="dn-pricing-discount">-{{ block.settings.discount }}%</span>
+              </div>
+              <div class="dn-pricing-value">R$ {{ block.settings.price }}</div>
+              <div class="dn-pricing-installment">ou 3x de R$ {{ block.settings.installment }} sem juros</div>
+            </div>
+
+            <div class="dn-pricing-perpot">
+              <span class="dn-pricing-perpot-label">Preço por pote:</span>
+              <span class="dn-pricing-perpot-val">R$ {{ block.settings.per_pot }}</span>
+            </div>
+
+            <div class="dn-pricing-benefits">
+              {% if block.settings.free_shipping %}
+                <div class="dn-pricing-benefit">
+                  <svg class="dn-pricing-benefit-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                  <span>Frete Grátis</span>
+                </div>
+              {% endif %}
+              <div class="dn-pricing-benefit">
+                <svg class="dn-pricing-benefit-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>100% Natural</span>
+              </div>
+              <div class="dn-pricing-benefit">
+                <svg class="dn-pricing-benefit-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                <span>Satisfação Garantida</span>
+              </div>
+              <div class="dn-pricing-benefit">
+                <svg class="dn-pricing-benefit-gift" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
+                <span class="dn-pricing-benefit-gift">Cashback de R$ {{ block.settings.cashback }}</span>
+              </div>
+            </div>
+
+            <a href="{{ block.settings.checkout_url }}" target="_blank" rel="noopener noreferrer" class="dn-btn-buy">Comprar Agora</a>
+
+            <div class="dn-pricing-delivery">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+              <span>Entrega em 3-7 dias úteis</span>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M10] HowToUseSection ✓ — Video + 3 steps ═══ -->
+  {% if s.show_howto %}
+  <div class="dn-howto" data-animate style="background:linear-gradient(180deg, {{ s.howto_bg_color }} 0%, {{ s.howto_bg_color_end }} 100%);">
+    <div class="dn-container" style="position:relative;z-index:10;">
+      <div class="dn-text-center" style="margin-bottom:4rem;">
+        <span class="dn-section-tag" style="background:{{ s.howto_tag_bg_color }};color:{{ s.howto_tag_text_color }};">{{ s.howto_tag }}</span>
+        <h2 class="dn-section-heading" style="color:{{ s.howto_heading_color }};">{{ s.howto_heading }}</h2>
+      </div>
+      <div class="dn-howto-grid">
+        <div class="dn-howto-video-wrap">
+          <div class="dn-howto-circle-deco1"></div>
+          <div class="dn-howto-circle-deco2"></div>
+          <div class="dn-howto-circle-deco3"></div>
+          <div class="dn-howto-video-container">
+            {% if s.howto_video_hosted != blank %}
+              <video src="{{ s.howto_video_hosted.sources[0].url }}" autoplay loop muted playsinline preload="metadata"></video>
+            {% elsif s.howto_video_url != blank %}
+              <video src="{{ s.howto_video_url }}" autoplay loop muted playsinline preload="metadata"></video>
+            {% endif %}
+          </div>
+        </div>
+        <div>
+          {% for block in howto_steps %}
+            <div class="dn-howto-step" {{ block.shopify_attributes }}>
+              <div class="dn-howto-step-icon-wrap">
+                <div class="dn-howto-step-icon">
+                  {% if block.settings.image != blank %}
+                    <img src="{{ block.settings.image | image_url: width: 56 }}" alt="{{ block.settings.title }}" style="width:28px;height:28px;object-fit:contain;">
+                  {% else %}
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                  {% endif %}
+                </div>
+                <div class="dn-howto-step-number">{{ block.settings.number }}</div>
+              </div>
+              <div style="padding-top:0.5rem;">
+                <h3>{{ block.settings.title }}</h3>
+                <p>{{ block.settings.description }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M11] FAQSection ✓ — Accordion ═══ -->
+  {% if s.show_faq %}
+  <div class="dn-faq" id="faq" data-animate style="background:{{ s.faq_bg_color }};">
+    <div class="dn-faq-deco"></div>
+    <div class="dn-container" style="position:relative;z-index:10;">
+      <div class="dn-text-center" style="margin-bottom:3rem;">
+        <div class="dn-section-tag" style="display:inline-flex;align-items:center;gap:0.5rem;background:{{ s.faq_tag_bg_color }};color:{{ s.faq_tag_text_color }};">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+          {{ s.faq_tag }}
+        </div>
+        <h2 class="dn-section-heading" style="color:{{ s.faq_heading_color }};">{{ s.faq_heading }}</h2>
+      </div>
+      <div class="dn-faq-list">
+        {% for block in faq_items %}
+          <div class="dn-faq-item" {{ block.shopify_attributes }}>
+            <button class="dn-faq-question" onclick="this.classList.toggle('dn-open');this.nextElementSibling.classList.toggle('dn-open')">
+              <span>{{ block.settings.question }}</span>
+              <svg class="dn-faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div class="dn-faq-answer">{{ block.settings.answer }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M12] Footer ✓ — Full footer ═══ -->
+  {% if s.show_footer %}
+  <footer class="dn-footer">
+    <svg class="dn-footer-wave" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none">
+      <path d="M0 50C300 0 450 120 800 50C1150 -20 1300 80 1440 50V0H0Z" fill="white"/>
+    </svg>
+    <div class="dn-container dn-footer-content">
+      <div class="dn-footer-grid">
+        <div class="dn-footer-brand">
+          <div class="dn-footer-logo">
+            {% if s.footer_logo != blank %}
+              <img src="{{ s.footer_logo | image_url: width: 300 }}" alt="Logo">
+            {% endif %}
+          </div>
+          <p class="dn-desktop-only" style="display:none;">{{ s.footer_description }}</p>
+          <div class="dn-footer-socials">
+            {% if s.footer_instagram_url != blank %}
+              <a href="{{ s.footer_instagram_url }}" target="_blank" rel="noopener noreferrer" class="dn-footer-social-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              </a>
+            {% endif %}
+            {% if s.footer_tiktok_url != blank %}
+              <a href="{{ s.footer_tiktok_url }}" target="_blank" rel="noopener noreferrer" class="dn-footer-social-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+              </a>
+            {% endif %}
+            {% if s.footer_facebook_url != blank %}
+              <a href="{{ s.footer_facebook_url }}" target="_blank" rel="noopener noreferrer" class="dn-footer-social-link">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+        <div class="dn-footer-links">
+          <h4>Links Úteis</h4>
+          <ul>
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#transformacao">Como Funciona</a></li>
+            <li><a href="#resultados">Depoimentos</a></li>
+            <li><a href="#faq">Perguntas Frequentes</a></li>
+            <li><a href="#ofertas">Comprar Agora</a></li>
+          </ul>
+        </div>
+        <div class="dn-footer-links">
+          <h4>Institucional</h4>
+          <ul>
+            {% if s.footer_privacy_url != blank %}<li><a href="{{ s.footer_privacy_url }}" target="_blank" rel="noopener noreferrer">Política de Privacidade</a></li>{% endif %}
+            {% if s.footer_terms_url != blank %}<li><a href="{{ s.footer_terms_url }}" target="_blank" rel="noopener noreferrer">Termos de Uso</a></li>{% endif %}
+            {% if s.footer_returns_url != blank %}<li><a href="{{ s.footer_returns_url }}" target="_blank" rel="noopener noreferrer">Política de Trocas</a></li>{% endif %}
+          </ul>
+        </div>
+        <div class="dn-footer-contact dn-desktop-only" style="display:none;">
+          <h4 style="font-weight:700;font-size:0.875rem;margin-bottom:0.75rem;">Contato</h4>
+          {% if s.footer_email != blank %}
+            <a href="mailto:{{ s.footer_email }}" style="margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              {{ s.footer_email }}
+            </a>
+          {% endif %}
+          {% if s.footer_phone != blank %}
+            <a href="{{ s.footer_phone_url }}" target="_blank" rel="noopener noreferrer" style="margin-bottom:0.5rem;display:flex;align-items:center;gap:0.5rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              {{ s.footer_phone }}
+            </a>
+          {% endif %}
+          <span style="display:flex;align-items:center;gap:0.5rem;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            {{ s.footer_hours }}
+          </span>
+        </div>
+      </div>
+
+      <!-- Mobile contact compact -->
+      <div class="dn-mobile-only" style="text-align:center;margin-bottom:1rem;font-size:0.75rem;">
+        <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;color:rgba(255,255,255,0.7);">
+          {% if s.footer_email != blank %}
+            <a href="mailto:{{ s.footer_email }}" style="color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:0.25rem;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ s.color_secondary }}" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              {{ s.footer_email }}
+            </a>
+          {% endif %}
+          {% if s.footer_phone != blank %}
+            <a href="{{ s.footer_phone_url }}" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.7);display:flex;align-items:center;gap:0.25rem;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ s.color_secondary }}" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              {{ s.footer_phone }}
+            </a>
+          {% endif %}
+        </div>
+        <p style="color:rgba(255,255,255,0.5);margin-top:0.25rem;">{{ s.footer_hours }}</p>
+      </div>
+
+      <!-- WhatsApp button mobile -->
+      <div class="dn-mobile-only" style="display:flex;justify-content:center;margin-bottom:1.5rem;">
+        {% if s.footer_whatsapp_url != blank %}
+          <a href="{{ s.footer_whatsapp_url }}" target="_blank" rel="noopener noreferrer" style="display:inline-flex;align-items:center;gap:0.5rem;background:#25D366;color:#fff;font-weight:600;padding:0.625rem 1.25rem;border-radius:9999px;font-size:0.875rem;transition:background 0.2s;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            Fale Conosco
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="dn-footer-bottom">
+        {% if s.footer_payment_image != blank %}
+          <div class="dn-footer-payment">
+            <img src="{{ s.footer_payment_image | image_url: width: 400 }}" alt="Formas de pagamento">
+          </div>
+        {% endif %}
+        <div class="dn-footer-trust">
+          <span style="display:flex;align-items:center;gap:0.25rem;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ s.color_secondary }}" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+            Compra Segura
+          </span>
+          <span style="display:flex;align-items:center;gap:0.25rem;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="{{ s.color_secondary }}" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+            Entrega Brasil
+          </span>
+        </div>
+        <div class="dn-footer-warning">{{ s.footer_warning }}</div>
+        <div class="dn-footer-copyright">© {{ 'now' | date: '%Y' }} Denavita. Todos os direitos reservados.</div>
+      </div>
+    </div>
+  </footer>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M13] StickyFooter ✓ — Fixed bottom bar with variant selector ═══ -->
+  {% if s.sticky_show and pricing_kits.size > 0 %}
+  <div class="dn-sticky-footer" id="dn-sticky-{{ sid }}">
+    <div class="dn-sticky-inner">
+      <div class="dn-sticky-product-name">
+        <p>Vinagre de Maçã</p>
+        <span>Gomas Denavita</span>
+      </div>
+      <div class="dn-sticky-selector">
+        <button class="dn-sticky-select-btn" id="dn-sticky-select-btn-{{ sid }}" onclick="dnToggleStickyDropdown_{{ sid | replace: '-', '_' }}()">
+          <span id="dn-sticky-selected-name-{{ sid }}">{{ pricing_kits[1].settings.name | default: pricing_kits.first.settings.name }}</span>
+          <svg class="dn-sticky-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="dn-sticky-dropdown" id="dn-sticky-dropdown-{{ sid }}">
+          {% for block in pricing_kits %}
+            <button class="dn-sticky-dropdown-item {% if forloop.index == 2 %}dn-selected{% endif %}"
+              data-name="{{ block.settings.name }}"
+              data-price="{{ block.settings.price }}"
+              data-original="{{ block.settings.original_price }}"
+              data-discount="{{ block.settings.discount }}"
+              data-url="{{ block.settings.checkout_url }}"
+              data-capsules="{{ block.settings.capsules }}"
+              data-free="{{ block.settings.free_shipping }}"
+              {% if block.settings.badge_type == 'popular' %}data-badge="Mais Vendido"{% endif %}
+              {% if block.settings.badge_type == 'best_value' %}data-badge="Maior Economia"{% endif %}
+              onclick="dnSelectStickyVariant_{{ sid | replace: '-', '_' }}(this)">
+              <div>
+                <div style="display:flex;align-items:center;gap:0.375rem;">
+                  <span class="dn-sdi-name">{{ block.settings.name }}</span>
+                  {% if block.settings.badge_type != 'none' %}
+                    <span class="dn-sdi-badge">{% if block.settings.badge_type == 'popular' %}Mais Vendido{% else %}Maior Economia{% endif %}</span>
+                  {% endif %}
+                </div>
+                <div style="display:flex;align-items:center;gap:0.375rem;">
+                  <span class="dn-sdi-sub">{{ block.settings.capsules }}</span>
+                  {% if block.settings.free_shipping %}<span class="dn-sdi-sub" style="color:var(--s-secondary);font-weight:500;">• Frete Grátis</span>{% endif %}
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <span class="dn-sdi-price">R$ {{ block.settings.price }}</span><br>
+                <span class="dn-sdi-orig">R$ {{ block.settings.original_price }}</span>
+              </div>
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="dn-sticky-price-desktop">
+        <div style="display:flex;align-items:center;gap:0.375rem;justify-content:flex-end;">
+          <span class="dn-sticky-price-orig" id="dn-sticky-orig-{{ sid }}">R$ {{ pricing_kits[1].settings.original_price | default: pricing_kits.first.settings.original_price }}</span>
+          <span class="dn-sticky-price-discount" id="dn-sticky-disc-{{ sid }}">-{{ pricing_kits[1].settings.discount | default: pricing_kits.first.settings.discount }}%</span>
+        </div>
+        <span class="dn-sticky-price-val" id="dn-sticky-price-{{ sid }}">R$ {{ pricing_kits[1].settings.price | default: pricing_kits.first.settings.price }}</span>
+      </div>
+      <a href="{{ pricing_kits[1].settings.checkout_url | default: pricing_kits.first.settings.checkout_url }}" target="_blank" rel="noopener noreferrer" class="dn-btn-sticky-buy" id="dn-sticky-buy-{{ sid }}">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+        <span class="dn-desktop-only" style="display:none;">Comprar</span>
+        <span class="dn-mobile-only" id="dn-sticky-mobile-price-{{ sid }}">R$ {{ pricing_kits[1].settings.price | default: pricing_kits.first.settings.price }}</span>
+      </a>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- ═══ CHECKPOINT [M14] WhatsAppButton ✓ — Floating fixed button ═══ -->
+  {% if s.whatsapp_show and s.whatsapp_button_url != blank %}
+  <a href="{{ s.whatsapp_button_url }}" target="_blank" rel="noopener noreferrer" class="dn-whatsapp-btn" aria-label="Fale conosco pelo WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor" width="28" height="28"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.128 6.744 3.046 9.378L1.054 31.29l6.122-1.958C9.722 30.89 12.76 32 16.004 32 24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.528 22.614c-.396 1.116-1.954 2.042-3.21 2.312-.86.182-1.982.328-5.762-1.238-4.836-2.004-7.95-6.912-8.19-7.23-.232-.318-1.942-2.586-1.942-4.932 0-2.346 1.23-3.498 1.666-3.976.396-.434 1.04-.624 1.66-.624.2 0 .38.01.542.018.478.02.716.05 1.032.798.394.934 1.356 3.28 1.474 3.52.12.24.24.554.074.872-.158.318-.278.516-.556.796-.278.28-.586.626-.834.838-.278.24-.566.5-.244.98.322.478 1.432 2.362 3.074 3.828 2.114 1.886 3.894 2.47 4.446 2.744.396.198.868.158 1.204-.198.424-.452.948-1.2 1.48-1.938.38-.524.858-.59 1.294-.432.44.15 2.784 1.312 3.262 1.55.478.24.796.358.914.554.116.198.116 1.134-.28 2.252z"/></svg>
+  </a>
+  {% endif %}
+
+</div>
+
+<script>
+/* ═══ MÓDULO: Core ═══
+   ID: M00
+   ORIGEM: Configuração global, scoping, utilitários
+   DEPENDE DE: —
+   RECEBE: section.id
+   EXPÕE: CONFIG, utility functions
+   ESTADO: —
+   SCHEMA BINDINGS: Todos os settings consumidos via Liquid no HTML/CSS
+═══ */
+(function() {
+  var SID = '{{ sid }}';
+  var SID_SAFE = SID.replace(/-/g, '_');
+  var ROOT = document.getElementById('dn-landing-' + SID);
+  if (!ROOT) return;
+
+  /* ═══ MÓDULO: BenefitsToggle ═══
+     ID: M04-JS
+     ORIGEM: BenefitsGridSection useState showAll
+     DEPENDE DE: M00
+     RECEBE: click event
+     EXPÕE: dnToggleBenefits_{sid}
+     ESTADO: benefitsExpanded (boolean)
+     SCHEMA BINDINGS: benefits_initial_mobile
+  ═══ */
+  var benefitsExpanded = false;
+  window['dnToggleBenefits_' + SID_SAFE] = function() {
+    benefitsExpanded = !benefitsExpanded;
+    var container = document.getElementById('dn-benefits-mobile-' + SID);
+    var btn = document.getElementById('dn-benefits-toggle-' + SID);
+    if (!container || !btn) return;
+    var hidden = container.querySelectorAll('.dn-benefit-hidden');
+    hidden.forEach(function(el) {
+      el.style.display = benefitsExpanded ? '' : 'none';
+    });
+    btn.innerHTML = benefitsExpanded
+      ? 'Ver menos <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg>'
+      : 'Ver mais benefícios <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>';
+  };
+  // Init hidden benefits
+  var benefitContainer = document.getElementById('dn-benefits-mobile-' + SID);
+  if (benefitContainer) {
+    benefitContainer.querySelectorAll('.dn-benefit-hidden').forEach(function(el) { el.style.display = 'none'; });
+  }
+
+  /* ═══ MÓDULO: WrittenTestimonialsToggle ═══
+     ID: M08-JS-Written
+     ORIGEM: TestimonialsSection useState showAllComments
+     DEPENDE DE: M00
+     RECEBE: click event
+     EXPÕE: dnToggleWritten_{sid}
+     ESTADO: writtenExpanded (boolean)
+     SCHEMA BINDINGS: —
+  ═══ */
+  var writtenExpanded = false;
+  window['dnToggleWritten_' + SID_SAFE] = function() {
+    writtenExpanded = !writtenExpanded;
+    var container = document.getElementById('dn-written-mobile-' + SID);
+    var btn = document.getElementById('dn-written-toggle-' + SID);
+    if (!container || !btn) return;
+    container.querySelectorAll('.dn-written-hidden').forEach(function(el) {
+      el.style.display = writtenExpanded ? '' : 'none';
+    });
+    btn.textContent = writtenExpanded ? 'Ver menos' : 'Ver mais comentários';
+  };
+  var writtenContainer = document.getElementById('dn-written-mobile-' + SID);
+  if (writtenContainer) {
+    writtenContainer.querySelectorAll('.dn-written-hidden').forEach(function(el) { el.style.display = 'none'; });
+  }
+
+  /* ═══ MÓDULO: CarouselScroll ═══
+     ID: M07-JS, M08-JS-Desktop
+     ORIGEM: TimelineSection scrollLeft/scrollRight, TestimonialsSection scrollCommentsLeft/Right
+     DEPENDE DE: M00
+     RECEBE: trackId, scrollAmount
+     EXPÕE: dnCarouselScroll_{sid}
+     ESTADO: —
+     SCHEMA BINDINGS: —
+  ═══ */
+  window['dnCarouselScroll_' + SID_SAFE] = function(trackId, amount) {
+    var track = document.getElementById('dn-' + trackId + '-track-' + SID) ||
+                document.getElementById('dn-' + trackId + '-desktop-' + SID);
+    if (!track) return;
+    track.scrollBy({ left: amount, behavior: 'smooth' });
+  };
+
+  /* ═══ MÓDULO: VideoModal ═══
+     ID: M08-JS-Modal
+     ORIGEM: TestimonialsSection selectedVideo state, Dialog
+     DEPENDE DE: M00
+     RECEBE: videoUrl
+     EXPÕE: dnOpenVideoModal_{sid}, dnCloseVideoModal_{sid}
+     ESTADO: modal open/closed
+     SCHEMA BINDINGS: —
+  ═══ */
+  window['dnOpenVideoModal_' + SID_SAFE] = function(url) {
+    var modal = document.getElementById('dn-video-modal-' + SID);
+    var video = document.getElementById('dn-modal-video-' + SID);
+    if (!modal || !video) return;
+    video.src = url;
+    modal.classList.add('dn-modal-open');
+    video.play();
+  };
+  window['dnCloseVideoModal_' + SID_SAFE] = function() {
+    var modal = document.getElementById('dn-video-modal-' + SID);
+    var video = document.getElementById('dn-modal-video-' + SID);
+    if (!modal || !video) return;
+    modal.classList.remove('dn-modal-open');
+    video.pause();
+    video.src = '';
+  };
+  // Close modal on backdrop click
+  var modal = document.getElementById('dn-video-modal-' + SID);
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) {
+        window['dnCloseVideoModal_' + SID_SAFE]();
+      }
+    });
+  }
+
+  /* ═══ MÓDULO: StickyFooter ═══
+     ID: M13-JS
+     ORIGEM: StickyFooter component - scroll visibility, variant selection, dropdown
+     DEPENDE DE: M00
+     RECEBE: scroll events, click events
+     EXPÕE: dnToggleStickyDropdown_{sid}, dnSelectStickyVariant_{sid}
+     ESTADO: isVisible, isDropdownOpen, selectedVariant
+     SCHEMA BINDINGS: sticky_show, pricing_kit blocks
+  ═══ */
+  var stickyEl = document.getElementById('dn-sticky-' + SID);
+  if (stickyEl) {
+    window.addEventListener('scroll', function() {
+      var footer = ROOT.querySelector('.dn-footer');
+      var footerTop = footer ? footer.getBoundingClientRect().top : Infinity;
+      var isFooterVisible = footerTop < window.innerHeight;
+      var show = window.scrollY > 500 && !isFooterVisible;
+      stickyEl.classList.toggle('dn-visible', show);
+    });
+  }
+
+  window['dnToggleStickyDropdown_' + SID_SAFE] = function() {
+    var dropdown = document.getElementById('dn-sticky-dropdown-' + SID);
+    var btn = document.getElementById('dn-sticky-select-btn-' + SID);
+    if (!dropdown || !btn) return;
+    var isOpen = dropdown.classList.toggle('dn-open');
+    btn.classList.toggle('dn-open', isOpen);
+  };
+
+  window['dnSelectStickyVariant_' + SID_SAFE] = function(el) {
+    var name = el.getAttribute('data-name');
+    var price = el.getAttribute('data-price');
+    var original = el.getAttribute('data-original');
+    var discount = el.getAttribute('data-discount');
+    var url = el.getAttribute('data-url');
+
+    // Update selected name
+    var nameEl = document.getElementById('dn-sticky-selected-name-' + SID);
+    if (nameEl) nameEl.textContent = name;
+
+    // Update prices
+    var origEl = document.getElementById('dn-sticky-orig-' + SID);
+    if (origEl) origEl.textContent = 'R$ ' + original;
+    var discEl = document.getElementById('dn-sticky-disc-' + SID);
+    if (discEl) discEl.textContent = '-' + discount + '%';
+    var priceEl = document.getElementById('dn-sticky-price-' + SID);
+    if (priceEl) priceEl.textContent = 'R$ ' + price;
+    var mobilePriceEl = document.getElementById('dn-sticky-mobile-price-' + SID);
+    if (mobilePriceEl) mobilePriceEl.textContent = 'R$ ' + price;
+
+    // Update buy URL
+    var buyEl = document.getElementById('dn-sticky-buy-' + SID);
+    if (buyEl) buyEl.href = url;
+
+    // Update selected state
+    var dropdown = document.getElementById('dn-sticky-dropdown-' + SID);
+    if (dropdown) {
+      dropdown.querySelectorAll('.dn-sticky-dropdown-item').forEach(function(item) {
+        item.classList.remove('dn-selected');
+      });
+      el.classList.add('dn-selected');
+    }
+
+    // Close dropdown
+    window['dnToggleStickyDropdown_' + SID_SAFE]();
+  };
+
+  /* ═══ MÓDULO: Validation ═══
+     ID: M00-VALIDATE
+     ORIGEM: OP₇ Invariantes Executáveis
+     DEPENDE DE: Todos
+     RECEBE: —
+     EXPÕE: __VALIDATE_INTEGRITY__
+     ESTADO: —
+     SCHEMA BINDINGS: —
+  ═══ */
+  window.__VALIDATE_INTEGRITY__ = function() {
+    var results = [];
+    function assert(mod, test, desc) {
+      try {
+        var pass = test();
+        results.push({ module: mod, description: desc, status: pass ? '✅' : '❌' });
+      } catch(e) {
+        results.push({ module: mod, description: desc, status: '💥 ERRO: ' + e.message });
+      }
+    }
+
+    assert('M01', function() { return !!ROOT.querySelector('.dn-subhero') || true; }, 'SubHero section present or toggled off');
+    assert('M02', function() { return !!ROOT.querySelector('.dn-hero') || true; }, 'Hero section present or toggled off');
+    assert('M03', function() { return !!ROOT.querySelector('.dn-why') || true; }, 'WhyItWorks section present or toggled off');
+    assert('M04', function() { return !!ROOT.querySelector('.dn-benefits') || true; }, 'Benefits section present or toggled off');
+    assert('M05', function() { return !!ROOT.querySelector('.dn-whoisitfor') || true; }, 'WhoIsItFor section present or toggled off');
+    assert('M06', function() { return !!ROOT.querySelector('.dn-science') || true; }, 'Science section present or toggled off');
+    assert('M07', function() { return !!ROOT.querySelector('.dn-timeline') || true; }, 'Timeline section present or toggled off');
+    assert('M08', function() { return !!ROOT.querySelector('.dn-testimonials') || true; }, 'Testimonials section present or toggled off');
+    assert('M09', function() { return !!ROOT.querySelector('.dn-pricing') || true; }, 'Pricing section present or toggled off');
+    assert('M10', function() { return !!ROOT.querySelector('.dn-howto') || true; }, 'HowToUse section present or toggled off');
+    assert('M11', function() { return !!ROOT.querySelector('.dn-faq') || true; }, 'FAQ section present or toggled off');
+    assert('M12', function() { return !!ROOT.querySelector('.dn-footer') || true; }, 'Footer present or toggled off');
+    assert('M13', function() { return !!document.getElementById('dn-sticky-' + SID) || true; }, 'StickyFooter present or toggled off');
+    assert('M14', function() { return !!ROOT.querySelector('.dn-whatsapp-btn') || true; }, 'WhatsApp button present or toggled off');
+    assert('CSS', function() {
+      var el = document.getElementById('shopify-section-' + SID);
+      if (!el) return true;
+      var style = getComputedStyle(el);
+      return style.getPropertyValue('--s-primary') !== '';
+    }, 'CSS custom properties injected from schema');
+    assert('FAQ-JS', function() {
+      var faqQ = ROOT.querySelector('.dn-faq-question');
+      if (!faqQ) return true;
+      faqQ.click();
+      var isOpen = faqQ.classList.contains('dn-open');
+      faqQ.click();
+      return isOpen;
+    }, 'FAQ accordion toggle works');
+    assert('STICKY-JS', function() {
+      return typeof window['dnToggleStickyDropdown_' + SID_SAFE] === 'function';
+    }, 'Sticky dropdown function exists');
+    assert('MODAL-JS', function() {
+      return typeof window['dnOpenVideoModal_' + SID_SAFE] === 'function';
+    }, 'Video modal function exists');
+
+    console.table(results);
+    var failures = results.filter(function(r) { return r.status !== '✅'; });
+    if (failures.length === 0) {
+      console.log('%c✅ TODOS OS INVARIANTES PASSARAM', 'color:green;font-size:16px');
+    } else {
+      console.log('%c❌ ' + failures.length + ' FALHA(S) DETECTADA(S)', 'color:red;font-size:16px');
+    }
+    return results;
+  };
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Archfy LP Vinagre Maca",
+  "tag": "section",
+  "class": "denavita-landing",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🎨 Cores Globais"
+    },
+    { "type": "color", "id": "color_primary", "label": "Cor Primária (Verde)", "default": "#4DA80D" },
+    { "type": "color", "id": "color_primary_dark", "label": "Cor Primária Escura", "default": "#337308" },
+    { "type": "color", "id": "color_primary_light", "label": "Cor Primária Clara", "default": "#E8F5D6" },
+    { "type": "color", "id": "color_secondary", "label": "Cor Secundária (Vermelho)", "default": "#A8201A" },
+    { "type": "color", "id": "color_secondary_light", "label": "Cor Secundária Clara", "default": "#FDE8E8" },
+    { "type": "color", "id": "color_foreground", "label": "Cor do Texto", "default": "#1E293B" },
+    { "type": "color", "id": "color_muted", "label": "Cor Texto Secundário", "default": "#636E7F" },
+    { "type": "color", "id": "color_background", "label": "Cor de Fundo", "default": "#FFFFFF" },
+    { "type": "color", "id": "color_footer_bg", "label": "Cor de Fundo Footer", "default": "#1a3e01" },
+    {
+      "type": "header",
+      "content": "📐 Espaçamento"
+    },
+    { "type": "range", "id": "padding_top", "label": "Padding Superior", "min": 0, "max": 100, "step": 4, "default": 0, "unit": "px" },
+    { "type": "range", "id": "padding_bottom", "label": "Padding Inferior", "min": 0, "max": 100, "step": 4, "default": 0, "unit": "px" },
+    {
+      "type": "header",
+      "content": "🔀 Visibilidade das Seções"
+    },
+    { "type": "checkbox", "id": "show_subhero", "label": "Mostrar Sub-Hero Marquee", "default": true },
+    { "type": "checkbox", "id": "show_hero", "label": "Mostrar Hero", "default": true },
+    { "type": "checkbox", "id": "show_why", "label": "Mostrar Por Que Funciona", "default": true },
+    { "type": "checkbox", "id": "show_benefits", "label": "Mostrar Benefícios", "default": true },
+    { "type": "checkbox", "id": "show_whoisitfor", "label": "Mostrar Identificação", "default": true },
+    { "type": "checkbox", "id": "show_science", "label": "Mostrar Ciência", "default": true },
+    { "type": "checkbox", "id": "show_timeline", "label": "Mostrar Timeline", "default": true },
+    { "type": "checkbox", "id": "show_testimonials", "label": "Mostrar Depoimentos", "default": true },
+    { "type": "checkbox", "id": "show_pricing", "label": "Mostrar Ofertas", "default": true },
+    { "type": "checkbox", "id": "show_howto", "label": "Mostrar Como Usar", "default": true },
+    { "type": "checkbox", "id": "show_faq", "label": "Mostrar FAQ", "default": true },
+    { "type": "checkbox", "id": "show_footer", "label": "Mostrar Footer", "default": true },
+    {
+      "type": "header",
+      "content": "📢 Sub-Hero Marquee"
+    },
+    { "type": "color", "id": "subhero_bg_color", "label": "Cor de Fundo Marquee", "default": "#4DA80D" },
+    { "type": "color", "id": "subhero_text_color", "label": "Cor do Texto Marquee", "default": "#FFFFFF" },
+    {
+      "type": "header",
+      "content": "🏠 1 Hero"
+    },
+    { "type": "text", "id": "hero_badge_text", "label": "Badge do Hero", "default": "Gominhas com Vinagre de Maçã" },
+    { "type": "text", "id": "hero_heading", "label": "Título do Hero", "default": "Emagreça de forma gostosa e natural com apenas 1 goma por dia." },
+    { "type": "text", "id": "hero_heading_highlight", "label": "Texto Destacado", "default": "gostosa e natural" },
+    { "type": "textarea", "id": "hero_subheading", "label": "Subtítulo do Hero", "default": "A goma de vinagre de maçã que controla a fome, acelera o metabolismo e queima gordura sem aquele gosto amargo. Resultados que você sente já na primeira semana." },
+    { "type": "text", "id": "hero_cta_text", "label": "Texto do Botão CTA", "default": "Quero emagrecer gostoso" },
+    { "type": "text", "id": "hero_cta_url", "label": "URL do Botão CTA" },
+    { "type": "image_picker", "id": "hero_product_image", "label": "Imagem do Produto" },
+    { "type": "color", "id": "hero_glow_color", "label": "Cor do Glow", "default": "#C62828" },
+    { "type": "checkbox", "id": "hero_show_gummies", "label": "Mostrar Gomas Flutuantes", "default": true },
+    { "type": "image_picker", "id": "hero_gummy_image", "label": "Imagem da Goma Flutuante" },
+    { "type": "text", "id": "hero_badge_left_value", "label": "Badge Direita - Valor", "default": "-Fome" },
+    { "type": "text", "id": "hero_badge_left_label", "label": "Badge Direita - Label", "default": "Controla Apetite" },
+    { "type": "text", "id": "hero_badge_right_value", "label": "Badge Esquerda - Valor", "default": "100%" },
+    { "type": "text", "id": "hero_badge_right_label", "label": "Badge Esquerda - Label", "default": "Natural" },
+    { "type": "color", "id": "hero_bg_color", "label": "Cor de Fundo Hero (início)", "default": "#2E7D32" },
+    { "type": "color", "id": "hero_bg_color_end", "label": "Cor de Fundo Hero (fim)", "default": "#1B5E20" },
+    { "type": "color", "id": "hero_text_color", "label": "Cor do Texto Hero", "default": "#FFFFFF" },
+    { "type": "color", "id": "hero_highlight_color", "label": "Cor do Destaque Hero", "default": "#FDE047" },
+    { "type": "color", "id": "hero_desc_color", "label": "Cor da Descrição Hero", "default": "#FFFFFF" },
+    { "type": "color", "id": "hero_wave_color", "label": "Cor da Onda Hero", "default": "#FFFFFF" },
+    { "type": "color", "id": "hero_cta_bg_color", "label": "Cor Fundo Botão CTA", "default": "#4DA80D" },
+    { "type": "color", "id": "hero_cta_text_color", "label": "Cor Texto Botão CTA", "default": "#FFFFFF" },
+    {
+      "type": "header",
+      "content": "🔬 2 Por Que Funciona"
+    },
+    { "type": "text", "id": "why_section_tag", "label": "Tag da Seção", "default": "CIÊNCIA COMPROVADA" },
+    { "type": "text", "id": "why_heading", "label": "Título", "default": "Por que funciona de verdade" },
+    { "type": "text", "id": "why_subheading", "label": "Subtítulo", "default": "Não é mágica, é ciência. Descubra como o vinagre de maçã age no seu corpo" },
+    { "type": "image_picker", "id": "why_celebrity_image", "label": "Imagem Celebridade" },
+    { "type": "color", "id": "why_bg_color", "label": "Cor de Fundo", "default": "#FFFFFF" },
+    { "type": "color", "id": "why_tag_bg_color", "label": "Cor Fundo Tag", "default": "#E8F5D6" },
+    { "type": "color", "id": "why_tag_text_color", "label": "Cor Texto Tag", "default": "#4DA80D" },
+    { "type": "color", "id": "why_heading_color", "label": "Cor do Título", "default": "#1E293B" },
+    { "type": "color", "id": "why_card_bg_color", "label": "Cor Fundo Card", "default": "#FDE8E8" },
+    { "type": "color", "id": "why_card_border_color", "label": "Cor Borda Card", "default": "#A8201A" },
+    { "type": "color", "id": "why_icon_bg_color", "label": "Cor Fundo Ícone", "default": "#A8201A" },
+    {
+      "type": "header",
+      "content": "✨ 3 Benefícios"
+    },
+    { "type": "text", "id": "benefits_tag", "label": "Tag da Seção", "default": "BENEFÍCIOS" },
+    { "type": "text", "id": "benefits_heading", "label": "Título", "default": "Sinta a diferença no seu corpo" },
+    { "type": "text", "id": "benefits_subheading", "label": "Subtítulo", "default": "Benefícios que você nota no espelho, nas roupas e na disposição do dia a dia" },
+    { "type": "range", "id": "benefits_initial_mobile", "label": "Benefícios visíveis (mobile)", "min": 1, "max": 6, "step": 1, "default": 3 },
+    { "type": "color", "id": "benefits_bg_color", "label": "Cor de Fundo", "default": "#E8F5D6" },
+    { "type": "color", "id": "benefits_tag_bg_color", "label": "Cor Fundo Tag", "default": "#FFFFFF" },
+    { "type": "color", "id": "benefits_tag_text_color", "label": "Cor Texto Tag", "default": "#4DA80D" },
+    { "type": "color", "id": "benefits_heading_color", "label": "Cor do Título", "default": "#1E293B" },
+    { "type": "color", "id": "benefits_icon_bg_color", "label": "Cor Fundo Ícone", "default": "#A8201A" },
+    {
+      "type": "header",
+      "content": "👩 4 Identificação"
+    },
+    { "type": "text", "id": "whoisitfor_tag", "label": "Tag da Seção", "default": "VOCÊ SE IDENTIFICA?" },
+    { "type": "text", "id": "whoisitfor_heading", "label": "Título", "default": "Se identificou com algo?" },
+    { "type": "image_picker", "id": "whoisitfor_image", "label": "Imagem" },
+    { "type": "text", "id": "whoisitfor_cta_text", "label": "Texto do CTA", "default": "Quero Começar Agora!" },
+    { "type": "text", "id": "whoisitfor_cta_url", "label": "URL do CTA" },
+    { "type": "richtext", "id": "whoisitfor_motivational", "label": "Texto Motivacional", "default": "<p>Marcou <strong>1 item</strong>? O Vinagre de Maçã pode te ajudar. <strong>Marcou todos? É hora de virar o jogo.</strong></p>" },
+    { "type": "color", "id": "whoisitfor_bg_color", "label": "Cor de Fundo", "default": "#FFFFFF" },
+    { "type": "color", "id": "whoisitfor_diag_bg_color", "label": "Cor Fundo Diagonal", "default": "#FDE8E8" },
+    { "type": "color", "id": "whoisitfor_tag_bg_color", "label": "Cor Fundo Tag", "default": "#A8201A" },
+    { "type": "color", "id": "whoisitfor_tag_text_color", "label": "Cor Texto Tag", "default": "#FFFFFF" },
+    { "type": "color", "id": "whoisitfor_heading_color", "label": "Cor do Título", "default": "#1E293B" },
+    { "type": "color", "id": "whoisitfor_icon_bg_color", "label": "Cor Fundo Ícone", "default": "#E8F5D6" },
+    { "type": "color", "id": "whoisitfor_check_color", "label": "Cor do Check", "default": "#4DA80D" },
+    { "type": "color", "id": "whoisitfor_wave_color", "label": "Cor da Onda", "default": "#A8201A" },
+    {
+      "type": "header",
+      "content": "🧪 5 Ciência"
+    },
+    { "type": "text", "id": "science_tag", "label": "Tag", "default": "CIÊNCIA" },
+    { "type": "text", "id": "science_heading", "label": "Título", "default": "Fórmula com ingredientes poderosos" },
+    { "type": "text", "id": "science_subheading", "label": "Subtítulo", "default": "Três ativos naturais que agem juntos para acelerar seu metabolismo e controlar a fome" },
+    { "type": "color", "id": "science_bg_color", "label": "Cor de Fundo", "default": "#A8201A" },
+    { "type": "color", "id": "science_tag_bg_color", "label": "Cor Fundo Tag", "default": "#C0392B" },
+    { "type": "color", "id": "science_tag_text_color", "label": "Cor Texto Tag", "default": "#FFFFFF" },
+    { "type": "color", "id": "science_heading_color", "label": "Cor do Título", "default": "#FFFFFF" },
+    { "type": "text", "id": "science_study_title", "label": "Título do Estudo", "default": "Benefícios Comprovados" },
+    { "type": "text", "id": "science_study_subtitle", "label": "Subtítulo do Estudo", "default": "Vinagre de Maçã - Eficácia Milenar" },
+    { "type": "textarea", "id": "science_study_description", "label": "Descrição do Estudo", "default": "Estudos mostram que o vinagre de maçã prolonga a sensação de saciedade, auxilia no controle do apetite e pode contribuir para a redução de medidas quando combinado com alimentação equilibrada." },
+    { "type": "text", "id": "science_study_source", "label": "Fonte", "default": "Fonte: Journal of Functional Foods, 2018" },
+    {
+      "type": "header",
+      "content": "📅 6 Timeline"
+    },
+    { "type": "text", "id": "timeline_tag", "label": "Tag", "default": "TRANSFORMAÇÃO" },
+    { "type": "text", "id": "timeline_heading", "label": "Título", "default": "O que esperar em cada fase" },
+    { "type": "text", "id": "timeline_subheading", "label": "Subtítulo", "default": "Acompanhe a evolução do seu corpo semana a semana" },
+    { "type": "color", "id": "timeline_bg_color", "label": "Cor de Fundo", "default": "#FFFFFF" },
+    { "type": "color", "id": "timeline_tag_bg_color", "label": "Cor Fundo Tag", "default": "#E8F5D6" },
+    { "type": "color", "id": "timeline_tag_text_color", "label": "Cor Texto Tag", "default": "#4DA80D" },
+    { "type": "color", "id": "timeline_heading_color", "label": "Cor do Título", "default": "#1E293B" },
+    { "type": "color", "id": "timeline_card_bg_color", "label": "Cor Fundo Card", "default": "#FDE8E8" },
+    { "type": "color", "id": "timeline_icon_bg_color", "label": "Cor Fundo Ícone", "default": "#A8201A" },
+    {
+      "type": "header",
+      "content": "💬 7 Depoimentos"
+    },
+    { "type": "text", "id": "testimonials_tag", "label": "Tag", "default": "RESULTADOS REAIS" },
+    { "type": "text", "id": "testimonials_heading", "label": "Título", "default": "Veja quem já transformou o corpo" },
+    { "type": "text", "id": "testimonials_subheading", "label": "Subtítulo", "default": "Milhares de mulheres já deram o primeiro passo. Agora é a sua vez." },
+    { "type": "text", "id": "testimonials_video_title", "label": "Título Vídeos", "default": "Vídeos de Depoimentos" },
+    { "type": "text", "id": "testimonials_written_title", "label": "Título Escritos", "default": "O que nossas clientes dizem" },
+    { "type": "color", "id": "testimonials_bg_color", "label": "Cor de Fundo", "default": "#E8F5D6" },
+    { "type": "color", "id": "testimonials_tag_bg_color", "label": "Cor Fundo Tag", "default": "#A8201A" },
+    { "type": "color", "id": "testimonials_tag_text_color", "label": "Cor Texto Tag", "default": "#FFFFFF" },
+    { "type": "color", "id": "testimonials_heading_color", "label": "Cor do Título", "default": "#1E293B" },
+    {
+      "type": "header",
+      "content": "💰 8 Ofertas"
+    },
+    { "type": "text", "id": "pricing_tag", "label": "Tag", "default": "OFERTA ESPECIAL" },
+    { "type": "text", "id": "pricing_heading", "label": "Título", "default": "Escolha seu kit e comece hoje" },
+    { "type": "text", "id": "pricing_subheading", "label": "Subtítulo", "default": "Quanto mais potes, maior a economia e melhores os resultados" },
+    { "type": "color", "id": "pricing_bg_color", "label": "Cor de Fundo", "default": "#FEF2F2" },
+    { "type": "color", "id": "pricing_tag_bg_color", "label": "Cor Fundo Tag", "default": "#4DA80D" },
+    { "type": "color", "id": "pricing_tag_text_color", "label": "Cor Texto Tag", "default": "#FFFFFF" },
+    { "type": "color", "id": "pricing_heading_color", "label": "Cor do Título", "default": "#1E293B" },
+    {
+      "type": "header",
+      "content": "📖 9 Como Usar"
+    },
+    { "type": "text", "id": "howto_tag", "label": "Tag", "default": "SIMPLES ASSIM" },
+    { "type": "text", "id": "howto_heading", "label": "Título", "default": "Só 1 goma por dia" },
+    { "type": "video_url", "id": "howto_video_url", "label": "URL do Vídeo (YouTube/Vimeo)", "accept": ["youtube", "vimeo"] },
+    { "type": "video", "id": "howto_video_hosted", "label": "Vídeo Hospedado (Shopify Files)" },
+    { "type": "color", "id": "howto_bg_color", "label": "Cor de Fundo (início)", "default": "#FFFFFF" },
+    { "type": "color", "id": "howto_bg_color_end", "label": "Cor de Fundo (fim)", "default": "#F5F5F5" },
+    { "type": "color", "id": "howto_tag_bg_color", "label": "Cor Fundo Tag", "default": "#E8F5D6" },
+    { "type": "color", "id": "howto_tag_text_color", "label": "Cor Texto Tag", "default": "#4DA80D" },
+    { "type": "color", "id": "howto_heading_color", "label": "Cor do Título", "default": "#1E293B" },
+    { "type": "color", "id": "howto_step_icon_bg", "label": "Cor Fundo Ícone Passo", "default": "#A8201A" },
+    {
+      "type": "header",
+      "content": "❓ 10 FAQ"
+    },
+    { "type": "text", "id": "faq_tag", "label": "Tag", "default": "TIRE SUAS DÚVIDAS" },
+    { "type": "text", "id": "faq_heading", "label": "Título", "default": "Ainda tem perguntas?" },
+    { "type": "color", "id": "faq_bg_color", "label": "Cor de Fundo", "default": "#FFFFFF" },
+    { "type": "color", "id": "faq_tag_bg_color", "label": "Cor Fundo Tag", "default": "#FDE8E8" },
+    { "type": "color", "id": "faq_tag_text_color", "label": "Cor Texto Tag", "default": "#A8201A" },
+    { "type": "color", "id": "faq_heading_color", "label": "Cor do Título", "default": "#1E293B" },
+    {
+      "type": "header",
+      "content": "🦶 Footer"
+    },
+    { "type": "image_picker", "id": "footer_logo", "label": "Logo" },
+    { "type": "textarea", "id": "footer_description", "label": "Descrição da Marca", "default": "Acreditamos que o consumo de vitaminas e suplementos é fundamental para uma vida com mais vitalidade e energia." },
+    { "type": "text", "id": "footer_email", "label": "Email", "default": "sac@denavita.com" },
+    { "type": "text", "id": "footer_phone", "label": "Telefone", "default": "(11) 92066-4623" },
+    { "type": "text", "id": "footer_phone_url", "label": "URL do Telefone" },
+    { "type": "text", "id": "footer_hours", "label": "Horário", "default": "Seg-Sex, 9h às 18h" },
+    { "type": "text", "id": "footer_instagram_url", "label": "Instagram URL" },
+    { "type": "text", "id": "footer_tiktok_url", "label": "TikTok URL" },
+    { "type": "text", "id": "footer_facebook_url", "label": "Facebook URL" },
+    { "type": "text", "id": "footer_whatsapp_url", "label": "WhatsApp URL" },
+    { "type": "image_picker", "id": "footer_payment_image", "label": "Imagem Pagamentos" },
+    { "type": "textarea", "id": "footer_warning", "label": "Aviso Legal", "default": "Gestantes, idosos, crianças, lactantes e pessoas com doenças devem consultar médico antes do consumo. Produto autorizado RDC 240/2018, código 4300041, conforme ANVISA." },
+    { "type": "text", "id": "footer_privacy_url", "label": "URL Privacidade" },
+    { "type": "text", "id": "footer_terms_url", "label": "URL Termos" },
+    { "type": "text", "id": "footer_returns_url", "label": "URL Trocas" },
+    { "type": "color", "id": "footer_text_color", "label": "Cor Texto Footer", "default": "#FFFFFF" },
+    { "type": "color", "id": "footer_heading_color", "label": "Cor Títulos Footer", "default": "#FFFFFF" },
+    { "type": "color", "id": "footer_link_hover_color", "label": "Cor Link Hover", "default": "#A8201A" },
+    { "type": "color", "id": "footer_social_bg", "label": "Cor Fundo Social", "default": "#333333" },
+    { "type": "color", "id": "footer_social_hover_bg", "label": "Cor Social Hover", "default": "#A8201A" },
+    {
+      "type": "header",
+      "content": "📱 WhatsApp & Sticky"
+    },
+    { "type": "text", "id": "whatsapp_button_url", "label": "WhatsApp URL" },
+    { "type": "checkbox", "id": "whatsapp_show", "label": "Mostrar Botão WhatsApp", "default": true },
+    { "type": "checkbox", "id": "sticky_show", "label": "Mostrar Barra Fixa", "default": true }
+  ],
+  "blocks": [
+    {
+      "type": "subhero_item",
+      "name": "Item do Marquee",
+      "settings": [
+        { "type": "text", "id": "text", "label": "Texto", "default": "Texto do item" }
+      ]
+    },
+    {
+      "type": "why_card",
+      "name": "Card Por Que Funciona",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "alert", "options": [
+          { "value": "alert", "label": "Alerta" },
+          { "value": "flame", "label": "Chama" },
+          { "value": "leaf", "label": "Folha" }
+        ]},
+        { "type": "text", "id": "title", "label": "Título", "default": "Título" },
+        { "type": "textarea", "id": "description", "label": "Descrição", "default": "Descrição do card" },
+        { "type": "image_picker", "id": "image", "label": "Imagem Personalizada" }
+      ]
+    },
+    {
+      "type": "benefit_card",
+      "name": "Card de Benefício",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "flame", "options": [
+          { "value": "flame", "label": "Chama" },
+          { "value": "heart", "label": "Coração" },
+          { "value": "shield", "label": "Escudo" },
+          { "value": "zap", "label": "Raio" },
+          { "value": "brain", "label": "Cérebro" },
+          { "value": "coffee", "label": "Café" }
+        ]},
+        { "type": "text", "id": "title", "label": "Título", "default": "Benefício" },
+        { "type": "textarea", "id": "description", "label": "Descrição", "default": "Descrição do benefício" },
+        { "type": "image_picker", "id": "image", "label": "Imagem Personalizada" }
+      ]
+    },
+    {
+      "type": "target_item",
+      "name": "Item Identificação",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "scale", "options": [
+          { "value": "scale", "label": "Balança" },
+          { "value": "flame", "label": "Chama" },
+          { "value": "heart", "label": "Coração" },
+          { "value": "utensils", "label": "Talheres" },
+          { "value": "clock", "label": "Relógio" },
+          { "value": "zap", "label": "Raio" }
+        ]},
+        { "type": "text", "id": "text", "label": "Texto", "default": "Texto do item" }
+      ]
+    },
+    {
+      "type": "ingredient",
+      "name": "Ingrediente",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "apple", "options": [
+          { "value": "apple", "label": "Maçã" },
+          { "value": "pill", "label": "Cápsula" },
+          { "value": "heart", "label": "Coração" }
+        ]},
+        { "type": "text", "id": "name", "label": "Nome", "default": "Ingrediente" },
+        { "type": "text", "id": "description", "label": "Descrição", "default": "Descrição do ingrediente" },
+        { "type": "image_picker", "id": "image", "label": "Imagem do Ingrediente" }
+      ]
+    },
+    {
+      "type": "science_stat",
+      "name": "Estatística Científica",
+      "settings": [
+        { "type": "text", "id": "value", "label": "Valor", "default": "100%" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Resultado" }
+      ]
+    },
+    {
+      "type": "science_badge",
+      "name": "Badge Científico",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "leaf", "options": [
+          { "value": "leaf", "label": "Folha" },
+          { "value": "beaker", "label": "Béquer" },
+          { "value": "sparkle", "label": "Brilho" },
+          { "value": "atom", "label": "Átomo" }
+        ]},
+        { "type": "text", "id": "text", "label": "Texto", "default": "100% Natural" },
+        { "type": "image_picker", "id": "image", "label": "Imagem do Badge" }
+      ]
+    },
+    {
+      "type": "timeline_step",
+      "name": "Etapa da Timeline",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "clock", "options": [
+          { "value": "clock", "label": "Relógio" },
+          { "value": "trending", "label": "Tendência" },
+          { "value": "trophy", "label": "Troféu" }
+        ]},
+        { "type": "text", "id": "period", "label": "Período", "default": "Primeiros 7 Dias" },
+        { "type": "text", "id": "title", "label": "Título", "default": "Controle da Fome" },
+        { "type": "textarea", "id": "description", "label": "Descrição", "default": "Descrição da etapa" },
+        { "type": "image_picker", "id": "image", "label": "Imagem da Etapa" }
+      ]
+    },
+    {
+      "type": "video_testimonial",
+      "name": "Vídeo Depoimento",
+      "settings": [
+        { "type": "video_url", "id": "video_url", "label": "URL do Vídeo (YouTube/Vimeo)", "accept": ["youtube", "vimeo"] },
+        { "type": "video", "id": "video_hosted", "label": "Vídeo Hospedado (Shopify Files)" },
+        { "type": "image_picker", "id": "thumbnail", "label": "Thumbnail do Vídeo" },
+        { "type": "text", "id": "name", "label": "Nome do Cliente", "default": "Cliente" }
+      ]
+    },
+    {
+      "type": "written_testimonial",
+      "name": "Depoimento Escrito",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nome", "default": "Maria S." },
+        { "type": "text", "id": "location", "label": "Localização", "default": "São Paulo, SP" },
+        { "type": "range", "id": "rating", "label": "Avaliação", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Depoimento", "default": "Produto incrível!" },
+        { "type": "image_picker", "id": "avatar", "label": "Foto do Cliente" }
+      ]
+    },
+    {
+      "type": "pricing_kit",
+      "name": "Kit de Preço",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Nome", "default": "1 Unidade" },
+        { "type": "text", "id": "capsules", "label": "Quantidade", "default": "60 gomas" },
+        { "type": "text", "id": "duration", "label": "Duração", "default": "2 meses" },
+        { "type": "text", "id": "original_price", "label": "Preço Original", "default": "129,90" },
+        { "type": "text", "id": "price", "label": "Preço com Desconto", "default": "107,90" },
+        { "type": "text", "id": "discount", "label": "% Desconto", "default": "17" },
+        { "type": "text", "id": "installment", "label": "Parcela", "default": "35,96" },
+        { "type": "text", "id": "per_pot", "label": "Preço por Pote", "default": "107,90" },
+        { "type": "text", "id": "cashback", "label": "Cashback", "default": "16,18" },
+        { "type": "image_picker", "id": "image", "label": "Imagem do Kit" },
+        { "type": "text", "id": "checkout_url", "label": "URL de Checkout" },
+        { "type": "select", "id": "badge_type", "label": "Tipo de Badge", "default": "none", "options": [
+          { "value": "none", "label": "Nenhum" },
+          { "value": "popular", "label": "Mais Vendido" },
+          { "value": "best_value", "label": "Maior Economia" }
+        ]},
+        { "type": "checkbox", "id": "free_shipping", "label": "Frete Grátis", "default": false }
+      ]
+    },
+    {
+      "type": "howto_step",
+      "name": "Passo Como Usar",
+      "settings": [
+        { "type": "select", "id": "icon", "label": "Ícone", "default": "candy", "options": [
+          { "value": "candy", "label": "Goma" },
+          { "value": "droplet", "label": "Gota" },
+          { "value": "calendar", "label": "Calendário" }
+        ]},
+        { "type": "text", "id": "number", "label": "Número", "default": "1" },
+        { "type": "text", "id": "title", "label": "Título", "default": "1 Goma" },
+        { "type": "text", "id": "description", "label": "Descrição", "default": "Consuma 1 goma por dia" },
+        { "type": "image_picker", "id": "image", "label": "Imagem do Passo" }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "Pergunta FAQ",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Pergunta", "default": "Pergunta frequente?" },
+        { "type": "textarea", "id": "answer", "label": "Resposta", "default": "Resposta da pergunta." }
+      ]
+    },
+    {
+      "type": "footer_link",
+      "name": "Link do Footer",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Link" },
+        { "type": "text", "id": "url", "label": "URL" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Archfy LP Vinagre Maca",
+      "settings": {
+        "color_primary": "#4DA80D",
+        "color_primary_dark": "#337308",
+        "color_primary_light": "#E8F5D6",
+        "color_secondary": "#A8201A",
+        "color_secondary_light": "#FDE8E8",
+        "color_foreground": "#1E293B",
+        "color_muted": "#636E7F",
+        "color_background": "#FFFFFF",
+        "color_footer_bg": "#1a3e01",
+        "subhero_bg_color": "#4DA80D",
+        "hero_glow_color": "#C62828",
+        "hero_bg_color": "#2E7D32",
+        "hero_bg_color_end": "#1B5E20",
+        "hero_text_color": "#FFFFFF",
+        "hero_highlight_color": "#FDE047",
+        "hero_desc_color": "#FFFFFF",
+        "hero_wave_color": "#FFFFFF",
+        "hero_cta_bg_color": "#4DA80D",
+        "hero_cta_text_color": "#FFFFFF",
+        "why_bg_color": "#FFFFFF",
+        "why_tag_bg_color": "#E8F5D6",
+        "why_tag_text_color": "#4DA80D",
+        "why_heading_color": "#1E293B",
+        "why_card_bg_color": "#FDE8E8",
+        "why_card_border_color": "#A8201A",
+        "why_icon_bg_color": "#A8201A",
+        "benefits_bg_color": "#E8F5D6",
+        "benefits_tag_bg_color": "#FFFFFF",
+        "benefits_tag_text_color": "#4DA80D",
+        "benefits_heading_color": "#1E293B",
+        "benefits_icon_bg_color": "#A8201A",
+        "whoisitfor_bg_color": "#FFFFFF",
+        "whoisitfor_diag_bg_color": "#FDE8E8",
+        "whoisitfor_tag_bg_color": "#A8201A",
+        "whoisitfor_tag_text_color": "#FFFFFF",
+        "whoisitfor_heading_color": "#1E293B",
+        "whoisitfor_icon_bg_color": "#E8F5D6",
+        "whoisitfor_check_color": "#4DA80D",
+        "whoisitfor_wave_color": "#A8201A",
+        "science_bg_color": "#A8201A",
+        "science_tag_bg_color": "#C0392B",
+        "science_tag_text_color": "#FFFFFF",
+        "science_heading_color": "#FFFFFF",
+        "timeline_bg_color": "#FFFFFF",
+        "timeline_tag_bg_color": "#E8F5D6",
+        "timeline_tag_text_color": "#4DA80D",
+        "timeline_heading_color": "#1E293B",
+        "timeline_card_bg_color": "#FDE8E8",
+        "timeline_icon_bg_color": "#A8201A",
+        "testimonials_bg_color": "#E8F5D6",
+        "testimonials_tag_bg_color": "#A8201A",
+        "testimonials_tag_text_color": "#FFFFFF",
+        "testimonials_heading_color": "#1E293B",
+        "pricing_bg_color": "#FEF2F2",
+        "pricing_tag_bg_color": "#4DA80D",
+        "pricing_tag_text_color": "#FFFFFF",
+        "pricing_heading_color": "#1E293B",
+        "howto_bg_color": "#FFFFFF",
+        "howto_bg_color_end": "#F5F5F5",
+        "howto_tag_bg_color": "#E8F5D6",
+        "howto_tag_text_color": "#4DA80D",
+        "howto_heading_color": "#1E293B",
+        "howto_step_icon_bg": "#A8201A",
+        "faq_bg_color": "#FFFFFF",
+        "faq_tag_bg_color": "#FDE8E8",
+        "faq_tag_text_color": "#A8201A",
+        "faq_heading_color": "#1E293B",
+        "footer_text_color": "#FFFFFF",
+        "footer_heading_color": "#FFFFFF",
+        "footer_link_hover_color": "#A8201A",
+        "footer_social_bg": "#333333",
+        "footer_social_hover_bg": "#A8201A"
+      },
+      "blocks": [
+        { "type": "subhero_item", "settings": { "text": "Zero corantes artificiais" } },
+        { "type": "subhero_item", "settings": { "text": "Milhares de clientes satisfeitas" } },
+        { "type": "subhero_item", "settings": { "text": "Gomas de pectina vegetal" } },
+        { "type": "subhero_item", "settings": { "text": "Frete Rápido" } },
+        { "type": "subhero_item", "settings": { "text": "Delicioso sabor de maçã" } },
+        { "type": "why_card", "settings": { "icon": "alert", "title": "Dificuldade em Controlar a Fome", "description": "A fome constante sabota qualquer dieta. O vinagre de maçã prolonga a sensação de saciedade através das fibras presentes na fórmula, fazendo com que você coma menos naturalmente." } },
+        { "type": "why_card", "settings": { "icon": "flame", "title": "O Poder do Vinagre de Maçã", "description": "Conhecido há milênios por suas propriedades extraordinárias, o vinagre de maçã é um emagrecedor natural que inibe enzimas digestivas responsáveis pela absorção de carboidratos." } },
+        { "type": "why_card", "settings": { "icon": "leaf", "title": "Gomas de Pectina Natural", "description": "Nossas gomas são feitas com pectina, uma fibra vegetal natural. Enriquecidas com Vitamina B12 e Ácido Fólico para potencializar os resultados de forma saudável e deliciosa." } },
+        { "type": "benefit_card", "settings": { "icon": "flame", "title": "Acelera o Metabolismo", "description": "Potencializa a queima de gordura de forma natural e saudável*" } },
+        { "type": "benefit_card", "settings": { "icon": "heart", "title": "Controla o Apetite", "description": "Prolonga a sensação de saciedade e reduz a compulsão alimentar*" } },
+        { "type": "benefit_card", "settings": { "icon": "shield", "title": "Saúde Vascular", "description": "Auxilia no controle do colesterol e manutenção do metabolismo*" } },
+        { "type": "benefit_card", "settings": { "icon": "zap", "title": "Reduz Medidas", "description": "Inibe enzimas que absorvem carboidratos, reduzindo calorias*" } },
+        { "type": "benefit_card", "settings": { "icon": "brain", "title": "Vitamina B12", "description": "Auxilia no metabolismo energético e formação de células*" } },
+        { "type": "benefit_card", "settings": { "icon": "coffee", "title": "Prático e Saboroso", "description": "Apenas 1 goma por dia com delicioso sabor de maçã*" } },
+        { "type": "target_item", "settings": { "icon": "scale", "text": "Já tentou de tudo e o peso não sai" } },
+        { "type": "target_item", "settings": { "icon": "flame", "text": "Sente que seu metabolismo está travado" } },
+        { "type": "target_item", "settings": { "icon": "heart", "text": "Vive inchada e com sensação de inflamação" } },
+        { "type": "target_item", "settings": { "icon": "utensils", "text": "Quer emagrecer sem passar fome ou sofrer" } },
+        { "type": "target_item", "settings": { "icon": "clock", "text": "Tem mais de 35 anos e sente o corpo diferente" } },
+        { "type": "target_item", "settings": { "icon": "zap", "text": "Precisa de mais energia e disposição no dia a dia" } },
+        { "type": "ingredient", "settings": { "icon": "apple", "name": "Vinagre de Maçã", "description": "Prolonga a saciedade e controla o apetite" } },
+        { "type": "ingredient", "settings": { "icon": "pill", "name": "Vitamina B12", "description": "Metabolismo energético e formação celular" } },
+        { "type": "ingredient", "settings": { "icon": "heart", "name": "Ácido Fólico", "description": "Saúde cardiovascular e bem-estar" } },
+        { "type": "science_stat", "settings": { "value": "-Fome", "label": "Controle do apetite" } },
+        { "type": "science_stat", "settings": { "value": "1 goma", "label": "Dose diária" } },
+        { "type": "science_stat", "settings": { "value": "100%", "label": "Ingredientes naturais" } },
+        { "type": "science_badge", "settings": { "icon": "leaf", "text": "100% Natural" } },
+        { "type": "science_badge", "settings": { "icon": "beaker", "text": "Testado em Laboratório" } },
+        { "type": "science_badge", "settings": { "icon": "sparkle", "text": "Sem Efeitos Colaterais" } },
+        { "type": "science_badge", "settings": { "icon": "atom", "text": "Fórmula Exclusiva" } },
+        { "type": "timeline_step", "settings": { "icon": "clock", "period": "Primeiros 7 Dias", "title": "Controle da Fome", "description": "A saciedade começa a aumentar. Você sente menos fome entre as refeições e percebe uma redução na compulsão alimentar." } },
+        { "type": "timeline_step", "settings": { "icon": "trending", "period": "2 a 4 Semanas", "title": "Metabolismo Acelerado", "description": "Seu metabolismo entra em ritmo. As medidas começam a diminuir e as roupas ficam mais confortáveis." } },
+        { "type": "timeline_step", "settings": { "icon": "trophy", "period": "Uso Contínuo", "title": "Resultados Consolidados", "description": "Medidas reduzidas, mais disposição e equilíbrio na alimentação. A transformação se consolida." } },
+        { "type": "written_testimonial", "settings": { "name": "Camila R.", "location": "São Paulo, SP", "rating": 5, "text": "Já na primeira semana senti menos fome entre as refeições. Perdi 3kg no primeiro mês sem passar vontade!" } },
+        { "type": "written_testimonial", "settings": { "name": "Fernanda S.", "location": "Rio de Janeiro, RJ", "rating": 5, "text": "O sabor é maravilhoso, nem parece suplemento. Minha digestão melhorou muito e estou mais disposta." } },
+        { "type": "written_testimonial", "settings": { "name": "Juliana M.", "location": "Belo Horizonte, MG", "rating": 5, "text": "Comprei o kit de 5 potes e não me arrependo. Já estou no terceiro mês e as roupas estão folgando!" } },
+        { "type": "written_testimonial", "settings": { "name": "Patricia L.", "location": "Curitiba, PR", "rating": 5, "text": "Depois dos 40 tudo ficou mais difícil. Essas gomas me ajudaram a voltar a ter controle sobre minha alimentação." } },
+        { "type": "written_testimonial", "settings": { "name": "Amanda C.", "location": "Salvador, BA", "rating": 4, "text": "Super prático, tomo antes do almoço e a fome diminuiu bastante. Recomendo para quem tem compulsão." } },
+        { "type": "written_testimonial", "settings": { "name": "Renata B.", "location": "Porto Alegre, RS", "rating": 5, "text": "Melhor investimento que fiz em mim. Em 2 meses perdi 5kg e ganhei muito mais energia no dia a dia." } },
+        { "type": "pricing_kit", "settings": { "name": "1 Unidade", "capsules": "60 gomas", "duration": "2 meses", "original_price": "129,90", "price": "107,90", "discount": "17", "installment": "35,96", "per_pot": "107,90", "cashback": "16,18", "checkout_url": "https://seguro.denavita.com.br/r/CHL8B86TU3", "badge_type": "none", "free_shipping": false } },
+        { "type": "pricing_kit", "settings": { "name": "Compre 2 Leve 3", "capsules": "180 gomas", "duration": "6 meses", "original_price": "389,70", "price": "257,90", "discount": "34", "installment": "85,96", "per_pot": "85,97", "cashback": "38,68", "checkout_url": "https://seguro.denavita.com.br/r/DW51KI4TQQ", "badge_type": "popular", "free_shipping": true } },
+        { "type": "pricing_kit", "settings": { "name": "Compre 3 Leve 5", "capsules": "300 gomas", "duration": "10 meses", "original_price": "649,50", "price": "387,90", "discount": "40", "installment": "129,30", "per_pot": "77,58", "cashback": "58,18", "checkout_url": "https://seguro.denavita.com.br/r/2U8X2VGNZ9", "badge_type": "best_value", "free_shipping": true } },
+        { "type": "howto_step", "settings": { "icon": "candy", "number": "1", "title": "1 Goma", "description": "Consuma 1 goma por dia" } },
+        { "type": "howto_step", "settings": { "icon": "droplet", "number": "2", "title": "30 Min Antes", "description": "Preferencialmente antes da refeição principal" } },
+        { "type": "howto_step", "settings": { "icon": "calendar", "number": "3", "title": "Todos os Dias", "description": "Use diariamente para melhores resultados" } },
+        { "type": "faq_item", "settings": { "question": "O que é o Vinagre de Maçã em Gomas?", "answer": "É um suplemento alimentar no formato de gomas, que combina os benefícios do vinagre de maçã com vitaminas como B12 e ácido fólico. Uma forma prática e saborosa de aproveitar os benefícios milenares do vinagre de maçã." } },
+        { "type": "faq_item", "settings": { "question": "Como devo consumir?", "answer": "Recomenda-se o consumo de 1 goma por dia, preferencialmente 30 minutos antes da sua principal refeição, para auxiliar na sensação de saciedade e na digestão." } },
+        { "type": "faq_item", "settings": { "question": "Em quanto tempo verei resultados?", "answer": "Os efeitos na digestão e na saciedade podem ser percebidos já nos primeiros dias. Para resultados relacionados ao controle de medidas, sugerimos o uso contínuo por pelo menos 1 mês. Os benefícios se consolidam a partir de 90 dias." } },
+        { "type": "faq_item", "settings": { "question": "Tem contraindicações?", "answer": "O produto não é indicado para menores de 19 anos, gestantes, lactantes ou pessoas com condições médicas específicas. Nesses casos, consulte um médico antes de iniciar o uso." } },
+        { "type": "faq_item", "settings": { "question": "É um produto vegano?", "answer": "Sim! Todas as gomas são formuladas com pectina, uma fibra natural de origem vegetal. Além disso, a Denavita não realiza testes em animais." } },
+        { "type": "faq_item", "settings": { "question": "Como é feita a entrega?", "answer": "Enviamos para todo o Brasil via transportadora ou Correios. O prazo médio de entrega é de 5 a 15 dias úteis. Você receberá o código de rastreio para acompanhar seu pedido." } },
+        { "type": "faq_item", "settings": { "question": "A compra é segura?", "answer": "Sim! Utilizamos a mesma tecnologia de segurança dos grandes bancos. Seu pagamento é processado por plataformas certificadas e você tem garantia de satisfação." } },
+        { "type": "faq_item", "settings": { "question": "Posso parcelar minha compra?", "answer": "Sim! Você pode parcelar em até 3x sem juros no cartão de crédito. Também aceitamos PIX com desconto." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

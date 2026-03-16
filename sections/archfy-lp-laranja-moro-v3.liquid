@@ -1,0 +1,1684 @@
+{% if section.settings.standalone_mode %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="favicon.png" type="image/png"/>
+<title>Laranja Moro Denavita | Suplemento Natural para Emagrecer com Morosil®</title>
+<meta name="description" content="Laranja Moro Denavita com Morosil® patenteado. Suplemento 100% natural e vegano que ajuda a desinflamar e queimar gordura abdominal. Resultados comprovados cientificamente."/>
+<meta name="keywords" content="laranja moro, morosil, suplemento natural, emagrecer, queimar gordura, desinflama, vegano, Denavita, perder peso, gordura abdominal"/>
+<meta name="author" content="Denavita"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://laranjamoro.denavita.com.br"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://laranjamoro.denavita.com.br"/>
+<meta property="og:title" content="Laranja Moro Denavita | Suplemento Natural com Morosil®"/>
+<meta property="og:description" content="Suplemento 100% natural e vegano que ajuda a desinflamar e queimar gordura abdominal. Fórmula exclusiva com Morosil® patenteado."/>
+<meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
+<meta property="og:locale" content="pt_BR"/>
+<meta property="og:site_name" content="Denavita"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:url" content="https://laranjamoro.denavita.com.br"/>
+<meta name="twitter:title" content="Laranja Moro Denavita | Suplemento Natural com Morosil®"/>
+<meta name="twitter:description" content="Suplemento 100% natural e vegano que ajuda a desinflamar e queimar gordura abdominal. Fórmula exclusiva com Morosil® patenteado."/>
+<meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Laranja Moro Denavita","description":"Suplemento natural com Morosil® patenteado para auxiliar no metabolismo de gorduras, proteínas e carboidratos. 100% natural e vegano.","brand":{"@type":"Brand","name":"Denavita"},"offers":{"@type":"Offer","availability":"https://schema.org/InStock","priceCurrency":"BRL"}}
+</script>
+<!-- Google Analytics (GA4) + Facebook Pixel — carregados após pintura inicial -->
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+function _loadAnalytics(){
+  if(window._analyticsLoaded)return;window._analyticsLoaded=true;
+  var g=document.createElement('script');g.async=true;g.src='https://www.googletagmanager.com/gtag/js?id=G-262158423';document.head.appendChild(g);
+  gtag('js',new Date());gtag('config','G-262158423',{'page_title':'LM - LP LOVABLE'});
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1120227461949168');fbq('track','PageView');
+}
+if('requestIdleCallback' in window){requestIdleCallback(_loadAnalytics,{timeout:3000});}
+else{setTimeout(_loadAnalytics,2000);}
+</script>
+{% endif %}
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet"/></noscript>
+<style>
+/* ═══ MÓDULO: DesignSystem ═══
+   ID: M16
+   ORIGEM: index.css + tailwind.config.ts
+   DEPENDE DE: (nenhum)
+   RECEBE: (nenhum)
+   EXPÕE: CSS custom properties, utility classes, animations
+   ESTADO: (nenhum)
+═══ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+--background:0 0% 100%;--foreground:220 20% 15%;
+--primary:90 99% 35%;--primary-fg:0 0% 100%;--primary-dark:90 99% 25%;--primary-light:90 60% 90%;
+--secondary:25 95% 52%;--secondary-fg:0 0% 100%;--secondary-light:30 100% 95%;
+--accent:25 95% 52%;--accent-fg:0 0% 100%;--accent-light:30 100% 95%;
+--muted:220 15% 96%;--muted-fg:220 10% 45%;
+--destructive:0 84% 60%;--destructive-fg:0 0% 100%;
+--border:220 15% 90%;--radius:0.75rem;--footer-bg:100 98% 13%;
+--gradient-hero:linear-gradient(135deg,hsl(90 99% 35%) 0%,hsl(90 99% 25%) 100%);
+--gradient-orange:linear-gradient(135deg,hsl(25 95% 52%) 0%,hsl(15 90% 50%) 100%);
+--gradient-subtle:linear-gradient(180deg,hsl(0 0% 100%) 0%,hsl(220 15% 96%) 100%);
+--gradient-green-light:linear-gradient(180deg,hsl(90 60% 95%) 0%,hsl(90 60% 90%) 100%);
+}
+html,body{overflow-x:hidden;max-width:100vw}
+body{background:hsl(var(--background));color:hsl(var(--foreground));font-family:'Inter',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+h1,h2,h3,h4,h5,h6{font-family:'Poppins',sans-serif;line-height:1.2}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;height:auto;display:block}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+.container{width:100%;max-width:1400px;margin:0 auto;padding:0 1rem}
+.overflow-hidden{overflow:hidden}
+/* Icons */
+.icon{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.icon svg{width:100%;height:100%;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;fill:none}
+/* Animations */
+@keyframes pulse-glow{0%,100%{box-shadow:0 0 0 0 hsl(90 99% 35%/.4)}50%{box-shadow:0 0 0 15px hsl(90 99% 35%/0)}}
+@keyframes shine{0%{left:-100%}50%,100%{left:100%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes scroll-subhero{0%{transform:translateX(0)}100%{transform:translateX(-25%)}}
+@keyframes scroll-left{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes scroll-videos{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes capsule-float-1{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-15px) rotate(10deg)}}
+@keyframes capsule-float-2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-20px) rotate(-15deg)}}
+@keyframes capsule-float-3{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(20deg)}}
+@keyframes fade-in-up{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes fade-in-left{0%{opacity:0;transform:translateX(-30px)}100%{opacity:1;transform:translateX(0)}}
+@keyframes fade-in-right{0%{opacity:0;transform:translateX(30px)}100%{opacity:1;transform:translateX(0)}}
+@keyframes scale-in{0%{opacity:0;transform:scale(.8)}100%{opacity:1;transform:scale(1)}}
+.animate-float{animation:float 3s ease-in-out infinite}
+.btn-pulse{animation:pulse-glow 2s ease-in-out infinite}
+.btn-shine{position:relative;overflow:hidden}
+.btn-shine::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);animation:shine 2.5s infinite}
+.animate-scroll-subhero{animation:scroll-subhero 15s linear infinite;width:max-content}
+.animate-scroll-videos{animation:scroll-videos 60s linear infinite;width:max-content}
+.animate-scroll-videos:hover{animation-play-state:paused}
+.animate-scroll-left{animation:scroll-left 60s linear infinite;width:max-content}
+.animate-scroll-left:hover{animation-play-state:paused}
+/* Intersection Observer reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-30px);transition:opacity .6s ease,transform .6s ease}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(30px);transition:opacity .6s ease,transform .6s ease}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+/* Geometric shapes */
+.geo-circle{position:absolute;border-radius:50%;opacity:.2}
+/* Button base */
+.btn{display:inline-flex;align-items:center;justify-content:center;font-weight:700;border-radius:9999px;transition:all .2s;cursor:pointer;text-decoration:none}
+.btn-primary{background:hsl(var(--primary));color:#fff}
+.btn-primary:hover{background:hsl(var(--primary-dark))}
+.btn-white{background:#fff;color:hsl(var(--primary))}
+.btn-white:hover{background:rgba(255,255,255,.9)}
+.btn-outline{background:rgba(255,255,255,.8);color:hsl(var(--foreground));border:1px solid hsl(var(--border))}
+.btn-outline:hover{background:#fff}
+.btn-green-wa{background:#25D366;color:#fff}
+.btn-green-wa:hover{background:#20BD5A}
+.btn-lg{font-size:1.125rem;padding:.75rem 2rem}
+.btn-sm{font-size:.875rem;padding:.5rem 1rem}
+.btn-icon{width:2.5rem;height:2.5rem;padding:0;border-radius:9999px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1);border:1px solid hsl(var(--border))}
+/* Scrollbar hide */
+.scrollbar-hide{scrollbar-width:none;-ms-overflow-style:none}
+.scrollbar-hide::-webkit-scrollbar{display:none}
+
+/* Render optimization for below-fold sections */
+.why-section,.benefits-section,.whoisit-section,.science-section,.timeline-section,.testimonials-section,.howtouse-section,.faq-section,.footer{content-visibility:auto;contain-intrinsic-size:auto 800px}
+
+/* ═══ M01 SubHeroSection ═══ */
+.subhero{background:hsl(var(--primary));padding:.75rem 0;overflow:hidden}
+.subhero-track{display:flex;align-items:center}
+.subhero-item{display:flex;align-items:center;flex-shrink:0}
+.subhero-item span{color:#fff;font-weight:600;font-size:.875rem;white-space:nowrap;padding:0 1rem}
+.subhero-dot{color:rgba(255,255,255,.6);margin:0 .5rem}
+
+/* ═══ M02 HeroSection ═══ */
+.hero{position:relative;min-height:100vh;overflow:hidden;background-image:var(--gradient-orange)}
+.hero .wave-bottom{position:absolute;bottom:-1px;left:0;width:100%;z-index:20;height:80px}
+.hero-content{position:relative;z-index:10;padding:100px 0 80px}
+.hero-grid{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.2);backdrop-filter:blur(8px);border-radius:9999px;padding:.5rem 1rem;margin-bottom:1.5rem}
+.hero-badge span{font-size:.875rem;color:#fff;font-weight:500}
+.hero h1{font-size:2.25rem;font-weight:700;color:#fff;line-height:1.1;margin-bottom:1.5rem}
+.hero h1 .highlight{color:#fde047}
+.hero-desc{font-size:1.125rem;color:rgba(255,255,255,.9);margin-bottom:2rem;max-width:36rem}
+.hero-img-wrap{position:relative;display:flex;justify-content:center}
+.hero-glow{position:absolute;inset:0;background:rgba(255,255,255,.3);border-radius:9999px;filter:blur(48px);transform:scale(.75)}
+.hero-product{position:relative;z-index:10;width:320px;height:auto;animation:float 3s ease-in-out infinite}
+.hero-capsule{position:absolute;height:auto}
+.hero-floating-badge{position:absolute;background:#fff;border-radius:1rem;padding:1rem;z-index:20;text-align:center}
+.hero-floating-badge .val{font-size:1.875rem;font-weight:700}
+.hero-floating-badge .lbl{font-size:.75rem;color:hsl(var(--muted-fg))}
+.badge-right{right:-1rem;top:4rem}
+.badge-left{left:-1rem;bottom:6rem}
+.val-green{color:hsl(var(--primary))}
+.val-orange{color:hsl(var(--secondary))}
+
+/* ═══ M03 WhyItWorksSection ═══ */
+.why-section{padding:5rem 0 0;background:#fff;position:relative;overflow:hidden;margin-top:-1px}
+.why-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+.why-card{background:hsl(var(--secondary-light));border-left:4px solid hsl(var(--secondary));border-radius:0 .75rem .75rem 0;padding:1.5rem}
+.why-card-inner{display:flex;align-items:flex-start;gap:1rem}
+.why-icon-box{width:3rem;height:3rem;background:hsl(var(--secondary));border-radius:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff}
+.why-card h3{font-size:1.125rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:.25rem}
+.why-card p{color:hsl(var(--muted-fg));font-size:.875rem}
+.why-accordion-header{display:flex;align-items:center;gap:1rem;width:100%;padding:1rem;cursor:pointer;border:none;background:none;text-align:left}
+.why-accordion-header h3{flex:1}
+.why-accordion-content{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.why-accordion-content.open{max-height:200px}
+.why-accordion-content p{padding:0 1rem 1rem 4.5rem}
+.why-celebrity{max-height:600px;object-fit:contain;object-position:bottom}
+/* Desktop cards (non-accordion) */
+.why-cards-desktop{display:none}
+.why-accordion-mobile{display:block}
+.section-tag{display:inline-block;font-weight:600;font-size:.875rem;padding:.5rem 1rem;border-radius:9999px;margin-bottom:1rem}
+.section-title{font-size:1.875rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:1rem}
+.section-subtitle{font-size:1.125rem;color:hsl(var(--muted-fg));max-width:42rem;margin:0 auto}
+.text-center{text-align:center}
+
+/* ═══ M04 BenefitsGridSection ═══ */
+.benefits-section{padding:5rem 0;background-image:var(--gradient-green-light);position:relative;overflow:hidden}
+.benefits-grid{display:grid;gap:1rem}
+.benefit-card{background:rgba(255,255,255,.5);backdrop-filter:blur(12px);border-radius:1rem;padding:1.25rem;border:1px solid rgba(255,255,255,.5)}
+.benefit-card-inner{display:flex;align-items:flex-start;gap:1rem}
+.benefit-icon{width:3rem;height:3rem;background:hsl(var(--secondary));border-radius:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#fff}
+.benefit-card h3{font-size:1.125rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:.25rem}
+.benefit-card p{color:hsl(var(--muted-fg));font-size:.875rem}
+.benefits-expand{text-align:center;margin-top:1.5rem}
+.benefits-desktop{display:none}
+.benefits-mobile-hidden{display:none}
+
+/* ═══ M05 WhoIsItForSection ═══ */
+.whoisit-section{padding:5rem 0;background:#fff;position:relative;overflow:hidden}
+.whoisit-diagonal{position:absolute;top:0;right:0;width:50%;height:100%;background:hsl(var(--secondary-light));transform:skewX(12deg);transform-origin:top right}
+.whoisit-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center}
+.whoisit-women{width:100%;max-width:700px;margin:0 auto}
+.whoisit-list{display:flex;flex-direction:column;gap:1rem}
+.whoisit-item{display:flex;align-items:center;gap:1rem;background:#fff;border-radius:.75rem;padding:1rem;transition:background .2s}
+.whoisit-item-icon{width:2.5rem;height:2.5rem;background:hsl(var(--primary-light));border-radius:9999px;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:hsl(var(--primary))}
+.whoisit-check{width:1.5rem;height:1.5rem;color:hsl(var(--primary));flex-shrink:0}
+.whoisit-item p{font-weight:500;color:hsl(var(--foreground))}
+.whoisit-cta{margin-top:3rem;text-align:center;max-width:48rem;margin-left:auto;margin-right:auto}
+.whoisit-cta p{font-size:1.125rem;font-weight:500;color:hsl(var(--foreground));margin-bottom:1.5rem}
+.whoisit-cta .green{color:hsl(var(--primary));font-weight:700}
+.whoisit-cta .orange{color:hsl(var(--secondary));font-weight:700}
+.whoisit-wave{position:absolute;bottom:-1px;left:0;width:100%;height:80px}
+
+/* ═══ M06 ScienceHeroSection ═══ */
+.science-section{padding:2rem 0 4rem;background:hsl(var(--secondary));position:relative;overflow:hidden}
+.science-ingredients{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2.5rem}
+.science-ingredient{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border-radius:.75rem;padding:1rem;border:1px solid rgba(255,255,255,.2);display:flex;align-items:center;gap:1rem}
+.science-ingredient-icon{width:3.5rem;height:3.5rem;background:#fff;border-radius:.75rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:hsl(var(--secondary))}
+.science-ingredient h3{font-size:1rem;font-weight:700;color:#fff}
+.science-ingredient p{color:rgba(255,255,255,.7);font-size:.875rem}
+.science-desktop-grid{display:none}
+.science-mobile-list{display:flex;flex-direction:column;gap:.75rem}
+.science-study{background:#fff;border-radius:1rem;padding:1.5rem;max-width:56rem;margin:0 auto}
+.science-study-label{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.science-study-label span{font-size:.75rem;font-weight:700;color:hsl(var(--primary));text-transform:uppercase;letter-spacing:.05em}
+.science-study h3{font-size:1.25rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:1rem}
+.science-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:1rem}
+.science-stat{text-align:center;padding:.75rem;background:hsl(var(--primary-light));border-radius:.75rem}
+.science-stat .val{font-size:1.25rem;font-weight:700;color:hsl(var(--primary))}
+.science-stat .lbl{font-size:.625rem;color:hsl(var(--muted-fg))}
+.science-study .desc{font-size:.875rem;color:hsl(var(--muted-fg));margin-bottom:.75rem}
+.science-study .source{font-size:.75rem;color:hsl(var(--muted-fg));opacity:.7;font-style:italic}
+.science-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-top:2rem}
+.science-badge{display:flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.2);backdrop-filter:blur(4px);border-radius:9999px;padding:.375rem .75rem}
+.science-badge span{font-size:.75rem;color:#fff;font-weight:500}
+.science-wave{position:absolute;bottom:0;left:0;width:100%;height:80px}
+.science-capsule{position:absolute;opacity:.7}
+
+/* ═══ M07 TimelineSection ═══ */
+.timeline-section{padding:5rem 0;background:#fff;position:relative;overflow:hidden}
+.timeline-section .bg-dots{position:absolute;inset:0;opacity:.05;background-image:radial-gradient(circle at 1px 1px,currentColor 1px,transparent 0);background-size:40px 40px}
+.timeline-mobile{position:relative}
+.timeline-scroll{display:flex;gap:1rem;padding:1rem 2.5rem;overflow-x:auto;scroll-snap-type:x mandatory}
+.timeline-card{flex-shrink:0;width:18rem;scroll-snap-align:center}
+.timeline-card-inner{background:hsl(var(--secondary-light));border-radius:1rem;padding:1.5rem;height:100%;border:1px solid hsl(var(--secondary)/.2)}
+.timeline-card-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1rem}
+.timeline-card-icon{width:3rem;height:3rem;background:hsl(var(--secondary));border-radius:9999px;display:flex;align-items:center;justify-content:center;color:#fff}
+.timeline-card-step{font-size:.875rem;font-weight:700;color:hsl(var(--secondary))}
+.timeline-period{display:inline-block;padding:.25rem .75rem;border-radius:9999px;font-size:.75rem;font-weight:700;margin-bottom:.75rem;background:hsl(var(--secondary)/.2);color:hsl(var(--secondary))}
+.timeline-card h3{font-size:1.125rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:.5rem}
+.timeline-card p{font-size:.875rem;color:hsl(var(--muted-fg))}
+.timeline-desktop{display:none}
+.timeline-desktop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+.timeline-arrows{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;pointer-events:none;transform:translateY(-50%);z-index:10;padding:0}
+.timeline-arrows button{pointer-events:all}
+
+/* ═══ M08 TestimonialsSection ═══ */
+.testimonials-section{padding:5rem 0;background-image:var(--gradient-green-light);position:relative;overflow:hidden}
+.testimonials-videos{margin-bottom:4rem;position:relative}
+.video-carousel{overflow:hidden;padding:1rem 0}
+.video-track{display:flex;gap:1rem}
+.video-item{position:relative;border-radius:1rem;overflow:hidden;flex-shrink:0;width:12rem;cursor:pointer}
+.video-item video{width:100%;height:20rem;object-fit:cover;border-radius:1rem}
+.video-play-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.video-play-btn{width:3.5rem;height:3.5rem;background:rgba(255,255,255,.9);border-radius:9999px;display:flex;align-items:center;justify-content:center;transition:transform .2s}
+.video-item:hover .video-play-btn{transform:scale(1.1)}
+.ba-section{margin-bottom:4rem}
+.ba-mobile{position:relative}
+.ba-scroll{display:flex;gap:1rem;overflow-x:auto;padding:1rem 2.5rem}
+.ba-card{background:#fff;border-radius:1rem;padding:1rem;flex-shrink:0;width:18rem}
+.ba-img-wrap{position:relative;margin-bottom:1rem;aspect-ratio:1;overflow:hidden;border-radius:.75rem}
+.ba-img-wrap img{width:100%;height:100%;object-fit:cover}
+.ba-labels{position:absolute;bottom:.5rem;left:.5rem;right:.5rem;display:flex;justify-content:space-between}
+.ba-label{font-size:.75rem;color:#fff;padding:.25rem .5rem;border-radius:9999px}
+.ba-label-before{background:hsl(var(--secondary))}
+.ba-label-after{background:hsl(var(--primary))}
+.ba-card .name{font-weight:700;color:hsl(var(--foreground));text-align:center}
+.ba-card .result{color:hsl(var(--primary));font-weight:600;text-align:center}
+.ba-desktop{display:none}
+.ba-desktop-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+/* Instagram */
+.insta-section{margin-bottom:4rem;position:relative}
+.insta-mobile{display:flex;flex-direction:column;gap:.75rem;align-items:center}
+.insta-mobile img{border-radius:.5rem;width:100%;height:auto;object-fit:contain}
+.insta-desktop{display:none}
+.insta-scroll{display:flex;gap:1rem;overflow-x:auto}
+.insta-scroll img{border-radius:.75rem;max-height:8rem;width:auto;object-fit:contain;flex-shrink:0}
+/* Written */
+.written-carousel{overflow:hidden;padding:1rem 0;position:relative}
+.written-track{display:flex;gap:1.5rem}
+.written-card{flex-shrink:0;width:18rem;background:#fff;border-radius:1rem;padding:1.5rem}
+.written-stars{display:flex;gap:.25rem;margin-bottom:.75rem}
+.written-card .quote-icon{width:2rem;height:2rem;color:hsl(var(--primary)/.2);margin-bottom:.5rem}
+.written-card .text{color:hsl(var(--foreground));font-size:.875rem;margin-bottom:1rem;font-style:italic}
+.written-card .author{font-weight:700;color:hsl(var(--foreground))}
+/* Video Modal */
+.video-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:100;display:none;align-items:center;justify-content:center}
+.video-modal-overlay.active{display:flex}
+.video-modal{position:relative;max-width:400px;width:90vw;aspect-ratio:9/16;max-height:90vh;background:#000;border-radius:1rem;overflow:hidden}
+.video-modal video{width:100%;height:100%;object-fit:cover}
+.video-modal-close{position:absolute;right:.5rem;top:.5rem;z-index:50;background:rgba(0,0,0,.5);border-radius:9999px;padding:.5rem;color:#fff;cursor:pointer;border:none;transition:background .2s}
+.video-modal-close:hover{background:rgba(0,0,0,.7)}
+
+/* ═══ M09 PricingSection ═══ */
+.pricing-section{padding:5rem 0;background:#fff7ed;position:relative;overflow:hidden}
+.pricing-grid{display:grid;grid-template-columns:1fr;gap:1.5rem;max-width:72rem;margin:0 auto}
+.pricing-card{position:relative;border-radius:1.5rem;padding:1.5rem;background:#fff;border:1px solid hsl(var(--muted))}
+.pricing-card.popular{background:hsl(var(--primary));border:2px solid hsl(var(--primary));box-shadow:0 0 0 4px hsl(var(--primary)/.2)}
+.pricing-card.best-value{background:#fff;border:2px solid hsl(var(--secondary));box-shadow:0 0 0 4px hsl(var(--secondary)/.2)}
+.pricing-badge{position:absolute;top:-1rem;left:50%;transform:translateX(-50%);font-size:.75rem;font-weight:700;padding:.5rem 1rem;border-radius:9999px;display:flex;align-items:center;gap:.375rem;white-space:nowrap}
+.pricing-badge-popular{background:#facc15;color:hsl(var(--foreground))}
+.pricing-badge-best{background:hsl(var(--secondary));color:#fff}
+.pricing-img{display:flex;justify-content:center;margin-bottom:1.5rem;padding-top:1rem}
+.pricing-img img{height:12rem;width:auto;object-fit:contain}
+.pricing-info{text-align:center;margin-bottom:1rem}
+.pricing-info h3{font-size:1.25rem;font-weight:700;margin-bottom:.25rem}
+.pricing-info .caps{font-size:.875rem}
+.pricing-prices{text-align:center;margin-bottom:1rem}
+.pricing-original{font-size:.875rem;text-decoration:line-through}
+.pricing-discount{font-weight:700;font-size:.875rem;padding:.125rem .5rem;border-radius:.25rem}
+.pricing-main{font-size:2.25rem;font-weight:700}
+.pricing-installment{font-size:.875rem;margin-top:.25rem}
+.pricing-perpot{border-radius:.75rem;padding:.75rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:center;border:1px solid hsl(var(--muted))}
+.pricing-perpot span:first-child{font-size:.875rem}
+.pricing-perpot span:last-child{font-weight:700}
+.pricing-benefits{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1rem}
+.pricing-benefit{display:flex;align-items:center;gap:.5rem;font-size:.875rem}
+.pricing-cta{display:block;width:100%;text-align:center;font-size:1.125rem;font-weight:700;padding:.75rem 1.5rem;border-radius:9999px}
+.pricing-delivery{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:1rem;font-size:.75rem}
+/* Popular card colors */
+.pricing-card.popular h3,.pricing-card.popular .pricing-main{color:#fff}
+.pricing-card.popular .caps,.pricing-card.popular .pricing-installment{color:rgba(255,255,255,.8)}
+.pricing-card.popular .pricing-original{color:rgba(255,255,255,.6)}
+.pricing-card.popular .pricing-discount{color:#fff;background:rgba(255,255,255,.2)}
+.pricing-card.popular .pricing-perpot{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.2)}
+.pricing-card.popular .pricing-perpot span:first-child{color:rgba(255,255,255,.8)}
+.pricing-card.popular .pricing-perpot span:last-child{color:#fff}
+.pricing-card.popular .pricing-benefit{color:#fff}
+.pricing-card.popular .pricing-delivery{color:rgba(255,255,255,.7)}
+.pricing-card.popular .pricing-cta{background:#fff;color:hsl(var(--primary))}
+.pricing-card.popular .pricing-cta:hover{background:rgba(255,255,255,.9)}
+.pricing-card:not(.popular) .pricing-discount{color:hsl(var(--secondary))}
+.pricing-card:not(.popular) .pricing-cta{background:hsl(var(--primary));color:#fff}
+.pricing-card:not(.popular) .pricing-cta:hover{background:hsl(var(--primary-dark))}
+.pricing-card.best-value .pricing-perpot{background:hsl(var(--secondary)/.1);border-color:hsl(var(--secondary)/.3)}
+.pricing-card.best-value .pricing-perpot span:last-child{color:hsl(var(--secondary))}
+
+/* ═══ M10 HowToUseSection ═══ */
+.howtouse-section{padding:5rem 0;background-image:var(--gradient-subtle);position:relative;overflow:hidden}
+.howtouse-grid{display:grid;grid-template-columns:1fr;gap:3rem;align-items:center;max-width:64rem;margin:0 auto}
+.howtouse-video-wrap{position:relative;display:flex;justify-content:center}
+.howtouse-video{width:16rem;height:16rem;border-radius:9999px;overflow:hidden}
+.howtouse-video video{width:100%;height:100%;object-fit:cover}
+.howtouse-circle-1{position:absolute;top:-2rem;left:50%;transform:translateX(-50%);width:4rem;height:4rem;border-radius:9999px;background:#fff2e5}
+.howtouse-circle-2{position:absolute;top:33%;left:-1.5rem;width:6rem;height:6rem;background:hsl(var(--primary)/.15);border-radius:9999px;z-index:-1}
+.howtouse-circle-3{position:absolute;bottom:25%;right:-2rem;width:8rem;height:8rem;background:hsl(var(--primary)/.1);border-radius:9999px;z-index:-1}
+.howtouse-steps{display:flex;flex-direction:column;gap:2rem}
+.howtouse-step{display:flex;align-items:flex-start;gap:1rem}
+.howtouse-step-icon{position:relative;flex-shrink:0}
+.howtouse-step-circle{width:4rem;height:4rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;background:hsl(var(--secondary));color:#fff}
+.howtouse-step-num{position:absolute;top:-.25rem;right:-.25rem;width:1.5rem;height:1.5rem;border-radius:9999px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;background:#fff;color:hsl(var(--secondary))}
+.howtouse-step h3{font-size:1.25rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:.25rem}
+.howtouse-step p{color:hsl(var(--muted-fg))}
+
+/* ═══ M11 FAQSection ═══ */
+.faq-section{padding:5rem 0;background:#fff;position:relative;overflow:hidden}
+.faq-deco{position:absolute;top:0;right:0;width:18rem;height:18rem;background:hsl(var(--primary-light));border-radius:9999px;transform:translate(50%,-50%);opacity:.5}
+.faq-list{max-width:48rem;margin:0 auto;display:flex;flex-direction:column;gap:1rem}
+.faq-item{background:hsl(var(--muted)/.5);border-radius:.75rem;overflow:hidden}
+.faq-question{width:100%;display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;font-weight:600;color:hsl(var(--foreground));font-size:1rem;cursor:pointer;text-align:left;border:none;background:none;font-family:inherit;transition:color .2s}
+.faq-question:hover{color:hsl(var(--primary))}
+.faq-question .chevron{transition:transform .2s;flex-shrink:0;margin-left:1rem}
+.faq-question.open .chevron{transform:rotate(180deg)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-answer.open{max-height:300px}
+.faq-answer p{padding:0 1.5rem 1.25rem;color:hsl(var(--muted-fg))}
+
+/* ═══ M12 Footer ═══ */
+.footer{background:#1a3e01;color:#fff;position:relative;overflow:hidden}
+.footer-wave{position:absolute;top:-1px;left:0;width:100%;height:80px}
+.footer-inner{padding:4rem 0 1.5rem}
+.footer-mobile{display:block}
+.footer-desktop{display:none}
+.footer-logo{height:3.5rem;margin:0 auto 1.5rem}
+.footer-links-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem;font-size:.875rem;margin-left:15%;}
+.footer-links-grid h4{font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.5rem}
+.footer-links-grid ul{list-style:none;display:flex;flex-direction:column;gap:.25rem}
+.footer-links-grid a{color:rgba(255,255,255,.7);font-size:.75rem;transition:color .2s}
+.footer-links-grid a:hover{color:hsl(var(--secondary))}
+.footer-contact{text-align:center;margin-bottom:1rem;font-size:.75rem}
+.footer-contact a{color:rgba(255,255,255,.7);transition:color .2s;display:inline-flex;align-items:center;gap:.25rem}
+.footer-contact a:hover{color:hsl(var(--secondary))}
+.footer-social{display:flex;justify-content:center;gap:.75rem;margin-bottom:1rem}
+.footer-social-icon{width:2.25rem;height:2.25rem;background:rgba(255,255,255,.1);border-radius:9999px;display:flex;align-items:center;justify-content:center;color:#fff;transition:background .2s}
+.footer-social-icon:hover{background:hsl(var(--secondary))}
+.footer-payment{border-top:1px solid rgba(255,255,255,.1);padding-top:1rem;margin-bottom:1rem}
+.footer-payment img{height:1.5rem;margin:0 auto .75rem}
+.footer-payment-badges{display:flex;justify-content:center;gap:1rem;font-size:.75rem;color:rgba(255,255,255,.7)}
+.footer-warning{border-top:1px solid rgba(255,255,255,.1);padding-top:1rem;margin-bottom:1rem}
+.footer-warning p{color:rgba(255,255,255,.4);font-size:10px;text-align:center;line-height:1.6}
+.footer-copyright{text-align:center;border-top:1px solid rgba(255,255,255,.1);padding-top:1rem}
+.footer-copyright p{color:rgba(255,255,255,.5);font-size:10px}
+/* Desktop footer */
+.footer-desktop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-bottom:2rem;margin-left:2%;}
+.footer-desktop-grid h4{font-weight:700;font-size:.875rem;margin-bottom:.75rem}
+.footer-desktop-grid ul{list-style:none;display:flex;flex-direction:column;gap:.375rem}
+.footer-desktop-grid a{color:rgba(255,255,255,.7);font-size:.875rem;transition:color .2s}
+.footer-desktop-grid a:hover{color:hsl(var(--secondary))}
+.footer-desktop-brand p{color:rgba(255,255,255,.7);font-size:.875rem;margin-bottom:1rem}
+.footer-desktop-brand img{height:2rem;margin-bottom:.75rem}
+.footer-desktop-contact li{display:flex;align-items:center;gap:.5rem;color:rgba(255,255,255,.7);font-size:.875rem}
+
+/* ═══ M13 StickyFooter ═══ */
+.sticky-footer{position:fixed;bottom:0;left:0;right:0;z-index:50;background:#fff;border-top:1px solid hsl(var(--border));box-shadow:0 -4px 20px rgba(0,0,0,.1);transform:translateY(100%);opacity:0;transition:transform .3s,opacity .3s;will-change:transform,opacity;contain:layout style}
+.sticky-footer.visible{transform:translateY(0);opacity:1}
+.sticky-inner{display:flex;align-items:center;justify-content:space-between;gap:.5rem;max-width:56rem;margin:0 auto;padding:.75rem 1rem}
+.sticky-product{display:none}
+.sticky-selector{position:relative;flex:1;min-width:0}
+.sticky-selector-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:.25rem;padding:.5rem .75rem;background:hsl(var(--muted));border-radius:.5rem;font-size:.75rem;font-weight:500;color:hsl(var(--foreground));border:none;cursor:pointer;transition:background .2s}
+.sticky-selector-btn:hover{background:hsl(var(--muted)/.8)}
+.sticky-selector-btn .chevron{transition:transform .2s}
+.sticky-selector-btn .chevron.open{transform:rotate(180deg)}
+.sticky-dropdown{position:absolute;bottom:100%;margin-bottom:.5rem;left:0;background:#fff;border-radius:.75rem;box-shadow:0 10px 40px rgba(0,0,0,.15);border:1px solid hsl(var(--muted));overflow:hidden;z-index:50;width:280px;display:none}
+.sticky-dropdown.open{display:block}
+.sticky-dropdown-item{width:100%;display:flex;align-items:center;justify-content:space-between;padding:.625rem .75rem;font-size:.875rem;border:none;background:none;cursor:pointer;transition:background .2s;text-align:left}
+.sticky-dropdown-item:hover{background:hsl(var(--muted)/.5)}
+.sticky-dropdown-item.selected{background:hsl(var(--primary)/.1)}
+.sticky-dropdown-item .name{font-weight:600;font-size:.75rem}
+.sticky-dropdown-item .name.selected-text{color:hsl(var(--primary))}
+.sticky-dropdown-item .badge{font-size:9px;background:hsl(var(--secondary)/.1);color:hsl(var(--secondary));padding:.125rem .25rem;border-radius:.25rem;white-space:nowrap}
+.sticky-dropdown-item .sub{font-size:10px;color:hsl(var(--muted-fg))}
+.sticky-dropdown-item .price{font-weight:700;font-size:.75rem}
+.sticky-dropdown-item .price.selected-text{color:hsl(var(--primary))}
+.sticky-dropdown-item .orig{font-size:10px;color:hsl(var(--muted-fg));text-decoration:line-through}
+.sticky-price{display:none;text-align:right;flex-shrink:0}
+.sticky-price-row{display:flex;align-items:center;gap:.375rem;justify-content:flex-end}
+.sticky-price .orig{font-size:10px;color:hsl(var(--muted-fg));text-decoration:line-through;white-space:nowrap}
+.sticky-price .disc{font-size:9px;background:hsl(var(--secondary));color:#fff;padding:.125rem .25rem;border-radius:9999px;font-weight:600}
+.sticky-price .main{font-size:1rem;font-weight:700;color:hsl(var(--primary));white-space:nowrap}
+.sticky-buy{background:hsl(var(--primary));color:#fff;font-weight:700;padding:.75rem 1rem;border-radius:9999px;font-size:.75rem;white-space:nowrap;display:inline-flex;align-items:center;gap:.375rem;flex-shrink:0;text-decoration:none;transition:background .2s}
+.sticky-buy:hover{background:hsl(var(--primary-dark))}
+.sticky-buy .mobile-price{display:inline}
+.sticky-buy .desktop-text{display:none}
+
+/* ═══ M14 WhatsAppButton ═══ */
+.whatsapp-btn{position:fixed;bottom:6rem;right:1rem;z-index:50;width:3.5rem;height:3.5rem;background:#25D366;border-radius:9999px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 12px rgba(0,0,0,.15);transition:transform .2s;color:#fff}
+.whatsapp-btn:hover{transform:scale(1.1)}
+
+/* ═══ RESPONSIVE ═══ */
+@media(min-width:640px){
+  .sticky-buy .mobile-price{display:none}
+  .sticky-buy .desktop-text{display:inline}
+  .sticky-buy{font-size:.875rem;padding:.75rem 1.25rem}
+  .sticky-price{display:block}
+  .sticky-selector{flex:none;width:150px}
+  .sticky-product-tablet{display:block!important;flex-shrink:0}
+  .science-capsule.mobile-only{display:none}
+}
+@media(min-width:768px){
+  .container{padding:0 1.5rem}
+  .hero-grid{grid-template-columns:1fr 1fr;gap:3rem}
+  .hero h1{font-size:3rem}
+  .hero-content{padding:7rem 1.5rem 10rem}
+  .hero-product{width:420px}
+  .hero .wave-bottom{height:136px}
+  .hero-capsule.mobile-only{display:none}
+  .hero-capsule.desktop-only{display:block!important}
+  .section-title{font-size:2.25rem}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .why-accordion-mobile{display:none}
+  .why-cards-desktop{display:flex;flex-direction:column;gap:1.5rem}
+  .why-card{padding:1.5rem}
+  .why-icon-box{width:3rem;height:3rem}
+  .why-card h3{font-size:1.25rem}
+  .why-celebrity{max-height:750px}
+  .benefits-grid{display:none}
+  .benefits-expand{display:none}
+  .benefits-desktop{display:grid!important;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+  .benefit-card-desktop{background:rgba(255,255,255,.5);backdrop-filter:blur(12px);border-radius:1rem;padding:1.5rem;border:1px solid rgba(255,255,255,.5);transition:all .3s}
+  .benefit-card-desktop:hover{background:rgba(255,255,255,.6);transform:translateY(-.5rem)}
+  .benefit-icon-desktop{width:4rem;height:4rem;background:hsl(var(--secondary));border-radius:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;color:#fff}
+  .benefit-card-desktop h3{font-size:1.25rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:.5rem}
+  .benefit-card-desktop p{color:hsl(var(--muted-fg))}
+  .whoisit-grid{grid-template-columns:1fr 1fr}
+  .whoisit-wave{height:136px}
+  .science-section{padding:4rem 0 8rem}
+  .science-mobile-list{display:none}
+  .science-desktop-grid{display:grid!important;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:56rem;margin:0 auto 4rem}
+  .science-ingredient-desktop{background:rgba(255,255,255,.1);backdrop-filter:blur(12px);border-radius:1rem;padding:1.5rem;border:1px solid rgba(255,255,255,.2);text-align:center;transition:all .3s}
+  .science-ingredient-desktop:hover{background:rgba(255,255,255,.2)}
+  .science-ingredient-desktop .icon-wrap{width:5rem;height:5rem;background:#fff;border-radius:1rem;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;color:hsl(var(--secondary));transition:transform .3s}
+  .science-ingredient-desktop:hover .icon-wrap{transform:scale(1.1)}
+  .science-ingredient-desktop h3{font-size:1.25rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+  .science-ingredient-desktop p{color:rgba(255,255,255,.7);font-size:.875rem}
+  .science-study{padding:2.5rem;border-radius:1.5rem}
+  .science-study h3{font-size:1.875rem}
+  .science-stat .val{font-size:1.875rem}
+  .science-stat .lbl{font-size:.75rem}
+  .science-wave{height:136px}
+  .timeline-mobile{display:none}
+  .timeline-desktop{display:block!important}
+  .video-item{width:14rem}
+  .video-item video{height:24rem}
+  .ba-mobile{display:none}
+  .ba-desktop{display:block!important}
+  .insta-mobile{display:none!important}
+  .insta-desktop{display:block!important}
+  .written-card{width:20rem}
+  .pricing-grid{grid-template-columns:repeat(3,1fr)}
+  .pricing-card.best-value{transform:scale(1.05);margin:-.5rem 0}
+  .howtouse-grid{grid-template-columns:1fr 1fr}
+  .howtouse-video{width:20rem;height:20rem}
+  .footer-mobile{display:none!important}
+  .footer-desktop{display:block!important}
+  .footer-inner{padding:6rem 0 2rem}
+  .sticky-product{display:block;flex-shrink:0}
+  .sticky-selector{flex:none;width:180px}
+  .sticky-price .main{font-size:1.125rem}
+}
+@media(min-width:1024px){
+  .hero h1{font-size:3.75rem}
+  .hero-product{width:480px}
+  .section-title{font-size:3rem}
+  .benefits-desktop{grid-template-columns:repeat(3,1fr)!important}
+  .whoisit-section .container{padding-bottom:3rem}
+}
+</style>
+{% if section.settings.standalone_mode %}
+</head>
+<body>
+{% endif %}
+<!-- Facebook Pixel noscript -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1120227461949168&ev=PageView&noscript=1"/></noscript>
+
+<main class="overflow-hidden">
+
+<!-- ═══ CHECKPOINT [M01] SubHeroSection ✓ — Barra scrolling benefícios ═══ -->
+<section class="subhero">
+<div class="animate-scroll-subhero subhero-track" id="subhero-track"></div>
+</section>
+
+<!-- ═══ CHECKPOINT [M02] HeroSection ✓ — Hero principal com produto e CTA ═══ -->
+<section id="inicio" class="hero">
+<div style="position:absolute;inset:0;overflow:hidden">
+<div class="geo-circle" style="width:24rem;height:24rem;background:rgba(255,255,255,.1);top:-5rem;right:-5rem"></div>
+<div class="geo-circle" style="width:16rem;height:16rem;background:hsl(var(--primary)/.2);top:33%;left:-4rem"></div>
+<div class="geo-circle" style="width:12rem;height:12rem;background:rgba(255,255,255,.1);bottom:5rem;right:25%"></div>
+<div class="geo-circle" style="width:8rem;height:8rem;background:rgba(255,255,255,.2);top:50%;right:2.5rem"></div>
+</div>
+<svg class="wave-bottom" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="white"/></svg>
+<div class="container hero-content">
+<div class="hero-grid">
+<div style="text-align:center;max-width:350px;margin:0 auto" class="reveal-left" id="hero-text">
+<div class="hero-badge">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+<span>Fórmula Exclusiva com Morosil®</span>
+</div>
+<h1>Desinflame e <span class="highlight">derreta a gordura</span> de dentro pra fora.</h1>
+<p class="hero-desc">A inflamação silenciosa pode estar sabotando seu emagrecimento. O Laranja Moro age na causa, desinflama seu organismo e acelera a queima de gordura. Sem dietas malucas ou treinos exaustivos.</p>
+<a href="#ofertas" class="btn btn-primary btn-lg btn-pulse btn-shine">Acelerar meu metabolismo <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:.5rem"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+</div>
+<div class="hero-img-wrap reveal" id="hero-img" style="transition-delay:.3s">
+<div class="hero-glow"></div>
+<!-- Desktop capsules -->
+<img src="{% if section.settings.capsule_image_1 %}{{ section.settings.capsule_image_1 | image_url: width: 200 }}{% else %}assets/capsula-1.webp{% endif %}" alt="" class="hero-capsule desktop-only" decoding="async" style="display:none;top:-2rem;left:0;width:9rem;animation:capsule-float-1 3s ease-in-out infinite"/>
+<img src="{% if section.settings.capsule_image_2 %}{{ section.settings.capsule_image_2 | image_url: width: 200 }}{% else %}assets/capsula-2.webp{% endif %}" alt="" class="hero-capsule desktop-only" decoding="async" style="display:none;top:7rem;right:-1.5rem;width:6rem;animation:capsule-float-2 4s ease-in-out infinite .5s"/>
+<img src="{% if section.settings.capsule_image_1 %}{{ section.settings.capsule_image_1 | image_url: width: 200 }}{% else %}assets/capsula-1.webp{% endif %}" alt="" class="hero-capsule desktop-only" decoding="async" style="display:none;bottom:13rem;left:-3rem;width:7rem;animation:capsule-float-3 3.5s ease-in-out infinite 1s"/>
+<img src="{% if section.settings.capsule_image_2 %}{{ section.settings.capsule_image_2 | image_url: width: 200 }}{% else %}assets/capsula-2.webp{% endif %}" alt="" class="hero-capsule desktop-only" decoding="async" style="display:none;bottom:9rem;right:-1rem;width:4.5rem;animation:capsule-float-2 2.8s ease-in-out infinite 1.5s"/>
+<img src="{% if section.settings.capsule_image_1 %}{{ section.settings.capsule_image_1 | image_url: width: 200 }}{% else %}assets/capsula-1.webp{% endif %}" alt="" class="hero-capsule desktop-only" decoding="async" style="display:none;top:25%;right:-4rem;width:3.5rem;opacity:.7;animation:capsule-float-1 3.2s ease-in-out infinite .8s"/>
+<!-- Mobile capsules -->
+<img src="{% if section.settings.capsule_image_1 %}{{ section.settings.capsule_image_1 | image_url: width: 200 }}{% else %}assets/capsula-1.webp{% endif %}" alt="" class="hero-capsule mobile-only" decoding="async" style="top:-2rem;right:1rem;width:3.5rem;animation:capsule-float-1 2.8s ease-in-out infinite .2s"/>
+<img src="{% if section.settings.capsule_image_1 %}{{ section.settings.capsule_image_1 | image_url: width: 200 }}{% else %}assets/capsula-1.webp{% endif %}" alt="" class="hero-capsule mobile-only" decoding="async" style="bottom:-4rem;left:1rem;width:4rem;animation:capsule-float-3 3s ease-in-out infinite"/>
+<img src="{% if section.settings.capsule_image_2 %}{{ section.settings.capsule_image_2 | image_url: width: 200 }}{% else %}assets/capsula-2.webp{% endif %}" alt="" class="hero-capsule mobile-only" decoding="async" style="bottom:-3rem;right:2rem;width:3.5rem;animation:capsule-float-2 3.5s ease-in-out infinite .5s"/>
+<img src="{% if section.settings.hero_product_image %}{{ section.settings.hero_product_image | image_url: width: 960 }}{% else %}assets/laranja-moro-produto.webp{% endif %}" alt="Laranja Moro Denavita" class="hero-product" fetchpriority="high"/>
+<div class="hero-floating-badge badge-right"><span class="val val-green">-50%</span><p class="lbl">Gordura Abdominal</p></div>
+<div class="hero-floating-badge badge-left"><span class="val val-orange">100%</span><p class="lbl">Natural</p></div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ CHECKPOINT [M03] WhyItWorksSection ✓ — Accordion/Cards ciência ═══ -->
+<section class="why-section" id="why-section">
+<div class="container" style="position:relative;z-index:10">
+<div class="text-center reveal" style="margin-bottom:4rem">
+<span class="section-tag" style="background:hsl(var(--primary-light));color:hsl(var(--primary))">CIÊNCIA COMPROVADA</span>
+<h2 class="section-title">Entenda por que funciona de verdade</h2>
+<p class="section-subtitle">Não é mágica: é ciência. Veja como o Laranja Moro ataca a raiz do problema</p>
+</div>
+<div class="why-grid">
+<div class="reveal-left" style="transition-delay:.2s">
+<!-- Mobile: Accordion -->
+<div class="why-accordion-mobile" id="why-accordion">
+<div class="why-card" style="margin-bottom:.75rem">
+<button class="why-accordion-header" onclick="toggleWhyAccordion(this)">
+<div class="why-icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+<h3>A Inflamação Invisível</h3>
+<svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="why-accordion-content"><p>Seu corpo pode estar sofrendo de uma inflamação silenciosa que impede a queima de gordura, mesmo fazendo dieta e exercícios. Essa inflamação "travada" no organismo é a principal responsável pela dificuldade em perder peso.</p></div>
+</div>
+<div class="why-card" style="margin-bottom:.75rem">
+<button class="why-accordion-header" onclick="toggleWhyAccordion(this)">
+<div class="why-icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
+<h3>O Poder do Morosil®</h3>
+<svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="why-accordion-content"><p>O Morosil® é um extrato patenteado da Laranja Moro, cultivada nas encostas do Monte Etna, na Sicília. Rico em antocianinas únicas, ele atua diretamente na gordura abdominal, reduzindo-a de forma natural e segura.</p></div>
+</div>
+<div class="why-card">
+<button class="why-accordion-header" onclick="toggleWhyAccordion(this)">
+<div class="why-icon-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 2.5-.8 6.5C18 10 20 12 20 15a7 7 0 0 1-9 0"/><path d="M15.7 14.8a2.5 2.5 0 0 1-4.13 1.55"/></svg></div>
+<h3>100% Natural e Vegano</h3>
+<svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="why-accordion-content"><p>Nosso suplemento é feito exclusivamente com ingredientes naturais, sem aditivos químicos ou substâncias artificiais. Totalmente vegano e livre de efeitos colaterais, é a escolha segura para quem busca resultados sem comprometer a saúde.</p></div>
+</div>
+</div>
+<!-- Desktop: Cards -->
+<div class="why-cards-desktop">
+<div class="why-card"><div class="why-card-inner"><div class="why-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div><h3>A Inflamação Invisível</h3><p>Seu corpo pode estar sofrendo de uma inflamação silenciosa que impede a queima de gordura, mesmo fazendo dieta e exercícios. Essa inflamação "travada" no organismo é a principal responsável pela dificuldade em perder peso.</p></div></div></div>
+<div class="why-card"><div class="why-card-inner"><div class="why-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div><div><h3>O Poder do Morosil®</h3><p>O Morosil® é um extrato patenteado da Laranja Moro, cultivada nas encostas do Monte Etna, na Sicília. Rico em antocianinas únicas, ele atua diretamente na gordura abdominal, reduzindo-a de forma natural e segura.</p></div></div></div>
+<div class="why-card"><div class="why-card-inner"><div class="why-icon-box"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 2.5-.8 6.5C18 10 20 12 20 15a7 7 0 0 1-9 0"/><path d="M15.7 14.8a2.5 2.5 0 0 1-4.13 1.55"/></svg></div><div><h3>100% Natural e Vegano</h3><p>Nosso suplemento é feito exclusivamente com ingredientes naturais, sem aditivos químicos ou substâncias artificiais. Totalmente vegano e livre de efeitos colaterais, é a escolha segura para quem busca resultados sem comprometer a saúde.</p></div></div></div>
+</div>
+</div>
+<div class="reveal-right" style="transition-delay:.4s;display:flex;flex-direction:column;align-items:center">
+<img src="{% if section.settings.celebrity_image %}{{ section.settings.celebrity_image | image_url: width: 800 }}{% else %}assets/dani-winits.webp{% endif %}" alt="Dani Winits segurando o produto Laranja Moro" class="why-celebrity" loading="lazy"/>
+</div>
+</div>
+</div>
+</section>
+
+<!-- ═══ CHECKPOINT [M04] BenefitsGridSection ✓ — Grid de benefícios ═══ -->
+<section class="benefits-section" id="benefits-section">
+<div style="position:absolute;top:5rem;left:2.5rem;width:8rem;height:8rem;background:hsl(var(--primary)/.1);border-radius:9999px"></div>
+<div style="position:absolute;bottom:5rem;right:2.5rem;width:12rem;height:12rem;background:hsl(var(--secondary)/.1);border-radius:9999px"></div>
+<div class="container" style="position:relative;z-index:10">
+<div class="text-center reveal" style="margin-bottom:4rem">
+<span class="section-tag" style="background:#fff;color:hsl(var(--primary));box-shadow:0 1px 3px rgba(0,0,0,.06)">BENEFÍCIOS</span>
+<h2 class="section-title">O que você vai sentir no corpo</h2>
+<p class="section-subtitle">Resultados reais que você percebe no espelho e nas roupas</p>
+</div>
+<!-- Mobile -->
+<div class="benefits-grid reveal" id="benefits-mobile"></div>
+<div class="benefits-expand" id="benefits-expand-wrap"></div>
+<!-- Desktop -->
+<div class="benefits-desktop reveal" id="benefits-desktop"></div>
+</div>
+</section>
+
+<!-- ═══ CHECKPOINT [M05] WhoIsItForSection ✓ — Checklist público-alvo ═══ -->
+<section class="whoisit-section" id="whoisit-section">
+<div class="whoisit-diagonal"></div>
+<div class="container" style="position:relative;z-index:10;padding-bottom:3rem">
+<div class="whoisit-grid">
+<div class="reveal-left" style="display:flex;flex-direction:column;align-items:center">
+<img src="{% if section.settings.whoisit_women_image %}{{ section.settings.whoisit_women_image | image_url: width: 700 }}{% else %}assets/fotos-meninas.webp{% endif %}" alt="Mulheres satisfeitas com Laranja Moro" class="whoisit-women" loading="lazy"/>
+</div>
+<div class="reveal-right" style="transition-delay:.2s">
+<div class="text-center" style="margin-bottom:2rem"><span class="section-tag" style="background:hsl(var(--secondary));color:#fff">VOCÊ SE IDENTIFICA?</span><h2 class="section-title">Isso soa familiar?</h2></div>
+<div class="whoisit-list" id="whoisit-list"></div>
+</div>
+</div>
+<div class="whoisit-cta reveal" style="transition-delay:.9s">
+<p>Marcou <span class="green">1 item</span>? O Laranja Moro pode te ajudar. <span class="orange">Marcou todos? É hora de virar o jogo.</span></p>
+<a href="#ofertas" class="btn btn-primary btn-lg btn-shine">Quero Começar Agora! <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-left:.5rem"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+</div>
+</div>
+<svg class="whoisit-wave" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="hsl(var(--secondary))"/></svg>
+</section>
+
+<!-- ═══ CHECKPOINT [M06] ScienceHeroSection ✓ — Seção ciência com ingredientes ═══ -->
+<section class="science-section" id="science-section">
+<div style="position:absolute;inset:0">
+<div class="geo-circle" style="width:24rem;height:24rem;background:rgba(255,255,255,.05);top:-12rem;left:-12rem"></div>
+<div class="geo-circle" style="width:16rem;height:16rem;background:hsl(var(--secondary)/.2);top:25%;right:2.5rem"></div>
+<div class="geo-circle" style="width:12rem;height:12rem;background:rgba(255,255,255,.1);bottom:5rem;left:33%"></div>
+</div>
+<svg class="science-wave" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="white"/></svg>
+<!-- Floating capsules desktop -->
+<img src="{% if section.settings.capsule_image_1 %}{{ section.settings.capsule_image_1 | image_url: width: 200 }}{% else %}assets/capsula-1.webp{% endif %}" alt="" class="science-capsule" loading="lazy" style="left:3rem;top:25%;width:6rem;display:none;animation:capsule-float-1 4s ease-in-out infinite"/>
+<img src="{% if section.settings.capsule_image_2 %}{{ section.settings.capsule_image_2 | image_url: width: 200 }}{% else %}assets/capsula-2.webp{% endif %}" alt="" class="science-capsule" loading="lazy" style="right:4rem;top:33%;width:5rem;display:none;animation:capsule-float-2 5s ease-in-out infinite"/>
+<!-- Mobile capsules -->
+<img src="{% if section.settings.capsule_image_1 %}{{ section.settings.capsule_image_1 | image_url: width: 200 }}{% else %}assets/capsula-1.webp{% endif %}" alt="" class="science-capsule mobile-only" loading="lazy" style="left:.5rem;top:8rem;width:3rem;animation:capsule-float-1 4s ease-in-out infinite"/>
+<img src="{% if section.settings.capsule_image_2 %}{{ section.settings.capsule_image_2 | image_url: width: 200 }}{% else %}assets/capsula-2.webp{% endif %}" alt="" class="science-capsule mobile-only" loading="lazy" style="right:.5rem;top:10rem;width:2.5rem;animation:capsule-float-2 5s ease-in-out infinite"/>
+<div class="container" style="position:relative;z-index:10;padding:1rem 0 2rem">
+<div class="text-center reveal" style="margin-bottom:2.5rem">
+<div class="hero-badge" style="margin-bottom:1rem">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>
+<span style="font-weight:600">CIÊNCIA</span>
+</div>
+<h2 style="font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:.75rem">Fórmula cientificamente comprovada</h2>
+<p style="color:rgba(255,255,255,.8);max-width:42rem;margin:0 auto">Três ingredientes poderosos que trabalham juntos para destravar seu metabolismo</p>
+</div>
+<!-- Mobile ingredients -->
+<div class="science-mobile-list reveal" id="science-ingredients-mobile"></div>
+<!-- Desktop ingredients -->
+<div class="science-desktop-grid reveal" id="science-ingredients-desktop"></div>
+<!-- Morosil Study -->
+<div class="science-study reveal" style="transition-delay:.4s">
+<div class="science-study-label">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--primary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3h15"/><path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/></svg>
+<span>Estudo Científico Comprovado</span>
+</div>
+<h3>Morosil® - Eficácia Clinicamente Testada</h3>
+<div class="science-stats">
+<div class="science-stat"><p class="val">-50%</p><p class="lbl">Redução de gordura abdominal</p></div>
+<div class="science-stat"><p class="val">12 sem</p><p class="lbl">Período do estudo</p></div>
+<div class="science-stat"><p class="val">100%</p><p class="lbl">Ingredientes naturais</p></div>
+</div>
+<p class="desc">Estudo clínico randomizado, duplo-cego, controlado por placebo demonstrou que o extrato de Laranja Moro (Morosil®) reduziu significativamente a circunferência da cintura, o IMC e a gordura corporal total em indivíduos com sobrepeso.</p>
+<p class="source">Fonte: Journal of Medicinal Food, 2015</p>
+</div>
+<!-- Badges -->
+<div class="science-badges reveal" style="transition-delay:.5s" id="science-badges"></div>
+</div>
+</section>
+
+<!-- ═══ CHECKPOINT [M07] TimelineSection ✓ — Etapas transformação ═══ -->
+<section id="transformacao" class="timeline-section">
+<div class="bg-dots"></div>
+<div class="container" style="position:relative;z-index:10">
+<div class="text-center reveal" style="margin-bottom:3rem">
+<span class="section-tag" style="background:hsl(var(--primary-light));color:hsl(var(--primary))">TRANSFORMAÇÃO</span>
+<h2 class="section-title">Sua jornada de transformação</h2>
+<p class="section-subtitle">Veja o que esperar a cada fase do tratamento</p>
+</div>
+<!-- Mobile carousel -->
+<div class="timeline-mobile" id="timeline-mobile">
+<div class="timeline-arrows">
+<button class="btn-icon" onclick="timelineScroll(-280)" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+<button class="btn-icon" onclick="timelineScroll(280)" aria-label="Próximo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+</div>
+<div class="timeline-scroll scrollbar-hide" id="timeline-scroll"></div>
+</div>
+<!-- Desktop grid -->
+<div class="timeline-desktop" style="display:none" id="timeline-desktop"></div>
+</div>
+</section>
+
+<!-- ═══ CHECKPOINT [M08] TestimonialsSection ✓ — Depoimentos multi-formato ═══ -->
+<section id="resultados" class="testimonials-section">
+<div style="position:absolute;top:2.5rem;right:2.5rem;width:8rem;height:8rem;background:hsl(var(--secondary)/.1);border-radius:9999px"></div>
+<div style="position:absolute;bottom:2.5rem;left:2.5rem;width:12rem;height:12rem;background:hsl(var(--primary)/.1);border-radius:9999px"></div>
+<div class="container" style="position:relative;z-index:10">
+<div class="text-center reveal" style="margin-bottom:4rem">
+<span class="section-tag" style="background:hsl(var(--secondary));color:#fff">RESULTADOS REAIS</span>
+<h2 class="section-title">Elas já destravaram o metabolismo</h2>
+<p class="section-subtitle">Milhares de mulheres como você que decidiram dar o primeiro passo.</p>
+</div>
+<!-- Videos -->
+<div class="testimonials-videos reveal" style="transition-delay:.2s">
+<h3 style="font-size:1.25rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:1.5rem;text-align:center">Vídeos de Depoimentos</h3>
+<div style="position:absolute;left:0;top:50%;margin-top:1rem;transform:translateY(-50%);z-index:10"><button class="btn-icon" onclick="scrollCarousel('video-track',-250)" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button></div>
+<div style="position:absolute;right:0;top:50%;margin-top:1rem;transform:translateY(-50%);z-index:10"><button class="btn-icon" onclick="scrollCarousel('video-track',250)" aria-label="Próximo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+<div class="video-carousel"><div class="video-track animate-scroll-videos" id="video-track"></div></div>
+</div>
+<!-- Before/After -->
+<div class="ba-section reveal" style="transition-delay:.3s">
+<h3 style="font-size:1.25rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:1.5rem;text-align:center">Antes e Depois</h3>
+<div class="ba-mobile" id="ba-mobile">
+<div style="position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:10"><button class="btn-icon" onclick="scrollCarousel('ba-scroll',-280)" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button></div>
+<div style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:10"><button class="btn-icon" onclick="scrollCarousel('ba-scroll',280)" aria-label="Próximo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+<div class="ba-scroll scrollbar-hide" id="ba-scroll"></div>
+</div>
+<div class="ba-desktop" style="display:none" id="ba-desktop"></div>
+</div>
+<!-- Instagram -->
+<div class="insta-section reveal" style="transition-delay:.35s">
+<h3 style="font-size:1.25rem;font-weight:700;color:hsl(var(--foreground));margin-bottom:1.5rem;text-align:center">Comentários nas Redes Sociais</h3>
+<div class="insta-mobile" id="insta-mobile"></div>
+<div class="insta-desktop" style="display:none">
+<div style="position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:10"><button class="btn-icon" onclick="scrollCarousel('insta-scroll',-320)" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button></div>
+<div style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:10"><button class="btn-icon" onclick="scrollCarousel('insta-scroll',320)" aria-label="Próximo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+<div style="overflow:hidden;padding:1rem 0"><div class="insta-scroll scrollbar-hide animate-scroll-left" id="insta-scroll"></div></div>
+</div>
+</div>
+<!-- Written testimonials -->
+<div class="reveal" style="transition-delay:.4s;position:relative">
+<div style="position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:10" class="written-arrow-mobile"><button class="btn-icon" onclick="scrollCarousel('written-track',-300)" aria-label="Anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button></div>
+<div style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:10" class="written-arrow-mobile"><button class="btn-icon" onclick="scrollCarousel('written-track',300)" aria-label="Próximo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button></div>
+<div class="written-carousel"><div class="written-track animate-scroll-left" id="written-track"></div></div>
+</div>
+</div>
+</section>
+
+<!-- ═══ CHECKPOINT [M09] PricingSection ✓ — Kits de preço com GA4 ═══ -->
+<section id="ofertas" class="pricing-section">
+<div class="container" style="position:relative;z-index:10">
+<div class="text-center reveal" style="margin-bottom:4rem">
+<span class="section-tag" style="background:hsl(var(--primary));color:#fff">OFERTA ESPECIAL</span>
+<h2 class="section-title">Comece sua transformação agora</h2>
+<p class="section-subtitle">Escolha o kit ideal para sua jornada. Quanto maior, melhor o resultado</p>
+</div>
+<div class="pricing-grid reveal" id="pricing-grid"></div>
+</div>
+</section>
+
+<!-- ═══ CHECKPOINT [M10] HowToUseSection ✓ — Vídeo + 3 passos ═══ -->
+<section class="howtouse-section" id="howtouse-section">
+<div class="container" style="position:relative;z-index:10">
+<div class="text-center reveal" style="margin-bottom:4rem">
+<span class="section-tag" style="background:hsl(var(--primary-light));color:hsl(var(--primary))">SIMPLES ASSIM</span>
+<h2 class="section-title">Só 1 cápsula por dia</h2>
+</div>
+<div class="howtouse-grid">
+<div class="howtouse-video-wrap reveal-left" style="transition-delay:.2s">
+<div class="howtouse-circle-1"></div>
+<div class="howtouse-circle-2"></div>
+<div class="howtouse-circle-3"></div>
+<div class="howtouse-video"><video data-src="{% if section.settings.howtouse_video_url != blank %}{{ section.settings.howtouse_video_url }}{% else %}assets/como-consumir-video.mp4{% endif %}" loop muted playsinline preload="none" class="lazy-video"></video></div>
+</div>
+<div class="howtouse-steps" id="howtouse-steps"></div>
+</div>
+</div>
+</section>
+
+<!-- ═══ CHECKPOINT [M11] FAQSection ✓ — Accordion FAQ ═══ -->
+<section id="faq" class="faq-section">
+<div class="faq-deco"></div>
+<div class="container" style="position:relative;z-index:10">
+<div class="text-center reveal" style="margin-bottom:3rem">
+<div class="hero-badge" style="background:hsl(var(--accent-light));margin-bottom:1rem;display:inline-flex">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--accent))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+<span style="color:hsl(var(--accent));font-weight:600;font-size:.875rem">TIRE SUAS DÚVIDAS</span>
+</div>
+<h2 class="section-title">Ainda tem perguntas?</h2>
+</div>
+<div class="faq-list reveal" style="transition-delay:.2s" id="faq-list"></div>
+</div>
+</section>
+
+<!-- ═══ CHECKPOINT [M12] Footer ✓ — Footer completo ═══ -->
+<footer class="footer">
+<svg class="footer-wave" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 50C300 0 450 120 800 50C1150 -20 1300 80 1440 50V0H0Z" fill="white"/></svg>
+<div class="container footer-inner">
+<!-- Mobile Footer -->
+<div class="footer-mobile" id="footer-mobile">
+<img src="{% if section.settings.footer_logo %}{{ section.settings.footer_logo | image_url: width: 400 }}{% else %}assets/logo-denavita.png{% endif %}" alt="Denavita" class="footer-logo"/>
+<div class="footer-links-grid">
+<div><h4>Links Úteis</h4><ul><li><a href="#inicio">Início</a></li><li><a href="#transformacao">Como Funciona</a></li><li><a href="#resultados">Depoimentos</a></li><li><a href="#faq">FAQ</a></li><li><a href="#ofertas">Comprar</a></li></ul></div>
+<div><h4>Institucional</h4><ul><li><a href="https://www.denavita.com.br/pages/politica-de-privacidade" target="_blank" rel="noopener noreferrer">Privacidade</a></li><li><a href="https://www.denavita.com.br/pages/termos-e-condicoes" target="_blank" rel="noopener noreferrer">Termos de Uso</a></li><li><a href="https://www.denavita.com.br/pages/politica-de-trocas-e-devolucoes" target="_blank" rel="noopener noreferrer">Trocas</a></li></ul></div>
+</div>
+<div class="footer-contact">
+<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:1rem;color:rgba(255,255,255,.7)">
+<a href="mailto:sac@denavita.com"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg> sac@denavita.com</a>
+<a href="https://wa.me/5511920664623" target="_blank" rel="noopener noreferrer"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> (11) 92066-4623</a>
+</div>
+<p style="color:rgba(255,255,255,.5);margin-top:.25rem">Seg a Sex, 9h às 18h</p>
+</div>
+<div class="footer-social">
+<a href="https://www.instagram.com/denavita_oficial" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+<a href="https://www.tiktok.com/@denavita.oficial" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
+<a href="https://www.facebook.com/profile.php?id=100090027781076" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+</div>
+<div style="display:flex;justify-content:center;margin-bottom:1.5rem"><a href="https://wa.me/5511920664623" target="_blank" rel="noopener noreferrer" class="btn btn-green-wa btn-sm" style="border-radius:9999px;padding:.625rem 1.25rem;font-weight:600"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:.5rem"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg> Fale Conosco</a></div>
+<div class="footer-payment">
+<img src="{% if section.settings.payment_icons %}{{ section.settings.payment_icons | image_url: width: 600 }}{% else %}assets/icones-pagamentos.svg{% endif %}" alt="Formas de pagamento"/>
+<div class="footer-payment-badges">
+<span style="display:flex;align-items:center;gap:.25rem"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg> Compra Segura</span>
+<span style="display:flex;align-items:center;gap:.25rem"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Entrega Brasil</span>
+</div>
+</div>
+<div class="footer-warning"><p>Gestantes, idosos, crianças, lactantes e pessoas com doenças devem consultar médico antes do consumo. Produto autorizado RDC 240/2018, código 4300041, conforme ANVISA.</p></div>
+<div class="footer-copyright"><p id="footer-year-mobile"></p></div>
+</div>
+<!-- Desktop Footer -->
+<div class="footer-desktop" style="display:none" id="footer-desktop">
+<div class="footer-desktop-grid">
+<div class="footer-desktop-brand">
+<img src="{% if section.settings.footer_logo %}{{ section.settings.footer_logo | image_url: width: 400 }}{% else %}assets/logo-denavita.png{% endif %}" alt="Denavita"/>
+<p>Acreditamos que o consumo de vitaminas e suplementos é fundamental para uma vida com mais vitalidade e energia.</p>
+<div class="footer-social">
+<a href="https://www.instagram.com/denavita_oficial" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+<a href="https://www.tiktok.com/@denavita.oficial" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg></a>
+<a href="https://www.facebook.com/profile.php?id=100090027781076" target="_blank" rel="noopener noreferrer" class="footer-social-icon" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+<a href="https://wa.me/5511920664623" target="_blank" rel="noopener noreferrer" class="footer-social-icon" style="background:#25D366" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></a>
+</div>
+</div>
+<div><h4>Links Úteis</h4><ul><li><a href="#inicio">Início</a></li><li><a href="#transformacao">Como Funciona</a></li><li><a href="#resultados">Depoimentos</a></li><li><a href="#faq">Perguntas Frequentes</a></li><li><a href="#ofertas">Comprar Agora</a></li></ul></div>
+<div><h4>Institucional</h4><ul><li><a href="https://www.denavita.com.br/pages/politica-de-privacidade" target="_blank" rel="noopener noreferrer">Política de Privacidade</a></li><li><a href="https://www.denavita.com.br/pages/termos-e-condicoes" target="_blank" rel="noopener noreferrer">Termos de Uso</a></li><li><a href="https://www.denavita.com.br/pages/politica-de-trocas-e-devolucoes" target="_blank" rel="noopener noreferrer">Política de Trocas</a></li></ul></div>
+<div><h4>Contato</h4><ul class="footer-desktop-contact">
+<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg><a href="mailto:sac@denavita.com">sac@denavita.com</a></li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg><a href="https://wa.me/5511920664623" target="_blank" rel="noopener noreferrer">(11) 92066-4623</a></li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span>Seg-Sex, 9h às 18h</span></li>
+</ul></div>
+</div>
+<div style="border-top:1px solid rgba(255,255,255,.1);padding-top:1.5rem;margin-bottom:1.5rem">
+<div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:1.5rem;margin-bottom:1rem">
+<div style="display:flex;align-items:center;gap:.5rem"><span style="font-size:.75rem;color:rgba(255,255,255,.7)">Pagamento:</span><img src="{% if section.settings.payment_icons %}{{ section.settings.payment_icons | image_url: width: 600 }}{% else %}assets/icones-pagamentos.svg{% endif %}" alt="Formas de pagamento" style="height:1.5rem"/></div>
+<span style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;color:rgba(255,255,255,.7)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg> Compra Segura</span>
+<span style="display:flex;align-items:center;gap:.375rem;font-size:.75rem;color:rgba(255,255,255,.7)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="hsl(var(--secondary))" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Entrega Brasil</span>
+</div>
+<p style="color:rgba(255,255,255,.4);font-size:10px;text-align:center;max-width:56rem;margin:0 auto;line-height:1.6"><span style="color:hsl(var(--secondary));font-weight:500">Advertência:</span> Gestantes, idosos, crianças, lactantes e pessoas com doenças devem consultar médico antes do consumo. Produto autorizado RDC 240/2018, código 4300041, conforme ANVISA.</p>
+</div>
+<div class="footer-copyright"><p id="footer-year-desktop"></p></div>
+</div>
+</div>
+</footer>
+</main>
+
+<!-- ═══ CHECKPOINT [M13] StickyFooter ✓ — Barra fixa inferior ═══ -->
+<div class="sticky-footer" id="sticky-footer">
+<div class="container">
+<div class="sticky-inner">
+<div class="sticky-product" style="display:none">
+<p style="font-weight:700;color:hsl(var(--foreground));font-size:.875rem">Laranja Moro</p>
+<div style="display:flex;align-items:center;gap:.5rem">
+<p style="font-size:.75rem;color:hsl(var(--muted-fg))">Morosil® Original</p>
+<span id="sticky-shipping" style="font-size:10px;color:hsl(var(--secondary));font-weight:500;display:none"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg> Frete Grátis</span>
+</div>
+</div>
+<div class="sticky-selector">
+<button class="sticky-selector-btn" id="sticky-selector-btn" onclick="toggleStickyDropdown()">
+<span id="sticky-selected-name">Compre 2 Leve 3</span>
+<svg class="chevron" id="sticky-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+</button>
+<div class="sticky-dropdown" id="sticky-dropdown"></div>
+</div>
+<div class="sticky-price" style="display:none">
+<div class="sticky-price-row">
+<span class="orig" id="sticky-orig"></span>
+<span class="disc" id="sticky-disc"></span>
+</div>
+<p class="main" id="sticky-main-price"></p>
+</div>
+<a href="" target="_blank" rel="noopener noreferrer" class="sticky-buy btn-shine" id="sticky-buy-btn">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+<span class="desktop-text">Comprar</span>
+<span class="mobile-price" id="sticky-mobile-price"></span>
+</a>
+</div>
+</div>
+</div>
+
+<!-- ═══ CHECKPOINT [M14] WhatsAppButton ✓ — Botão flutuante ═══ -->
+<a href="https://wa.me/5511920664623" target="_blank" rel="noopener noreferrer" class="whatsapp-btn" aria-label="Fale conosco pelo WhatsApp">
+<svg width="28" height="28" viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.128 6.744 3.046 9.378L1.054 31.29l6.122-1.958C9.722 30.89 12.76 32 16.004 32 24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.528 22.614c-.396 1.116-1.954 2.042-3.21 2.312-.86.182-1.982.328-5.762-1.238-4.836-2.004-7.95-6.912-8.19-7.23-.232-.318-1.942-2.586-1.942-4.932 0-2.346 1.23-3.498 1.666-3.976.396-.434 1.04-.624 1.66-.624.2 0 .38.01.542.018.478.02.716.05 1.032.798.394.934 1.356 3.28 1.474 3.52.12.24.24.554.074.872-.158.318-.278.516-.556.796-.278.28-.586.626-.834.838-.278.24-.566.5-.244.98.322.478 1.432 2.362 3.074 3.828 2.114 1.886 3.894 2.47 4.446 2.744.396.198.868.158 1.204-.198.424-.452.948-1.2 1.48-1.938.38-.524.858-.59 1.294-.432.44.15 2.784 1.312 3.262 1.55.478.24.796.358.914.554.116.198.116 1.134-.28 2.252z"/></svg>
+</a>
+
+<!-- Video Modal -->
+<div class="video-modal-overlay" id="video-modal" onclick="closeVideoModal(event)">
+<div class="video-modal">
+<button class="video-modal-close" onclick="closeVideoModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+<video id="modal-video" controls playsinline></video>
+</div>
+</div>
+
+<script>
+/* ═══ MÓDULO: DataStore ═══
+   ID: M_DATA
+   ORIGEM: Dados estáticos de todos os componentes React
+   DEPENDE DE: (nenhum)
+   RECEBE: (nenhum)
+   EXPÕE: subheroItems, benefits, targets, ingredients, timelineSteps, videoTestimonials, beforeAfterPhotos, instagramTestimonials, writtenTestimonials, kits, faqs, stickyVariants
+   ESTADO: (nenhum)
+═══ */
+var subheroItems=["Zero corantes artificiais","Milhares de clientes satisfeitas","Vegano","Frete Rápido","100% Natural e Seguro"];
+var benefits=[
+{title:"Queima Gordura Localizada",desc:"Age direto na gordura abdominal, a mais difícil de eliminar*",icon:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>'},
+{title:"Diminui Medidas",desc:"Redução visível na cintura e quadril já nas primeiras semanas*",icon:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>'},
+{title:"Combate Inflamação",desc:"Antioxidantes que reduzem o inchaço e aceleram resultados*",icon:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>'},
+{title:"Regula o Apetite",desc:"Menos compulsão por doces e carboidratos ao longo do dia*",icon:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'},
+{title:"Melhora a Pele",desc:"Reduz celulite e flacidez enquanto você emagrece*",icon:'<path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/>'},
+{title:"Mais Energia",desc:"Disposição extra sem nervosismo ou efeito rebote*",icon:'<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/>'}
+];
+var targets=[
+{text:"Já tentou de tudo e o peso não sai",icon:'<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/>'},
+{text:"Sente que seu metabolismo está travado",icon:'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>'},
+{text:"Vive inchada e com sensação de inflamação",icon:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>'},
+{text:"Quer emagrecer sem passar fome ou sofrer",icon:'<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>'},
+{text:"Tem mais de 35 anos e sente o corpo diferente",icon:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'},
+{text:"Precisa de mais energia e disposição no dia a dia",icon:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>'}
+];
+var scienceIngredients=[
+{name:"Laranja Moro",desc:"Combate a gordura visceral com antocianinas",icon:'<path d="M21.7 16.2A12 12 0 0 0 13 2.1a1 1 0 0 0-1 .9l-.5 4.5a2 2 0 0 1-2 1.8H5.1a1 1 0 0 0-.9 1.1 12 12 0 0 0 17.5 6.8Z"/><circle cx="12" cy="12" r="3"/>'},
+{name:"Café Verde",desc:"Acelera o metabolismo naturalmente",icon:'<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/>'},
+{name:"Cromo",desc:"Reduz a vontade por doces",icon:'<path d="M6 3h12l4 6-10 13L2 9Z"/>'}
+];
+var timelineSteps=[
+{period:"Primeiros 7 Dias",title:"Desincha e Desintoxica",desc:"A inflamação começa a baixar. Você sente menos inchaço, mais leveza e já percebe a diferença na balança.",icon:'<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>'},
+{period:"2 a 4 Semanas",title:"Queima Acelerada",desc:"Seu metabolismo entra em ritmo. A gordura começa a derreter e as roupas ficam mais soltas na cintura.",icon:'<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>'},
+{period:"Uso Contínuo",title:"Corpo Transformado",desc:"Medidas reduzidas, mais disposição, zero compulsão por doces. Você se olha no espelho e se reconhece.",icon:'<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>'}
+];
+var videoTestimonials=[
+{id:1,url:"{% if section.settings.video_1_url != blank %}{{ section.settings.video_1_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/a62a9361b6444258b42ef2794a1c273a/a62a9361b6444258b42ef2794a1c273a.HD-1080p-7.2Mbps-44936164.mp4?v=0{% endif %}"},
+{id:2,url:"{% if section.settings.video_2_url != blank %}{{ section.settings.video_2_url }}{% else %}https://cdn.shopify.com/videos/c/vp/d39fbd16dc0f4a359f08c181674c00dd/d39fbd16dc0f4a359f08c181674c00dd.m3u8#t=0.01{% endif %}"},
+{id:3,url:"{% if section.settings.video_3_url != blank %}{{ section.settings.video_3_url }}{% else %}https://cdn.shopify.com/videos/c/vp/a4b8c4a20eec44ee8996cd702e08c1bb/a4b8c4a20eec44ee8996cd702e08c1bb.m3u8#t=0.01{% endif %}"},
+{id:4,url:"{% if section.settings.video_4_url != blank %}{{ section.settings.video_4_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/0e8bab94d54e4b12948497d31a3347bf/0e8bab94d54e4b12948497d31a3347bf.HD-1080p-4.8Mbps-39502645.mp4?v=0{% endif %}"},
+{id:5,url:"{% if section.settings.video_5_url != blank %}{{ section.settings.video_5_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/dcbad2e5af4445d2aa1c2c6ae73d73c9/dcbad2e5af4445d2aa1c2c6ae73d73c9.HD-1080p-7.2Mbps-39502646.mp4?v=0{% endif %}"},
+{id:6,url:"{% if section.settings.video_6_url != blank %}{{ section.settings.video_6_url }}{% else %}https://cdn.shopify.com/videos/c/vp/70f7e14488924aa8aa2bce544cbf66d8/70f7e14488924aa8aa2bce544cbf66d8.m3u8#t=0.01{% endif %}"},
+{id:7,url:"{% if section.settings.video_7_url != blank %}{{ section.settings.video_7_url }}{% else %}https://cdn.shopify.com/videos/c/o/v/fa22383a382c45d2adcb70b56ee157f5.mp4{% endif %}"},
+{id:8,url:"{% if section.settings.video_8_url != blank %}{{ section.settings.video_8_url }}{% else %}https://cdn.shopify.com/videos/c/o/v/89b761de6b384884a566ac98d2fada55.mp4{% endif %}"},
+{id:9,url:"{% if section.settings.video_9_url != blank %}{{ section.settings.video_9_url }}{% else %}https://cdn.shopify.com/videos/c/o/v/5568d03313484667a73a6bf255a57c1d.mp4{% endif %}"}
+];
+var beforeAfterPhotos=[
+{id:1,image:"{% if section.settings.ba_image_1 %}{{ section.settings.ba_image_1 | image_url: width: 600 }}{% else %}assets/antes-depois-1.jpg{% endif %}",name:"Cliente Satisfeita",result:"Transformação em 90 dias"},
+{id:2,image:"{% if section.settings.ba_image_2 %}{{ section.settings.ba_image_2 | image_url: width: 600 }}{% else %}assets/antes-depois-2.jpg{% endif %}",name:"Cliente Satisfeita",result:"Resultado incrível em 90 dias"},
+{id:3,image:"{% if section.settings.ba_image_3 %}{{ section.settings.ba_image_3 | image_url: width: 600 }}{% else %}assets/antes-depois-3.jpg{% endif %}",name:"Cliente Satisfeita",result:"Definição e menos gordura"}
+];
+var instagramTestimonials=[
+{id:1,image:"{% if section.settings.insta_image_1 %}{{ section.settings.insta_image_1 | image_url: width: 600 }}{% else %}assets/depoimento-insta-1.webp{% endif %}"},{id:2,image:"{% if section.settings.insta_image_2 %}{{ section.settings.insta_image_2 | image_url: width: 600 }}{% else %}assets/depoimento-insta-2.webp{% endif %}"},
+{id:3,image:"{% if section.settings.insta_image_3 %}{{ section.settings.insta_image_3 | image_url: width: 600 }}{% else %}assets/depoimento-insta-3.webp{% endif %}"},{id:4,image:"{% if section.settings.insta_image_4 %}{{ section.settings.insta_image_4 | image_url: width: 600 }}{% else %}assets/depoimento-insta-4.webp{% endif %}"},
+{id:5,image:"{% if section.settings.insta_image_5 %}{{ section.settings.insta_image_5 | image_url: width: 600 }}{% else %}assets/depoimento-insta-5.webp{% endif %}"}
+];
+var writtenTestimonials=[
+{name:"Maria Clara",text:"Perdi 8kg em 2 meses! Eu já tinha tentado de tudo, mas só com o Laranja Moro consegui resultados reais. O inchaço sumiu!",rating:5},
+{name:"Ana Paula",text:"Minha barriga finalmente desinchou! Em 3 semanas já vi diferença na roupa. Super recomendo!",rating:4},
+{name:"Fernanda Silva",text:"Com a menopausa achei que não conseguiria mais emagrecer. Perdi 6kg e ganhei muito mais disposição!",rating:5},
+{name:"Juliana Costa",text:"Produto maravilhoso! Minha energia melhorou muito e já perdi 5kg no primeiro mês de uso.",rating:4},
+{name:"Patricia Lima",text:"Nunca pensei que fosse conseguir perder peso assim! O Laranja Moro mudou minha vida completamente.",rating:5},
+{name:"Carla Santos",text:"Excelente! Além de emagrecer, minha pele melhorou e me sinto muito mais disposta para o dia a dia.",rating:4}
+];
+var kits=[
+{id:1,name:"1 Unidade",caps:"30 cápsulas",dur:"1 mês",origPrice:99.90,price:94.90,disc:5,inst:31.63,perPot:94.90,cashback:14.24,popular:false,best:false,ship:false,img:"{% if section.settings.kit_1_image %}{{ section.settings.kit_1_image | image_url: width: 400 }}{% else %}assets/kit-1-pote.webp{% endif %}",url:"https://seguro.denavita.com.br/r/9IOZJY8CS1"},
+{id:2,name:"Compre 2 Leve 3",caps:"90 cápsulas",dur:"3 meses",origPrice:299.70,price:197.90,disc:34,inst:65.96,perPot:65.97,cashback:29.68,popular:true,best:false,ship:true,img:"{% if section.settings.kit_2_image %}{{ section.settings.kit_2_image | image_url: width: 400 }}{% else %}assets/kit-3-potes.webp{% endif %}",url:"https://seguro.denavita.com.br/r/QVDGZ03LJK"},
+{id:3,name:"Compre 3 Leve 5",caps:"150 cápsulas",dur:"5 meses",origPrice:499.50,price:297.90,disc:40,inst:99.30,perPot:59.58,cashback:44.68,popular:false,best:true,ship:true,img:"{% if section.settings.kit_3_image %}{{ section.settings.kit_3_image | image_url: width: 400 }}{% else %}assets/kit-5-potes.webp{% endif %}",url:"https://seguro.denavita.com.br/r/7CC38OYH39"}
+];
+var faqs=[
+{q:"O Laranja Moro Denavita tem contraindicações?",a:"O Laranja Moro Denavita é um suplemento 100% natural e seguro para a maioria das pessoas. Porém, gestantes, lactantes, menores de 18 anos e pessoas com condições de saúde específicas devem consultar um médico antes de iniciar o uso."},
+{q:"Em quanto tempo vou ver os resultados?",a:"Os primeiros resultados, como redução do inchaço e mais disposição, podem ser percebidos já nas primeiras semanas. Para resultados mais expressivos na redução de medidas, recomendamos o uso contínuo por pelo menos 3 meses."},
+{q:"Posso tomar junto com outros suplementos?",a:"Sim! O Laranja Moro pode ser combinado com outros suplementos. Porém, se você já faz uso de algum medicamento controlado, recomendamos consultar seu médico antes."},
+{q:"Como é feita a entrega?",a:"Enviamos para todo o Brasil via transportadora ou Correios. O prazo médio de entrega é de 5 a 15 dias úteis, dependendo da sua região. Você receberá o código de rastreio para acompanhar seu pedido."},
+{q:"A compra é realmente segura?",a:"Sim! Utilizamos a mesma tecnologia de segurança dos grandes bancos para proteger seus dados. Seu pagamento é processado por plataformas certificadas e você tem garantia de 30 dias para devolução."},
+{q:"Quantos potes devo comprar?",a:"Recomendamos o kit de 3 potes para um tratamento completo e resultados mais duradouros. Este é o período ideal para seu corpo se adaptar à fórmula e você perceber toda a transformação."},
+{q:"Posso parcelar minha compra?",a:"Sim! Você pode parcelar em até 12x no cartão de crédito. Também aceitamos PIX."},
+{q:"O produto é aprovado pela Anvisa?",a:"Sim! O Laranja Moro Denavita é produzido seguindo todas as normas da Anvisa e boas práticas de fabricação. É um suplemento alimentar registrado e seguro para consumo."}
+];
+var stickyVariants=[
+{id:1,name:"Compre 1 Unidade",short:"1 Un.",sub:"30 cápsulas",price:94.90,orig:99.90,badge:null,ship:false,url:"https://seguro.denavita.com.br/r/9IOZJY8CS1"},
+{id:2,name:"Compre 2 Leve 3",short:"2 Leve 3",sub:"90 cápsulas",price:197.90,orig:299.70,badge:"Mais Vendido",ship:true,url:"https://seguro.denavita.com.br/r/QVDGZ03LJK"},
+{id:3,name:"Compre 3 Leve 5",short:"3 Leve 5",sub:"150 cápsulas",price:297.90,orig:499.50,badge:"Maior Economia",ship:true,url:"https://seguro.denavita.com.br/r/7CC38OYH39"}
+];
+var selectedVariant=stickyVariants[1];
+
+/* ═══ MÓDULO: IconHelper ═══
+   ID: M_ICON
+   ORIGEM: lucide-react icons
+   DEPENDE DE: (nenhum)
+   RECEBE: SVG path string, size
+   EXPÕE: svgIcon()
+   ESTADO: (nenhum)
+═══ */
+function svgIcon(paths,s,cls,fill){
+  s=s||24;cls=cls||'';fill=fill||'none';
+  return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 24 24" fill="'+fill+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="'+cls+'">'+paths+'</svg>';
+}
+function starIcon(filled){
+  return '<svg width="16" height="16" viewBox="0 0 24 24" fill="'+(filled?'currentColor':'none')+'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:hsl(var(--secondary))"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+}
+var checkIcon='<polyline points="20 6 9 17 4 12"/>';
+
+/* ═══ MÓDULO: DOMRenderer ═══
+   ID: M_RENDER
+   ORIGEM: Todos os componentes React renderizados
+   DEPENDE DE: M_DATA, M_ICON
+   RECEBE: (nenhum)
+   EXPÕE: renderAll()
+   ESTADO: (nenhum)
+═══ */
+function fmt(v){return v.toFixed(2).replace('.',',')}
+function renderAll(){
+  // M01 SubHero
+  var sh='';var items4=subheroItems.concat(subheroItems,subheroItems,subheroItems);
+  items4.forEach(function(t){sh+='<div class="subhero-item"><span>'+t+'</span><span class="subhero-dot">•</span></div>';});
+  document.getElementById('subhero-track').innerHTML=sh;
+
+  // M04 Benefits Mobile
+  var bm='';
+  benefits.forEach(function(b,i){
+    var hidden=(i>=3)?' benefits-mobile-hidden':'';
+    bm+='<div class="benefit-card'+hidden+'"><div class="benefit-card-inner"><div class="benefit-icon">'+svgIcon(b.icon,24)+'</div><div><h3>'+b.title+'</h3><p>'+b.desc+'</p></div></div></div>';
+  });
+  document.getElementById('benefits-mobile').innerHTML=bm;
+  document.getElementById('benefits-expand-wrap').innerHTML='<button class="btn btn-outline btn-sm" onclick="toggleBenefits(this)" style="border-radius:9999px;padding:.5rem 1.5rem">Ver mais benefícios '+svgIcon('<polyline points="6 9 12 15 18 9"/>',16,'','none')+'</button>';
+  // Benefits Desktop
+  var bd='';
+  benefits.forEach(function(b){
+    bd+='<div class="benefit-card-desktop"><div class="benefit-icon-desktop">'+svgIcon(b.icon,32)+'</div><h3>'+b.title+'</h3><p>'+b.desc+'</p></div>';
+  });
+  document.getElementById('benefits-desktop').innerHTML=bd;
+
+  // M05 WhoIsItFor
+  var wl='';
+  targets.forEach(function(t){
+    wl+='<div class="whoisit-item"><div class="whoisit-item-icon">'+svgIcon(t.icon,20)+'</div>'+svgIcon(checkIcon,24,'whoisit-check')+'<p>'+t.text+'</p></div>';
+  });
+  document.getElementById('whoisit-list').innerHTML=wl;
+
+  // M06 Science ingredients mobile
+  var sim='';
+  scienceIngredients.forEach(function(ing){
+    sim+='<div class="science-ingredient"><div class="science-ingredient-icon">'+svgIcon(ing.icon,28)+'</div><div><h3>'+ing.name+'</h3><p>'+ing.desc+'</p></div></div>';
+  });
+  document.getElementById('science-ingredients-mobile').innerHTML=sim;
+  // Desktop
+  var sid='';
+  scienceIngredients.forEach(function(ing){
+    sid+='<div class="science-ingredient-desktop"><div class="icon-wrap">'+svgIcon(ing.icon,40)+'</div><h3>'+ing.name+'</h3><p>'+ing.desc+'</p></div>';
+  });
+  document.getElementById('science-ingredients-desktop').innerHTML=sid;
+  // Badges
+  var badgeData=[
+    {icon:'<path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 17 3.5s1.5 2.5-.8 6.5C18 10 20 12 20 15a7 7 0 0 1-9 0"/><path d="M15.7 14.8a2.5 2.5 0 0 1-4.13 1.55"/>',text:"100% Natural"},
+    {icon:'<path d="M4.5 3h15"/><path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/>',text:"Testado em Laboratório"},
+    {icon:'<path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/>',text:"Sem Efeitos Colaterais"},
+    {icon:'<circle cx="12" cy="12" r="5"/><path d="M12 1v2"/><path d="M12 21v2"/><path d="M4.22 4.22l1.42 1.42"/><path d="M18.36 18.36l1.42 1.42"/><path d="M1 12h2"/><path d="M21 12h2"/><path d="M4.22 19.78l1.42-1.42"/><path d="M18.36 5.64l1.42-1.42"/>',text:"Fórmula Exclusiva"}
+  ];
+  var sb='';badgeData.forEach(function(bd){sb+='<div class="science-badge">'+svgIcon(bd.icon,16,'','none')+'<span>'+bd.text+'</span></div>';});
+  document.getElementById('science-badges').innerHTML=sb;
+
+  // M07 Timeline mobile
+  var tm='';
+  timelineSteps.forEach(function(s,i){
+    tm+='<div class="timeline-card"><div class="timeline-card-inner"><div class="timeline-card-header"><div class="timeline-card-icon">'+svgIcon(s.icon,24)+'</div><span class="timeline-card-step">ETAPA '+(i+1)+'</span></div><span class="timeline-period">'+s.period+'</span><h3>'+s.title+'</h3><p>'+s.desc+'</p></div></div>';
+  });
+  document.getElementById('timeline-scroll').innerHTML=tm;
+  // Desktop
+  var td='<div class="timeline-desktop-grid">';
+  timelineSteps.forEach(function(s,i){
+    td+='<div><div class="timeline-card-inner" style="padding:2rem"><div style="display:flex;width:4rem;height:4rem;background:hsl(var(--secondary));border-radius:1rem;align-items:center;justify-content:center;margin-bottom:1rem;color:#fff">'+svgIcon(s.icon,32)+'</div><span class="timeline-period">'+s.period+'</span><h3 style="font-size:1.25rem;margin-top:.75rem">'+s.title+'</h3><p style="color:hsl(var(--muted-fg));margin-top:.75rem">'+s.desc+'</p></div></div>';
+  });
+  td+='</div>';
+  document.getElementById('timeline-desktop').innerHTML=td;
+
+  // M08 Videos
+  var vt='';var allVids=videoTestimonials.concat(videoTestimonials);
+  allVids.forEach(function(v,i){
+    vt+='<div class="video-item" onclick="openVideoModal(\''+v.url+'\')"><video data-src="'+v.url+'" muted playsinline preload="none" class="lazy-video"></video><div class="video-play-overlay"><div class="video-play-btn">'+svgIcon('<polygon points="5 3 19 12 5 21 5 3"/>',24,'','currentColor')+'</div></div></div>';
+  });
+  document.getElementById('video-track').innerHTML=vt;
+
+  // Before/After mobile
+  var bam='';var allBA=beforeAfterPhotos.concat(beforeAfterPhotos);
+  allBA.forEach(function(p){
+    bam+='<div class="ba-card"><div class="ba-img-wrap"><img src="'+p.image+'" alt="Antes e Depois" loading="lazy"/><div class="ba-labels"><span class="ba-label ba-label-before">Antes</span><span class="ba-label ba-label-after">Depois</span></div></div><p class="name">'+p.name+'</p><p class="result">'+p.result+'</p></div>';
+  });
+  document.getElementById('ba-scroll').innerHTML=bam;
+  // BA desktop
+  var bad='<div class="ba-desktop-grid">';
+  beforeAfterPhotos.forEach(function(p){
+    bad+='<div class="ba-card"><div class="ba-img-wrap"><img src="'+p.image+'" alt="Antes e Depois" loading="lazy"/><div class="ba-labels"><span class="ba-label ba-label-before">Antes</span><span class="ba-label ba-label-after">Depois</span></div></div><p class="name">'+p.name+'</p><p class="result">'+p.result+'</p></div>';
+  });
+  bad+='</div>';
+  document.getElementById('ba-desktop').innerHTML=bad;
+
+  // Instagram mobile
+  var im='';
+  instagramTestimonials.slice(0,3).forEach(function(t){
+    im+='<div style="width:100%"><img src="'+t.image+'" alt="Depoimento do Instagram" loading="lazy"/></div>';
+  });
+  im+='<button class="btn btn-outline btn-sm" id="insta-more-btn" onclick="showAllInstagram()" style="margin-top:.5rem">Ver mais depoimentos</button>';
+  document.getElementById('insta-mobile').innerHTML=im;
+  // Instagram desktop scroll
+  var isd='';var allInsta=instagramTestimonials.concat(instagramTestimonials);
+  allInsta.forEach(function(t){
+    isd+='<div style="flex-shrink:0"><img src="'+t.image+'" alt="Depoimento do Instagram" style="border-radius:.75rem;max-height:8rem;width:auto;object-fit:contain" loading="lazy"/></div>';
+  });
+  document.getElementById('insta-scroll').innerHTML=isd;
+
+  // Written
+  var wt='';var allW=writtenTestimonials.concat(writtenTestimonials,writtenTestimonials);
+  allW.forEach(function(t){
+    var stars='';for(var i=0;i<5;i++)stars+=starIcon(i<t.rating);
+    wt+='<div class="written-card"><div class="written-stars">'+stars+'</div><svg class="quote-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:hsl(var(--primary)/.2)"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V21c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg><p class="text">"'+t.text+'"</p><p class="author">'+t.name+'</p></div>';
+  });
+  document.getElementById('written-track').innerHTML=wt;
+
+  // M09 Pricing
+  var pg='';
+  kits.forEach(function(k){
+    var cls='pricing-card'+(k.popular?' popular':'')+(k.best?' best-value':'');
+    var badge='';
+    if(k.popular)badge='<div class="pricing-badge pricing-badge-popular">'+svgIcon('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',14,'','currentColor')+' MAIS VENDIDO</div>';
+    if(k.best)badge='<div class="pricing-badge pricing-badge-best">'+svgIcon('<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',14,'','currentColor')+' MAIOR ECONOMIA</div>';
+    var checkColor=k.popular?'#fff':(k.best?'hsl(var(--secondary))':'hsl(var(--primary))');
+    var benefitsList='';
+    if(k.ship)benefitsList+='<div class="pricing-benefit">'+svgIcon(checkIcon,16,'','none').replace('currentColor',checkColor)+' Frete Grátis</div>';
+    benefitsList+='<div class="pricing-benefit">'+svgIcon(checkIcon,16,'','none').replace('currentColor',checkColor)+' 100% Natural</div>';
+    benefitsList+='<div class="pricing-benefit">'+svgIcon(checkIcon,16,'','none').replace('currentColor',checkColor)+' Satisfação Garantida</div>';
+    benefitsList+='<div class="pricing-benefit"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="'+(k.popular?'#fff':'hsl(var(--secondary))')+'" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg> <span style="font-weight:500;color:'+(k.popular?'#fff':'hsl(var(--secondary))')+'">Cashback de R$ '+fmt(k.cashback)+'</span></div>';
+    pg+='<div class="'+cls+'">'+badge+
+    '<div class="pricing-img"><img src="'+k.img+'" alt="'+k.name+'" style="height:'+(k.best?'14rem':'12rem')+'" loading="lazy"/></div>'+
+    '<div class="pricing-info"><h3>'+k.name+'</h3><p class="caps">'+k.caps+' • '+k.dur+'</p></div>'+
+    '<div class="pricing-prices"><div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.25rem"><span class="pricing-original">R$ '+fmt(k.origPrice)+'</span><span class="pricing-discount">-'+k.disc+'%</span></div><p class="pricing-main">R$ '+fmt(k.price)+'</p><p class="pricing-installment">ou 3x de R$ '+fmt(k.inst)+' sem juros</p></div>'+
+    '<div class="pricing-perpot"><span>Preço por pote:</span><span>R$ '+fmt(k.perPot)+'</span></div>'+
+    '<div class="pricing-benefits">'+benefitsList+'</div>'+
+    '<a href="'+k.url+'" target="_blank" rel="noopener noreferrer" class="pricing-cta btn-shine" onclick="trackPurchase('+k.id+',\''+k.name.replace(/'/g,"\\'")+'\','+k.price+')">Comprar Agora</a>'+
+    '<div class="pricing-delivery"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Entrega em 3-7 dias úteis</span></div>'+
+    '</div>';
+  });
+  document.getElementById('pricing-grid').innerHTML=pg;
+
+  // M10 HowToUse steps
+  var htSteps=[
+    {num:"1",title:"1 Cápsula",desc:"Tome 1 cápsula pela manhã",icon:'<rect x="4.5" y="4.5" width="15" height="15" rx="4" ry="4"/><path d="M9 12h6"/><path d="M12 9v6"/>'},
+    {num:"2",title:"Com Água",desc:"Acompanhada de um copo de água",icon:'<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>'},
+    {num:"3",title:"Todos os Dias",desc:"Use diariamente para melhores resultados e continuamente",icon:'<rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/>'}
+  ];
+  var hs='';
+  htSteps.forEach(function(s,i){
+    hs+='<div class="howtouse-step reveal-right" style="transition-delay:'+(0.3+i*0.15)+'s"><div class="howtouse-step-icon"><div class="howtouse-step-circle">'+svgIcon(s.icon,28)+'</div><div class="howtouse-step-num">'+s.num+'</div></div><div style="padding-top:.5rem"><h3>'+s.title+'</h3><p>'+s.desc+'</p></div></div>';
+  });
+  document.getElementById('howtouse-steps').innerHTML=hs;
+
+  // M11 FAQ
+  var fl='';
+  faqs.forEach(function(f,i){
+    fl+='<div class="faq-item"><button class="faq-question" onclick="toggleFaq(this)">'+f.q+'<svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></button><div class="faq-answer"><p>'+f.a+'</p></div></div>';
+  });
+  document.getElementById('faq-list').innerHTML=fl;
+
+  // M12 Footer year
+  var y=new Date().getFullYear();
+  document.getElementById('footer-year-mobile').textContent='© '+y+' Denavita. Todos os direitos reservados.';
+  document.getElementById('footer-year-desktop').textContent='© '+y+' Denavita. Todos os direitos reservados. • *Os resultados podem variar de pessoa para pessoa.';
+
+  // M13 Sticky dropdown
+  renderStickyDropdown();
+  updateStickyFooter();
+}
+
+/* ═══ MÓDULO: InteractionHandlers ═══
+   ID: M_INTERACT
+   ORIGEM: React state + event handlers de todos os componentes
+   DEPENDE DE: M_DATA, M_RENDER
+   RECEBE: User events (click, scroll)
+   EXPÕE: toggleWhyAccordion, toggleBenefits, toggleFaq, openVideoModal, closeVideoModal, toggleStickyDropdown, scrollCarousel, timelineScroll, showAllInstagram, trackPurchase
+   ESTADO: benefitsExpanded, stickyDropdownOpen, selectedVariant
+═══ */
+var benefitsExpanded=false;
+var stickyDropdownOpen=false;
+
+function toggleWhyAccordion(btn){
+  var content=btn.nextElementSibling;
+  var chevron=btn.querySelector('.chevron');
+  var isOpen=content.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.why-accordion-content').forEach(function(c){c.classList.remove('open');});
+  document.querySelectorAll('.why-accordion-header .chevron').forEach(function(c){c.style.transform='';});
+  if(!isOpen){content.classList.add('open');chevron.style.transform='rotate(180deg)';}
+}
+
+function toggleBenefits(btn){
+  benefitsExpanded=!benefitsExpanded;
+  var hidden=document.querySelectorAll('.benefits-mobile-hidden');
+  hidden.forEach(function(el){el.style.display=benefitsExpanded?'block':'none';});
+  btn.innerHTML=benefitsExpanded?'Ver menos '+svgIcon('<polyline points="18 15 12 9 6 15"/>',16):'Ver mais benefícios '+svgIcon('<polyline points="6 9 12 15 18 9"/>',16);
+}
+
+function toggleFaq(btn){
+  var answer=btn.nextElementSibling;
+  var isOpen=answer.classList.contains('open');
+  document.querySelectorAll('.faq-answer').forEach(function(a){a.classList.remove('open');});
+  document.querySelectorAll('.faq-question').forEach(function(q){q.classList.remove('open');});
+  if(!isOpen){answer.classList.add('open');btn.classList.add('open');}
+}
+
+function openVideoModal(url){
+  var modal=document.getElementById('video-modal');
+  var video=document.getElementById('modal-video');
+  video.src=url;
+  modal.classList.add('active');
+  video.play();
+}
+function closeVideoModal(e){
+  if(e&&e.target!==document.getElementById('video-modal')&&!e.target.closest('.video-modal-close'))return;
+  var modal=document.getElementById('video-modal');
+  var video=document.getElementById('modal-video');
+  if(video){video.pause();video.removeAttribute('src');video.load();}
+  modal.classList.remove('active');
+}
+
+function toggleStickyDropdown(){
+  stickyDropdownOpen=!stickyDropdownOpen;
+  document.getElementById('sticky-dropdown').classList.toggle('open',stickyDropdownOpen);
+  document.getElementById('sticky-chevron').classList.toggle('open',stickyDropdownOpen);
+}
+function selectStickyVariant(id){
+  selectedVariant=stickyVariants.find(function(v){return v.id===id;});
+  stickyDropdownOpen=false;
+  document.getElementById('sticky-dropdown').classList.remove('open');
+  document.getElementById('sticky-chevron').classList.remove('open');
+  updateStickyFooter();
+}
+function renderStickyDropdown(){
+  var dd='';
+  stickyVariants.forEach(function(v){
+    var sel=selectedVariant.id===v.id;
+    dd+='<button class="sticky-dropdown-item'+(sel?' selected':'')+'" onclick="selectStickyVariant('+v.id+')"><div style="display:flex;flex-direction:column;align-items:flex-start;gap:2px"><div style="display:flex;align-items:center;gap:6px"><span class="name'+(sel?' selected-text':'')+'">'+v.name+'</span>'+(v.badge?'<span class="badge">'+v.badge+'</span>':'')+'</div><div style="display:flex;align-items:center;gap:6px"><span class="sub">'+v.sub+'</span>'+(v.ship?'<span style="font-size:9px;color:hsl(var(--secondary));font-weight:500">• Frete Grátis</span>':'')+'</div></div><div style="text-align:right"><p class="price'+(sel?' selected-text':'')+'">R$ '+fmt(v.price)+'</p><p class="orig">R$ '+fmt(v.orig)+'</p></div></button>';
+  });
+  document.getElementById('sticky-dropdown').innerHTML=dd;
+}
+function updateStickyFooter(){
+  document.getElementById('sticky-selected-name').textContent=selectedVariant.name;
+  var disc=Math.round((1-selectedVariant.price/selectedVariant.orig)*100);
+  document.getElementById('sticky-orig').textContent='R$ '+fmt(selectedVariant.orig);
+  document.getElementById('sticky-disc').textContent='-'+disc+'%';
+  document.getElementById('sticky-main-price').textContent='R$ '+fmt(selectedVariant.price);
+  document.getElementById('sticky-mobile-price').textContent='R$ '+fmt(selectedVariant.price);
+  document.getElementById('sticky-buy-btn').href=selectedVariant.url;
+  var shipEl=document.getElementById('sticky-shipping');
+  if(shipEl)shipEl.style.display=selectedVariant.ship?'inline-flex':'none';
+  document.getElementById('sticky-buy-btn').onclick=function(){trackPurchase(selectedVariant.id,selectedVariant.name,selectedVariant.price);};
+  renderStickyDropdown();
+}
+
+function scrollCarousel(id,amount){
+  var el=document.getElementById(id);
+  if(el){
+    el.style.animation='none';
+    el.style.overflowX='auto';
+    el.scrollBy({left:amount,behavior:'smooth'});
+  }
+}
+function timelineScroll(amount){
+  var el=document.getElementById('timeline-scroll');
+  if(el){
+    var sl=el.scrollLeft;var sw=el.scrollWidth;var cw=el.clientWidth;
+    if(amount<0&&sl<=10){el.scrollTo({left:sw-cw,behavior:'smooth'});}
+    else if(amount>0&&sl+cw>=sw-10){el.scrollTo({left:0,behavior:'smooth'});}
+    else{el.scrollBy({left:amount,behavior:'smooth'});}
+  }
+}
+function showAllInstagram(){
+  var container=document.getElementById('insta-mobile');
+  var html='';
+  instagramTestimonials.forEach(function(t){
+    html+='<div style="width:100%"><img src="'+t.image+'" alt="Depoimento do Instagram" style="border-radius:.5rem;width:100%;height:auto" loading="lazy"/></div>';
+  });
+  container.innerHTML=html;
+}
+
+/* ═══ MÓDULO: AnalyticsTracking ═══
+   ID: M15
+   ORIGEM: GA4 purchase events em PricingSection + StickyFooter
+   DEPENDE DE: (nenhum — usa window.gtag global)
+   RECEBE: kit id, name, price
+   EXPÕE: trackPurchase()
+   ESTADO: (nenhum)
+═══ */
+function trackPurchase(kitId,kitName,price){
+  if(typeof gtag==='function'){
+    gtag('event','purchase',{
+      currency:'BRL',value:price,page_title:'LM - LP LOVABLE',
+      items:[{item_id:'kit-'+kitId,item_name:kitName,price:price,quantity:1}]
+    });
+  }
+}
+
+/* ═══ MÓDULO: ScrollObserver ═══
+   ID: M_SCROLL
+   ORIGEM: framer-motion useInView + StickyFooter scroll listener
+   DEPENDE DE: M_RENDER (DOM must exist)
+   RECEBE: (nenhum)
+   EXPÕE: initObservers()
+   ESTADO: isVisible (sticky footer)
+═══ */
+function initObservers(){
+  // IntersectionObserver for reveal animations
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}
+    });
+  },{rootMargin:'-100px'});
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el){observer.observe(el);});
+
+  // Lazy video loading - só carrega vídeo quando próximo do viewport
+  var videoObserver=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        var v=entry.target;
+        if(v.dataset.src&&!v.src){
+          v.src=v.dataset.src;
+          if(v.closest('.howtouse-video')){v.play().catch(function(){});}
+        }
+        videoObserver.unobserve(v);
+      }
+    });
+  },{rootMargin:'200px'});
+  document.querySelectorAll('.lazy-video').forEach(function(v){videoObserver.observe(v);});
+
+  // Sticky footer scroll — throttled via rAF
+  var stickyEl=document.getElementById('sticky-footer');
+  var ticking=false;
+  window.addEventListener('scroll',function(){
+    if(!ticking){
+      ticking=true;
+      requestAnimationFrame(function(){
+        var footer=document.querySelector('footer');
+        var footerTop=footer?footer.getBoundingClientRect().top:Infinity;
+        var isFooterVis=footerTop<window.innerHeight;
+        var show=window.scrollY>500&&!isFooterVis;
+        stickyEl.classList.toggle('visible',show);
+        ticking=false;
+      });
+    }
+  },{passive:true});
+
+  // Desktop capsules visibility
+  if(window.innerWidth>=768){
+    document.querySelectorAll('.hero-capsule.desktop-only').forEach(function(el){el.style.display='block';});
+    document.querySelectorAll('.hero-capsule.mobile-only').forEach(function(el){el.style.display='none';});
+    document.querySelectorAll('.science-capsule:not(.mobile-only)').forEach(function(el){el.style.display='block';});
+  }
+  // Hero text alignment on desktop
+  if(window.innerWidth>=1024){
+    var heroText=document.getElementById('hero-text');
+    if(heroText){heroText.style.textAlign='left';heroText.style.maxWidth='none';heroText.style.margin='0';}
+  }
+}
+
+/* ═══ MÓDULO: Validation ═══
+   ID: M_VALID (OP₇)
+   ORIGEM: Axioma OP₇
+   DEPENDE DE: Todos os módulos
+   RECEBE: (nenhum)
+   EXPÕE: __VALIDATE_INTEGRITY__()
+   ESTADO: (nenhum)
+═══ */
+function __VALIDATE_INTEGRITY__(){
+  var results=[];
+  function assert(mod,test,desc){
+    try{var pass=test();results.push({module:mod,description:desc,status:pass?'✅':'❌'});}
+    catch(e){results.push({module:mod,description:desc,status:'💥 ERRO: '+e.message});}
+  }
+  assert('M01',function(){return document.querySelector('.subhero-track').children.length>0;},'SubHero track renderizado');
+  assert('M02',function(){return document.querySelector('.hero-product')!==null;},'Hero product image existe');
+  assert('M03',function(){return document.querySelectorAll('.why-card').length>=3;},'WhyItWorks 3 cards existem');
+  assert('M04',function(){return document.querySelectorAll('.benefit-card').length>=3;},'Benefits mobile renderizado');
+  assert('M05',function(){return document.querySelectorAll('.whoisit-item').length===6;},'WhoIsItFor 6 targets');
+  assert('M06',function(){return document.querySelectorAll('.science-ingredient').length===3;},'Science 3 ingredientes mobile');
+  assert('M07',function(){return document.querySelectorAll('.timeline-card').length===3;},'Timeline 3 steps mobile');
+  assert('M08',function(){return document.querySelectorAll('.video-item').length>0;},'Video testimonials renderizados');
+  assert('M08',function(){return document.querySelectorAll('.ba-card').length>0;},'Before/After renderizado');
+  assert('M08',function(){return document.querySelectorAll('.written-card').length>0;},'Written testimonials renderizados');
+  assert('M09',function(){return document.querySelectorAll('.pricing-card').length===3;},'3 pricing cards');
+  assert('M10',function(){return document.querySelector('.howtouse-video video')!==null;},'HowToUse video existe');
+  assert('M11',function(){return document.querySelectorAll('.faq-item').length===8;},'8 FAQ items');
+  assert('M12',function(){return document.querySelector('.footer')!==null;},'Footer existe');
+  assert('M13',function(){return document.getElementById('sticky-footer')!==null;},'StickyFooter existe');
+  assert('M13',function(){return typeof selectStickyVariant==='function';},'selectStickyVariant é função');
+  assert('M14',function(){return document.querySelector('.whatsapp-btn')!==null;},'WhatsApp button existe');
+  assert('M15',function(){return typeof trackPurchase==='function';},'trackPurchase é função');
+  assert('M16',function(){return getComputedStyle(document.documentElement).getPropertyValue('--primary').trim().length>0;},'CSS custom properties definidas');
+  console.table(results);
+  var failures=results.filter(function(r){return r.status!=='✅';});
+  if(failures.length>0){console.warn('⚠️ '+failures.length+' módulo(s) com falha:');console.table(failures);}
+  else{console.log('✅ Todos os módulos OK');}
+  return {total:results.length,passed:results.length-failures.length,failed:failures.length};
+}
+
+/* ═══ MÓDULO: Bootstrap ═══ */
+document.addEventListener('DOMContentLoaded',function(){
+  renderAll();
+  initObservers();
+});
+</script>
+{% if section.settings.standalone_mode %}
+</body>
+</html>
+{% endif %}
+{% schema %}
+{
+  "name": "Archfy LP Laranja V3",
+  "tag": "section",
+  "class": "lp-laranja-moro",
+  "settings": [
+    {
+      "type": "header",
+      "content": "⚙️ Modo da Página"
+    },
+    {
+      "type": "checkbox",
+      "id": "standalone_mode",
+      "label": "Página Isolada (Standalone)",
+      "info": "Ativado: inclui DOCTYPE, head com meta tags/SEO, body (página independente do tema). Desativado: funciona como seção dentro do theme.liquid.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "🍊 Hero — Produto Principal"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_product_image",
+      "label": "Imagem do Produto (Hero)",
+      "info": "Imagem principal do produto na seção hero. Recomendado: 960×960px, formato WebP."
+    },
+    {
+      "type": "image_picker",
+      "id": "capsule_image_1",
+      "label": "Cápsula Decorativa 1",
+      "info": "Cápsula flutuante decorativa (Hero e seção Ciência). Recomendado: 200×200px, fundo transparente."
+    },
+    {
+      "type": "image_picker",
+      "id": "capsule_image_2",
+      "label": "Cápsula Decorativa 2",
+      "info": "Segunda variação da cápsula flutuante. Recomendado: 200×200px, fundo transparente."
+    },
+    {
+      "type": "header",
+      "content": "🧪 Seção — Por que Funciona"
+    },
+    {
+      "type": "image_picker",
+      "id": "celebrity_image",
+      "label": "Imagem Celebridade / Embaixadora",
+      "info": "Foto da embaixadora do produto. Recomendado: 800×1000px, formato WebP."
+    },
+    {
+      "type": "header",
+      "content": "👩 Seção — Para Quem É"
+    },
+    {
+      "type": "image_picker",
+      "id": "whoisit_women_image",
+      "label": "Imagem Grupo de Mulheres",
+      "info": "Foto das mulheres satisfeitas. Recomendado: 700×700px, formato WebP."
+    },
+    {
+      "type": "header",
+      "content": "📸 Antes e Depois"
+    },
+    {
+      "type": "image_picker",
+      "id": "ba_image_1",
+      "label": "Antes e Depois — Foto 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "ba_image_2",
+      "label": "Antes e Depois — Foto 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "ba_image_3",
+      "label": "Antes e Depois — Foto 3"
+    },
+    {
+      "type": "header",
+      "content": "📱 Depoimentos Instagram"
+    },
+    {
+      "type": "image_picker",
+      "id": "insta_image_1",
+      "label": "Print Instagram 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "insta_image_2",
+      "label": "Print Instagram 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "insta_image_3",
+      "label": "Print Instagram 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "insta_image_4",
+      "label": "Print Instagram 4"
+    },
+    {
+      "type": "image_picker",
+      "id": "insta_image_5",
+      "label": "Print Instagram 5"
+    },
+    {
+      "type": "header",
+      "content": "💰 Kits de Preço"
+    },
+    {
+      "type": "image_picker",
+      "id": "kit_1_image",
+      "label": "Imagem Kit 1 Pote",
+      "info": "Recomendado: 400×500px, fundo transparente."
+    },
+    {
+      "type": "image_picker",
+      "id": "kit_2_image",
+      "label": "Imagem Kit 3 Potes (Compre 2 Leve 3)",
+      "info": "Recomendado: 400×500px, fundo transparente."
+    },
+    {
+      "type": "image_picker",
+      "id": "kit_3_image",
+      "label": "Imagem Kit 5 Potes (Compre 3 Leve 5)",
+      "info": "Recomendado: 400×500px, fundo transparente."
+    },
+    {
+      "type": "header",
+      "content": "🦶 Footer"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Logo do Footer",
+      "info": "Logo da marca exibido no rodapé. Recomendado: 400×100px, fundo transparente."
+    },
+    {
+      "type": "image_picker",
+      "id": "payment_icons",
+      "label": "Ícones de Pagamento",
+      "info": "Imagem com os ícones das formas de pagamento aceitas. Recomendado: SVG ou PNG."
+    },
+    {
+      "type": "header",
+      "content": "🎬 Vídeo — Como Usar"
+    },
+    {
+      "type": "text",
+      "id": "howtouse_video_url",
+      "label": "URL do Vídeo (Como Consumir)",
+      "info": "Cole a URL do vídeo hospedado em Configurações > Arquivos (Files) do Shopify. Deixe vazio para usar o padrão.",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/seu-video.mp4"
+    },
+    {
+      "type": "header",
+      "content": "🎬 Vídeos — Depoimentos"
+    },
+    {
+      "type": "text",
+      "id": "video_1_url",
+      "label": "Depoimento em Vídeo 1",
+      "info": "Cole a URL do vídeo hospedado no Shopify Files. Deixe vazio para usar o padrão.",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/video.mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_2_url",
+      "label": "Depoimento em Vídeo 2",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/video.mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_3_url",
+      "label": "Depoimento em Vídeo 3",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/video.mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_4_url",
+      "label": "Depoimento em Vídeo 4",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/video.mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_5_url",
+      "label": "Depoimento em Vídeo 5",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/video.mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_6_url",
+      "label": "Depoimento em Vídeo 6",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/video.mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_7_url",
+      "label": "Depoimento em Vídeo 7",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/video.mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_8_url",
+      "label": "Depoimento em Vídeo 8",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/video.mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_9_url",
+      "label": "Depoimento em Vídeo 9",
+      "placeholder": "https://cdn.shopify.com/videos/c/o/v/video.mp4"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Archfy LP Laranja V3",
+      "category": "Landing Page"
+    }
+  ]
+}
+{% endschema %}

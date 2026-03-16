@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laranja Moro Denavita® | Suplemento Natural para Acelerar o Metabolismo</title>
+  <meta name="description" content="Suplemento natural com Morosil® que acelera o metabolismo e reduz gordura abdominal. Resultados comprovados.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+  
+  <!-- Google Analytics (GA4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-262158423"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-262158423');
+  </script>
+  
+  <!-- Facebook Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1120227461949168');
+    fbq('track', 'PageView');
+  </script>
+
+  <style>
+    :root {
+      --background: hsl(0, 0%, 100%);
+      --foreground: hsl(150, 10%, 15%);
+      --card: hsl(0, 0%, 100%);
+      --card-foreground: hsl(150, 10%, 15%);
+      --primary: hsl(92, 99%, 35%);
+      --primary-foreground: hsl(0, 0%, 100%);
+      --secondary: hsl(92, 40%, 96%);
+      --secondary-foreground: hsl(92, 10%, 15%);
+      --muted: hsl(92, 20%, 96%);
+      --muted-foreground: hsl(92, 10%, 40%);
+      --accent: hsl(24, 95%, 53%);
+      --accent-foreground: hsl(0, 0%, 100%);
+      --success: hsl(92, 99%, 35%);
+      --success-foreground: hsl(0, 0%, 100%);
+      --destructive: hsl(0, 84%, 60%);
+      --border: hsl(92, 15%, 90%);
+      --radius: 0.75rem;
+      --font-display: 'Plus Jakarta Sans', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      border-color: var(--border);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--background);
+      color: var(--foreground);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Gradients */
+    .gradient-cta {
+      background: linear-gradient(135deg, hsl(24, 95%, 53%) 0%, hsl(16, 90%, 48%) 100%);
+    }
+
+    .gradient-orange {
+      background: linear-gradient(135deg, hsl(24, 95%, 53%) 0%, hsl(35, 100%, 55%) 100%);
+    }
+
+    .gradient-section-orange {
+      background: linear-gradient(180deg, hsl(35, 50%, 98%) 0%, hsl(30, 40%, 95%) 100%);
+    }
+
+    .gradient-section-green {
+      background: linear-gradient(180deg, hsl(92, 30%, 98%) 0%, hsl(92, 25%, 95%) 100%);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      text-decoration: none;
+    }
+
+    .btn-cta {
+      background: linear-gradient(135deg, hsl(24, 95%, 53%) 0%, hsl(16, 90%, 48%) 100%);
+      color: white;
+      box-shadow: 0 8px 24px -4px hsla(24, 95%, 53%, 0.35);
+    }
+
+    .btn-cta:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 32px -4px hsla(24, 95%, 53%, 0.45);
+    }
+
+    .btn-green {
+      background: #54b101;
+      color: white;
+    }
+
+    .btn-green:hover {
+      background: #4a9e01;
+      transform: scale(1.05);
+    }
+
+    .btn-xl {
+      padding: 1rem 2rem;
+      font-size: 1.125rem;
+    }
+
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.8125rem;
+    }
+
+    /* Shimmer effect */
+    .shimmer {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shimmer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 20px -4px hsla(152, 20%, 20%, 0.12);
+    }
+
+    /* Top Bar */
+    .top-bar {
+      background: linear-gradient(135deg, hsl(24, 95%, 53%) 0%, hsl(16, 90%, 48%) 100%);
+      padding: 0.5rem 0;
+      overflow: hidden;
+    }
+
+    .marquee {
+      display: flex;
+      animation: marquee 10s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0 2rem;
+      color: white;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    /* Header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 3.5rem;
+    }
+
+    .logo {
+      height: 2rem;
+    }
+
+    /* Banner Section */
+    .banner {
+      background: #FF6B00;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .banner-content {
+      text-align: center;
+      padding: 1.5rem 0.5rem 1rem;
+    }
+
+    .banner-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #fef3c7;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+
+    .banner h2 {
+      font-size: 1.25rem;
+      color: white;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .banner h2 span {
+      color: #fef3c7;
+      font-weight: 800;
+    }
+
+    .banner p {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 0.75rem;
+    }
+
+    .banner-image {
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .banner-image::before {
+      content: '';
+      position: absolute;
+      width: 16rem;
+      height: 16rem;
+      background: rgba(255,255,255,0.4);
+      border-radius: 50%;
+      filter: blur(3rem);
+    }
+
+    .banner-image img {
+      width: 18rem;
+      height: auto;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 1.5rem 0;
+      background: var(--background);
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .hero-brand {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      font-weight: 500;
+    }
+
+    .hero-title {
+      font-size: 1.75rem;
+      color: var(--foreground);
+      line-height: 1.2;
+      margin: 0.75rem 0;
+    }
+
+    .hero-title span {
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      margin-bottom: 1rem;
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      max-width: 300px;
+      margin: 0 auto;
+    }
+
+    .carousel-slides {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      aspect-ratio: 1;
+      background: var(--muted);
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .carousel-nav-prev { left: 0.75rem; }
+    .carousel-nav-next { right: 0.75rem; }
+
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .carousel-dot {
+      width: 0.625rem;
+      height: 0.625rem;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      border: none;
+    }
+
+    .carousel-dot.active {
+      background: var(--primary);
+    }
+
+    /* Rating */
+    .rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      margin: 1rem 0;
+    }
+
+    .stars {
+      display: flex;
+      color: #fbbf24;
+    }
+
+    /* Pills */
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .pill {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      padding: 0.375rem 0.75rem;
+      background: var(--secondary);
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .pill svg {
+      color: var(--success);
+    }
+
+    /* Price Card */
+    .price-card {
+      background: var(--card);
+      border-radius: 1rem;
+      padding: 1.25rem;
+      box-shadow: 0 4px 20px -4px hsla(152, 20%, 20%, 0.12);
+      border: 1px solid var(--border);
+      margin: 1rem 0;
+    }
+
+    .price-old {
+      font-size: 1.125rem;
+      color: var(--muted-foreground);
+      text-decoration: line-through;
+    }
+
+    .price-badge {
+      display: inline-block;
+      background: hsla(24, 95%, 53%, 0.1);
+      color: var(--accent);
+      padding: 0.125rem 0.625rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      margin-left: 0.75rem;
+    }
+
+    .price-current {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--foreground);
+      margin: 0.25rem 0;
+    }
+
+    .price-installments {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      margin-bottom: 0.75rem;
+    }
+
+    .cashback {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--success);
+    }
+
+    /* Delivery Box */
+    .delivery-box {
+      background: hsla(92, 99%, 35%, 0.1);
+      border: 1px solid hsla(92, 99%, 35%, 0.2);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin: 1rem 0;
+    }
+
+    .delivery-icon {
+      width: 2rem;
+      height: 2rem;
+      background: hsla(92, 99%, 35%, 0.2);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--primary);
+    }
+
+    .delivery-text {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    .delivery-text span {
+      color: var(--primary);
+    }
+
+    .delivery-sub {
+      font-size: 0.6875rem;
+      color: var(--muted-foreground);
+      font-weight: 400;
+      margin-top: 0.25rem;
+    }
+
+    /* Trust Grid */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    .trust-item svg {
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* Section Headers */
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-tag.primary { color: var(--primary); }
+    .section-tag.accent { color: var(--accent); }
+
+    .section-title {
+      font-size: 1.3125rem;
+      text-align: center;
+      color: var(--foreground);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-desc {
+      font-size: 0.875rem;
+      text-align: center;
+      color: var(--muted-foreground);
+      margin-bottom: 2.5rem;
+      max-width: 32rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Problem Section */
+    .problems-scroll {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding: 0 2.5rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .problem-card {
+      flex: 0 0 9rem;
+      padding: 1rem;
+      background: var(--card);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      text-align: center;
+      scroll-snap-align: center;
+    }
+
+    .problem-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+      background: hsla(24, 95%, 53%, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.5rem;
+      color: var(--accent);
+    }
+
+    .problem-card h3 {
+      font-size: 0.875rem;
+      color: var(--foreground);
+      margin-bottom: 0.25rem;
+    }
+
+    .problem-card p {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    /* Benefits Section */
+    .benefits-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .benefit-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: var(--card);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+    }
+
+    .benefit-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 1rem;
+      background: linear-gradient(135deg, hsl(24, 95%, 53%) 0%, hsl(35, 100%, 55%) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+      box-shadow: 0 0 20px hsla(24, 95%, 53%, 0.3);
+    }
+
+    .benefit-card h3 {
+      font-size: 1rem;
+      color: var(--foreground);
+      margin-bottom: 0.25rem;
+    }
+
+    .benefit-card p {
+      font-size: 0.8125rem;
+      color: var(--muted-foreground);
+    }
+
+    /* Ingredients Section */
+    .ingredients-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .ingredient-card {
+      padding: 1.5rem;
+      background: var(--card);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .ingredient-icon {
+      width: 4rem;
+      height: 4rem;
+      border-radius: 1rem;
+      background: hsla(24, 95%, 53%, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: var(--accent);
+    }
+
+    .ingredient-card h3 {
+      font-size: 1rem;
+      color: var(--foreground);
+      margin-bottom: 0.25rem;
+    }
+
+    .ingredient-card .subtitle {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .ingredient-card p {
+      font-size: 0.8125rem;
+      color: var(--muted-foreground);
+    }
+
+    /* Offers Section */
+    .offers {
+      padding: 2.5rem 0 4rem;
+      background: linear-gradient(180deg, var(--background) 0%, hsla(92, 40%, 96%, 0.3) 100%);
+    }
+
+    .offers-header {
+      text-align: center;
+      max-width: 48rem;
+      margin: 0 auto 2.5rem;
+    }
+
+    .offers-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: hsla(92, 99%, 35%, 0.1);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .offers-title {
+      font-size: 1.875rem;
+      color: var(--foreground);
+      margin-bottom: 1rem;
+    }
+
+    .offers-title span {
+      color: var(--primary);
+    }
+
+    .offers-grid {
+      display: grid;
+      gap: 1.5rem;
+      max-width: 64rem;
+      margin: 0 auto;
+    }
+
+    .offer-card {
+      position: relative;
+      background: var(--card);
+      border-radius: 1.5rem;
+      border: 2px solid var(--border);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.2s;
+    }
+
+    .offer-card:hover {
+      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+      transform: translateY(-4px);
+    }
+
+    .offer-card.featured {
+      border-color: var(--primary);
+      box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);
+    }
+
+    .offer-badge {
+      position: absolute;
+      top: -0.75rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: white;
+      padding: 0.375rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .offer-image {
+      height: 10rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .offer-image img {
+      max-height: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .offer-title {
+      font-size: 1.25rem;
+      text-align: center;
+      color: var(--foreground);
+      margin-bottom: 0.25rem;
+    }
+
+    .offer-subtitle {
+      font-size: 0.875rem;
+      text-align: center;
+      color: var(--muted-foreground);
+      margin-bottom: 1rem;
+    }
+
+    .offer-price {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .offer-price-old {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      text-decoration: line-through;
+    }
+
+    .offer-price-discount {
+      display: inline-block;
+      background: hsla(24, 95%, 53%, 0.1);
+      color: var(--accent);
+      padding: 0.125rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-left: 0.5rem;
+    }
+
+    .offer-price-current {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--foreground);
+    }
+
+    .offer-price-installments {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin-top: 0.25rem;
+    }
+
+    .offer-per-bottle {
+      background: hsla(92, 40%, 96%, 0.5);
+      border-radius: 0.75rem;
+      padding: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+    }
+
+    .offer-per-bottle span:last-child {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .offer-benefits {
+      flex-grow: 1;
+      margin-bottom: 1.5rem;
+    }
+
+    .offer-benefit {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      margin-bottom: 0.5rem;
+    }
+
+    .offer-benefit svg {
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    .offer-cashback {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .offer-delivery {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin-top: 1rem;
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 3rem 0;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    .transformation-card {
+      background: var(--card);
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+
+    .transformation-image {
+      position: relative;
+      aspect-ratio: 1;
+    }
+
+    .transformation-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .transformation-badge {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 0.5rem;
+      background: var(--success);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+
+    .transformation-content {
+      padding: 1rem;
+    }
+
+    .transformation-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .transformation-name {
+      font-weight: 700;
+      color: var(--foreground);
+    }
+
+    .transformation-location {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+    }
+
+    .transformation-text {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+    }
+
+    /* Comparison Section */
+    .comparison {
+      padding: 3rem 0;
+    }
+
+    .comparison-table {
+      background: var(--card);
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .comparison-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      background: hsla(92, 99%, 35%, 0.05);
+    }
+
+    .comparison-header-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .comparison-header-item:first-child {
+      align-items: flex-start;
+      font-weight: 600;
+      color: var(--muted-foreground);
+      font-size: 0.75rem;
+    }
+
+    .comparison-header-image {
+      width: 3.5rem;
+      height: 3.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comparison-header-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .comparison-header-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .comparison-header-label.primary {
+      color: var(--primary);
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .comparison-row:last-child {
+      border-bottom: none;
+    }
+
+    .comparison-feature {
+      font-size: 0.625rem;
+      font-weight: 500;
+      color: var(--foreground);
+      line-height: 1.3;
+    }
+
+    .comparison-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .comparison-icon {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .comparison-icon.success {
+      background: hsla(92, 99%, 35%, 0.1);
+      color: var(--success);
+    }
+
+    .comparison-icon.error {
+      background: hsla(0, 84%, 60%, 0.1);
+      color: var(--destructive);
+    }
+
+    .comparison-text {
+      font-size: 0.5rem;
+      text-align: center;
+      line-height: 1.2;
+    }
+
+    .comparison-text.success {
+      color: var(--success);
+      font-weight: 500;
+    }
+
+    .comparison-text.muted {
+      color: var(--muted-foreground);
+    }
+
+    /* FAQ Section */
+    .faq {
+      padding: 3rem 0;
+    }
+
+    .faq-item {
+      background: var(--card);
+      border-radius: 0.75rem;
+      border: 1px solid var(--border);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      background: none;
+      border: none;
+      text-align: left;
+      font-weight: 600;
+      font-size: 0.8125rem;
+      color: var(--foreground);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-display);
+    }
+
+    .faq-question svg {
+      transition: transform 0.2s;
+      flex-shrink: 0;
+      margin-left: 1rem;
+    }
+
+    .faq-item.open .faq-question svg {
+      transform: rotate(180deg);
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 1.25rem 1rem;
+      font-size: 0.8125rem;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    /* Warning Section */
+    .warning {
+      padding: 2rem 0;
+    }
+
+    .warning-card {
+      background: var(--card);
+      border: 1px solid hsla(24, 95%, 53%, 0.2);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .warning-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: hsla(24, 95%, 53%, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--accent);
+    }
+
+    .warning-card h3 {
+      font-size: 1.125rem;
+      color: var(--foreground);
+      margin-bottom: 0.75rem;
+    }
+
+    .warning-card p {
+      font-size: 0.875rem;
+      color: var(--muted-foreground);
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    .warning-card p:last-child {
+      font-size: 0.75rem;
+      margin-bottom: 0;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 3rem 0;
+      background: var(--primary);
+    }
+
+    .footer-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-logo img {
+      height: 2.5rem;
+      filter: brightness(0) invert(1);
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-links a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-copyright {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .footer-disclaimer {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      max-width: 32rem;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* Floating CTA */
+    .floating-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.5rem;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+      z-index: 50;
+      display: none;
+    }
+
+    .floating-cta.visible {
+      display: flex;
+    }
+
+    .floating-cta-inner {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      width: 100%;
+    }
+
+    .floating-select {
+      flex: 1;
+      position: relative;
+    }
+
+    .floating-select-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0.75rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .floating-select-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--foreground);
+    }
+
+    .floating-select-price {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .floating-dropdown {
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+      right: 0;
+      margin-bottom: 0.25rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      display: none;
+    }
+
+    .floating-dropdown.open {
+      display: block;
+    }
+
+    .floating-option {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0.75rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      transition: background 0.2s;
+    }
+
+    .floating-option:hover {
+      background: var(--muted);
+    }
+
+    .floating-option.selected {
+      background: hsla(92, 99%, 35%, 0.1);
+    }
+
+    .floating-option-label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--foreground);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .floating-option-badge {
+      font-size: 0.5625rem;
+      background: var(--primary);
+      color: white;
+      padding: 0.125rem 0.375rem;
+      border-radius: 9999px;
+    }
+
+    .floating-option-price {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* SVG Icons */
+    .icon {
+      width: 1rem;
+      height: 1rem;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    .icon-sm { width: 0.875rem; height: 0.875rem; }
+    .icon-lg { width: 1.5rem; height: 1.5rem; }
+    .icon-xl { width: 2rem; height: 2rem; }
+
+    .icon-filled {
+      fill: currentColor;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      .hero-grid {
+        grid-template-columns: repeat(2, 1fr);
+        align-items: start;
+        gap: 2rem;
+      }
+
+      .hero-image-col {
+        order: 1;
+      }
+
+      .hero-content-col {
+        order: 2;
+      }
+
+      .carousel {
+        max-width: 100%;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .section-title {
+        font-size: 1.875rem;
+      }
+
+      .benefits-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ingredients-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .offers-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .transformations-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+      }
+
+      .floating-cta {
+        display: none !important;
+      }
+
+      .banner-desktop {
+        display: flex;
+        align-items: stretch;
+        min-height: 20rem;
+      }
+
+      .banner-desktop .banner-image {
+        flex-shrink: 0;
+        width: 20rem;
+        display: flex;
+        align-items: flex-end;
+      }
+
+      .banner-desktop .banner-content {
+        flex: 1;
+        text-align: left;
+        padding: 3rem 0;
+      }
+
+      .banner-desktop h2 {
+        font-size: 2rem;
+      }
+
+      .banner-mobile {
+        display: none;
+      }
+    }
+
+    @media (max-width: 767px) {
+      .banner-desktop {
+        display: none;
+      }
+
+      .hero-image-col {
+        display: none;
+      }
+
+      .transformations-grid {
+        display: block;
+      }
+
+      .transformation-card:not(:first-child) {
+        display: none;
+      }
+    }
+
+    /* Utility classes */
+    .text-center { text-align: center; }
+    .hidden { display: none; }
+    .w-full { width: 100%; }
+    .max-w-md { max-width: 28rem; margin-left: auto; margin-right: auto; }
+  </style>
+</head>
+<body>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="marquee">
+      <div class="marquee-item">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+        <span>Frete Rápido</span>
+      </div>
+      <div class="marquee-item">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        <span>Milhares de clientes satisfeitos</span>
+      </div>
+      <div class="marquee-item">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        <span>100% Natural e Seguro</span>
+      </div>
+      <div class="marquee-item">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+        <span>Frete Rápido</span>
+      </div>
+      <div class="marquee-item">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        <span>Milhares de clientes satisfeitos</span>
+      </div>
+      <div class="marquee-item">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        <span>100% Natural e Seguro</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="/">
+          <img src="https://laranjamorodenavita2.lovable.app/assets/denavita-logo-CLTjrlZx.svg" alt="Denavita" class="logo">
+        </a>
+        <a href="#ofertas" class="btn btn-cta btn-sm">Comprar Agora</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Banner Section -->
+  <section class="banner">
+    <div class="container">
+      <div class="banner-mobile">
+        <div class="banner-content">
+          <div class="banner-badge">
+            <svg class="icon-sm" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            <span>Resultados Comprovados</span>
+            <svg class="icon-sm" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          </div>
+          <h2>Elas Perderam até <span>8kg em 30 Dias</span><br><span style="font-size: 1rem; font-weight: 500; opacity: 0.9;">Sem Dietas Malucas, Sem exercícios pesados</span></h2>
+          <p>Descubra o segredo que <strong style="color: #fef3c7;">derrete gordura em poucas semanas</strong>. Já são +47.000 transformações comprovadas!</p>
+        </div>
+        <div class="banner-image">
+          <img src="https://laranjamorodenavita2.lovable.app/assets/dani-banner-new-DnwfhLif.png" alt="Resultado com Laranja Moro">
+        </div>
+      </div>
+      <div class="banner-desktop">
+        <div class="banner-image">
+          <img src="https://laranjamorodenavita2.lovable.app/assets/dani-banner-new-DnwfhLif.png" alt="Resultado com Laranja Moro">
+        </div>
+        <div class="banner-content">
+          <div class="banner-badge">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+            <span>Resultados Comprovados</span>
+            <svg class="icon" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          </div>
+          <h2>Elas Perderam até <span>8kg em 30 Dias</span><br><span style="font-size: 1.25rem; font-weight: 500; opacity: 0.9;">Sem Dietas Malucas, Sem exercícios pesados</span></h2>
+          <p style="font-size: 1rem;">Descubra o segredo que <strong style="color: #fef3c7;">derrete gordura em poucas semanas</strong>. Já são <strong>+47.000 transformações</strong> comprovadas!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <!-- Desktop Image -->
+        <div class="hero-image-col">
+          <div class="carousel" id="heroCarousel">
+            <div class="carousel-slides" id="carouselSlides">
+              <div class="carousel-slide"><img src="https://laranjamorodenavita2.lovable.app/assets/hero-carousel-2-DqypJZCo.jpg" alt="Laranja Moro"></div>
+              <div class="carousel-slide"><img src="https://laranjamorodenavita2.lovable.app/assets/hero-carousel-3-CpVZj_U4.jpg" alt="Laranja Moro"></div>
+              <div class="carousel-slide"><img src="https://laranjamorodenavita2.lovable.app/assets/hero-carousel-4-CPZZrYxg.jpg" alt="Laranja Moro"></div>
+            </div>
+            <button class="carousel-nav carousel-nav-prev" onclick="prevSlide()">
+              <svg class="icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="carousel-nav carousel-nav-next" onclick="nextSlide()">
+              <svg class="icon" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div class="carousel-dots" id="carouselDots"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="hero-content-col" style="max-width: 350px; margin: 0 auto;">
+          <p class="hero-brand">Denavita • Suplemento Alimentar</p>
+          <h1 class="hero-title">Laranja Moro Denavita®<br><span>Acelere Seu Metabolismo</span></h1>
+          <p class="hero-desc">A fórmula italiana com Morosil® que ajuda seu corpo a queimar gordura de forma natural. Sem dietas malucas, sem efeito sanfona.</p>
+
+          <!-- Mobile Carousel -->
+          <div class="carousel" id="mobileCarousel" style="display: block;">
+            <div class="carousel-slides" id="mobileCarouselSlides">
+              <div class="carousel-slide"><img src="https://laranjamorodenavita2.lovable.app/assets/hero-carousel-2-DqypJZCo.jpg" alt="Laranja Moro"></div>
+              <div class="carousel-slide"><img src="https://laranjamorodenavita2.lovable.app/assets/hero-carousel-3-CpVZj_U4.jpg" alt="Laranja Moro"></div>
+              <div class="carousel-slide"><img src="https://laranjamorodenavita2.lovable.app/assets/hero-carousel-4-CPZZrYxg.jpg" alt="Laranja Moro"></div>
+            </div>
+            <button class="carousel-nav carousel-nav-prev" onclick="prevMobileSlide()">
+              <svg class="icon" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button class="carousel-nav carousel-nav-next" onclick="nextMobileSlide()">
+              <svg class="icon" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+          <div class="carousel-dots" id="mobileCarouselDots" style="margin-top: 1rem;"></div>
+
+          <!-- Rating -->
+          <div class="rating">
+            <div class="stars">
+              <svg class="icon icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span style="font-weight: 700;">4.9</span>
+            <span style="color: var(--muted-foreground);">• 1.023 avaliações reais</span>
+          </div>
+
+          <!-- Pills -->
+          <div class="pills">
+            <div class="pill">
+              <svg class="icon-sm" style="color: var(--success);" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>100% Natural</span>
+            </div>
+            <div class="pill">
+              <svg class="icon-sm" style="color: var(--success);" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Morosil® Patenteado</span>
+            </div>
+            <div class="pill">
+              <svg class="icon-sm" style="color: var(--success);" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Fácil de Usar</span>
+            </div>
+          </div>
+
+          <!-- Price Card -->
+          <div class="price-card">
+            <div>
+              <span class="price-old">R$ 99,90</span>
+              <span class="price-badge">-5%</span>
+            </div>
+            <div class="price-current">R$ 94,90</div>
+            <p class="price-installments">ou 3x de R$ 31,63 sem juros</p>
+            <div class="cashback">
+              <svg class="icon" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+              <span>Receba R$ 14,24 em Cashback</span>
+            </div>
+          </div>
+
+          <!-- CTA Button -->
+          <a href="#ofertas" class="btn btn-green btn-xl shimmer w-full">Ver Todas as Ofertas</a>
+
+          <!-- Delivery Box -->
+          <div class="delivery-box">
+            <div class="delivery-icon">
+              <svg class="icon-lg" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+            </div>
+            <div>
+              <p class="delivery-text">Você receberá seu pedido entre <span id="deliveryStart"></span> e <span id="deliveryEnd"></span></p>
+              <p class="delivery-sub">Confirme o prazo final na próxima etapa.</p>
+            </div>
+          </div>
+
+          <!-- Trust Grid -->
+          <div class="trust-grid">
+            <div class="trust-item">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span>Desenvolvido por especialistas</span>
+            </div>
+            <div class="trust-item">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              <span>Milhares de clientes satisfeitos</span>
+            </div>
+            <div class="trust-item">
+              <svg class="icon" viewBox="0 0 24 24"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/></svg>
+              <span>Suporte especializado</span>
+            </div>
+            <div class="trust-item">
+              <svg class="icon" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+              <span>Qualidade Denavita</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="gradient-section-orange" style="padding: 3rem 0;">
+    <div class="container">
+      <p class="section-tag accent">Você se reconhece?</p>
+      <h2 class="section-title">Cansou de lutar contra o próprio corpo?</h2>
+      <p class="section-desc">Se você sente que seu metabolismo está travado, você não está sozinha. Milhares de mulheres passam pelo mesmo.</p>
+      
+      <div class="problems-scroll" id="problemsScroll">
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg class="icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M22 2 11 13"/></svg>
+          </div>
+          <h3>Gordura teimosa</h3>
+          <p>Aquela barriga que não vai embora</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg class="icon-lg" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          </div>
+          <h3>Metabolismo lento</h3>
+          <p>Parece que tudo engorda</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg class="icon-lg" viewBox="0 0 24 24"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>
+          </div>
+          <h3>Inchaço constante</h3>
+          <p>Sensação de peso o dia todo</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg class="icon-lg" viewBox="0 0 24 24"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>
+          </div>
+          <h3>Dietas sem resultado</h3>
+          <p>Já tentou de tudo?</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-icon">
+            <svg class="icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Falta de energia</h3>
+          <p>Cansaço que não passa</p>
+        </div>
+      </div>
+
+      <p style="margin-top: 2rem; color: var(--accent); font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+        <svg class="icon" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+        A boa notícia? <strong style="margin-left: 0.25rem;">Existe uma solução natural que funciona.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section class="gradient-section-orange" style="padding: 3rem 0;">
+    <div class="container">
+      <p class="section-tag accent">Aqui está a solução</p>
+      <h2 class="section-title">O que o Laranja Moro faz pelo seu corpo</h2>
+      <p class="section-desc">Uma cápsula por dia que trabalha em 6 frentes diferentes para acelerar seus resultados.</p>
+
+      <div class="benefits-grid" style="max-width: 64rem; margin: 0 auto;">
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          </div>
+          <div>
+            <h3>Queima gordura localizada</h3>
+            <p>Age direto na gordura abdominal, a mais difícil de eliminar*</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+          </div>
+          <div>
+            <h3>Diminui medidas</h3>
+            <p>Redução visível na cintura e quadril já nas primeiras semanas*</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>
+          </div>
+          <div>
+            <h3>Combate inflamação</h3>
+            <p>Antioxidantes que reduzem o inchaço e aceleram resultados*</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+          </div>
+          <div>
+            <h3>Regula o apetite</h3>
+            <p>Menos compulsão por doces e carboidratos ao longo do dia*</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          </div>
+          <div>
+            <h3>Melhora a pele</h3>
+            <p>Reduz celulite e flacidez enquanto você emagrece*</p>
+          </div>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <h3>Mais energia</h3>
+            <p>Disposição extra sem nervosismo ou efeito rebote*</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ingredients Section -->
+  <section class="gradient-section-orange" style="padding: 3rem 0;">
+    <div class="container">
+      <p class="section-tag accent">Ingredientes</p>
+      <h2 class="section-title">Como funciona no seu corpo?</h2>
+      <p class="section-desc">Ingredientes naturais selecionados para auxiliar no seu metabolismo</p>
+
+      <div class="ingredients-grid" style="max-width: 64rem; margin: 0 auto;">
+        <div class="ingredient-card">
+          <div class="ingredient-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><path d="M8 2v2"/><path d="M16 2v2"/><path d="M8 8a4 4 0 0 1 8 0c0 2.21-1.79 4-4 4"/><circle cx="12" cy="17" r="5"/><path d="M12 15v4"/><path d="M10 17h4"/></svg>
+          </div>
+          <h3>Morosil®</h3>
+          <p class="subtitle">Laranja Moro</p>
+          <p>Rico em antocianinas que auxiliam no metabolismo*</p>
+        </div>
+        <div class="ingredient-card">
+          <div class="ingredient-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+          </div>
+          <h3>Antocianinas</h3>
+          <p class="subtitle">Pigmentos Naturais</p>
+          <p>Ação antioxidante que combate radicais livres*</p>
+        </div>
+        <div class="ingredient-card">
+          <div class="ingredient-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg>
+          </div>
+          <h3>Café Verde</h3>
+          <p class="subtitle">Ácido Clorogênico</p>
+          <p>Suporte metabólico natural para seu corpo*</p>
+        </div>
+        <div class="ingredient-card">
+          <div class="ingredient-icon">
+            <svg class="icon-xl" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+          </div>
+          <h3>Cromo</h3>
+          <p class="subtitle">Mineral Essencial</p>
+          <p>Metabolismo de carboidratos e lipídios*</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Offers Section -->
+  <section class="offers" id="ofertas">
+    <div class="container">
+      <div class="offers-header">
+        <div class="offers-badge">
+          <svg class="icon" viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          Oferta por Tempo Limitado
+        </div>
+        <h2 class="offers-title">Escolha Seu <span>Tratamento</span></h2>
+        <p style="color: var(--muted-foreground);">Quanto maior o kit, maior a economia. Transforme seu corpo com Laranja Moro Denavita®</p>
+      </div>
+
+      <div class="offers-grid">
+        <!-- 1 Unit -->
+        <div class="offer-card">
+          <div class="offer-image">
+            <img src="https://laranjamorodenavita2.lovable.app/assets/kit-1-frasco-BNyODzyp.webp" alt="1 Unidade">
+          </div>
+          <h3 class="offer-title">1 Unidade</h3>
+          <p class="offer-subtitle">30 cápsulas • 1 mês</p>
+          <div class="offer-price">
+            <span class="offer-price-old">R$ 99,90</span>
+            <span class="offer-price-discount">-5%</span>
+            <div class="offer-price-current">R$ 94,90</div>
+            <p class="offer-price-installments">ou 3x de R$ 31,63 sem juros</p>
+          </div>
+          <div class="offer-per-bottle">
+            <span>Preço por pote:</span>
+            <span>R$ 94,90</span>
+          </div>
+          <div class="offer-benefits">
+            <div class="offer-benefit">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>100% Natural</span>
+            </div>
+            <div class="offer-benefit">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Satisfação Garantida</span>
+            </div>
+            <div class="offer-cashback">
+              <svg class="icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+              <span>Cashback de R$ 14,24</span>
+            </div>
+          </div>
+          <a href="https://seguro.denavita.com.br/r/9IOZJY8CS1" target="_blank" class="btn btn-cta w-full">Comprar Agora</a>
+          <div class="offer-delivery">
+            <svg class="icon-sm" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+            <span>Entrega em 3-7 dias úteis</span>
+          </div>
+        </div>
+
+        <!-- 3 Units - Featured -->
+        <div class="offer-card featured">
+          <div class="offer-badge">
+            <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            MAIS VENDIDO
+          </div>
+          <div class="offer-image">
+            <img src="https://laranjamorodenavita2.lovable.app/assets/kit-3-frascos-BCXJRFPw.webp" alt="3 Frascos">
+          </div>
+          <h3 class="offer-title">Compre 2 Leve 3</h3>
+          <p class="offer-subtitle">90 cápsulas • 3 meses</p>
+          <div class="offer-price">
+            <span class="offer-price-old">R$ 299,70</span>
+            <span class="offer-price-discount">-34%</span>
+            <div class="offer-price-current">R$ 197,90</div>
+            <p class="offer-price-installments">ou 3x de R$ 65,96 sem juros</p>
+          </div>
+          <div class="offer-per-bottle">
+            <span>Preço por pote:</span>
+            <span>R$ 65,97</span>
+          </div>
+          <div class="offer-benefits">
+            <div class="offer-benefit">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Frete Grátis</span>
+            </div>
+            <div class="offer-benefit">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>100% Natural</span>
+            </div>
+            <div class="offer-benefit">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Satisfação Garantida</span>
+            </div>
+            <div class="offer-cashback">
+              <svg class="icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+              <span>Cashback de R$ 29,69</span>
+            </div>
+          </div>
+          <a href="https://seguro.denavita.com.br/r/QVDGZ03LJK" target="_blank" class="btn btn-cta shimmer w-full">Comprar Agora</a>
+          <div class="offer-delivery">
+            <svg class="icon-sm" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+            <span>Entrega em 3-7 dias úteis</span>
+          </div>
+        </div>
+
+        <!-- 5 Units -->
+        <div class="offer-card">
+          <div class="offer-badge" style="background: var(--accent);">Maior Economia</div>
+          <div class="offer-image">
+            <img src="https://laranjamorodenavita2.lovable.app/assets/kit-5-frascos-B3-T3-6t.jpg" alt="5 Frascos">
+          </div>
+          <h3 class="offer-title">Compre 3 Leve 5</h3>
+          <p class="offer-subtitle">150 cápsulas • 5 meses</p>
+          <div class="offer-price">
+            <span class="offer-price-old">R$ 499,50</span>
+            <span class="offer-price-discount">-40%</span>
+            <div class="offer-price-current">R$ 297,90</div>
+            <p class="offer-price-installments">ou 3x de R$ 99,30 sem juros</p>
+          </div>
+          <div class="offer-per-bottle">
+            <span>Preço por pote:</span>
+            <span>R$ 59,58</span>
+          </div>
+          <div class="offer-benefits">
+            <div class="offer-benefit">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Frete Grátis</span>
+            </div>
+            <div class="offer-benefit">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>100% Natural</span>
+            </div>
+            <div class="offer-benefit">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>Satisfação Garantida</span>
+            </div>
+            <div class="offer-cashback">
+              <svg class="icon-sm" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+              <span>Cashback de R$ 44,69</span>
+            </div>
+          </div>
+          <a href="https://seguro.denavita.com.br/r/7CC38OYH39" target="_blank" class="btn btn-cta w-full">Comprar Agora</a>
+          <div class="offer-delivery">
+            <svg class="icon-sm" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+            <span>Entrega em 3-7 dias úteis</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust badges -->
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--muted-foreground);">
+          <svg class="icon" style="color: var(--primary);" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <span style="font-size: 0.875rem; font-weight: 500;">Compra 100% Segura</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--muted-foreground);">
+          <svg class="icon" style="color: var(--primary);" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+          <span style="font-size: 0.875rem; font-weight: 500;">Frete Grátis Brasil</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--muted-foreground);">
+          <svg class="icon" style="color: var(--primary);" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+          <span style="font-size: 0.875rem; font-weight: 500;">Cashback em Dobro</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials gradient-section-green">
+    <div class="container">
+      <p class="section-tag primary">Resultados reais</p>
+      <h2 class="section-title">Elas já destravaram o metabolismo</h2>
+      <p class="section-desc">Mulheres como você que decidiram dar o primeiro passo.</p>
+
+      <div class="stats-grid" style="max-width: 64rem; margin: 0 auto 2.5rem;">
+        <div class="stat-card">
+          <div class="stat-value">1.023</div>
+          <div class="stat-label">Avaliações reais</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">5/5</div>
+          <div class="stat-label">Avaliação média</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">96%</div>
+          <div class="stat-label">Recomendam</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">Milhares</div>
+          <div class="stat-label">Mulheres satisfeitas</div>
+        </div>
+      </div>
+
+      <h3 style="text-align: center; margin-bottom: 0.5rem;">Veja quem já transformou o corpo</h3>
+      <p style="font-size: 0.8125rem; color: var(--muted-foreground); text-align: center; margin-bottom: 1.5rem;">Resultados reais de quem usou o Laranja Moro Denavita® por 90 dias.</p>
+
+      <div class="transformations-grid" style="max-width: 64rem; margin: 0 auto;">
+        <div class="transformation-card">
+          <div class="transformation-image">
+            <img src="https://laranjamorodenavita2.lovable.app/assets/before-after-1-D1B0N3j8.png" alt="Transformação">
+            <span class="transformation-badge">-12kg em 3 meses*</span>
+          </div>
+          <div class="transformation-content">
+            <div class="transformation-header">
+              <span class="transformation-name">Fernanda L.</span>
+              <span class="transformation-location">• Campinas, SP</span>
+            </div>
+            <div class="stars" style="margin-bottom: 0.5rem;">
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="transformation-text">"Em 3 meses de uso contínuo, aliado à alimentação saudável, consegui resultados incríveis!"</p>
+          </div>
+        </div>
+        <div class="transformation-card">
+          <div class="transformation-image">
+            <img src="https://laranjamorodenavita2.lovable.app/assets/before-after-2-BQ0Ev4fL.png" alt="Transformação">
+            <span class="transformation-badge">-8kg em 2 meses*</span>
+          </div>
+          <div class="transformation-content">
+            <div class="transformation-header">
+              <span class="transformation-name">Patrícia M.</span>
+              <span class="transformation-location">• Salvador, BA</span>
+            </div>
+            <div class="stars" style="margin-bottom: 0.5rem;">
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="transformation-text">"Não acreditava que funcionaria, mas decidi tentar. Hoje estou muito mais confiante!"</p>
+          </div>
+        </div>
+        <div class="transformation-card">
+          <div class="transformation-image">
+            <img src="https://laranjamorodenavita2.lovable.app/assets/before-after-3-Ds4HekXy.png" alt="Transformação">
+            <span class="transformation-badge">-10kg em 3 meses*</span>
+          </div>
+          <div class="transformation-content">
+            <div class="transformation-header">
+              <span class="transformation-name">Renata C.</span>
+              <span class="transformation-location">• Porto Alegre, RS</span>
+            </div>
+            <div class="stars" style="margin-bottom: 0.5rem;">
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="icon-sm icon-filled" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <p class="transformation-text">"O Laranja Moro virou meu aliado diário. Minha transformação foi surpreendente!"</p>
+          </div>
+        </div>
+      </div>
+
+      <p style="font-size: 0.75rem; color: var(--muted-foreground); text-align: center; margin-top: 1rem;">*Resultados individuais podem variar. Uso aliado à alimentação equilibrada e exercícios físicos.</p>
+    </div>
+  </section>
+
+  <!-- Comparison Section -->
+  <section class="comparison gradient-section-green">
+    <div class="container">
+      <p class="section-tag primary">Mas por que Denavita?</p>
+      <h2 class="section-title">Nem todo Laranja Moro é igual</h2>
+      <p class="section-desc">A diferença entre resultado e frustração está na qualidade do que você consome.</p>
+
+      <div class="comparison-table" style="max-width: 48rem; margin: 0 auto;">
+        <div class="comparison-header">
+          <div class="comparison-header-item">Característica</div>
+          <div class="comparison-header-item">
+            <div class="comparison-header-image">
+              <img src="https://laranjamorodenavita2.lovable.app/assets/kit-1-frasco-BNyODzyp.webp" alt="Denavita">
+            </div>
+            <span class="comparison-header-label primary">Denavita</span>
+          </div>
+          <div class="comparison-header-item">
+            <div class="comparison-header-image">
+              <img src="https://laranjamorodenavita2.lovable.app/assets/generic-bottle-transparent-CMqXvB1v.png" alt="Genérico" style="opacity: 0.8;">
+            </div>
+            <span class="comparison-header-label" style="color: var(--muted-foreground);">Genéricos</span>
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-feature">Morosil® patenteado</div>
+          <div class="comparison-cell">
+            <div class="comparison-icon success">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="comparison-text success">Selo internacional da Sicília</span>
+          </div>
+          <div class="comparison-cell">
+            <div class="comparison-icon error">
+              <svg class="icon-sm" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </div>
+            <span class="comparison-text muted">Extrato genérico sem certificação</span>
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-feature">Concentração de antocianinas</div>
+          <div class="comparison-cell">
+            <div class="comparison-icon success">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="comparison-text success">500mg padronizado por cápsula</span>
+          </div>
+          <div class="comparison-cell">
+            <div class="comparison-icon error">
+              <svg class="icon-sm" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </div>
+            <span class="comparison-text muted">Dosagem variável ou não informada</span>
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-feature">Fórmula potencializada</div>
+          <div class="comparison-cell">
+            <div class="comparison-icon success">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="comparison-text success">Café Verde + Cromo + Morosil®</span>
+          </div>
+          <div class="comparison-cell">
+            <div class="comparison-icon error">
+              <svg class="icon-sm" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </div>
+            <span class="comparison-text muted">Apenas um ingrediente isolado</span>
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-feature">Absorção e biodisponibilidade</div>
+          <div class="comparison-cell">
+            <div class="comparison-icon success">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="comparison-text success">Cápsula vegetal de alta absorção</span>
+          </div>
+          <div class="comparison-cell">
+            <div class="comparison-icon error">
+              <svg class="icon-sm" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </div>
+            <span class="comparison-text muted">Cápsula comum com baixa absorção</span>
+          </div>
+        </div>
+
+        <div class="comparison-row">
+          <div class="comparison-feature">Estudos clínicos</div>
+          <div class="comparison-cell">
+            <div class="comparison-icon success">
+              <svg class="icon-sm" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="comparison-text success">Eficácia comprovada cientificamente</span>
+          </div>
+          <div class="comparison-cell">
+            <div class="comparison-icon error">
+              <svg class="icon-sm" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </div>
+            <span class="comparison-text muted">Sem comprovação de resultados</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="gradient-section-orange" style="padding: 4rem 0;">
+    <div class="container">
+      <div style="max-width: 32rem; margin: 0 auto; text-align: center;">
+        <div style="width: 4rem; height: 4rem; margin: 0 auto 1rem; border-radius: 50%; background: hsla(24, 95%, 53%, 0.1); display: flex; align-items: center; justify-content: center;">
+          <svg class="icon-xl" style="color: var(--accent);" viewBox="0 0 24 24"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+        </div>
+        <h2 class="section-title">Pronta para destravar seu metabolismo?</h2>
+        <p style="color: var(--muted-foreground); margin-bottom: 2rem;">Você já sabe que funciona. Você já viu os resultados. Agora só falta dar o primeiro passo.</p>
+        
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--muted-foreground);">
+            <svg class="icon" style="color: var(--accent);" viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><polyline points="9 12 11 14 15 10"/></svg>
+            <span>Satisfação Garantida</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--muted-foreground);">
+            <svg class="icon" style="color: var(--accent);" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>
+            <span>Frete Grátis</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--muted-foreground);">
+            <svg class="icon" style="color: var(--accent);" viewBox="0 0 24 24"><circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/></svg>
+            <span>Cashback</span>
+          </div>
+        </div>
+
+        <a href="#ofertas" class="btn btn-cta btn-xl shimmer w-full max-w-md">Comprar Agora – Frete Grátis</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq gradient-section-green">
+    <div class="container">
+      <p class="section-tag primary">Ainda com dúvidas?</p>
+      <h2 class="section-title">Respondemos as perguntas mais comuns</h2>
+      <p class="section-desc">Tudo que você precisa saber antes de começar sua transformação.</p>
+
+      <div style="max-width: 48rem; margin: 0 auto;">
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Funciona mesmo ou é só mais um suplemento?
+            <svg class="icon" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            O Laranja Moro Denavita® usa Morosil®, ingrediente patenteado com estudos clínicos que comprovam sua ação no metabolismo da gordura*. Não é mágica — é ciência aplicada com ingredientes de qualidade.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Em quanto tempo vou ver resultado?
+            <svg class="icon" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            Muitas clientes relatam mais disposição e leveza já nas primeiras semanas*. Para resultados visíveis nas medidas, recomendamos uso contínuo por 90 dias. Cada corpo responde no seu tempo.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Preciso fazer dieta junto?
+            <svg class="icon" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            Não precisa de dieta radical. O Laranja Moro potencializa seus esforços — quanto mais saudável sua alimentação, melhores os resultados. Mas ele já ajuda mesmo sem mudanças drásticas.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Tem algum efeito colateral?
+            <svg class="icon" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            Por ser 100% natural, o Laranja Moro é bem tolerado pela maioria. Não causa nervosismo nem insônia. Gestantes, lactantes e menores de 18 anos devem consultar um médico.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            Como sei se é original?
+            <svg class="icon" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            Comprando direto pelo nosso site oficial, você garante o produto original com Morosil® certificado, nota fiscal e suporte completo. Cuidado com imitações baratas.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" onclick="toggleFaq(this)">
+            E se eu não gostar, posso devolver?
+            <svg class="icon" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <div class="faq-answer">
+            Sim! Você tem garantia de satisfação. Se não ficar satisfeita, é só entrar em contato com nosso suporte. Seu dinheiro de volta, sem burocracia.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Warning Section -->
+  <section class="warning gradient-section-orange">
+    <div class="container">
+      <div class="warning-card" style="max-width: 48rem; margin: 0 auto;">
+        <div class="warning-icon">
+          <svg class="icon-lg" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+        </div>
+        <div>
+          <h3>Advertência</h3>
+          <p>Gestantes, idosos, crianças, lactantes e pessoas que apresentam doenças ou alterações fisiológicas, somente devem consumir este produto sob orientação de nutricionista ou médico.</p>
+          <p>Produto autorizado para comercialização em todo o território nacional através do anexo I da RDC 240/2018, código 4300041, em conformidade com a RDC 27/2010 e RDC 23/2000 da ANVISA.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo">
+        <img src="https://laranjamorodenavita2.lovable.app/assets/denavita-logo-CLTjrlZx.svg" alt="Denavita">
+      </div>
+      <div class="footer-links">
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Uso</a>
+        <a href="#">Fale Conosco</a>
+      </div>
+      <p class="footer-copyright">© 2025 Denavita. Todos os direitos reservados.</p>
+      <p class="footer-disclaimer">*Suplemento alimentar. Não é medicamento. Não substitui alimentação saudável e hábitos de vida equilibrados. Resultados variam de pessoa para pessoa. Imagens meramente ilustrativas.</p>
+    </div>
+  </footer>
+
+  <!-- Floating CTA -->
+  <div class="floating-cta" id="floatingCta">
+    <div class="floating-cta-inner">
+      <div class="floating-select">
+        <button class="floating-select-btn" onclick="toggleFloatingDropdown()">
+          <div>
+            <div class="floating-select-label" id="floatingLabel">Compre 2 leve 3</div>
+            <div class="floating-select-price" id="floatingPrice">R$ 197,90</div>
+          </div>
+          <svg class="icon" id="floatingChevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="floating-dropdown" id="floatingDropdown">
+          <button class="floating-option" onclick="selectVariant('1unit', '1 Unidade', 'R$ 94,90', 'https://seguro.denavita.com.br/r/9IOZJY8CS1')">
+            <div class="floating-option-label">1 Unidade</div>
+            <div class="floating-option-price">R$ 94,90</div>
+          </button>
+          <button class="floating-option selected" onclick="selectVariant('3units', 'Compre 2 leve 3', 'R$ 197,90', 'https://seguro.denavita.com.br/r/QVDGZ03LJK')">
+            <div class="floating-option-label">Compre 2 leve 3 <span class="floating-option-badge">TOP</span></div>
+            <div class="floating-option-price">R$ 197,90</div>
+          </button>
+          <button class="floating-option" onclick="selectVariant('5units', 'Compre 3 leve 5', 'R$ 297,90', 'https://seguro.denavita.com.br/r/7CC38OYH39')">
+            <div class="floating-option-label">Compre 3 leve 5</div>
+            <div class="floating-option-price">R$ 297,90</div>
+          </button>
+        </div>
+      </div>
+      <button class="btn btn-cta btn-sm" onclick="buyNow()">
+        <svg class="icon-sm" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Comprar
+      </button>
+    </div>
+  </div>
+
+  <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1120227461949168&ev=PageView&noscript=1"/></noscript>
+
+  <script>
+    // Carousel functionality
+    let currentSlide = 0;
+    let mobileCurrentSlide = 0;
+    const totalSlides = 3;
+
+    function updateCarousel() {
+      const slides = document.getElementById('carouselSlides');
+      if (slides) {
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+      }
+      updateDots();
+    }
+
+    function updateMobileCarousel() {
+      const slides = document.getElementById('mobileCarouselSlides');
+      if (slides) {
+        slides.style.transform = `translateX(-${mobileCurrentSlide * 100}%)`;
+      }
+      updateMobileDots();
+    }
+
+    function updateDots() {
+      const dotsContainer = document.getElementById('carouselDots');
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === currentSlide ? ' active' : '');
+        dot.onclick = () => { currentSlide = i; updateCarousel(); };
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updateMobileDots() {
+      const dotsContainer = document.getElementById('mobileCarouselDots');
+      if (!dotsContainer) return;
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot' + (i === mobileCurrentSlide ? ' active' : '');
+        dot.onclick = () => { mobileCurrentSlide = i; updateMobileCarousel(); };
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateCarousel();
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }
+
+    function prevMobileSlide() {
+      mobileCurrentSlide = (mobileCurrentSlide - 1 + totalSlides) % totalSlides;
+      updateMobileCarousel();
+    }
+
+    function nextMobileSlide() {
+      mobileCurrentSlide = (mobileCurrentSlide + 1) % totalSlides;
+      updateMobileCarousel();
+    }
+
+    // Auto-slide
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateCarousel();
+    }, 4000);
+
+    setInterval(() => {
+      mobileCurrentSlide = (mobileCurrentSlide + 1) % totalSlides;
+      updateMobileCarousel();
+    }, 4000);
+
+    // Initialize
+    updateCarousel();
+    updateMobileCarousel();
+
+    // Delivery dates
+    function formatDeliveryDate(daysFromNow) {
+      const date = new Date();
+      date.setDate(date.getDate() + daysFromNow);
+      const months = ['jan.', 'fev.', 'mar.', 'abr.', 'mai.', 'jun.', 'jul.', 'ago.', 'set.', 'out.', 'nov.', 'dez.'];
+      return date.getDate() + ' de ' + months[date.getMonth()];
+    }
+
+    document.getElementById('deliveryStart').textContent = formatDeliveryDate(3);
+    document.getElementById('deliveryEnd').textContent = formatDeliveryDate(8);
+
+    // FAQ toggle
+    function toggleFaq(button) {
+      const item = button.parentElement;
+      item.classList.toggle('open');
+    }
+
+    // Floating CTA
+    let selectedUrl = 'https://seguro.denavita.com.br/r/QVDGZ03LJK';
+
+    function toggleFloatingDropdown() {
+      const dropdown = document.getElementById('floatingDropdown');
+      const chevron = document.getElementById('floatingChevron');
+      dropdown.classList.toggle('open');
+      chevron.style.transform = dropdown.classList.contains('open') ? 'rotate(180deg)' : '';
+    }
+
+    function selectVariant(id, label, price, url) {
+      document.getElementById('floatingLabel').textContent = label;
+      document.getElementById('floatingPrice').textContent = price;
+      selectedUrl = url;
+      
+      // Update selected state
+      document.querySelectorAll('.floating-option').forEach(opt => opt.classList.remove('selected'));
+      event.target.closest('.floating-option').classList.add('selected');
+      
+      toggleFloatingDropdown();
+    }
+
+    function buyNow() {
+      window.open(selectedUrl, '_blank');
+    }
+
+    // Show floating CTA on scroll
+    window.addEventListener('scroll', function() {
+      const floatingCta = document.getElementById('floatingCta');
+      if (window.scrollY > 500 && window.innerWidth < 768) {
+        floatingCta.classList.add('visible');
+      } else {
+        floatingCta.classList.remove('visible');
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1844 @@
+{% if section.settings.standalone_page %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="icon" href="/favicon.png" type="image/png"/>
+<title>Jejoom | O Repositor Natural para Quem Faz Jejum ou Usa Caneta</title>
+<meta name="description" content="Jejoom é o shot matinal em pó sabor tangerina com Curcumina, L-Cisteína, Vitamina C e Zinco. Acelere o metabolismo, combata o inchaço e emagreça de verdade."/>
+<meta name="keywords" content="jejoom, shot matinal, emagrecer, metabolismo, curcumina, denavita, suplemento natural, queimar gordura, desinchar"/>
+<meta name="author" content="Denavita"/>
+<meta name="robots" content="index, follow"/>
+<link rel="canonical" href="https://jejoom.denavita.com.br"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://jejoom.denavita.com.br"/>
+<meta property="og:title" content="Jejoom Denavita | Shot Matinal para Emagrecer"/>
+<meta property="og:description" content="Shot matinal em pó com 7 ativos poderosos que aceleram o metabolismo e potencializam o emagrecimento. Sabor tangerina."/>
+<meta property="og:locale" content="pt_BR"/>
+<meta property="og:site_name" content="Denavita"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Jejoom Denavita | Shot Matinal para Emagrecer"/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Product","name":"Jejoom Shot Matinal Denavita","description":"Shot matinal em pó sabor tangerina com Curcumina, L-Cisteína, Vitamina C, Vitamina E, Zinco, Selênio e Antocianinas.","brand":{"@type":"Brand","name":"Denavita"},"offers":{"@type":"Offer","availability":"https://schema.org/InStock","priceCurrency":"BRL"}}
+</script>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-262158423"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-262158423');
+</script>
+<!-- Facebook Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','1120227461949168');fbq('track','PageView');
+</script>
+{% endif %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="dns-prefetch" href="https://www.googletagmanager.com"/>
+<link rel="dns-prefetch" href="https://connect.facebook.net"/>
+<link rel="dns-prefetch" href="https://www.denavita.com.br"/>
+<link rel="dns-prefetch" href="https://seguro.denavita.com.br"/>
+<link rel="preload" as="image" href="{%- if section.settings.hero_product_image != blank -%}{{ section.settings.hero_product_image | image_url: width: 960 }}{%- else -%}assets/saco-produto-jejoom.webp{%- endif -%}"/>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@600;700;800;900&display=swap" rel="stylesheet"/></noscript>
+
+<style>
+/* ═══ MÓDULO: DesignSystem ═══
+   ID: M17
+   ORIGEM: index.css + tailwind.config.ts
+   DEPENDE DE: —
+   RECEBE: —
+   EXPÕE: CSS custom properties, utility classes
+   ESTADO: —
+═══ */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 220 20% 15%;
+  --primary: 82 99% 35%;
+  --primary-foreground: 0 0% 100%;
+  --primary-dark: 82 99% 28%;
+  --primary-light: 82 60% 90%;
+  --secondary: 0 85% 52%;
+  --secondary-foreground: 0 0% 100%;
+  --secondary-light: 0 90% 95%;
+  --accent: 0 85% 52%;
+  --accent-light: 0 90% 95%;
+  --muted: 220 15% 96%;
+  --muted-foreground: 220 10% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 15% 90%;
+  --radius: 0.75rem;
+  --footer-bg: 100 98% 13%;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { overflow-x: hidden; max-width: 100vw; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.6;
+}
+h1,h2,h3,h4,h5,h6 { font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.2; }
+a { text-decoration: none; color: inherit; }
+ul, ol { padding: 0; margin: 0; list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+main { overflow: hidden; }
+
+.container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 1.25rem; }
+@media(min-width:768px) { .container { padding: 0 2rem; } }
+
+/* Gradients */
+.bg-gradient-hero { background: linear-gradient(135deg, hsl(140 65% 33%) 0%, hsl(140 65% 22%) 100%); }
+.bg-gradient-red { background: linear-gradient(135deg, hsl(0 85% 52%) 0%, hsl(350 80% 45%) 100%); }
+.bg-gradient-subtle { background: linear-gradient(180deg, #fff 0%, hsl(var(--muted)) 100%); }
+.bg-gradient-green-light { background: linear-gradient(180deg, hsl(82 40% 95%) 0%, hsl(82 40% 90%) 100%); }
+
+/* Button styles */
+.btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  background: hsl(var(--primary)); color: #fff; font-weight: 700;
+  border-radius: 9999px; transition: all 0.3s; position: relative; overflow: hidden;
+}
+.btn-primary:hover { background: hsl(var(--primary-dark)); }
+.btn-primary.btn-lg { padding: 0.75rem 2rem; font-size: 1.125rem; }
+
+.btn-shine::before {
+  content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shine 2.5s infinite;
+}
+@keyframes shine { 0%{left:-100%} 50%,100%{left:100%} }
+
+.btn-pulse { animation: pulse-glow 2s ease-in-out infinite; }
+@keyframes pulse-glow {
+  0%,100%{box-shadow:0 0 0 0 hsl(82 99% 35%/0.4)}
+  50%{box-shadow:0 0 0 15px hsl(82 99% 35%/0)}
+}
+
+/* Animations */
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+.animate-float { animation: float 3s ease-in-out infinite; will-change: transform; }
+
+@keyframes scroll-subhero { 0%{transform:translateX(0)} 100%{transform:translateX(-25%)} }
+.animate-scroll-subhero { animation: scroll-subhero 15s linear infinite; width: max-content; will-change: transform; contain: layout style; }
+
+@keyframes scroll-left { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.animate-scroll-left { animation: scroll-left 60s linear infinite; width: max-content; will-change: transform; contain: layout style; }
+.animate-scroll-left:hover { animation-play-state: paused; }
+
+@keyframes scroll-videos { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+.animate-scroll-videos { animation: scroll-videos 60s linear infinite; width: max-content; will-change: transform; contain: layout style; }
+.animate-scroll-videos:hover { animation-play-state: paused; }
+
+@keyframes sparkle-pulse {
+  0%,100%{opacity:0;transform:scale(0.4)} 25%{opacity:0.8;transform:scale(1)} 50%{opacity:0.3;transform:scale(0.7)} 75%{opacity:0.9;transform:scale(1.1)}
+}
+@keyframes bob1 { 0%,100%{transform:translateY(0) rotate(-5deg)} 50%{transform:translateY(-8px) rotate(3deg)} }
+@keyframes bob2 { 0%,100%{transform:translateY(0) rotate(5deg)} 50%{transform:translateY(6px) rotate(-5deg)} }
+@keyframes bob3 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-6px) rotate(10deg)} }
+@keyframes bob4 { 0%,100%{transform:translateY(0) rotate(10deg)} 50%{transform:translateY(-5px) rotate(18deg)} }
+@keyframes bob5 { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+/* InView animation */
+.inview-hidden { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; will-change: opacity, transform; }
+.inview-hidden.from-left { transform: translateX(-30px); }
+.inview-hidden.from-right { transform: translateX(30px); }
+.inview-visible { opacity: 1; transform: translateY(0) translateX(0); }
+
+/* Scrollbar hide */
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+/* ═══ CHECKPOINT [M17] DesignSystem ✓ — CSS tokens, gradients, animations, utilities ═══ */
+
+/* ═══ MÓDULO: Responsive ═══
+   ID: M18
+   ORIGEM: tailwind.config.ts breakpoints
+   DEPENDE DE: M17
+   RECEBE: —
+   EXPÕE: responsive utility classes via media queries
+   ESTADO: —
+═══ */
+.hide-mobile { display: none; }
+.hide-desktop { display: block; }
+@media(min-width:768px) {
+  .hide-mobile { display: block; }
+  .hide-desktop { display: none; }
+  .container { padding: 0 1.5rem; }
+}
+/* ═══ CHECKPOINT [M18] Responsive ✓ — breakpoint system ═══ */
+
+/* ═══ SubHero M01 ═══ */
+.subhero { padding: 0.75rem 0; overflow: hidden; }
+.subhero-track { display: flex; }
+.subhero-item { display: flex; align-items: center; flex-shrink: 0; }
+.subhero-item span { color: #fff; font-weight: 600; font-size: 0.875rem; white-space: nowrap; padding: 0 1rem; }
+.subhero-dot { color: rgba(255,255,255,0.6); margin: 0 0.5rem; }
+
+/* ═══ Hero M02 ═══ */
+.hero { position: relative; min-height: 100vh; overflow: hidden; }
+.hero .wave-bottom { position: absolute; bottom: -1px; left: 0; width: 100%; z-index: 20; height: 80px; }
+.hero .content { position: relative; z-index: 10; padding: 100px 0 80px; }
+.hero .grid { display: grid; gap: 2rem; align-items: center; }
+.hero .badge-pill { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.2); backdrop-filter: blur(8px); border-radius: 9999px; padding: 0.5rem 1rem; margin-bottom: 1.5rem; }
+.hero .badge-pill span { font-size: 0.875rem; color: #fff; font-weight: 500; }
+.hero h1 { font-size: 2.25rem; font-weight: 700; color: #fff; margin-bottom: 1.5rem; }
+.hero h1 .highlight { color: #fcc603; }
+.hero .subtitle { font-size: 1.125rem; color: rgba(255,255,255,0.9); margin-bottom: 2rem; max-width: 36rem; margin-left: auto; margin-right: auto; }
+.hero .product-area { position: relative; display: flex; justify-content: center; }
+.hero .product-inner { position: relative; }
+.hero .glow1 { position: absolute; inset: 0; background: rgba(250,204,3,0.4); border-radius: 50%; filter: blur(80px); transform: scale(0.9); }
+.hero .glow2 { position: absolute; inset: 0; background: rgba(251,191,36,0.25); border-radius: 50%; filter: blur(120px); transform: scale(1.1); }
+.hero .product-img { position: relative; z-index: 10; width: 320px; height: auto; }
+.hero .float-badge { position: absolute; left: -1rem; bottom: 6rem; background: #fff; border-radius: 1rem; padding: 1rem; z-index: 20; box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center; }
+.hero .float-badge .big { font-size: 1.875rem; font-weight: 700; color: hsl(var(--secondary)); display: block; }
+.hero .float-badge .small { font-size: 0.75rem; color: hsl(var(--muted-foreground)); }
+.hero .sparkle { position: absolute; z-index: 3; pointer-events: none; border-radius: 50%; }
+.hero .orange-float { position: absolute; pointer-events: none; }
+.hero .caneta-float { position: absolute; right: -30px; top: 5%; width: 160px; z-index: 8; pointer-events: none; filter: blur(3px); transform: rotate(-15deg); animation: bob5 5s ease-in-out infinite; }
+.hero .text-col { text-align: center; max-width: 420px; margin: 0 auto; }
+@media(min-width:768px) {
+  .hero .wave-bottom { height: 136px; }
+  .hero .content { padding: 7rem 0 10rem; }
+  .hero h1 { font-size: 3rem; }
+  .hero .subtitle { font-size: 1.25rem; }
+  .hero .product-img { width: 420px; }
+  .hero .float-badge { left: -2rem; bottom: 8rem; }
+  .hero .caneta-float { right: -50px; width: 208px; }
+}
+@media(min-width:1024px) {
+  .hero .grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+  .hero .text-col { text-align: left; max-width: none; margin: 0; }
+  .hero .subtitle { margin-left: 0; margin-right: 0; }
+  .hero h1 { font-size: 3.75rem; }
+  .hero .product-img { width: 480px; }
+  .hero .caneta-float { width: 256px; }
+}
+
+/* ═══ WhyItWorks M03 ═══ */
+.why-section { padding: 5rem 0 0; background: #fff; position: relative; overflow: hidden; margin-top: -1px; }
+.why-section .section-header { text-align: center; margin-bottom: 4rem; }
+.section-badge { display: inline-block; font-weight: 600; font-size: 0.875rem; padding: 0.5rem 1rem; border-radius: 9999px; margin-bottom: 1rem; }
+.section-badge.green { background: hsl(var(--primary-light)); color: hsl(var(--primary)); }
+.section-badge.red { background: hsl(var(--secondary)); color: #fff; }
+.section-badge.white-bg { background: #fff; color: hsl(var(--primary)); box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.section-header { text-align: center; margin-bottom: 3rem; }
+.section-title { font-size: 1.875rem; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 1rem; }
+.section-subtitle { font-size: 1.125rem; color: hsl(var(--muted-foreground)); max-width: 42rem; margin: 0 auto; }
+@media(min-width:768px) { .section-title { font-size: 2.25rem; } }
+@media(min-width:1024px) { .section-title { font-size: 3rem; } }
+
+.why-grid { display: grid; gap: 3rem; align-items: center; }
+@media(min-width:1024px) { .why-grid { grid-template-columns: 1fr 1fr; } }
+
+.why-card { background: hsl(var(--secondary-light)); border-left: 4px solid hsl(var(--secondary)); border-radius: 0 0.75rem 0.75rem 0; padding: 1.5rem; margin-bottom: 1.5rem; }
+.why-card .card-row { display: flex; align-items: flex-start; gap: 1rem; }
+.why-card .icon-box { width: 3rem; height: 3rem; background: hsl(var(--secondary)); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.why-card .icon-box svg { width: 1.5rem; height: 1.5rem; color: #fff; }
+.why-card h3 { font-size: 1.25rem; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 0.5rem; }
+.why-card p { color: hsl(var(--muted-foreground)); }
+
+/* Mobile accordion for why cards */
+.accordion-trigger { width: 100%; display: flex; align-items: center; gap: 1rem; padding: 1rem; text-align: left; background: hsl(var(--secondary-light)); border-left: 4px solid hsl(var(--secondary)); border-radius: 0 0.75rem 0.75rem 0; margin-bottom: 0.5rem; }
+.accordion-trigger .icon-box { width: 2.5rem; height: 2.5rem; background: hsl(var(--secondary)); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.accordion-trigger .icon-box svg { width: 1.25rem; height: 1.25rem; color: #fff; }
+.accordion-trigger h3 { font-size: 1rem; font-weight: 700; color: hsl(var(--foreground)); flex: 1; }
+.accordion-trigger .chevron { width: 1.25rem; height: 1.25rem; color: hsl(var(--secondary)); transition: transform 0.2s; flex-shrink: 0; }
+.accordion-trigger[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.accordion-content-inner { padding: 0 1rem 1rem 4.5rem; }
+.accordion-content-inner p { color: hsl(var(--muted-foreground)); font-size: 0.875rem; }
+
+.why-image img { max-height: 600px; object-fit: contain; object-position: bottom; width: 100%; }
+@media(min-width:768px) { .why-image img { max-height: 750px; } }
+@media(min-width:1024px) { .why-image img { max-height: 850px; } }
+
+/* ═══ Benefits M04 ═══ */
+.benefits-section { padding: 5rem 0; position: relative; overflow: hidden; }
+.benefits-section .deco-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.benefit-card { background: rgba(255,255,255,0.5); backdrop-filter: blur(12px); border-radius: 1rem; padding: 1.25rem; border: 1px solid rgba(255,255,255,0.5); margin-bottom: 1rem; }
+.benefit-card .row { display: flex; align-items: flex-start; gap: 1rem; }
+.benefit-card .icon-box { width: 3rem; height: 3rem; background: hsl(var(--secondary)); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.benefit-card .icon-box svg { width: 1.5rem; height: 1.5rem; color: #fff; }
+.benefit-card h3 { font-size: 1.125rem; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 0.25rem; }
+.benefit-card p { font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
+.btn-outline { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.5rem; border: 1px solid hsl(var(--border)); border-radius: 9999px; background: rgba(255,255,255,0.8); color: hsl(var(--foreground)); font-weight: 500; font-size: 0.875rem; transition: background 0.3s; }
+.btn-outline:hover { background: #fff; }
+@media(min-width:768px) {
+  .benefits-desktop { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+  .benefit-card { padding: 1.5rem; transition: all 0.3s; }
+  .benefit-card:hover { background: rgba(255,255,255,0.6); transform: translateY(-8px); }
+  .benefit-card .icon-box { width: 4rem; height: 4rem; border-radius: 1rem; margin-bottom: 1rem; }
+  .benefit-card .icon-box svg { width: 2rem; height: 2rem; }
+  .benefit-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .benefit-card p { font-size: 1rem; }
+  .benefit-card .row { display: block; }
+}
+@media(min-width:1024px) { .benefits-desktop { grid-template-columns: repeat(3,1fr); } }
+
+/* ═══ WhoIsItFor M05 ═══ */
+.whoisitfor { padding: 5rem 0; background: #fff; position: relative; overflow: hidden; }
+.whoisitfor .skew-bg { position: absolute; top: 0; right: 0; width: 50%; height: 100%; background: hsl(var(--secondary-light)); transform: skewX(12deg); transform-origin: top right; }
+.whoisitfor .grid2 { display: grid; gap: 3rem; align-items: center; }
+@media(min-width:1024px) { .whoisitfor .grid2 { grid-template-columns: 1fr 1fr; } }
+.whoisitfor .target-item { display: flex; align-items: center; gap: 1rem; background: #fff; border-radius: 0.75rem; padding: 1rem; margin-bottom: 1rem; }
+.whoisitfor .target-icon { width: 2.5rem; height: 2.5rem; background: hsl(var(--primary-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.whoisitfor .target-icon svg { width: 1.25rem; height: 1.25rem; color: hsl(var(--primary)); }
+.whoisitfor .check-icon { width: 1.5rem; height: 1.5rem; color: hsl(var(--primary)); flex-shrink: 0; }
+.whoisitfor .target-text { font-weight: 500; color: hsl(var(--foreground)); }
+.whoisitfor .bottom-cta { margin-top: 3rem; text-align: center; max-width: 48rem; margin-left: auto; margin-right: auto; }
+.whoisitfor .bottom-cta p { font-size: 1.125rem; font-weight: 500; color: hsl(var(--foreground)); margin-bottom: 1.5rem; }
+.whoisitfor .wave-bottom { position: absolute; bottom: -1px; left: 0; width: 100%; height: 80px; }
+@media(min-width:768px) {
+  .whoisitfor .wave-bottom { height: 136px; }
+  .whoisitfor .bottom-cta p { font-size: 1.25rem; }
+}
+.whoisitfor .header-right { text-align: center; }
+@media(min-width:1024px) { .whoisitfor .header-right { text-align: left; } }
+
+/* ═══ ScienceHero M06 ═══ */
+.science { padding: 2rem 0 4rem; background: hsl(var(--secondary)); position: relative; overflow: hidden; }
+.science .deco-lines { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+.science .wave-bottom { position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; }
+.science .orange-deco { position: absolute; pointer-events: none; }
+.science .ingredient-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(12px); border-radius: 0.75rem; padding: 1rem; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; gap: 1rem; margin-bottom: 0.75rem; }
+.science .ingredient-card .ing-icon { width: 3.5rem; height: 3.5rem; background: #fff; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.science .ingredient-card .ing-icon svg { width: 1.75rem; height: 1.75rem; color: hsl(var(--secondary)); }
+.science .ingredient-card h3 { font-size: 1rem; font-weight: 700; color: #fff; }
+.science .ingredient-card p { font-size: 0.875rem; color: rgba(255,255,255,0.7); }
+.science .study-card { background: #fff; border-radius: 1rem; padding: 1.5rem; max-width: 56rem; margin: 0 auto; }
+.science .study-card .study-label { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; }
+.science .study-card .study-label svg { width: 1.25rem; height: 1.25rem; color: hsl(var(--primary)); }
+.science .study-card .study-label span { font-size: 0.75rem; font-weight: 700; color: hsl(var(--primary)); text-transform: uppercase; letter-spacing: 0.05em; }
+.science .study-card h3 { font-size: 1.25rem; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 1rem; }
+.science .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem; margin-bottom: 1rem; }
+.science .stat-box { text-align: center; padding: 0.75rem; background: hsl(var(--primary-light)); border-radius: 0.75rem; }
+.science .stat-box .val { font-size: 1.25rem; font-weight: 700; color: hsl(var(--primary)); }
+.science .stat-box .lab { font-size: 0.625rem; color: hsl(var(--muted-foreground)); }
+.science .badges-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 2rem; }
+.science .sci-badge { display: flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); border-radius: 9999px; padding: 0.375rem 0.75rem; }
+.science .sci-badge svg { width: 0.75rem; height: 0.75rem; color: #fff; }
+.science .sci-badge span { font-size: 0.75rem; color: #fff; font-weight: 500; }
+@media(min-width:768px) {
+  .science { padding: 4rem 0 8rem; }
+  .science .wave-bottom { height: 136px; }
+  .science .ingredients-desktop { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; max-width: 56rem; margin: 0 auto 4rem; }
+  .science .ingredient-card { flex-direction: column; text-align: center; border-radius: 1rem; padding: 1.5rem; transition: all 0.3s; }
+  .science .ingredient-card:hover { background: rgba(255,255,255,0.2); }
+  .science .ingredient-card .ing-icon { width: 5rem; height: 5rem; border-radius: 1rem; transition: transform 0.3s; }
+  .science .ingredient-card:hover .ing-icon { transform: scale(1.1); }
+  .science .ingredient-card .ing-icon svg { width: 2.5rem; height: 2.5rem; }
+  .science .ingredient-card h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .science .study-card { padding: 2.5rem; border-radius: 1.5rem; }
+  .science .study-card h3 { font-size: 1.875rem; margin-bottom: 1.5rem; }
+  .science .stats-grid { gap: 1rem; margin-bottom: 1.5rem; }
+  .science .stat-box { padding: 1rem; }
+  .science .stat-box .val { font-size: 1.875rem; }
+  .science .stat-box .lab { font-size: 0.75rem; }
+  .science .sci-badge { padding: 0.5rem 1rem; }
+  .science .sci-badge svg { width: 1rem; height: 1rem; }
+  .science .sci-badge span { font-size: 0.875rem; }
+}
+
+/* ═══ Timeline M07 ═══ */
+.timeline { padding: 5rem 0; background: #fff; position: relative; overflow: hidden; }
+.timeline .dots-bg { position: absolute; inset: 0; opacity: 0.05; background-image: radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0); background-size: 40px 40px; }
+.timeline-card { background: hsl(var(--secondary-light)); border-radius: 1rem; padding: 1.5rem; border: 1px solid hsl(0 85% 52%/0.2); height: 100%; }
+.timeline-card .top-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+.timeline-card .step-icon { width: 3rem; height: 3rem; background: hsl(var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.timeline-card .step-icon svg { width: 1.5rem; height: 1.5rem; color: #fff; }
+.timeline-card .step-label { font-size: 0.875rem; font-weight: 700; color: hsl(var(--secondary)); }
+.timeline-card .period-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 700; background: hsl(0 85% 52%/0.2); color: hsl(var(--secondary)); margin-bottom: 0.75rem; }
+.timeline-card h3 { font-size: 1.125rem; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 0.5rem; }
+.timeline-card p { font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
+.timeline-carousel { position: relative; }
+.timeline-carousel .scroll-container { display: flex; gap: 1rem; overflow-x: auto; padding: 1rem 2rem; scroll-snap-type: x mandatory; }
+.timeline-carousel .scroll-item { flex-shrink: 0; width: 288px; scroll-snap-align: center; }
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; width: 2.5rem; height: 2.5rem; border-radius: 50%; background: #fff; border: 1px solid hsl(var(--border)); box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; }
+.carousel-btn svg { width: 1.25rem; height: 1.25rem; }
+.carousel-btn.left { left: 0; }
+.carousel-btn.right { right: 0; }
+@media(min-width:768px) {
+  .timeline-desktop { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; }
+  .timeline-card { padding: 2rem; }
+  .timeline-card .step-icon { width: 4rem; height: 4rem; border-radius: 1rem; margin-bottom: 1rem; }
+  .timeline-card .step-icon svg { width: 2rem; height: 2rem; }
+  .timeline-card h3 { font-size: 1.25rem; margin-bottom: 0.75rem; }
+  .timeline-card p { font-size: 1rem; }
+}
+
+/* ═══ Testimonials M08 ═══ */
+.testimonials { padding: 5rem 0; position: relative; overflow: hidden; }
+.video-carousel { position: relative; margin-bottom: 4rem; }
+.video-carousel h3 { text-align: center; font-size: 1.25rem; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 1.5rem; }
+.video-carousel .scroll-wrap { overflow: hidden; padding: 1rem 0; }
+.video-item { position: relative; flex-shrink: 0; width: 192px; border-radius: 1rem; overflow: hidden; cursor: pointer; }
+.video-item video { width: 100%; height: 320px; object-fit: cover; border-radius: 1rem; background: #1a1a1a; }
+.video-item .play-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.video-item .play-btn { width: 3.5rem; height: 3.5rem; background: rgba(255,255,255,0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: transform 0.3s; }
+.video-item:hover .play-btn { transform: scale(1.1); }
+.video-item .play-btn svg { width: 1.5rem; height: 1.5rem; color: hsl(var(--primary)); margin-left: 2px; }
+@media(min-width:768px) {
+  .video-item { width: 224px; }
+  .video-item video { height: 384px; }
+}
+.written-carousel { position: relative; }
+.written-carousel .scroll-wrap { overflow: hidden; padding: 1rem 0; }
+.written-card { background: #fff; border-radius: 1rem; padding: 1.5rem; flex-shrink: 0; width: 320px; }
+.written-card .stars { display: flex; gap: 0.25rem; margin-bottom: 0.75rem; }
+.written-card .stars svg { width: 1rem; height: 1rem; }
+.written-card .stars .filled { color: #facc15; fill: #facc15; }
+.written-card .stars .empty { color: hsl(var(--muted)); }
+.written-card .quote-icon { width: 2rem; height: 2rem; color: hsl(var(--primary)/0.2); margin-bottom: 0.5rem; }
+.written-card p.text { color: hsl(var(--muted-foreground)); margin-bottom: 1rem; font-size: 0.875rem; }
+.written-card p.name { font-weight: 700; color: hsl(var(--foreground)); font-size: 0.875rem; }
+@media(min-width:768px) { .written-card { width: 384px; } }
+
+/* Video modal */
+.video-modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; }
+.video-modal.active { display: flex; }
+.video-modal .modal-content { position: relative; max-width: 56rem; width: 90%; }
+.video-modal .close-btn { position: absolute; right: 0.75rem; top: 0.75rem; z-index: 50; background: rgba(255,255,255,0.2); backdrop-filter: blur(4px); border-radius: 50%; width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+.video-modal .close-btn:hover { background: rgba(255,255,255,0.4); }
+.video-modal .close-btn svg { width: 1.25rem; height: 1.25rem; color: #fff; }
+.video-modal video { width: 100%; max-height: 80vh; object-fit: contain; }
+
+/* ═══ Pricing M09 ═══ */
+.pricing { padding: 5rem 0; background: hsl(0 90% 97%); position: relative; overflow: hidden; }
+.pricing-grid { display: grid; gap: 1.5rem; max-width: 72rem; margin: 0 auto; }
+@media(min-width:768px) { .pricing-grid { grid-template-columns: repeat(3,1fr); gap: 2rem; } }
+.kit-card { position: relative; border-radius: 1.5rem; padding: 1.5rem; background: #fff; border: 1px solid hsl(var(--muted)); }
+.kit-card.popular { background: hsl(var(--primary)); border: 2px solid hsl(var(--primary)); box-shadow: 0 0 0 4px hsl(82 99% 35%/0.2); }
+.kit-card.best-value { background: #fff; border: 2px solid hsl(var(--secondary)); box-shadow: 0 0 0 4px hsl(0 85% 52%/0.2); }
+@media(min-width:768px) {
+  .kit-card { padding: 2rem; }
+  .kit-card.best-value { transform: scale(1.05); margin: -1rem 0; }
+}
+.kit-badge { position: absolute; top: -1rem; left: 50%; transform: translateX(-50%); font-size: 0.75rem; font-weight: 700; padding: 0.5rem 1rem; border-radius: 9999px; white-space: nowrap; display: flex; align-items: center; gap: 0.375rem; }
+.kit-badge.yellow { background: #facc15; color: hsl(var(--foreground)); }
+.kit-badge.red { background: hsl(var(--secondary)); color: #fff; }
+.kit-badge svg { width: 0.875rem; height: 0.875rem; fill: currentColor; }
+.kit-card .kit-img { display: flex; justify-content: center; margin-bottom: 1.5rem; padding-top: 1rem; }
+.kit-card .kit-img img { width: auto; object-fit: contain; height: 192px; }
+.kit-card.best-value .kit-img img { height: 208px; }
+@media(min-width:768px) {
+  .kit-card .kit-img img { height: 208px; }
+  .kit-card.best-value .kit-img img { height: 224px; }
+}
+.kit-card .kit-name { text-align: center; margin-bottom: 1rem; }
+.kit-card .kit-name h3 { font-size: 1.25rem; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 0.25rem; }
+.kit-card.popular .kit-name h3 { color: #fff; }
+.kit-card .kit-name .capsules { font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
+.kit-card.popular .kit-name .capsules { color: rgba(255,255,255,0.8); }
+.kit-card .price-area { text-align: center; margin-bottom: 1rem; }
+.kit-card .price-row { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-bottom: 0.25rem; }
+.kit-card .old-price { text-decoration: line-through; font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
+.kit-card.popular .old-price { color: rgba(255,255,255,0.6); }
+.kit-card .discount-badge { font-weight: 700; font-size: 0.875rem; color: hsl(var(--secondary)); }
+.kit-card.popular .discount-badge { color: #fff; background: rgba(255,255,255,0.2); padding: 0.125rem 0.5rem; border-radius: 0.25rem; }
+.kit-card .big-price { font-size: 2.25rem; font-weight: 700; color: hsl(var(--foreground)); }
+.kit-card.popular .big-price { color: #fff; }
+.kit-card .installment { font-size: 0.875rem; color: hsl(var(--muted-foreground)); margin-top: 0.25rem; }
+.kit-card.popular .installment { color: rgba(255,255,255,0.8); }
+.kit-card .per-unit { border-radius: 0.75rem; padding: 0.75rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid hsl(var(--muted)); }
+.kit-card.popular .per-unit { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); }
+.kit-card.best-value .per-unit { background: hsl(0 85% 52%/0.1); border-color: hsl(0 85% 52%/0.3); }
+.kit-card .per-unit .label { font-size: 0.875rem; color: hsl(var(--muted-foreground)); }
+.kit-card.popular .per-unit .label { color: rgba(255,255,255,0.8); }
+.kit-card .per-unit .value { font-weight: 700; color: hsl(var(--secondary)); }
+.kit-card.popular .per-unit .value { color: #fff; }
+.kit-card .features { margin-bottom: 1rem; }
+.kit-card .feature-item { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+.kit-card .feature-item svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+.kit-card .feature-item span { font-size: 0.875rem; color: hsl(var(--foreground)); }
+.kit-card.popular .feature-item span { color: #fff; }
+.kit-card .feature-item .check { color: hsl(var(--primary)); }
+.kit-card.popular .feature-item .check { color: #fff; }
+.kit-card.best-value .feature-item .check { color: hsl(var(--secondary)); }
+.kit-card .feature-item .gift { color: hsl(var(--secondary)); }
+.kit-card.popular .feature-item .gift { color: #fff; }
+.kit-card .feature-item .cashback { font-weight: 500; color: hsl(var(--secondary)); }
+.kit-card.popular .feature-item .cashback { color: #fff; }
+.kit-card .buy-btn { display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.75rem; font-size: 1.125rem; font-weight: 700; border-radius: 9999px; position: relative; overflow: hidden; transition: all 0.3s; }
+.kit-card .buy-btn.green { background: hsl(var(--primary)); color: #fff; }
+.kit-card .buy-btn.green:hover { background: hsl(var(--primary-dark)); }
+.kit-card .buy-btn.white { background: #fff; color: hsl(var(--primary)); }
+.kit-card .buy-btn.white:hover { background: rgba(255,255,255,0.9); }
+.kit-card .delivery-note { display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1rem; font-size: 0.75rem; color: hsl(var(--muted-foreground)); }
+.kit-card.popular .delivery-note { color: rgba(255,255,255,0.7); }
+.kit-card .delivery-note svg { width: 1rem; height: 1rem; }
+
+/* ═══ HowToUse M10 ═══ */
+.howtouse { padding: 5rem 0; position: relative; overflow: hidden; }
+.howtouse .grid2 { display: grid; gap: 3rem; align-items: center; max-width: 64rem; margin: 0 auto; }
+@media(min-width:768px) { .howtouse .grid2 { grid-template-columns: 1fr 1fr; } }
+.howtouse .circle-img { width: 256px; height: 256px; border-radius: 50%; overflow: hidden; margin: 0 auto; }
+.howtouse .circle-img img { width: 100%; height: 100%; object-fit: cover; }
+@media(min-width:768px) { .howtouse .circle-img { width: 320px; height: 320px; } }
+.howtouse .step-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 2rem; }
+.howtouse .step-circle { position: relative; flex-shrink: 0; }
+.howtouse .step-circle .main { width: 4rem; height: 4rem; border-radius: 50%; background: hsl(var(--secondary)); display: flex; align-items: center; justify-content: center; }
+.howtouse .step-circle .main svg { width: 1.75rem; height: 1.75rem; color: #fff; }
+.howtouse .step-circle .num { position: absolute; top: -0.25rem; right: -0.25rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; background: #fff; color: hsl(var(--secondary)); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; }
+.howtouse .step-text { padding-top: 0.5rem; }
+.howtouse .step-text h3 { font-size: 1.25rem; font-weight: 700; color: hsl(var(--foreground)); margin-bottom: 0.25rem; }
+.howtouse .step-text p { color: hsl(var(--muted-foreground)); }
+
+/* ═══ FAQ M11 ═══ */
+.faq-section { padding: 5rem 0; background: #fff; position: relative; overflow: hidden; }
+.faq-section .faq-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: hsl(var(--accent-light)); color: hsl(var(--accent)); font-weight: 600; font-size: 0.875rem; padding: 0.5rem 1rem; border-radius: 9999px; margin-bottom: 1rem; }
+.faq-list { max-width: 48rem; margin: 0 auto; }
+.faq-item { background: hsl(var(--muted)/0.5); border-radius: 0.75rem; padding: 0 1.5rem; margin-bottom: 1rem; overflow: hidden; }
+.faq-trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 0; text-align: left; font-weight: 600; color: hsl(var(--foreground)); font-size: 1rem; transition: color 0.3s; }
+.faq-trigger:hover { color: hsl(var(--primary)); }
+.faq-trigger .chevron { width: 1.25rem; height: 1.25rem; transition: transform 0.3s; flex-shrink: 0; margin-left: 1rem; }
+.faq-trigger[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+.faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+.faq-answer-inner { padding-bottom: 1.25rem; color: hsl(var(--muted-foreground)); }
+
+/* ═══ Footer M12 ═══ */
+.site-footer { background: #1a3e01; color: #fff; position: relative; overflow: hidden; }
+.site-footer .wave-top { position: absolute; top: -1px; left: 0; width: 100%; height: 80px; }
+@media(min-width:768px) { .site-footer .wave-top { height: 136px; } }
+.site-footer .footer-inner { padding-top: 4rem; padding-bottom: 1.5rem; }
+@media(min-width:768px) { .site-footer .footer-inner { padding-top: 6rem; padding-bottom: 2rem; } }
+.footer-logo img { height: 3.5rem; }
+.footer-links h4 { font-weight: 700; font-size: 0.875rem; margin-bottom: 0.75rem; }
+.footer-links ul { list-style: none; }
+.footer-links li { margin-bottom: 0.375rem; }
+.footer-links a { color: rgba(255,255,255,0.7); font-size: 0.875rem; transition: color 0.3s; }
+.footer-links a:hover { color: hsl(var(--secondary)); }
+.social-icons { display: flex; gap: 0.75rem; }
+.social-icon { width: 2rem; height: 2rem; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background 0.3s; }
+.social-icon:hover { background: hsl(var(--secondary)); }
+.social-icon svg { width: 1rem; height: 1rem; color: #fff; fill: #fff; }
+.social-icon.whatsapp { background: #25D366; }
+.social-icon.whatsapp:hover { background: #20BD5A; }
+.footer-contact { color: rgba(255,255,255,0.7); font-size: 0.875rem; }
+.footer-contact a { color: rgba(255,255,255,0.7); transition: color 0.3s; }
+.footer-contact a:hover { color: hsl(var(--secondary)); }
+.footer-contact svg { width: 1rem; height: 1rem; color: hsl(var(--primary-light)); display: inline; vertical-align: middle; margin-right: 0.375rem; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; }
+.footer-bottom p { color: rgba(255,255,255,0.5); font-size: 0.625rem; text-align: center; }
+.footer-warning { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; margin-bottom: 1rem; }
+.footer-warning p { color: rgba(255,255,255,0.4); font-size: 0.625rem; text-align: center; line-height: 1.6; }
+.footer-pay { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 1.5rem; }
+.footer-pay img { height: 1.5rem; }
+.footer-pay .security-item { display: flex; align-items: center; gap: 0.375rem; font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+.footer-pay .security-item svg { width: 1rem; height: 1rem; color: hsl(var(--primary-light)); }
+
+/* Mobile footer */
+.footer-mobile { text-align: center; }
+.footer-mobile .footer-logo { margin-bottom: 1.5rem; }
+.footer-mobile .footer-logo img { margin: 0 auto; }
+.footer-mobile .links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; text-align: center; padding: 0 1rem; }
+.footer-mobile .links-grid h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 0.5rem; color: #fff; }
+.footer-mobile .links-grid ul { list-style: none; padding: 0; margin: 0; }
+.footer-mobile .links-grid li { margin-bottom: 0.5rem; }
+.footer-mobile .links-grid a { font-size: 0.8125rem; color: rgba(255,255,255,0.7); transition: color 0.3s; }
+.footer-mobile .links-grid a:hover { color: hsl(var(--secondary)); }
+.footer-mobile .contact-compact { font-size: 0.75rem; margin-bottom: 1rem; }
+.footer-mobile .contact-compact a { display: inline-flex; align-items: center; gap: 0.25rem; color: rgba(255,255,255,0.7); margin: 0.25rem 0.5rem; }
+.footer-mobile .contact-compact svg { width: 0.75rem; height: 0.75rem; }
+.footer-mobile .social-row { display: flex; justify-content: center; gap: 0.75rem; margin-bottom: 1rem; }
+.footer-mobile .social-icon { width: 2.25rem; height: 2.25rem; }
+.footer-mobile .wa-btn { display: inline-flex; align-items: center; gap: 0.5rem; background: #25D366; color: #fff; font-weight: 600; padding: 0.625rem 1.25rem; border-radius: 9999px; font-size: 0.875rem; margin-bottom: 1.5rem; }
+.footer-mobile .wa-btn:hover { background: #20BD5A; }
+.footer-mobile .pay-compact img { height: 1.5rem; margin: 0 auto 0.75rem; }
+.footer-mobile .security-row { display: flex; justify-content: center; gap: 1rem; font-size: 0.75rem; color: rgba(255,255,255,0.7); }
+.footer-mobile .security-row svg { width: 0.75rem; height: 0.75rem; color: hsl(var(--primary-light)); margin-right: 0.25rem; }
+
+/* Desktop footer */
+.footer-desktop { display: none; }
+@media(min-width:768px) {
+  .footer-mobile { display: none; }
+  .footer-desktop { display: block; }
+  .footer-desktop .grid4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-bottom: 2rem; }
+}
+
+/* ═══ StickyFooter M13 ═══ */
+.sticky-footer { position: fixed; bottom: 0; left: 0; right: 0; z-index: 50; background: #fff; border-top: 1px solid hsl(var(--muted)); box-shadow: 0 -4px 20px rgba(0,0,0,0.1); transform: translateY(100%); opacity: 0; transition: transform 0.3s, opacity 0.3s; will-change: transform, opacity; contain: layout style; }
+.sticky-footer.visible { transform: translateY(0); opacity: 1; }
+.sticky-footer .inner { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; max-width: 56rem; margin: 0 auto; padding: 0.75rem 1rem; }
+.sticky-footer .product-info { display: none; flex-shrink: 0; }
+.sticky-footer .product-info .pname { font-weight: 700; color: hsl(var(--foreground)); font-size: 0.875rem; }
+.sticky-footer .product-info .psub { font-size: 0.75rem; color: hsl(var(--muted-foreground)); }
+.sticky-footer .variant-select { position: relative; flex: 1; min-width: 0; }
+.sticky-footer .variant-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 0.25rem; padding: 0.5rem 0.75rem; background: hsl(var(--muted)); border-radius: 0.5rem; font-size: 0.75rem; font-weight: 500; color: hsl(var(--foreground)); }
+.sticky-footer .variant-btn .chevron { width: 0.875rem; height: 0.875rem; flex-shrink: 0; transition: transform 0.2s; }
+.sticky-footer .variant-btn[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+.sticky-footer .variant-dropdown { display: none; position: absolute; bottom: 100%; margin-bottom: 0.5rem; left: 0; width: 280px; background: #fff; border-radius: 0.75rem; box-shadow: 0 10px 40px rgba(0,0,0,0.15); border: 1px solid hsl(var(--muted)); overflow: hidden; z-index: 50; }
+.sticky-footer .variant-dropdown.open { display: block; }
+.sticky-footer .variant-option { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 0.625rem 0.75rem; font-size: 0.875rem; transition: background 0.2s; }
+.sticky-footer .variant-option:hover { background: hsl(var(--muted)/0.5); }
+.sticky-footer .variant-option.active { background: hsl(var(--primary)/0.1); }
+.sticky-footer .variant-option .opt-left .opt-name { font-weight: 600; font-size: 0.75rem; color: hsl(var(--foreground)); }
+.sticky-footer .variant-option.active .opt-name { color: hsl(var(--primary)); }
+.sticky-footer .variant-option .opt-badge { font-size: 0.5625rem; background: hsl(var(--secondary)/0.1); color: hsl(var(--secondary)); padding: 0.125rem 0.25rem; border-radius: 0.25rem; margin-left: 0.375rem; white-space: nowrap; }
+.sticky-footer .variant-option .opt-sub { font-size: 0.625rem; color: hsl(var(--muted-foreground)); }
+.sticky-footer .variant-option .opt-free { font-size: 0.5625rem; color: hsl(var(--secondary)); font-weight: 500; }
+.sticky-footer .variant-option .opt-right { text-align: right; }
+.sticky-footer .variant-option .opt-price { font-weight: 700; font-size: 0.75rem; color: hsl(var(--foreground)); }
+.sticky-footer .variant-option.active .opt-price { color: hsl(var(--primary)); }
+.sticky-footer .variant-option .opt-old { font-size: 0.625rem; color: hsl(var(--muted-foreground)); text-decoration: line-through; }
+.sticky-footer .price-display { display: none; text-align: right; flex-shrink: 0; }
+.sticky-footer .price-display .price-top { display: flex; align-items: center; gap: 0.375rem; justify-content: flex-end; }
+.sticky-footer .price-display .old { font-size: 0.625rem; color: hsl(var(--muted-foreground)); text-decoration: line-through; }
+.sticky-footer .price-display .disc { font-size: 0.5625rem; background: hsl(var(--secondary)); color: #fff; padding: 0.125rem 0.25rem; border-radius: 9999px; font-weight: 600; }
+.sticky-footer .price-display .current { font-size: 1rem; font-weight: 700; color: hsl(var(--primary)); white-space: nowrap; }
+.sticky-footer .buy-link { display: inline-flex; align-items: center; gap: 0.25rem; background: hsl(var(--primary)); color: #fff; font-weight: 700; padding: 0.75rem; border-radius: 9999px; font-size: 0.75rem; white-space: nowrap; flex-shrink: 0; position: relative; overflow: hidden; }
+.sticky-footer .buy-link:hover { background: hsl(var(--primary-dark)); }
+.sticky-footer .buy-link svg { width: 1rem; height: 1rem; }
+.sticky-footer .buy-link .mobile-price { font-weight: 700; }
+@media(min-width:640px) {
+  .sticky-footer .inner { gap: 0.75rem; }
+  .sticky-footer .product-info { display: block; }
+  .sticky-footer .product-info.sm-only { display: block; }
+  .sticky-footer .product-info.lg-only { display: none; }
+  .sticky-footer .variant-select { flex: initial; width: 150px; }
+  .sticky-footer .variant-btn { font-size: 0.875rem; padding: 0.5rem 0.75rem; }
+  .sticky-footer .price-display { display: block; }
+  .sticky-footer .buy-link { padding: 0.75rem 1rem; font-size: 0.875rem; }
+  .sticky-footer .buy-link .mobile-price { display: none; }
+  .sticky-footer .buy-link .desktop-text { display: inline; }
+}
+@media(min-width:1024px) {
+  .sticky-footer .product-info.sm-only { display: none; }
+  .sticky-footer .product-info.lg-only { display: block; }
+  .sticky-footer .variant-select { width: 180px; }
+  .sticky-footer .price-display .current { font-size: 1.125rem; }
+  .sticky-footer .buy-link { padding: 0.75rem 1.25rem; }
+}
+
+/* ═══ WhatsApp Button M14 ═══ */
+.whatsapp-float { position: fixed; bottom: 6rem; right: 1rem; z-index: 50; width: 3.5rem; height: 3.5rem; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: transform 0.3s, background 0.3s; }
+.whatsapp-float:hover { background: #20BD5A; transform: scale(1.1); }
+.whatsapp-float svg { width: 1.75rem; height: 1.75rem; color: #fff; }
+</style>
+{% if section.settings.standalone_page %}
+</head>
+<body>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1120227461949168&ev=PageView&noscript=1"/></noscript>
+{% endif %}
+
+<main>
+
+<!-- ═══ M01 SubHero ═══ -->
+<section class="subhero bg-gradient-red">
+<div class="subhero-track animate-scroll-subhero" id="subhero-track"></div>
+</section>
+<!-- ═══ CHECKPOINT [M01] SubHero ✓ — scrolling benefit banner ═══ -->
+
+<!-- ═══ M02 Hero ═══ -->
+<section id="inicio" class="hero bg-gradient-hero">
+<svg class="wave-bottom" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="white"/></svg>
+<div class="container content">
+<div class="grid">
+<div class="text-col inview-hidden from-left" data-inview>
+<div class="badge-pill">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+<span>Jejoom · Shot Matinal Denavita</span>
+</div>
+<h1>O repositor natural para quem <span class="highlight">faz jejum ou usa caneta.</span></h1>
+<p class="subtitle">Quem faz jejum ou usa caneta emagrecedora come menos e perde nutrientes essenciais. Use Jejoom durante o tratamento para repor vitaminas e minerais, ganhar energia, e ainda acelerar o emagrecimento.</p>
+<a href="#ofertas" class="btn-primary btn-lg btn-pulse btn-shine">Quero proteger meu corpo agora <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+</div>
+<div class="product-area inview-hidden" data-inview>
+<div class="product-inner">
+<div class="glow1"></div>
+<div class="glow2"></div>
+<div id="sparkles-container"></div>
+<img src="{% if section.settings.orange_image_1 != blank %}{{ section.settings.orange_image_1 | image_url: width: 160 }}{% else %}assets/laranja-1.webp{% endif %}" alt="" class="orange-float" style="left:-40px;top:25%;width:80px;z-index:15" loading="lazy">
+<img src="{% if section.settings.orange_image_3 != blank %}{{ section.settings.orange_image_3 | image_url: width: 128 }}{% else %}assets/laranja-3.webp{% endif %}" alt="" class="orange-float" style="right:-24px;bottom:15%;width:64px;z-index:15" loading="lazy">
+<img src="{% if section.settings.orange_image_4 != blank %}{{ section.settings.orange_image_4 | image_url: width: 112 }}{% else %}assets/laranja-4.webp{% endif %}" alt="" class="orange-float" style="left:5%;bottom:5%;width:56px;z-index:5" loading="lazy">
+<img src="{% if section.settings.orange_image_1 != blank %}{{ section.settings.orange_image_1 | image_url: width: 96 }}{% else %}assets/laranja-1.webp{% endif %}" alt="" class="orange-float" style="left:25%;top:-24px;width:48px;z-index:5" loading="lazy">
+<img src="{% if section.settings.orange_image_2 != blank %}{{ section.settings.orange_image_2 | image_url: width: 64 }}{% else %}assets/laranja-2.webp{% endif %}" alt="" class="orange-float" style="left:-16px;top:5%;width:32px;z-index:1;filter:blur(1px);opacity:0.8" loading="lazy">
+<img src="{% if section.settings.orange_image_4 != blank %}{{ section.settings.orange_image_4 | image_url: width: 64 }}{% else %}assets/laranja-4.webp{% endif %}" alt="" class="orange-float" style="right:20%;bottom:-32px;width:32px;z-index:1;filter:blur(1px);opacity:0.8" loading="lazy">
+<img src="{% if section.settings.hero_caneta_image != blank %}{{ section.settings.hero_caneta_image | image_url: width: 512 }}{% else %}assets/caneta-emagrecedora.webp{% endif %}" alt="" class="caneta-float" loading="lazy">
+<img src="{% if section.settings.hero_product_image != blank %}{{ section.settings.hero_product_image | image_url: width: 960 }}{% else %}assets/saco-produto-jejoom.webp{% endif %}" alt="Jejoom Shot Matinal Denavita" class="product-img animate-float" loading="eager" fetchpriority="high">
+<div class="float-badge">
+<span class="big">+Energia</span>
+<span class="small">Durante o jejum</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ═══ CHECKPOINT [M02] Hero ✓ — hero section with product, sparkles, oranges, caneta, badge, CTA ═══ -->
+
+<!-- ═══ M03 WhyItWorks ═══ -->
+<section class="why-section" data-inview-parent>
+<div class="container">
+<div class="section-header inview-hidden" data-inview>
+<span class="section-badge green">POR QUE O JEJOOM É ESSENCIAL</span>
+<h2 class="section-title">Você está comendo menos. Seu corpo sente.</h2>
+<p class="section-subtitle">Jejum ou caneta, o resultado é o mesmo: menos comida, menos nutrientes. O Jejoom resolve isso.</p>
+</div>
+<div class="why-grid">
+<div class="inview-hidden from-left" data-inview>
+<!-- Mobile: accordion -->
+<div class="hide-desktop" id="why-accordion"></div>
+<!-- Desktop: cards -->
+<div class="hide-mobile" id="why-cards-desktop"></div>
+</div>
+<div class="why-image inview-hidden from-right" data-inview style="display:flex;flex-direction:column;align-items:center">
+<img src="{% if section.settings.why_section_image != blank %}{{ section.settings.why_section_image | image_url: width: 1400 }}{% else %}assets/meninas-jejoom.webp{% endif %}" alt="Modelos com Jejoom Denavita" loading="lazy">
+</div>
+</div>
+</div>
+</section>
+<!-- ═══ CHECKPOINT [M03] WhyItWorks ✓ — cards desktop, accordion mobile, image ═══ -->
+
+<!-- ═══ M04 BenefitsGrid ═══ -->
+<section class="benefits-section bg-gradient-green-light" data-inview-parent>
+<svg class="deco-svg" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
+<path d="M-80 150 C200 50,450 300,750 180 S1150 350,1500 200" stroke="hsl(82,99%,35%)" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+<path d="M-40 650 C280 530,520 720,820 580 S1180 740,1480 630" stroke="hsl(0,85%,52%)" stroke-opacity="0.07" stroke-width="1.5" fill="none"/>
+</svg>
+<div class="container" style="position:relative;z-index:10">
+<div class="section-header inview-hidden" data-inview>
+<span class="section-badge white-bg">BENEFÍCIOS</span>
+<h2 class="section-title">Protege seu corpo e acelera os resultados</h2>
+<p class="section-subtitle">Nutrição, energia e emagrecimento potencializado em um único shot matinal.</p>
+</div>
+<!-- Mobile -->
+<div class="hide-desktop" id="benefits-mobile"></div>
+<!-- Desktop -->
+<div class="hide-mobile benefits-desktop" id="benefits-desktop"></div>
+</div>
+</section>
+<!-- ═══ CHECKPOINT [M04] BenefitsGrid ✓ — 6 benefit cards, show more/less mobile ═══ -->
+
+<!-- ═══ M05 WhoIsItFor ═══ -->
+<section class="whoisitfor" data-inview-parent>
+<div class="skew-bg"></div>
+<div class="container" style="position:relative;z-index:10;padding-bottom:50px">
+<div class="grid2">
+<div class="inview-hidden from-left" data-inview style="display:flex;flex-direction:column;align-items:center">
+<div style="width:100%;max-width:700px;margin:0 auto">
+<img src="{% if section.settings.whoisitfor_image != blank %}{{ section.settings.whoisitfor_image | image_url: width: 1400 }}{% else %}assets/lari-jejoom-caneta.webp{% endif %}" alt="Mulheres satisfeitas com Jejoom" loading="lazy">
+</div>
+</div>
+<div class="inview-hidden from-right" data-inview>
+<div class="header-right">
+<span class="section-badge red">VOCÊ SE IDENTIFICA?</span>
+<h2 class="section-title">Isso soa familiar?</h2>
+</div>
+<div id="targets-list"></div>
+</div>
+</div>
+<div class="bottom-cta inview-hidden" data-inview>
+<p>Marcou <span style="color:hsl(var(--primary));font-weight:700">1 item</span>? Seu corpo está avisando. <span style="color:hsl(var(--secondary));font-weight:700">Marcou todos? Você PRECISA do Jejoom. Agora.</span></p>
+<a href="#ofertas" class="btn-primary btn-lg btn-shine">Quero proteger meu corpo <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+</div>
+</div>
+<svg class="wave-bottom" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none" style="position:absolute;bottom:-1px;left:0;width:100%;height:80px"><path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="hsl(0,85%,52%)"/></svg>
+</section>
+<!-- ═══ CHECKPOINT [M05] WhoIsItFor ✓ — checklist, image, CTA ═══ -->
+
+<!-- ═══ M06 ScienceHero ═══ -->
+<section class="science" data-inview-parent>
+<div class="deco-lines">
+<svg style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none">
+<path d="M-100 200 C200 50,500 350,800 180 S1200 400,1540 250" stroke="white" stroke-opacity="0.08" stroke-width="2" fill="none"/>
+<path d="M-50 350 C250 150,450 500,750 300 S1100 550,1500 380" stroke="white" stroke-opacity="0.06" stroke-width="1.5" fill="none"/>
+</svg>
+<img src="{% if section.settings.orange_image_1 != blank %}{{ section.settings.orange_image_1 | image_url: width: 112 }}{% else %}assets/laranja-1.webp{% endif %}" alt="" class="orange-deco" style="top:10%;left:6%;width:56px" loading="lazy">
+<img src="{% if section.settings.orange_image_2 != blank %}{{ section.settings.orange_image_2 | image_url: width: 96 }}{% else %}assets/laranja-2.webp{% endif %}" alt="" class="orange-deco" style="top:20%;right:5%;width:48px" loading="lazy">
+<img src="{% if section.settings.orange_image_4 != blank %}{{ section.settings.orange_image_4 | image_url: width: 80 }}{% else %}assets/laranja-4.webp{% endif %}" alt="" class="orange-deco" style="bottom:30%;left:8%;width:40px" loading="lazy">
+<img src="{% if section.settings.orange_image_3 != blank %}{{ section.settings.orange_image_3 | image_url: width: 96 }}{% else %}assets/laranja-3.webp{% endif %}" alt="" class="orange-deco" style="top:50%;right:10%;width:48px" loading="lazy">
+<svg style="position:absolute;bottom:0;left:0;width:100%;height:80px" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 70C300 120 450 0 800 70C1150 140 1300 40 1440 70V120H0Z" fill="white"/></svg>
+</div>
+<div class="container" style="position:relative;z-index:10;padding-top:1rem;padding-bottom:2rem">
+<div class="section-header inview-hidden" data-inview style="margin-bottom:2.5rem">
+<div style="display:inline-flex;align-items:center;gap:0.5rem;background:rgba(255,255,255,0.2);backdrop-filter:blur(8px);border-radius:9999px;padding:0.5rem 1rem;margin-bottom:1rem">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>
+<span style="font-size:0.875rem;color:#fff;font-weight:600">CIÊNCIA</span>
+</div>
+<h2 class="section-title" style="color:#fff">7 ativos para nutrir, proteger e emagrecer</h2>
+<p class="section-subtitle" style="color:rgba(255,255,255,0.8)">Cada ingrediente trabalha em sinergia para dar energia e potencializar seus resultados</p>
+</div>
+<!-- Mobile ingredients -->
+<div class="hide-desktop" id="ingredients-mobile" style="margin-bottom:2.5rem"></div>
+<!-- Desktop ingredients -->
+<div class="hide-mobile ingredients-desktop" id="ingredients-desktop" style="margin-bottom:4rem"></div>
+<!-- Study card -->
+<div class="study-card inview-hidden" data-inview>
+<div class="study-label"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(82,99%,35%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 3h15"/><path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/></svg><span>Benefícios Comprovados</span></div>
+<h3>Jejoom · Fórmula Cientificamente Desenvolvida</h3>
+<div class="stats-grid">
+<div class="stat-box"><p class="val">7 ativos</p><p class="lab">Em uma fórmula</p></div>
+<div class="stat-box"><p class="val">1 dose</p><p class="lab">Por dia</p></div>
+<div class="stat-box"><p class="val">30 dias</p><p class="lab">De tratamento</p></div>
+</div>
+<p style="font-size:0.875rem;color:hsl(var(--muted-foreground));margin-bottom:0.75rem">Quem faz jejum ou restrição alimentar come menos e perde nutrientes. O Jejoom combina 7 ativos de alta performance para repor vitaminas e minerais, dar energia e ainda potencializar o emagrecimento acelerando o metabolismo.</p>
+<p style="font-size:0.75rem;color:hsl(var(--muted-foreground)/0.7);font-style:italic">Fonte: Composição baseada em estudos sobre os ativos individuais</p>
+</div>
+<!-- Badges -->
+<div class="badges-row inview-hidden" data-inview id="science-badges"></div>
+</div>
+</section>
+<!-- ═══ CHECKPOINT [M06] ScienceHero ✓ — ingredients, study card, badges ═══ -->
+
+<!-- ═══ M07 Timeline ═══ -->
+<section id="transformacao" class="timeline" data-inview-parent>
+<div class="dots-bg"></div>
+<div class="container" style="position:relative;z-index:10">
+<div class="section-header inview-hidden" data-inview>
+<span class="section-badge green">SUA EVOLUÇÃO COM JEJOOM</span>
+<h2 class="section-title">O que acontece quando você começa</h2>
+<p class="section-subtitle">Energia, nutrição e emagrecimento potencializado a cada fase</p>
+</div>
+<!-- Mobile carousel -->
+<div class="hide-desktop timeline-carousel" id="timeline-mobile"></div>
+<!-- Desktop grid -->
+<div class="hide-mobile timeline-desktop" id="timeline-desktop"></div>
+</div>
+</section>
+<!-- ═══ CHECKPOINT [M07] Timeline ✓ — carousel mobile, grid desktop ═══ -->
+
+<!-- ═══ M08 Testimonials ═══ -->
+<section id="resultados" class="testimonials bg-gradient-green-light" data-inview-parent>
+<svg class="deco-svg" viewBox="0 0 1440 800" fill="none" preserveAspectRatio="none" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none">
+<path d="M-50 80 C300 200,500 30,800 150 S1200 50,1500 120" stroke="hsl(0,85%,52%)" stroke-opacity="0.1" stroke-width="2" fill="none"/>
+</svg>
+<div class="container" style="position:relative;z-index:10">
+<div class="section-header inview-hidden" data-inview>
+<span class="section-badge red">RESULTADOS REAIS</span>
+<h2 class="section-title">Quem usa, não larga mais</h2>
+<p class="section-subtitle" style="font-size:1.125rem">Milhares de pessoas que transformaram sua rotina matinal com o Jejoom.</p>
+</div>
+<!-- Video carousel -->
+<div class="video-carousel inview-hidden" data-inview>
+<h3>Vídeos de Depoimentos</h3>
+<div style="position:relative">
+<button class="carousel-btn left" onclick="scrollVideoLeft()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+<button class="carousel-btn right" onclick="scrollVideoRight()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+<div class="scroll-wrap">
+<div id="video-track" class="animate-scroll-videos" style="display:flex;gap:1rem"></div>
+</div>
+</div>
+</div>
+<!-- Written testimonials -->
+<div class="written-carousel inview-hidden" data-inview>
+<div style="position:relative">
+<button class="carousel-btn left hide-mobile" style="display:none" onclick="scrollWrittenLeft()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button>
+<button class="carousel-btn right hide-mobile" style="display:none" onclick="scrollWrittenRight()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button>
+<div class="scroll-wrap">
+<div id="written-track" class="animate-scroll-left" style="display:flex;gap:1.5rem"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Video Modal -->
+<div class="video-modal" id="videoModal">
+<div class="modal-content">
+<button class="close-btn" onclick="closeVideoModal()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+<video id="modalVideo" controls playsinline></video>
+</div>
+</div>
+<!-- ═══ CHECKPOINT [M08] Testimonials ✓ — video carousel, written carousel, modal ═══ -->
+
+<!-- ═══ M09 Pricing ═══ -->
+<section id="ofertas" class="pricing" data-inview-parent>
+<div class="container" style="position:relative;z-index:10">
+<div class="section-header inview-hidden" data-inview>
+<span class="section-badge" style="background:hsl(var(--primary));color:#fff">OFERTA ESPECIAL</span>
+<h2 class="section-title">Não espere seu corpo dar sinais</h2>
+<p class="section-subtitle">Escolha o kit ideal para potencializar seus resultados com energia e nutrição.</p>
+</div>
+<div class="pricing-grid" id="pricing-grid"></div>
+</div>
+</section>
+<!-- ═══ CHECKPOINT [M09] Pricing ✓ — 3 kit cards with badges, prices, features, CTAs ═══ -->
+
+<!-- ═══ M10 HowToUse ═══ -->
+<section class="howtouse bg-gradient-subtle" data-inview-parent>
+<div class="container" style="position:relative;z-index:10">
+<div class="section-header inview-hidden" data-inview>
+<span class="section-badge green">SIMPLES ASSIM</span>
+<h2 class="section-title">Só 1 shot por dia</h2>
+</div>
+<div class="grid2">
+<div class="inview-hidden from-left" data-inview style="display:flex;justify-content:center">
+<div class="circle-img">
+<img src="{% if section.settings.howtouse_image != blank %}{{ section.settings.howtouse_image | image_url: width: 640 }}{% else %}assets/mao-sache-scoop.webp{% endif %}" alt="Como preparar o Jejoom" loading="lazy">
+</div>
+</div>
+<div class="inview-hidden from-right" data-inview id="howtouse-steps"></div>
+</div>
+</div>
+</section>
+<!-- ═══ CHECKPOINT [M10] HowToUse ✓ — 3 steps with image ═══ -->
+
+<!-- ═══ M11 FAQ ═══ -->
+<section id="faq" class="faq-section" data-inview-parent>
+<div class="container" style="position:relative;z-index:10">
+<div class="section-header inview-hidden" data-inview>
+<div class="faq-badge">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
+TIRE SUAS DÚVIDAS
+</div>
+<h2 class="section-title">Ainda tem perguntas?</h2>
+</div>
+<div class="faq-list inview-hidden" data-inview id="faq-list"></div>
+</div>
+</section>
+<!-- ═══ CHECKPOINT [M11] FAQ ✓ — accordion 8 questions ═══ -->
+
+<!-- ═══ M12 Footer ═══ -->
+<footer class="site-footer">
+<svg class="wave-top" viewBox="0 0 1440 120" fill="none" preserveAspectRatio="none"><path d="M0 50C300 0 450 120 800 50C1150 -20 1300 80 1440 50V0H0Z" fill="white"/></svg>
+<div class="container footer-inner">
+<!-- Mobile footer -->
+<div class="footer-mobile hide-desktop" id="footer-mobile"></div>
+<!-- Desktop footer -->
+<div class="footer-desktop" id="footer-desktop"></div>
+</div>
+</footer>
+<!-- ═══ CHECKPOINT [M12] Footer ✓ — links, contact, social, payments, legal ═══ -->
+
+</main>
+
+<!-- ═══ M13 StickyFooter ═══ -->
+<div class="sticky-footer" id="stickyFooter">
+<div class="container">
+<div class="inner">
+<div class="product-info lg-only"><p class="pname">Jejoom</p><div style="display:flex;align-items:center;gap:0.5rem"><p class="psub">Shot Matinal Denavita</p><span id="sticky-shipping" style="font-size:0.625rem;color:hsl(var(--secondary));font-weight:500;display:none"><svg style="width:0.75rem;height:0.75rem;display:inline;vertical-align:middle;margin-right:2px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>Frete Grátis</span></div></div>
+<div class="product-info sm-only"><p class="pname">Jejoom</p><p class="psub">Shot Matinal</p></div>
+<div class="variant-select">
+<button class="variant-btn" id="variantBtn" aria-expanded="false" onclick="toggleVariantDropdown()">
+<span id="variantBtnText">2 Unidades</span>
+<svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+</button>
+<div class="variant-dropdown" id="variantDropdown"></div>
+</div>
+<div class="price-display">
+<div class="price-top">
+<span class="old" id="sticky-old-price">R$ 279,80</span>
+<span class="disc" id="sticky-discount">-14%</span>
+</div>
+<p class="current" id="sticky-current-price">R$ 239,80</p>
+</div>
+<a id="sticky-buy-link" href="https://seguro.denavita.com.br/r/4IPLFGJWFT" target="_blank" rel="noopener noreferrer" class="buy-link btn-shine" onclick="trackPurchaseClick('2 Unidades',239.80,'sticky_footer')">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+<span class="mobile-price" id="sticky-mobile-price">R$ 239,80</span>
+<span class="desktop-text" style="display:none">Comprar</span>
+</a>
+</div>
+</div>
+</div>
+<!-- ═══ CHECKPOINT [M13] StickyFooter ✓ — variant selector, price, buy button ═══ -->
+
+<!-- ═══ M14 WhatsApp Button ═══ -->
+<a href="https://wa.me/5511920664623" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Fale conosco pelo WhatsApp">
+<svg viewBox="0 0 32 32" fill="currentColor"><path d="M16.004 0h-.008C7.174 0 0 7.176 0 16c0 3.5 1.128 6.744 3.046 9.378L1.054 31.29l6.122-1.958C9.722 30.89 12.76 32 16.004 32 24.826 32 32 24.822 32 16S24.826 0 16.004 0zm9.528 22.614c-.396 1.116-1.954 2.042-3.21 2.312-.86.182-1.982.328-5.762-1.238-4.836-2.004-7.95-6.912-8.19-7.23-.232-.318-1.942-2.586-1.942-4.932 0-2.346 1.23-3.498 1.666-3.976.396-.434 1.04-.624 1.66-.624.2 0 .38.01.542.018.478.02.716.05 1.032.798.394.934 1.356 3.28 1.474 3.52.12.24.24.554.074.872-.158.318-.278.516-.556.796-.278.28-.586.626-.834.838-.278.24-.566.5-.244.98.322.478 1.432 2.362 3.074 3.828 2.114 1.886 3.894 2.47 4.446 2.744.396.198.868.158 1.204-.198.424-.452.948-1.2 1.48-1.938.38-.524.858-.59 1.294-.432.44.15 2.784 1.312 3.262 1.55.478.24.796.358.914.554.116.198.116 1.134-.28 2.252z"/></svg>
+</a>
+<!-- ═══ CHECKPOINT [M14] WhatsApp ✓ — floating button ═══ -->
+
+
+<!-- Liquid → JS bridge: injeta URLs configuráveis do schema nas variáveis JS -->
+<script>
+var __ASSETS = {
+  sku1: '{% if section.settings.pricing_sku_1_image != blank %}{{ section.settings.pricing_sku_1_image | image_url: width: 500 }}{% else %}assets/sku-jejoom-1.webp{% endif %}',
+  sku2: '{% if section.settings.pricing_sku_2_image != blank %}{{ section.settings.pricing_sku_2_image | image_url: width: 500 }}{% else %}assets/sku-jejoom-2.webp{% endif %}',
+  sku3: '{% if section.settings.pricing_sku_3_image != blank %}{{ section.settings.pricing_sku_3_image | image_url: width: 500 }}{% else %}assets/sku-jejoom-3.webp{% endif %}',
+  logoFooter: '{% if section.settings.footer_logo != blank %}{{ section.settings.footer_logo | image_url: width: 400 }}{% else %}assets/logo-denavita.png{% endif %}',
+  paymentIcons: '{% if section.settings.footer_payment_icons != blank %}{{ section.settings.footer_payment_icons | image_url: width: 600 }}{% else %}assets/icones-pagamentos.svg{% endif %}',
+  video1: '{% if section.settings.video_1_url != blank %}{{ section.settings.video_1_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/2cae47ccd2864e0ead0b003d8f69317f/2cae47ccd2864e0ead0b003d8f69317f.HD-1080p-7.2Mbps-57913254.mp4?v=0{% endif %}',
+  video2: '{% if section.settings.video_2_url != blank %}{{ section.settings.video_2_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/21747f9f83f44a9abc31b025e39276f6/21747f9f83f44a9abc31b025e39276f6.HD-1080p-7.2Mbps-57913249.mp4?v=0{% endif %}',
+  video3: '{% if section.settings.video_3_url != blank %}{{ section.settings.video_3_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/4d6655019ccc4734acb6cfc75287103b/4d6655019ccc4734acb6cfc75287103b.HD-1080p-7.2Mbps-57913395.mp4?v=0{% endif %}',
+  video4: '{% if section.settings.video_4_url != blank %}{{ section.settings.video_4_url }}{% else %}https://www.denavita.com.br/cdn/shop/videos/c/vp/303d4962faac46aaae326716ad203d50/303d4962faac46aaae326716ad203d50.HD-1080p-7.2Mbps-57913246.mp4?v=0{% endif %}'
+};
+</script>
+
+<script>
+/* ═══ MÓDULO: GA4Tracking ═══
+   ID: M15
+   ORIGEM: src/lib/gtag.ts
+   DEPENDE DE: —
+   RECEBE: eventName, params
+   EXPÕE: trackEvent, trackPurchaseClick
+   ESTADO: —
+═══ */
+function trackEvent(eventName, params) {
+  if (window.gtag) { window.gtag('event', eventName, params); }
+}
+function trackPurchaseClick(kitName, price, location) {
+  var params = {
+    currency: 'BRL', value: price,
+    items: [{ item_name: 'Jejoom ' + kitName }],
+    event_label: kitName, event_category: 'ecommerce',
+    click_location: location, page_title: 'JEJOOM1 - LP LOVABLE'
+  };
+  trackEvent('begin_checkout', params);
+  trackEvent('purchase', params);
+}
+/* ═══ CHECKPOINT [M15] GA4Tracking ✓ — begin_checkout + purchase events ═══ */
+
+/* ═══ MÓDULO: FacebookPixel ═══
+   ID: M16
+   ORIGEM: index.html FB Pixel script
+   DEPENDE DE: —
+   RECEBE: —
+   EXPÕE: — (initialized in head)
+   ESTADO: —
+═══ */
+/* FB Pixel already initialized in <head>. No additional JS needed. */
+/* ═══ CHECKPOINT [M16] FacebookPixel ✓ — init + PageView in head ═══ */
+
+/* ═══ MÓDULO: InViewAnimations ═══
+   ID: M19
+   ORIGEM: framer-motion useInView
+   DEPENDE DE: M17
+   RECEBE: DOM elements with data-inview
+   EXPÕE: IntersectionObserver setup
+   ESTADO: visibility state per element
+═══ */
+(function() {
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('inview-visible');
+        observer.unobserve(entry.target);
+        // Remove will-change after transition to free GPU memory
+        setTimeout(function() { entry.target.style.willChange = 'auto'; }, 700);
+      }
+    });
+  }, { rootMargin: '-100px' });
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-inview]').forEach(function(el) {
+      observer.observe(el);
+    });
+  });
+})();
+/* ═══ CHECKPOINT [M19] InViewAnimations ✓ — IntersectionObserver fade-in ═══ */
+
+/* ═══ MÓDULO: SubHeroBanner ═══
+   ID: M01
+   ORIGEM: SubHeroSection.tsx
+   DEPENDE DE: M17
+   RECEBE: —
+   EXPÕE: —
+   ESTADO: —
+═══ */
+(function() {
+  var items = ['100% Natural','Energia durante o jejum','Potencializa o emagrecimento','Suporte nutricional completo','Sabor delicioso de tangerina'];
+  var track = document.getElementById('subhero-track');
+  var html = '';
+  for (var r = 0; r < 4; r++) {
+    for (var i = 0; i < items.length; i++) {
+      html += '<div class="subhero-item"><span>' + items[i] + '</span><span class="subhero-dot">•</span></div>';
+    }
+  }
+  track.innerHTML = html;
+})();
+
+/* ═══ MÓDULO: HeroSparkles ═══
+   ID: M02 (sparkles sub-module)
+   ORIGEM: HeroSection.tsx sparkles array
+   DEPENDE DE: M17
+   RECEBE: —
+   EXPÕE: —
+   ESTADO: —
+═══ */
+(function() {
+  var container = document.getElementById('sparkles-container');
+  var html = '';
+  for (var i = 0; i < 14; i++) {
+    var angle = (i / 14) * Math.PI * 2;
+    var rx = 45 + (i % 2) * 10;
+    var ry = 42 + (i % 2) * 8;
+    var left = 50 + Math.cos(angle) * rx;
+    var top = 50 + Math.sin(angle) * ry;
+    var size = Math.random() * 6 + 4;
+    var delay = Math.random() * 4;
+    var dur = Math.random() * 2 + 2;
+    html += '<div class="sparkle" style="left:' + left + '%;top:' + top + '%;width:' + size + 'px;height:' + size + 'px;background:radial-gradient(circle,rgba(252,198,3,0.95) 0%,rgba(252,198,3,0.4) 50%,transparent 100%);box-shadow:0 0 ' + size + 'px rgba(252,198,3,0.5);animation:sparkle-pulse ' + dur + 's ' + delay + 's ease-in-out infinite"></div>';
+  }
+  container.innerHTML = html;
+})();
+
+/* ═══ MÓDULO: WhyItWorksCards ═══
+   ID: M03
+   ORIGEM: WhyItWorksSection.tsx
+   DEPENDE DE: M17, M18
+   RECEBE: —
+   EXPÕE: accordion toggle
+   ESTADO: accordion open/closed
+═══ */
+(function() {
+  var cards = [
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/><line x1="12" x2="12.01" y1="16" y2="16"/></svg>', title: 'Jejum e restrição alimentar cobram um preço', desc: 'Quem faz jejum ou usa caneta emagrecedora come menos, mas o corpo continua precisando de vitaminas, minerais e antioxidantes. Sem reposição, vem a queda de cabelo, unhas fracas, pele sem vida e fadiga extrema.' },
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>', title: '1 shot = nutrição + emagrecimento potencializado', desc: 'O Jejoom repõe tudo o que o corpo precisa e ainda acelera seus resultados. Curcumina, L-Cisteína, Vitamina C, Zinco e mais 3 ativos potentes que dão energia, foco e potencializam a queima de gordura, mesmo comendo pouco.' },
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 4.6 17 2 17 2c0 0 2.5 3.5 2.5 8.5 0 3.8-3.1 7-7 7.5"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>', title: 'Proteção que vai além da dieta', desc: 'Enquanto a caneta cuida do peso, o Jejoom cuida do resto: fortalece a imunidade, combate radicais livres e protege suas células do desgaste. É o complemento que faltava no seu tratamento.' }
+  ];
+  // Desktop cards
+  var desktopHtml = '';
+  cards.forEach(function(c) {
+    desktopHtml += '<div class="why-card"><div class="card-row"><div class="icon-box">' + c.icon + '</div><div><h3>' + c.title + '</h3><p>' + c.desc + '</p></div></div></div>';
+  });
+  document.getElementById('why-cards-desktop').innerHTML = desktopHtml;
+  // Mobile accordion
+  var mobileHtml = '';
+  cards.forEach(function(c, i) {
+    mobileHtml += '<button class="accordion-trigger" aria-expanded="false" onclick="toggleAccordion(this)"><div class="icon-box">' + c.icon + '</div><h3>' + c.title + '</h3><svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button><div class="accordion-content"><div class="accordion-content-inner"><p>' + c.desc + '</p></div></div>';
+  });
+  document.getElementById('why-accordion').innerHTML = mobileHtml;
+})();
+
+function toggleAccordion(btn) {
+  var content = btn.nextElementSibling;
+  var expanded = btn.getAttribute('aria-expanded') === 'true';
+  // Close all siblings
+  var parent = btn.parentElement;
+  parent.querySelectorAll('.accordion-trigger').forEach(function(t) {
+    t.setAttribute('aria-expanded', 'false');
+    t.nextElementSibling.style.maxHeight = null;
+  });
+  if (!expanded) {
+    btn.setAttribute('aria-expanded', 'true');
+    content.style.maxHeight = content.scrollHeight + 'px';
+  }
+}
+
+/* ═══ MÓDULO: BenefitsGrid ═══
+   ID: M04
+   ORIGEM: BenefitsGridSection.tsx
+   DEPENDE DE: M17, M18
+   RECEBE: —
+   EXPÕE: toggleBenefits
+   ESTADO: showAll boolean
+═══ */
+var benefitsShowAll = false;
+(function() {
+  var benefits = [
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>', title: 'Fim da Fadiga Extrema', desc: 'Quem usa caneta sente cansaço brutal. O Jejoom repõe a energia que a falta de comida tira*' },
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>', title: 'Cabelo, Pele e Unhas Protegidos', desc: 'Vitamina C, Selênio e Zinco combatem a queda de cabelo e unhas fracas causadas pela restrição alimentar*' },
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>', title: 'Potencializa o Emagrecimento', desc: 'Curcumina e compostos fenólicos aceleram o metabolismo e a queima de gordura, turbinando seus resultados*' },
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>', title: 'Combate o Inchaço e Inflamação', desc: 'Ação anti-inflamatória potente que alivia o desconforto comum de quem usa canetas*' },
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/><path d="M17.599 6.5a3 3 0 0 0 .399-1.375"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M19.938 10.5a4 4 0 0 1 .585.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M19.967 17.484A4 4 0 0 1 18 18"/></svg>', title: 'Foco e Clareza Mental', desc: 'Sem nutrientes, o cérebro falha. O Jejoom mantém sua mente afiada o dia todo*' },
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/></svg>', title: '1 Shot Pela Manhã e Pronto', desc: 'Antes de trabalhar, treinar ou começar o dia. Sabor tangerina, sem esforço*' }
+  ];
+  // Desktop
+  var dHtml = '';
+  benefits.forEach(function(b) {
+    dHtml += '<div class="benefit-card inview-hidden" data-inview><div class="row"><div class="icon-box">' + b.icon + '</div><div><h3>' + b.title + '</h3><p>' + b.desc + '</p></div></div></div>';
+  });
+  document.getElementById('benefits-desktop').innerHTML = dHtml;
+  // Mobile
+  renderBenefitsMobile(benefits);
+  window._benefits = benefits;
+})();
+
+function renderBenefitsMobile(benefits) {
+  var visible = benefitsShowAll ? benefits : benefits.slice(0, 3);
+  var html = '';
+  visible.forEach(function(b) {
+    html += '<div class="benefit-card"><div class="row"><div class="icon-box">' + b.icon + '</div><div><h3>' + b.title + '</h3><p>' + b.desc + '</p></div></div></div>';
+  });
+  html += '<div style="text-align:center;margin-top:1.5rem">';
+  if (!benefitsShowAll) {
+    html += '<button class="btn-outline" onclick="toggleBenefits()">Ver mais benefícios <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></button>';
+  } else {
+    html += '<button class="btn-outline" onclick="toggleBenefits()">Ver menos <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 15-6-6-6 6"/></svg></button>';
+  }
+  html += '</div>';
+  document.getElementById('benefits-mobile').innerHTML = html;
+}
+function toggleBenefits() {
+  benefitsShowAll = !benefitsShowAll;
+  renderBenefitsMobile(window._benefits);
+}
+
+/* ═══ MÓDULO: WhoIsItForTargets ═══
+   ID: M05
+   ORIGEM: WhoIsItForSection.tsx
+   DEPENDE DE: M17
+   RECEBE: —
+   EXPÕE: —
+   ESTADO: —
+═══ */
+(function() {
+  var targets = [
+    'Faz jejum intermitente e sente falta de energia',
+    'Usa caneta emagrecedora e come muito pouco',
+    'Notou queda de cabelo ou unhas quebradiças',
+    'Quer potencializar o emagrecimento de forma saudável',
+    'Sente fadiga, tontura ou indisposição frequente',
+    'Quer começar o dia com mais disposição e foco'
+  ];
+  var checkSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="hsl(82,99%,35%)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>';
+  var html = '';
+  targets.forEach(function(t) {
+    html += '<div class="target-item"><div class="target-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>' + checkSvg + '<p class="target-text">' + t + '</p></div>';
+  });
+  document.getElementById('targets-list').innerHTML = html;
+})();
+
+/* ═══ MÓDULO: ScienceIngredients ═══
+   ID: M06
+   ORIGEM: ScienceHeroSection.tsx
+   DEPENDE DE: M17, M18
+   RECEBE: —
+   EXPÕE: —
+   ESTADO: —
+═══ */
+(function() {
+  var ingredients = [
+    { icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/><path d="M8.5 2h7"/><path d="M7 16h10"/></svg>', name: 'Curcumina + L-Cisteína', desc: 'Desinflamam o organismo e dão suporte durante o jejum' },
+    { icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>', name: 'Vitamina C + Zinco + Selênio', desc: 'Antioxidantes que fortalecem a imunidade' },
+    { icon: '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 4.6 17 2 17 2c0 0 2.5 3.5 2.5 8.5 0 3.8-3.1 7-7 7.5"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>', name: 'Antocianinas + Vitamina E', desc: 'Combatem radicais livres e protegem as células' }
+  ];
+  // Mobile
+  var mHtml = '';
+  ingredients.forEach(function(ing) {
+    mHtml += '<div class="ingredient-card inview-hidden" data-inview><div class="ing-icon">' + ing.icon + '</div><div><h3>' + ing.name + '</h3><p>' + ing.desc + '</p></div></div>';
+  });
+  document.getElementById('ingredients-mobile').innerHTML = mHtml;
+  // Desktop
+  var dHtml = '';
+  ingredients.forEach(function(ing) {
+    dHtml += '<div class="ingredient-card inview-hidden" data-inview><div class="ing-icon">' + ing.icon + '</div><h3>' + ing.name + '</h3><p>' + ing.desc + '</p></div>';
+  });
+  document.getElementById('ingredients-desktop').innerHTML = dHtml;
+  // Badges
+  var badges = [
+    { icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 4.6 17 2 17 2c0 0 2.5 3.5 2.5 8.5 0 3.8-3.1 7-7 7.5"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>', text: '100% Natural' },
+    { icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 3h15"/><path d="M6 3v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3"/><path d="M6 14h12"/></svg>', text: 'Testado em Laboratório' },
+    { icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>', text: 'Sem Efeitos Colaterais' },
+    { icon: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m12 8 4 4-4 4"/><path d="M8 12h8"/></svg>', text: 'Fórmula Exclusiva' }
+  ];
+  var bHtml = '';
+  badges.forEach(function(b) {
+    bHtml += '<div class="sci-badge">' + b.icon + '<span>' + b.text + '</span></div>';
+  });
+  document.getElementById('science-badges').innerHTML = bHtml;
+})();
+
+/* ═══ MÓDULO: TimelineCarousel ═══
+   ID: M07
+   ORIGEM: TimelineSection.tsx
+   DEPENDE DE: M17, M18
+   RECEBE: —
+   EXPÕE: scrollTimelineLeft, scrollTimelineRight
+   ESTADO: scroll position
+═══ */
+(function() {
+  var steps = [
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', period: 'Primeiros 7 Dias', title: 'Energia de Volta', desc: 'Já nos primeiros dias você sente a diferença: mais disposição pela manhã, menos fadiga e menos mal-estar durante o jejum ou uso da caneta.' },
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>', period: '2 a 4 Semanas', title: 'Corpo Nutrido e Protegido', desc: 'Cabelo para de cair, unhas ficam mais fortes, pele com mais vida. Seu corpo finalmente está recebendo o que precisa, mesmo comendo pouco.' },
+    { icon: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5C7 4 9 7 12 7c3 0 5-3 7.5-3a2.5 2.5 0 0 1 0 5H18"/><path d="M18 15h1.5a2.5 2.5 0 0 0 0-5C17 10 15 13 12 13c-3 0-5-3-7.5-3a2.5 2.5 0 0 0 0 5H6"/><path d="M6 21h1.5a2.5 2.5 0 0 0 0-5C5 16 3 19 3 19"/><path d="M18 21h-1.5a2.5 2.5 0 0 1 0-5c2.5 0 4.5 3 4.5 3"/></svg>', period: 'Uso Contínuo', title: 'Tratamento Completo', desc: 'Seu corpo está nutrido e protegido. Energia constante, imunidade forte e emagrecimento potencializado no seu dia a dia.' }
+  ];
+  // Mobile carousel
+  var mHtml = '<button class="carousel-btn left" onclick="scrollTimelineLeft()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg></button><button class="carousel-btn right" onclick="scrollTimelineRight()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg></button><div style="overflow:hidden;padding:1rem 0"><div id="timeline-scroll" class="scrollbar-hide" style="display:flex;gap:1rem;padding:0 2rem;overflow-x:auto;scroll-snap-type:x mandatory">';
+  steps.forEach(function(s, i) {
+    mHtml += '<div class="scroll-item" style="flex-shrink:0;width:288px;scroll-snap-align:center"><div class="timeline-card"><div class="top-row"><div class="step-icon">' + s.icon + '</div><span class="step-label">ETAPA ' + (i + 1) + '</span></div><span class="period-badge">' + s.period + '</span><h3>' + s.title + '</h3><p>' + s.desc + '</p></div></div>';
+  });
+  mHtml += '</div></div>';
+  document.getElementById('timeline-mobile').innerHTML = mHtml;
+  // Desktop grid
+  var dHtml = '';
+  steps.forEach(function(s) {
+    dHtml += '<div class="inview-hidden" data-inview><div class="timeline-card"><div class="step-icon">' + s.icon + '</div><span class="period-badge">' + s.period + '</span><h3>' + s.title + '</h3><p>' + s.desc + '</p></div></div>';
+  });
+  document.getElementById('timeline-desktop').innerHTML = dHtml;
+})();
+
+function scrollTimelineLeft() {
+  var el = document.getElementById('timeline-scroll');
+  if (el) el.scrollBy({ left: -280, behavior: 'smooth' });
+}
+function scrollTimelineRight() {
+  var el = document.getElementById('timeline-scroll');
+  if (el) el.scrollBy({ left: 280, behavior: 'smooth' });
+}
+
+/* ═══ MÓDULO: TestimonialsCarousels ═══
+   ID: M08
+   ORIGEM: TestimonialsSection.tsx
+   DEPENDE DE: M17
+   RECEBE: —
+   EXPÕE: openVideoModal, closeVideoModal, scrollVideoLeft/Right, scrollWrittenLeft/Right
+   ESTADO: selectedVideo, scroll positions
+═══ */
+(function() {
+  var videos = [
+    { id: 1, url: __ASSETS.video1 },
+    { id: 2, url: __ASSETS.video2 },
+    { id: 3, url: __ASSETS.video3 },
+    { id: 4, url: __ASSETS.video4 }
+  ].filter(function(v) { return v.url && v.url.length > 0; });
+  var playSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="hsl(82,99%,35%)" stroke="hsl(82,99%,35%)" stroke-width="2"><polygon points="6 3 20 12 6 21 6 3"/></svg>';
+  var vHtml = '';
+  if (videos.length > 0) {
+    var allVideos = videos.concat(videos);
+    allVideos.forEach(function(v) {
+      vHtml += '<div class="video-item" onclick="openVideoModal(\'' + v.url + '\')"><video preload="none" loop muted playsinline style="width:100%;height:320px;object-fit:cover;border-radius:1rem;background:#1a1a1a"><source data-src="' + v.url + '" type="video/mp4"></video><div class="play-overlay"><div class="play-btn">' + playSvg + '</div></div></div>';
+    });
+  }
+  document.getElementById('video-track').innerHTML = vHtml;
+  // Hide video carousel section entirely if no videos configured
+  if (videos.length === 0) {
+    var videoCarousel = document.querySelector('.video-carousel');
+    if (videoCarousel) videoCarousel.style.display = 'none';
+  }
+  // Lazy-load video sources when they enter the viewport
+  var videoObserver = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var video = entry.target;
+        var source = video.querySelector('source[data-src]');
+        if (source) {
+          source.src = source.getAttribute('data-src');
+          source.removeAttribute('data-src');
+          video.load();
+          video.play().catch(function(){});
+        }
+        videoObserver.unobserve(video);
+      }
+    });
+  }, { rootMargin: '200px' });
+  document.querySelectorAll('#video-track video').forEach(function(v) { videoObserver.observe(v); });
+
+  var written = [
+    { name: 'Maria Clara', text: 'Uso caneta há 4 meses e meu cabelo estava caindo horrores. Comecei o Jejoom e em 3 semanas já percebi diferença! Agora não largo mais.', rating: 5 },
+    { name: 'Ana Paula', text: 'A caneta tirou minha fome mas também minha energia. O Jejoom devolveu minha disposição pela manhã. Acordo e já tomo meu shot!', rating: 4 },
+    { name: 'Fernanda Silva', text: 'Minha médica recomendou suplementar durante o uso da caneta. O Jejoom é prático, gostoso e tem tudo que preciso em uma dose!', rating: 5 },
+    { name: 'Juliana Costa', text: 'Sentia tanta fraqueza com a caneta que quase desisti do tratamento. Com o Jejoom consigo manter tudo com energia e sem mal-estar.', rating: 4 },
+    { name: 'Patricia Lima', text: 'O Jejoom virou obrigatório na minha rotina matinal. Uso caneta e sei que sem ele meu corpo iria sofrer muito mais.', rating: 5 },
+    { name: 'Carla Santos', text: 'Sabor de tangerina delicioso! Tomo todo dia antes de sair pra trabalhar. Me sinto nutrida e protegida mesmo comendo pouco.', rating: 4 }
+  ];
+  var quoteSvg = '<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="hsl(82,99%,35%,0.2)" stroke-width="2"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>';
+  var wHtml = '';
+  var allWritten = written.concat(written).concat(written);
+  allWritten.forEach(function(t) {
+    var stars = '';
+    for (var i = 0; i < 5; i++) {
+      stars += '<svg width="16" height="16" viewBox="0 0 24 24" class="' + (i < t.rating ? 'filled' : 'empty') + '" ' + (i < t.rating ? 'fill="#facc15" stroke="#facc15"' : 'fill="none" stroke="hsl(220,15%,96%)"') + ' stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+    }
+    wHtml += '<div class="written-card"><div class="stars">' + stars + '</div>' + quoteSvg + '<p class="text">' + t.text + '</p><p class="name">' + t.name + '</p></div>';
+  });
+  document.getElementById('written-track').innerHTML = wHtml;
+})();
+
+function openVideoModal(url) {
+  var modal = document.getElementById('videoModal');
+  var video = document.getElementById('modalVideo');
+  video.src = url;
+  modal.classList.add('active');
+  var playPromise = video.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(function() { /* autoplay blocked, user can press play manually */ });
+  }
+}
+function closeVideoModal() {
+  var modal = document.getElementById('videoModal');
+  var video = document.getElementById('modalVideo');
+  video.pause();
+  video.src = '';
+  modal.classList.remove('active');
+}
+document.getElementById('videoModal').addEventListener('click', function(e) {
+  if (e.target === this) closeVideoModal();
+});
+function scrollVideoLeft() {
+  var track = document.getElementById('video-track');
+  track.classList.remove('animate-scroll-videos');
+  track.style.overflowX = 'auto';
+  track.scrollBy({ left: -250, behavior: 'smooth' });
+}
+function scrollVideoRight() {
+  var track = document.getElementById('video-track');
+  track.classList.remove('animate-scroll-videos');
+  track.style.overflowX = 'auto';
+  track.scrollBy({ left: 250, behavior: 'smooth' });
+}
+function scrollWrittenLeft() {
+  var track = document.getElementById('written-track');
+  track.classList.remove('animate-scroll-left');
+  track.style.overflowX = 'auto';
+  track.scrollBy({ left: -300, behavior: 'smooth' });
+}
+function scrollWrittenRight() {
+  var track = document.getElementById('written-track');
+  track.classList.remove('animate-scroll-left');
+  track.style.overflowX = 'auto';
+  track.scrollBy({ left: 300, behavior: 'smooth' });
+}
+
+/* ═══ MÓDULO: PricingCards ═══
+   ID: M09
+   ORIGEM: PricingSection.tsx
+   DEPENDE DE: M15, M17
+   RECEBE: —
+   EXPÕE: —
+   ESTADO: —
+═══ */
+(function() {
+  var kits = [
+    { id:1, name:'1 Unidade', capsules:'180g · 30 doses', duration:'1 mês', originalPrice:139.90, price:127.90, discount:9, installment:42.63, perPot:127.90, cashback:19.18, popular:false, bestValue:false, freeShipping:false, checkoutUrl:'https://seguro.denavita.com.br/r/NM00BESKUH', img:__ASSETS.sku1 },
+    { id:2, name:'2 Unidades', capsules:'360g · 60 doses', duration:'2 meses', originalPrice:279.80, price:239.80, discount:14, installment:79.93, perPot:119.90, cashback:35.97, popular:true, bestValue:false, freeShipping:true, checkoutUrl:'https://seguro.denavita.com.br/r/4IPLFGJWFT', img:__ASSETS.sku2 },
+    { id:3, name:'3 Unidades', capsules:'540g · 90 doses', duration:'3 meses', originalPrice:419.70, price:329.90, discount:21, installment:109.96, perPot:109.96, cashback:49.48, popular:false, bestValue:true, freeShipping:true, checkoutUrl:'https://seguro.denavita.com.br/r/OYU0IRXXWM', img:__ASSETS.sku3 }
+  ];
+  var checkSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>';
+  var giftSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>';
+  var truckSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>';
+  var starSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+  var fmt = function(n) { return n.toFixed(2).replace('.', ','); };
+  var html = '';
+  kits.forEach(function(k) {
+    var cls = 'kit-card' + (k.popular ? ' popular' : '') + (k.bestValue ? ' best-value' : '');
+    var badge = '';
+    if (k.popular) badge = '<div class="kit-badge yellow">' + starSvg + ' MAIS VENDIDO</div>';
+    if (k.bestValue) badge = '<div class="kit-badge red">' + starSvg + ' MAIOR ECONOMIA</div>';
+    var checkColor = k.popular ? 'color:#fff' : (k.bestValue ? 'color:hsl(0,85%,52%)' : 'color:hsl(82,99%,35%)');
+    var features = '';
+    if (k.freeShipping) features += '<div class="feature-item"><span class="check" style="' + checkColor + '">' + checkSvg + '</span><span>Frete Grátis</span></div>';
+    features += '<div class="feature-item"><span class="check" style="' + checkColor + '">' + checkSvg + '</span><span>100% Natural</span></div>';
+    features += '<div class="feature-item"><span class="check" style="' + checkColor + '">' + checkSvg + '</span><span>Satisfação Garantida</span></div>';
+    features += '<div class="feature-item"><span class="gift">' + giftSvg + '</span><span class="cashback">Cashback de R$ ' + fmt(k.cashback) + '</span></div>';
+    var btnCls = k.popular ? 'buy-btn white btn-shine' : 'buy-btn green btn-shine';
+    html += '<div class="' + cls + ' inview-hidden" data-inview>' + badge +
+      (k.img ? '<div class="kit-img"><img src="' + k.img + '" alt="' + k.name + '" loading="lazy"></div>' : '') +
+      '<div class="kit-name"><h3>' + k.name + '</h3><p class="capsules">' + k.capsules + ' • ' + k.duration + '</p></div>' +
+      '<div class="price-area"><div class="price-row"><span class="old-price">R$ ' + fmt(k.originalPrice) + '</span><span class="discount-badge">-' + k.discount + '%</span></div><p class="big-price">R$ ' + fmt(k.price) + '</p><p class="installment">ou 3x de R$ ' + fmt(k.installment) + ' sem juros</p></div>' +
+      '<div class="per-unit"><span class="label">Preço por unidade:</span><span class="value">R$ ' + fmt(k.perPot) + '</span></div>' +
+      '<div class="features">' + features + '</div>' +
+      '<a href="' + k.checkoutUrl + '" target="_blank" rel="noopener noreferrer" class="' + btnCls + '" onclick="trackPurchaseClick(\'' + k.name + '\',' + k.price + ',\'pricing_section\')">Comprar Agora</a>' +
+      '<div class="delivery-note">' + truckSvg + '<span>Entrega em 3-7 dias úteis</span></div></div>';
+  });
+  document.getElementById('pricing-grid').innerHTML = html;
+})();
+
+/* ═══ MÓDULO: HowToUseSteps ═══
+   ID: M10
+   ORIGEM: HowToUseSection.tsx
+   DEPENDE DE: M17
+   RECEBE: —
+   EXPÕE: —
+   ESTADO: —
+═══ */
+(function() {
+  var steps = [
+    { num:'1', icon:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>', title:'Ao Acordar', desc:'Dilua 1 dosador (6g) em um copo de água' },
+    { num:'2', icon:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/></svg>', title:'Antes de Começar o Dia', desc:'Tome o shot antes de trabalhar, treinar ou iniciar sua rotina' },
+    { num:'3', icon:'<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>', title:'Todos os Dias', desc:'Mantenha a rotina diária para energia e nutrição constantes' }
+  ];
+  var html = '';
+  steps.forEach(function(s) {
+    html += '<div class="step-item"><div class="step-circle"><div class="main">' + s.icon + '</div><div class="num">' + s.num + '</div></div><div class="step-text"><h3>' + s.title + '</h3><p>' + s.desc + '</p></div></div>';
+  });
+  document.getElementById('howtouse-steps').innerHTML = html;
+})();
+
+/* ═══ MÓDULO: FAQAccordion ═══
+   ID: M11
+   ORIGEM: FAQSection.tsx
+   DEPENDE DE: M17
+   RECEBE: —
+   EXPÕE: toggleFaq
+   ESTADO: open/closed per item
+═══ */
+(function() {
+  var faqs = [
+    { q:'O que é o Jejoom?', a:'O Jejoom é um shot matinal em pó sabor tangerina, desenvolvido para quem faz jejum ou restrição alimentar. Sua fórmula combina 7 ativos poderosos que repõem nutrientes, dão energia e potencializam o emagrecimento de forma saudável.' },
+    { q:'Como devo consumir o Jejoom?', a:'Dilua 1 dosador (6g) em um copo de água e tome logo ao acordar, antes de trabalhar, treinar ou começar o dia. A embalagem rende 30 doses, um mês completo de proteção nutricional.' },
+    { q:'Em quanto tempo verei resultados?', a:'Já nos primeiros dias você sente mais energia e menos fadiga. Entre 2 a 4 semanas, cabelo para de cair, unhas ficam mais fortes e a disposição se estabiliza. A partir de 90 dias, seu corpo está nutrido e protegido de forma consistente.' },
+    { q:'Tem contraindicações?', a:'O produto não é indicado para menores de 19 anos, gestantes, lactantes ou pessoas com condições médicas específicas. Nesses casos, consulte um médico antes de iniciar o uso.' },
+    { q:'O Jejoom é natural?', a:'Sim! O Jejoom é formulado com ingredientes naturais e antioxidantes de alta qualidade. Não contém corantes artificiais.' },
+    { q:'Como é feita a entrega?', a:'Enviamos para todo o Brasil via transportadora ou Correios. O prazo médio de entrega é de 5 a 15 dias úteis. Você receberá o código de rastreio para acompanhar seu pedido.' },
+    { q:'A compra é segura?', a:'Sim! Utilizamos a mesma tecnologia de segurança dos grandes bancos. Seu pagamento é processado por plataformas certificadas e você tem garantia de satisfação.' },
+    { q:'Posso parcelar minha compra?', a:'Sim! Você pode parcelar em até 3x sem juros no cartão de crédito. Também aceitamos PIX com desconto.' }
+  ];
+  var chevron = '<svg class="chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>';
+  var html = '';
+  faqs.forEach(function(f) {
+    html += '<div class="faq-item"><button class="faq-trigger" aria-expanded="false" onclick="toggleFaq(this)">' + f.q + chevron + '</button><div class="faq-answer"><div class="faq-answer-inner">' + f.a + '</div></div></div>';
+  });
+  document.getElementById('faq-list').innerHTML = html;
+})();
+
+function toggleFaq(btn) {
+  var answer = btn.nextElementSibling;
+  var expanded = btn.getAttribute('aria-expanded') === 'true';
+  // Close all
+  btn.closest('.faq-list').querySelectorAll('.faq-trigger').forEach(function(t) {
+    t.setAttribute('aria-expanded', 'false');
+    t.nextElementSibling.style.maxHeight = null;
+  });
+  if (!expanded) {
+    btn.setAttribute('aria-expanded', 'true');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
+}
+
+/* ═══ MÓDULO: FooterContent ═══
+   ID: M12
+   ORIGEM: Footer.tsx
+   DEPENDE DE: M17, M18
+   RECEBE: —
+   EXPÕE: —
+   ESTADO: —
+═══ */
+(function() {
+  var year = new Date().getFullYear();
+  var instaSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>';
+  var tiktokSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>';
+  var fbSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>';
+  var msgSvg = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>';
+  var mailSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>';
+  var phoneSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+  var shieldSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>';
+  var truckSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg>';
+
+  // Mobile
+  document.getElementById('footer-mobile').innerHTML =
+    (__ASSETS.logoFooter ? '<div class="footer-logo"><img src="' + __ASSETS.logoFooter + '" alt="Denavita" style="height:3.5rem;margin:0 auto"></div>' : '') +
+    '<div class="links-grid"><div><h4>Links Úteis</h4><ul><li><a href="#inicio">Início</a></li><li><a href="#transformacao">Como Funciona</a></li><li><a href="#resultados">Depoimentos</a></li><li><a href="#faq">FAQ</a></li><li><a href="#ofertas">Comprar</a></li></ul></div><div><h4>Institucional</h4><ul><li><a href="https://www.denavita.com.br/pages/politica-de-privacidade" target="_blank">Privacidade</a></li><li><a href="https://www.denavita.com.br/pages/termos-e-condicoes" target="_blank">Termos de Uso</a></li><li><a href="https://www.denavita.com.br/pages/politica-de-trocas-e-devolucoes" target="_blank">Trocas</a></li></ul></div></div>' +
+    '<div class="contact-compact"><a href="mailto:sac@denavita.com">' + mailSvg + ' sac@denavita.com</a><a href="https://w.app/vart0d" target="_blank">' + phoneSvg + ' (11) 92066-4623</a><p style="color:rgba(255,255,255,0.5);margin-top:0.25rem">Seg a Sex, 9h às 18h</p></div>' +
+    '<div class="social-row"><a href="https://www.instagram.com/denavita_oficial" target="_blank" class="social-icon">' + instaSvg + '</a><a href="https://www.tiktok.com/@denavita.oficial" target="_blank" class="social-icon">' + tiktokSvg + '</a><a href="https://www.facebook.com/profile.php?id=100090027781076" target="_blank" class="social-icon">' + fbSvg + '</a></div>' +
+    '<a href="https://w.app/vart0d" target="_blank" class="wa-btn">' + msgSvg + ' Fale Conosco</a>' +
+    '<div class="pay-compact" style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1rem;margin-bottom:1rem">' + (__ASSETS.paymentIcons ? '<img src="' + __ASSETS.paymentIcons + '" alt="Formas de pagamento" style="height:1.5rem;margin:0 auto 0.75rem">' : '') + '<div class="security-row"><span>' + shieldSvg + ' Compra Segura</span><span>' + truckSvg + ' Entrega Brasil</span></div></div>' +
+    '<div class="footer-warning"><p>Gestantes, idosos, crianças, lactantes e pessoas com doenças devem consultar médico antes do consumo. Produto autorizado RDC 240/2018, código 4300041, conforme ANVISA.</p></div>' +
+    '<div class="footer-bottom"><p>© ' + year + ' Denavita. Todos os direitos reservados.</p></div>';
+
+  // Desktop
+  document.getElementById('footer-desktop').innerHTML =
+    '<div class="grid4"><div>' + (__ASSETS.logoFooter ? '<div style="margin-bottom:0.75rem"><img src="' + __ASSETS.logoFooter + '" alt="Denavita" style="height:2rem"></div>' : '') + '<p style="color:rgba(255,255,255,0.7);font-size:0.875rem;margin-bottom:1rem">Acreditamos que o consumo de vitaminas e suplementos é fundamental para uma vida com mais vitalidade e energia.</p><div class="social-icons"><a href="https://www.instagram.com/denavita_oficial" target="_blank" class="social-icon">' + instaSvg + '</a><a href="https://www.tiktok.com/@denavita.oficial" target="_blank" class="social-icon">' + tiktokSvg + '</a><a href="https://www.facebook.com/profile.php?id=100090027781076" target="_blank" class="social-icon">' + fbSvg + '</a><a href="https://w.app/vart0d" target="_blank" class="social-icon whatsapp">' + msgSvg + '</a></div></div>' +
+    '<div class="footer-links"><h4>Links Úteis</h4><ul><li><a href="#inicio">Início</a></li><li><a href="#transformacao">Como Funciona</a></li><li><a href="#resultados">Depoimentos</a></li><li><a href="#faq">Perguntas Frequentes</a></li><li><a href="#ofertas">Comprar Agora</a></li></ul></div>' +
+    '<div class="footer-links"><h4>Institucional</h4><ul><li><a href="https://www.denavita.com.br/pages/politica-de-privacidade" target="_blank">Política de Privacidade</a></li><li><a href="https://www.denavita.com.br/pages/termos-e-condicoes" target="_blank">Termos de Uso</a></li><li><a href="https://www.denavita.com.br/pages/politica-de-trocas-e-devolucoes" target="_blank">Política de Trocas</a></li></ul></div>' +
+    '<div class="footer-links"><h4>Contato</h4><ul style="font-size:0.875rem"><li style="display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.7);margin-bottom:0.5rem">' + mailSvg + ' <a href="mailto:sac@denavita.com">sac@denavita.com</a></li><li style="display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.7);margin-bottom:0.5rem">' + phoneSvg + ' <a href="https://w.app/vart0d" target="_blank">(11) 92066-4623</a></li><li style="display:flex;align-items:center;gap:0.5rem;color:rgba(255,255,255,0.7)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Seg-Sex, 9h às 18h</li></ul></div></div>' +
+    '<div class="footer-pay"><div style="display:flex;align-items:center;gap:0.5rem"><span style="font-size:0.75rem;color:rgba(255,255,255,0.7)">Pagamento:</span>' + (__ASSETS.paymentIcons ? '<img src="' + __ASSETS.paymentIcons + '" alt="Formas de pagamento" style="height:1.5rem">' : '') + '</div><div class="security-item">' + shieldSvg + '<span>Compra Segura</span></div><div class="security-item">' + truckSvg + '<span>Entrega Brasil</span></div></div>' +
+    '<p style="color:rgba(255,255,255,0.4);font-size:0.625rem;text-align:center;max-width:56rem;margin:0 auto 1.5rem;line-height:1.6"><span style="color:hsl(var(--primary-light));font-weight:500">Advertência:</span> Gestantes, idosos, crianças, lactantes e pessoas com doenças devem consultar médico antes do consumo. Produto autorizado RDC 240/2018, código 4300041, conforme ANVISA.</p>' +
+    '<div class="footer-bottom"><p>© ' + year + ' Denavita. Todos os direitos reservados. • *Os resultados podem variar de pessoa para pessoa.</p></div>';
+})();
+
+/* ═══ MÓDULO: StickyFooterLogic ═══
+   ID: M13
+   ORIGEM: StickyFooter.tsx
+   DEPENDE DE: M15, M17
+   RECEBE: scroll events
+   EXPÕE: toggleVariantDropdown
+   ESTADO: isVisible, isDropdownOpen, selectedVariant
+═══ */
+(function() {
+  var variants = [
+    { id:1, name:'1 Unidade', subtitle:'180g · 30 doses', price:127.90, originalPrice:139.90, badge:null, freeShipping:false, checkoutUrl:'https://seguro.denavita.com.br/r/NM00BESKUH' },
+    { id:2, name:'2 Unidades', subtitle:'360g · 60 doses', price:239.80, originalPrice:279.80, badge:'Mais Vendido', freeShipping:true, checkoutUrl:'https://seguro.denavita.com.br/r/4IPLFGJWFT' },
+    { id:3, name:'3 Unidades', subtitle:'540g · 90 doses', price:329.90, originalPrice:419.70, badge:'Maior Economia', freeShipping:true, checkoutUrl:'https://seguro.denavita.com.br/r/OYU0IRXXWM' }
+  ];
+  var selected = variants[1];
+  var fmt = function(n) { return n.toFixed(2).replace('.', ','); };
+
+  // Render dropdown options
+  var ddHtml = '';
+  variants.forEach(function(v) {
+    var cls = v.id === selected.id ? 'variant-option active' : 'variant-option';
+    var badge = v.badge ? '<span class="opt-badge">' + v.badge + '</span>' : '';
+    var free = v.freeShipping ? '<span class="opt-free">• Frete Grátis</span>' : '';
+    ddHtml += '<button class="' + cls + '" data-variant-id="' + v.id + '"><div class="opt-left"><div style="display:flex;align-items:center;gap:0.375rem"><span class="opt-name">' + v.name + '</span>' + badge + '</div><div style="display:flex;align-items:center;gap:0.375rem"><span class="opt-sub">' + v.subtitle + '</span>' + free + '</div></div><div class="opt-right"><p class="opt-price">R$ ' + fmt(v.price) + '</p><p class="opt-old">R$ ' + fmt(v.originalPrice) + '</p></div></button>';
+  });
+  document.getElementById('variantDropdown').innerHTML = ddHtml;
+
+  // Click handlers for options
+  document.getElementById('variantDropdown').addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-variant-id]');
+    if (!btn) return;
+    var vid = parseInt(btn.getAttribute('data-variant-id'));
+    selected = variants.find(function(v) { return v.id === vid; });
+    updateStickyUI();
+    document.getElementById('variantDropdown').classList.remove('open');
+    document.getElementById('variantBtn').setAttribute('aria-expanded', 'false');
+  });
+
+  function updateStickyUI() {
+    var discount = Math.round((1 - selected.price / selected.originalPrice) * 100);
+    document.getElementById('variantBtnText').textContent = selected.name;
+    document.getElementById('sticky-old-price').textContent = 'R$ ' + fmt(selected.originalPrice);
+    document.getElementById('sticky-discount').textContent = '-' + discount + '%';
+    document.getElementById('sticky-current-price').textContent = 'R$ ' + fmt(selected.price);
+    document.getElementById('sticky-mobile-price').textContent = 'R$ ' + fmt(selected.price);
+    document.getElementById('sticky-buy-link').href = selected.checkoutUrl;
+    document.getElementById('sticky-buy-link').onclick = function() { trackPurchaseClick(selected.name, selected.price, 'sticky_footer'); };
+    document.getElementById('sticky-shipping').style.display = selected.freeShipping ? 'inline' : 'none';
+    // Update active state in dropdown
+    document.querySelectorAll('#variantDropdown .variant-option').forEach(function(opt) {
+      var vid = parseInt(opt.getAttribute('data-variant-id'));
+      opt.classList.toggle('active', vid === selected.id);
+      opt.querySelector('.opt-name').style.color = vid === selected.id ? 'hsl(82,99%,35%)' : '';
+      opt.querySelector('.opt-price').style.color = vid === selected.id ? 'hsl(82,99%,35%)' : '';
+    });
+  }
+
+  // Scroll visibility - throttled with rAF for performance
+  var sticky = document.getElementById('stickyFooter');
+  var scrollTicking = false;
+  window.addEventListener('scroll', function() {
+    if (!scrollTicking) {
+      scrollTicking = true;
+      requestAnimationFrame(function() {
+        var footer = document.querySelector('footer');
+        var footerTop = footer ? footer.getBoundingClientRect().top : Infinity;
+        var isFooterVisible = footerTop < window.innerHeight;
+        if (window.scrollY > 500 && !isFooterVisible) {
+          sticky.classList.add('visible');
+        } else {
+          sticky.classList.remove('visible');
+        }
+        scrollTicking = false;
+      });
+    }
+  }, { passive: true });
+})();
+
+function toggleVariantDropdown() {
+  var dd = document.getElementById('variantDropdown');
+  var btn = document.getElementById('variantBtn');
+  var isOpen = dd.classList.contains('open');
+  dd.classList.toggle('open');
+  btn.setAttribute('aria-expanded', !isOpen);
+}
+// Close dropdown on outside click
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.variant-select')) {
+    document.getElementById('variantDropdown').classList.remove('open');
+    document.getElementById('variantBtn').setAttribute('aria-expanded', 'false');
+  }
+});
+
+/* ═══ MÓDULO: ValidationFunction ═══
+   ID: M20
+   ORIGEM: Axioma OP₇
+   DEPENDE DE: todos
+   RECEBE: —
+   EXPÕE: __VALIDATE_INTEGRITY__
+   ESTADO: —
+═══ */
+function __VALIDATE_INTEGRITY__() {
+  var results = [];
+  function assert(module, test, description) {
+    try {
+      var pass = test();
+      results.push({ module: module, description: description, status: pass ? '✅' : '❌' });
+    } catch(e) {
+      results.push({ module: module, description: description, status: '💥 ERRO: ' + e.message });
+    }
+  }
+  assert('M01', function(){ return document.getElementById('subhero-track').children.length > 0; }, 'SubHero banner items rendered');
+  assert('M02', function(){ return document.getElementById('sparkles-container').children.length === 14; }, 'Hero sparkles rendered (14)');
+  assert('M02', function(){ var img = document.querySelector('.hero .product-img'); return img !== null || document.querySelector('.hero .product-inner') !== null; }, 'Hero product area exists');
+  assert('M02', function(){ return document.querySelector('.hero .float-badge') !== null; }, 'Hero float badge exists');
+  assert('M03', function(){ return document.getElementById('why-cards-desktop').children.length === 3; }, 'WhyItWorks desktop cards (3)');
+  assert('M03', function(){ return document.getElementById('why-accordion').querySelectorAll('.accordion-trigger').length === 3; }, 'WhyItWorks mobile accordion (3)');
+  assert('M04', function(){ return document.getElementById('benefits-desktop').children.length === 6; }, 'Benefits desktop cards (6)');
+  assert('M04', function(){ return document.getElementById('benefits-mobile').querySelectorAll('.benefit-card').length >= 3; }, 'Benefits mobile cards (≥3)');
+  assert('M05', function(){ return document.getElementById('targets-list').children.length === 6; }, 'WhoIsItFor targets (6)');
+  assert('M06', function(){ return document.getElementById('ingredients-mobile').children.length === 3; }, 'Science ingredients mobile (3)');
+  assert('M06', function(){ return document.getElementById('ingredients-desktop').children.length === 3; }, 'Science ingredients desktop (3)');
+  assert('M06', function(){ return document.querySelector('.study-card') !== null; }, 'Science study card exists');
+  assert('M06', function(){ return document.getElementById('science-badges').children.length === 4; }, 'Science badges (4)');
+  assert('M07', function(){ return document.getElementById('timeline-scroll') !== null; }, 'Timeline mobile carousel exists');
+  assert('M07', function(){ return document.getElementById('timeline-desktop').children.length === 3; }, 'Timeline desktop cards (3)');
+  assert('M08', function(){ var vt = document.getElementById('video-track'); return vt.children.length === 0 || vt.children.length % 2 === 0; }, 'Video testimonials (even count or empty)');
+  assert('M08', function(){ return document.getElementById('written-track').children.length === 18; }, 'Written testimonials (18 = 6x3)');
+  assert('M08', function(){ return document.getElementById('videoModal') !== null; }, 'Video modal exists');
+  assert('M09', function(){ return document.getElementById('pricing-grid').children.length === 3; }, 'Pricing kit cards (3)');
+  assert('M10', function(){ return document.getElementById('howtouse-steps').children.length === 3; }, 'HowToUse steps (3)');
+  assert('M11', function(){ return document.getElementById('faq-list').querySelectorAll('.faq-item').length === 8; }, 'FAQ items (8)');
+  assert('M12', function(){ return document.querySelector('.site-footer') !== null; }, 'Footer exists');
+  assert('M13', function(){ return document.getElementById('stickyFooter') !== null; }, 'StickyFooter exists');
+  assert('M13', function(){ return document.getElementById('variantDropdown').children.length === 3; }, 'StickyFooter variant options (3)');
+  assert('M14', function(){ return document.querySelector('.whatsapp-float') !== null; }, 'WhatsApp float button exists');
+  assert('M15', function(){ return typeof trackPurchaseClick === 'function'; }, 'trackPurchaseClick function exists');
+  assert('M15', function(){ return typeof trackEvent === 'function'; }, 'trackEvent function exists');
+  assert('M19', function(){ return document.querySelectorAll('[data-inview]').length > 0; }, 'InView elements exist');
+  assert('M20', function(){ return typeof __VALIDATE_INTEGRITY__ === 'function'; }, '__VALIDATE_INTEGRITY__ exists');
+
+  console.table(results);
+  var failures = results.filter(function(r) { return r.status !== '✅'; });
+  if (failures.length === 0) {
+    console.log('%c✅ TODOS OS INVARIANTES PASSARAM', 'color:green;font-size:16px');
+  } else {
+    console.log('%c❌ ' + failures.length + ' FALHA(S) DETECTADA(S)', 'color:red;font-size:16px');
+  }
+  return results;
+}
+/* ═══ CHECKPOINT [M20] ValidationFunction ✓ — __VALIDATE_INTEGRITY__ runtime validation ═══ */
+</script>
+{% if section.settings.standalone_page %}
+</body>
+{% endif %}
+
+
+{% schema %}
+{
+  "name": "Archfy LP Jejoom V3 Pen",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "header",
+      "content": "━━━ MODO DA PÁGINA ━━━━━━━━━"
+    },
+    {
+      "type": "checkbox",
+      "id": "standalone_page",
+      "label": "Página Standalone (isolada)",
+      "info": "Ativado: renderiza como página HTML completa (com DOCTYPE, head, meta SEO, GA4, FB Pixel). Desativado: funciona como seção pura dentro do theme.liquid.",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "━━━ HERO ━━━━━━━━━━━━━━━━━━"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_product_image",
+      "label": "Produto Principal (Hero)",
+      "info": "Imagem central do produto no topo da página. Recomendado: 960×960px, WebP."
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_caneta_image",
+      "label": "Caneta Emagrecedora (Hero)",
+      "info": "Imagem flutuante da caneta no hero. Recomendado: 512×512px, WebP."
+    },
+    {
+      "type": "header",
+      "content": "━━━ LARANJAS DECORATIVAS ━━━"
+    },
+    {
+      "type": "paragraph",
+      "content": "Imagens das laranjas usadas como decoração no Hero e na seção Ciência."
+    },
+    {
+      "type": "image_picker",
+      "id": "orange_image_1",
+      "label": "Laranja 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "orange_image_2",
+      "label": "Laranja 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "orange_image_3",
+      "label": "Laranja 3"
+    },
+    {
+      "type": "image_picker",
+      "id": "orange_image_4",
+      "label": "Laranja 4"
+    },
+    {
+      "type": "header",
+      "content": "━━━ IMAGENS DAS SEÇÕES ━━━━━"
+    },
+    {
+      "type": "image_picker",
+      "id": "why_section_image",
+      "label": "Seção 'Por Que o Jejoom'",
+      "info": "Imagem das modelos. Recomendado: 1400px de largura, WebP."
+    },
+    {
+      "type": "image_picker",
+      "id": "whoisitfor_image",
+      "label": "Seção 'Para Quem É'",
+      "info": "Imagem da seção de identificação. Recomendado: 1400px de largura, WebP."
+    },
+    {
+      "type": "image_picker",
+      "id": "howtouse_image",
+      "label": "Seção 'Como Usar'",
+      "info": "Foto da mão com sachê/scoop. Recomendado: 640×640px, WebP."
+    },
+    {
+      "type": "header",
+      "content": "━━━ IMAGENS DOS KITS (PREÇOS) ━━━"
+    },
+    {
+      "type": "image_picker",
+      "id": "pricing_sku_1_image",
+      "label": "SKU — 1 Unidade",
+      "info": "Foto do kit 1 unidade. Recomendado: 500×500px, WebP."
+    },
+    {
+      "type": "image_picker",
+      "id": "pricing_sku_2_image",
+      "label": "SKU — 2 Unidades",
+      "info": "Foto do kit 2 unidades. Recomendado: 500×500px, WebP."
+    },
+    {
+      "type": "image_picker",
+      "id": "pricing_sku_3_image",
+      "label": "SKU — 3 Unidades",
+      "info": "Foto do kit 3 unidades. Recomendado: 500×500px, WebP."
+    },
+    {
+      "type": "header",
+      "content": "━━━ VÍDEOS DE DEPOIMENTOS ━━━"
+    },
+    {
+      "type": "paragraph",
+      "content": "Cole abaixo a URL de cada vídeo hospedado em Configurações > Arquivos (Files) do Shopify."
+    },
+    {
+      "type": "text",
+      "id": "video_1_url",
+      "label": "URL do Vídeo 1",
+      "info": "Ex: https://cdn.shopify.com/s/files/1/.../meu-video.mp4",
+      "placeholder": "https://"
+    },
+    {
+      "type": "text",
+      "id": "video_2_url",
+      "label": "URL do Vídeo 2",
+      "placeholder": "https://"
+    },
+    {
+      "type": "text",
+      "id": "video_3_url",
+      "label": "URL do Vídeo 3",
+      "placeholder": "https://"
+    },
+    {
+      "type": "text",
+      "id": "video_4_url",
+      "label": "URL do Vídeo 4",
+      "placeholder": "https://"
+    },
+    {
+      "type": "header",
+      "content": "━━━ RODAPÉ ━━━━━━━━━━━━━━━━"
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_logo",
+      "label": "Logo do Rodapé",
+      "info": "Logo da marca exibido no footer. Recomendado: PNG transparente, 400px."
+    },
+    {
+      "type": "image_picker",
+      "id": "footer_payment_icons",
+      "label": "Ícones de Pagamento",
+      "info": "Bandeiras de cartão e formas de pagamento. Recomendado: SVG ou PNG."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Archfy LP Jejoom V3 Pen"
+    }
+  ]
+}
+{% endschema %}
+
+{% if section.settings.standalone_page %}
+</html>
+{% endif %}

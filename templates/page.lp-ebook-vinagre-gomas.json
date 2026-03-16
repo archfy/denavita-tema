@@ -1,0 +1,498 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {}
+    },
+    "banner_image_79WJcL": {
+      "type": "banner-image",
+      "blocks": {
+        "image_banner_qkzhBn": {
+          "type": "image_banner",
+          "settings": {
+            "banner_width": "12",
+            "banner_type": "image",
+            "image": "shopify://shop_images/BANNER_Topo-DESK_c5eb2b85-e93c-4d14-85cf-b8f8ba371459.webp",
+            "image_mobile": "shopify://shop_images/BANNER_Topo-MOB_aa4ea3df-1500-4eba-b0cd-1147619c48e4.webp",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "link": "https://cdn.shopify.com/s/files/1/0804/1889/8226/files/E-BOOK_DENAVITA-Vinagre_de_Maca_Gomas.pdf?v=1767893559",
+            "product": "",
+            "open_link": "_blank",
+            "subtext": "",
+            "title": "",
+            "content": "",
+            "btn_content": "",
+            "button_type": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "image_banner_qkzhBn"
+      ],
+      "custom_css": [
+        ".bls__section {background-color: #fee3e5;}"
+      ],
+      "name": "t:sections.banner-image.name",
+      "settings": {
+        "heading_logo_svg": "",
+        "heading": "",
+        "description": "",
+        "text_alignment": "text-center",
+        "container": "full-width",
+        "color_scheme": "",
+        "column_gap": 30,
+        "layout_on_mobile": false,
+        "design_banner": "text-overlay-image",
+        "design_content": "default",
+        "text_align": "text-left",
+        "hover_effect": "none",
+        "h_font_size": 36,
+        "h_font_weight": "default",
+        "h_spacing": 10,
+        "sub_font_size": 18,
+        "sub_font_weight": "default",
+        "sub_spacing": 10,
+        "des_font_size": 16,
+        "des_font_weight": "default",
+        "des_spacing": 30,
+        "image_behavior": "none",
+        "text_position": "top",
+        "content_on_mobile": false,
+        "reset_color_mb": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "reset_spacing": true
+      }
+    },
+    "custom_text_WXaxTD": {
+      "type": "custom-text",
+      "blocks": {
+        "desc_b8NVhB": {
+          "type": "desc",
+          "settings": {
+            "desc": "<p>Descubra como hábitos simples, inspirados em práticas ancestrais e explicados de forma clara, podem ajudar você a compreender melhor sua relação com a alimentação, a glicose e o bem-estar.</p>",
+            "desc_fs": 16,
+            "desc_fw": "default",
+            "content_width": 60,
+            "desc_tf": "unset",
+            "desc_mt": 0,
+            "desc_mb": 40
+          }
+        },
+        "buttons_4fNFTT": {
+          "type": "buttons",
+          "settings": {
+            "btn_content": "Baixar E-Book",
+            "button_type": "primary",
+            "button_link": "https://cdn.shopify.com/s/files/1/0804/1889/8226/files/E-BOOK_DENAVITA-Vinagre_de_Maca_Gomas.pdf?v=1767893559",
+            "button_target": false,
+            "b_mt": 0,
+            "b_mb": 0
+          }
+        }
+      },
+      "block_order": [
+        "desc_b8NVhB",
+        "buttons_4fNFTT"
+      ],
+      "custom_css": [
+        ".bls__section {background-color: #fee3e5;}"
+      ],
+      "name": "t:sections.custom-content.name",
+      "settings": {
+        "container": "container",
+        "text_align": "text-center",
+        "color_scheme": "",
+        "custom_class": "",
+        "padding_top": 30,
+        "padding_bottom": 10,
+        "reset_spacing": true
+      }
+    },
+    "icon_box_BcTJQx": {
+      "type": "icon-box",
+      "blocks": {
+        "iconbox_7ARMTT": {
+          "type": "iconbox",
+          "settings": {
+            "icon": "shopify://shop_images/ICONES_LP-Ebook_Vinagre_de_Maca_Gomas-glicose.webp",
+            "heading": "",
+            "description": "<p>Como a <strong>glicose influencia</strong> sua energia, fome e disposição</p>"
+          }
+        },
+        "iconbox_N9bzTT": {
+          "type": "iconbox",
+          "settings": {
+            "icon": "shopify://shop_images/ICONES_LP-Ebook_Vinagre_de_Maca_Gomas-maca.webp",
+            "heading": "",
+            "description": "<p>O papel do <strong>vinagre de maçã</strong> dentro de uma rotina equilibrada</p>"
+          }
+        },
+        "iconbox_aQzaGQ": {
+          "type": "iconbox",
+          "settings": {
+            "icon": "shopify://shop_images/ICONES_LP-Ebook_Vinagre_de_Maca_Gomas-comida.webp",
+            "heading": "",
+            "description": "<p>Estratégias simples de <strong>hábitos alimentares, </strong>sem dietas restritivas</p>"
+          }
+        },
+        "iconbox_UVrc8U": {
+          "type": "iconbox",
+          "settings": {
+            "icon": "shopify://shop_images/ICONES_LP-Ebook_Vinagre_de_Maca_Gomas-calendario.webp",
+            "heading": "",
+            "description": "<p>Um <strong>plano prático de 30 dias </strong>para aplicar no seu ritmo</p>"
+          }
+        }
+      },
+      "block_order": [
+        "iconbox_7ARMTT",
+        "iconbox_N9bzTT",
+        "iconbox_aQzaGQ",
+        "iconbox_UVrc8U"
+      ],
+      "custom_css": [
+        ".bls__section {background-color: #fee3e5;}",
+        "@media (max-width: 768px) {section {display: none !important; }}",
+        "h2 {color: #ce0037;}"
+      ],
+      "name": "Image box - DESK",
+      "settings": {
+        "heading_logo_svg": "",
+        "heading": "Neste e-book, você vai aprender de forma acessível:",
+        "description": "",
+        "text_alignment": "text-center",
+        "container": "container",
+        "color_scheme": "",
+        "custom_column": 4,
+        "column_gap": 30,
+        "icon_width": 60,
+        "icon_spacing": 0,
+        "ib_h_font_size": 20,
+        "ib_h_font_weight": "default",
+        "ib_spacing": 10,
+        "ib_desc_font_size": 16,
+        "ib_img_view": "default",
+        "img_position": "position-top",
+        "content_text_alignment": "text-center",
+        "padding_top": 0,
+        "padding_bottom": 30,
+        "reset_spacing": true
+      }
+    },
+    "icon_box_HHd6E9": {
+      "type": "icon-box",
+      "blocks": {
+        "iconbox_7phLK3": {
+          "type": "iconbox",
+          "settings": {
+            "icon": "shopify://shop_images/ICONES_LP-Ebook_Vinagre_de_Maca_Gomas-glicose.webp",
+            "heading": "",
+            "description": "<p>Como a <strong>glicose influencia</strong> sua energia, fome e disposição</p>"
+          }
+        },
+        "iconbox_84RJeX": {
+          "type": "iconbox",
+          "settings": {
+            "icon": "shopify://shop_images/ICONES_LP-Ebook_Vinagre_de_Maca_Gomas-maca.webp",
+            "heading": "",
+            "description": "<p>O papel do <strong>vinagre de maçã</strong> dentro de uma rotina equilibrada</p>"
+          }
+        },
+        "iconbox_eyDPfM": {
+          "type": "iconbox",
+          "settings": {
+            "icon": "shopify://shop_images/ICONES_LP-Ebook_Vinagre_de_Maca_Gomas-comida.webp",
+            "heading": "",
+            "description": "<p>Estratégias simples de <strong>hábitos alimentares, </strong>sem dietas restritivas</p>"
+          }
+        },
+        "iconbox_4kJB8Q": {
+          "type": "iconbox",
+          "settings": {
+            "icon": "shopify://shop_images/ICONES_LP-Ebook_Vinagre_de_Maca_Gomas-calendario.webp",
+            "heading": "",
+            "description": "<p>Um <strong>plano prático de 30 dias </strong>para aplicar no seu ritmo</p>"
+          }
+        }
+      },
+      "block_order": [
+        "iconbox_7phLK3",
+        "iconbox_84RJeX",
+        "iconbox_eyDPfM",
+        "iconbox_4kJB8Q"
+      ],
+      "custom_css": [
+        ".bls__section {background-color: #fee3e5;}",
+        "@media (min-width: 768px) {section {display: none !important; }}",
+        "h2 {color: #ce0037;}"
+      ],
+      "name": "Image box - MOB",
+      "settings": {
+        "heading_logo_svg": "",
+        "heading": "Neste e-book, você vai aprender de forma acessível:",
+        "description": "",
+        "text_alignment": "text-center",
+        "container": "container",
+        "color_scheme": "",
+        "custom_column": 4,
+        "column_gap": 30,
+        "icon_width": 60,
+        "icon_spacing": 20,
+        "ib_h_font_size": 20,
+        "ib_h_font_weight": "default",
+        "ib_spacing": 0,
+        "ib_desc_font_size": 16,
+        "ib_img_view": "default",
+        "img_position": "position-left",
+        "content_text_alignment": "text-left",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "reset_spacing": false
+      }
+    },
+    "banner_with_text_mrQmPh": {
+      "type": "banner-with-text",
+      "blocks": {
+        "heading_m3GMr6": {
+          "type": "heading",
+          "settings": {
+            "title": "Tudo com foco em educação, consciência e constância, não em promessas ou soluções milagrosas.",
+            "heading_fs": 32,
+            "heading_fw": "default",
+            "heading_tf": "unset",
+            "heading_mt": 0,
+            "heading_mb": 30
+          }
+        },
+        "buttons_93BakQ": {
+          "type": "buttons",
+          "settings": {
+            "btn_content": "Baixar E-Book",
+            "button_type": "primary",
+            "button_link": "https://cdn.shopify.com/s/files/1/0804/1889/8226/files/E-BOOK_DENAVITA-Vinagre_de_Maca_Gomas.pdf?v=1767893559",
+            "button_target": false,
+            "b_mt": 0,
+            "b_mb": 15
+          }
+        }
+      },
+      "block_order": [
+        "heading_m3GMr6",
+        "buttons_93BakQ"
+      ],
+      "custom_css": [
+        ".bls__section {background-color: #fee3e5;}",
+        "h2 {color: #ce0037;}",
+        ".btn-primary {background-color: #54b101; border-color: #54b101; padding: 1.36rem 5.5rem !important;}",
+        "@media (max-width: 768px) {section {display: none !important; }}"
+      ],
+      "name": "Banner with text - DESK",
+      "settings": {
+        "container": "full-width",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "banner_type": "image",
+        "image": "shopify://shop_images/mao.webp",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "link": "",
+        "open_link": "_blank",
+        "bn_design": "text_column",
+        "text_align": "text-left",
+        "text_horizontal_position": "left",
+        "text_position": "center",
+        "content_bg_color": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "content_width": 90,
+        "banner_height": "depend-image",
+        "height_dk": 800,
+        "height_tb": 600,
+        "height_mb": 360,
+        "height_full": false,
+        "content_box": "content_in_container",
+        "bg_opacity": 100,
+        "text_bellow_mobile": false,
+        "img_position": "left",
+        "banner_width": "col-md-6",
+        "column_gap": 30,
+        "secao_borda_esq": 20,
+        "hover_effect": "none",
+        "padding_top": 0,
+        "padding_bottom": 100,
+        "reset_spacing": true
+      }
+    },
+    "banner_with_text_QcKze9": {
+      "type": "banner-with-text",
+      "blocks": {
+        "heading_HdjfMd": {
+          "type": "heading",
+          "settings": {
+            "title": "Tudo com foco em educação, consciência e constância, não em promessas ou soluções milagrosas.",
+            "heading_fs": 32,
+            "heading_fw": "default",
+            "heading_tf": "unset",
+            "heading_mt": 0,
+            "heading_mb": 0
+          }
+        }
+      },
+      "block_order": [
+        "heading_HdjfMd"
+      ],
+      "custom_css": [
+        ".bls__section {background-color: #fee3e5;}",
+        "h2 {color: #ce0037;}",
+        ".btn-primary {background-color: #54b101; border-color: #54b101; padding: 1.36rem 5.5rem !important;}",
+        "@media (min-width: 768px) {section {display: none !important; }}"
+      ],
+      "name": "Banner with text - MOB",
+      "settings": {
+        "container": "full-width",
+        "color_scheme": "",
+        "image_behavior": "none",
+        "banner_type": "image",
+        "image": "shopify://shop_images/mao.webp",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "link": "",
+        "open_link": "_blank",
+        "bn_design": "text_column",
+        "text_align": "text-left",
+        "text_horizontal_position": "left",
+        "text_position": "center",
+        "content_bg_color": "rgba(0,0,0,0)",
+        "background_gradient": "",
+        "content_width": 90,
+        "banner_height": "depend-image",
+        "height_dk": 800,
+        "height_tb": 600,
+        "height_mb": 360,
+        "height_full": false,
+        "content_box": "content_in_container",
+        "bg_opacity": 100,
+        "text_bellow_mobile": false,
+        "img_position": "left",
+        "banner_width": "col-md-6",
+        "column_gap": 30,
+        "secao_borda_esq": 20,
+        "hover_effect": "none",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "reset_spacing": true
+      }
+    },
+    "custom_text_aAYUmw": {
+      "type": "custom-text",
+      "blocks": {
+        "buttons_8rgQd9": {
+          "type": "buttons",
+          "settings": {
+            "btn_content": "Baixar E-Book",
+            "button_type": "primary",
+            "button_link": "https://cdn.shopify.com/s/files/1/0804/1889/8226/files/E-BOOK_DENAVITA-Vinagre_de_Maca_Gomas.pdf?v=1767893559",
+            "button_target": false,
+            "b_mt": 0,
+            "b_mb": 0
+          }
+        }
+      },
+      "block_order": [
+        "buttons_8rgQd9"
+      ],
+      "custom_css": [
+        ".bls__section {background-color: #fee3e5;}",
+        "@media (min-width: 768px) {section {display: none !important; }}"
+      ],
+      "name": "CTA - MOB",
+      "settings": {
+        "container": "container",
+        "text_align": "text-center",
+        "color_scheme": "",
+        "custom_class": "",
+        "padding_top": 30,
+        "padding_bottom": 100,
+        "reset_spacing": true
+      }
+    },
+    "banner_image_neMBjw": {
+      "type": "banner-image",
+      "blocks": {
+        "image_banner_h4V8LW": {
+          "type": "image_banner",
+          "settings": {
+            "banner_width": "12",
+            "banner_type": "image",
+            "image": "shopify://shop_images/Divisoria_baixo-DESK_9abeb529-54de-49e1-ab27-7d91089935a9.webp",
+            "image_mobile": "shopify://shop_images/Divisoria_baixo-MOB_4c4d5040-c087-4980-b4ac-15c8261b351e.webp",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "link": "",
+            "product": "",
+            "open_link": "_blank",
+            "subtext": "",
+            "title": "",
+            "content": "",
+            "btn_content": "",
+            "button_type": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "image_banner_h4V8LW"
+      ],
+      "disabled": true,
+      "custom_css": [],
+      "name": "t:sections.banner-image.name",
+      "settings": {
+        "heading_logo_svg": "",
+        "heading": "",
+        "description": "",
+        "text_alignment": "text-center",
+        "container": "full-width",
+        "color_scheme": "",
+        "column_gap": 30,
+        "layout_on_mobile": false,
+        "design_banner": "text-overlay-image",
+        "design_content": "default",
+        "text_align": "text-left",
+        "hover_effect": "none",
+        "h_font_size": 36,
+        "h_font_weight": "default",
+        "h_spacing": 10,
+        "sub_font_size": 18,
+        "sub_font_weight": "default",
+        "sub_spacing": 10,
+        "des_font_size": 16,
+        "des_font_weight": "default",
+        "des_spacing": 30,
+        "image_behavior": "none",
+        "text_position": "top",
+        "content_on_mobile": false,
+        "reset_color_mb": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "reset_spacing": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "banner_image_79WJcL",
+    "custom_text_WXaxTD",
+    "icon_box_BcTJQx",
+    "icon_box_HHd6E9",
+    "banner_with_text_mrQmPh",
+    "banner_with_text_QcKze9",
+    "custom_text_aAYUmw",
+    "banner_image_neMBjw"
+  ]
+}
