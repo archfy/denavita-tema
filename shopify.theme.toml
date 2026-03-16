@@ -1,0 +1,6 @@
+# Configuração do ambiente de desenvolvimento
+# NUNCA alterar o environment "production" sem intenção explícita de publicar
+
+[environments.dev]
+store = "74535e-3.myshopify.com"
+theme = "184123621682"
