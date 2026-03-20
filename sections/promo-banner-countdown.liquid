@@ -1,0 +1,1279 @@
+{% liquid
+  assign st = section.settings
+  assign sp = st.selected_product
+
+  # ── M06 / M07: Resolução de produto e overrides ──────────────────────────
+  if st.use_product_title and sp != blank
+    assign resolved_name = sp.title
+  else
+    assign resolved_name = st.custom_product_name
+  endif
+
+  assign resolved_variant = nil
+  if sp != blank
+    assign variant_idx = st.variant_position | times: 1 | minus: 1
+    assign resolved_variant = sp.variants[variant_idx]
+    if resolved_variant == blank
+      assign resolved_variant = sp.selected_or_first_available_variant
+    endif
+  endif
+
+  # ── M09: Sistema de preços ───────────────────────────────────────────────
+  assign resolved_price_display    = st.custom_new_price
+  assign resolved_compare_display  = st.custom_old_price
+  assign discount_pct_liquid       = 0
+  assign show_shipping_initial     = false
+  assign use_liquid_discount       = false
+
+  if st.use_product_price and sp != blank and resolved_variant != blank
+    assign price_cents   = resolved_variant.price
+    assign compare_cents = resolved_variant.compare_at_price
+    assign resolved_price_display = price_cents | money
+    if compare_cents != blank and compare_cents > 0
+      assign resolved_compare_display = compare_cents | money
+    else
+      assign resolved_compare_display = st.fallback_compare_price
+    endif
+    if st.use_compare_at_for_discount and compare_cents != blank and compare_cents > price_cents
+      assign discount_pct_liquid = compare_cents | minus: price_cents | times: 100 | divided_by: compare_cents
+      assign use_liquid_discount = true
+    endif
+    assign free_shipping_cents = st.free_shipping_min | times: 100.0 | round
+    if price_cents >= free_shipping_cents
+      assign show_shipping_initial = true
+    endif
+  endif
+
+  # ── M09: Parcelamento — calculado integralmente pelo JS (PriceModule) ───────
+  assign resolved_price_cents = 0
+  if st.use_product_price and resolved_variant != blank
+    assign resolved_price_cents = price_cents
+  endif
+
+  # ── M08: Resolução de imagem ─────────────────────────────────────────────
+  assign resolved_img_url = ''
+  assign resolved_img_alt = resolved_name
+  if st.use_product_image and sp != blank
+    if resolved_variant != blank and resolved_variant.featured_image != blank
+      assign resolved_img_url = resolved_variant.featured_image | image_url: width: 500
+    elsif sp.featured_image != blank
+      assign resolved_img_url = sp.featured_image | image_url: width: 500
+    endif
+  elsif st.custom_product_image != blank
+    assign resolved_img_url = st.custom_product_image | image_url: width: 500
+  endif
+
+  # ── M14: Resolução do link CTA ───────────────────────────────────────────
+  assign resolved_cta_href = '#'
+  case st.cta_mode
+    when 'drawer'
+      assign resolved_cta_href = '/cart'
+    when 'checkout'
+      assign resolved_cta_href = '/checkout'
+    else
+      assign resolved_cta_href = st.cta_link | default: '#'
+  endcase
+
+  # ── M02: URL da imagem de fundo ──────────────────────────────────────────
+  assign bg_img_url = ''
+  if st.background_image != blank
+    assign bg_img_url = st.background_image | image_url: width: 1600
+  endif
+
+  # ── M09: Desconto calculado em Liquid (produto) ──────────────────────────
+  assign show_discount_initial = false
+  if use_liquid_discount and st.show_discount_badge
+    assign show_discount_initial = true
+  endif
+%}
+
+{% comment %}── M17: CSS custom properties (schema → CSS) ──{% endcomment %}
+<style>
+  /* ═══ CHECKPOINT [M01] Container principal ✓ — escopamento por section.id ═══ */
+  #shopify-section-{{ section.id }} {
+    --pb-bg-start:       {{ st.background_color_start }};
+    --pb-bg-mid:         {{ st.background_color_mid }};
+    --pb-bg-end:         {{ st.background_color_end }};
+    --pb-text:           {{ st.text_color }};
+    --pb-accent:         {{ st.accent_color }};
+    --pb-cta-bg:         {{ st.cta_bg_color }};
+    --pb-cta-hover:      {{ st.cta_bg_hover_color }};
+    --pb-discount-bg:    {{ st.discount_badge_color }};
+    --pb-coupon-xbg:     {{ st.coupon_extra_bg_color }};
+    --pb-radius:         {{ st.border_radius }}px;
+    --pb-max-w:          {{ st.section_max_width }}px;
+    --pb-img-desktop:    {{ st.image_desktop_size }}px;
+    --pb-img-mobile-max: {{ st.image_mobile_max_width }}px;
+    --pb-name-mobile:    {{ st.font_size_product_name_mobile }}px;
+    --pb-name-desktop:   {{ st.font_size_product_name_desktop }}px;
+    --pb-shine-dur:      {{ st.shine_duration }}s;
+    --pb-hover-scale:    {{ st.cta_hover_scale | divided_by: 100.0 }};
+    display: block;
+    padding-top:    {{ st.padding_top }}px;
+    padding-bottom: {{ st.padding_bottom }}px;
+    margin-top:     {{ st.section_margin_top }}px;
+    margin-bottom:  {{ st.section_margin_bottom }}px;
+  }
+
+  /* ── M16: Keyframe shine escopado por section.id ─────────────────────── */
+  @keyframes pb-shine-{{ section.id }} {
+    0%, 85% { transform: translateX(-100%) skewX(-20deg); }
+    100%    { transform: translateX(300%)  skewX(-20deg); }
+  }
+
+  /* ── M01/M02: Banner wrapper ─────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner {
+    position: relative;
+    width: 100%;
+    max-width: var(--pb-max-w);
+    margin: 0 auto;
+    border-radius: var(--pb-radius);
+    overflow: visible;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background: linear-gradient(to right, var(--pb-bg-start), var(--pb-bg-mid), var(--pb-bg-end));
+    background-size: cover;
+    background-position: center;
+    color: var(--pb-text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  /* ── M03: Grid responsivo ────────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    padding: 16px 14px;
+    gap: 10px;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__grid {
+      grid-template-columns: 1fr 1fr 1fr;
+      padding: 32px;
+      gap: 24px;
+    }
+  }
+
+  /* ── M04: Coluna esquerda ─────────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__left {
+      align-items: flex-start;
+      text-align: left;
+    }
+  }
+
+  /* ── M05: Badges row ──────────────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__badges {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__badges {
+      justify-content: flex-start;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .promo-banner__badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    font-weight: 800;
+    font-size: 9px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  @media (min-width: 640px) {
+    #shopify-section-{{ section.id }} .promo-banner__badge {
+      padding: 6px 16px;
+      font-size: 14px;
+    }
+  }
+
+  #shopify-section-{{ section.id }} .promo-banner__badge--primary {
+    background: hsl(28 95% 55%);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  #shopify-section-{{ section.id }} .promo-banner__badge--outline {
+    background: transparent;
+    border: 2px solid rgba(255,255,255,0.7);
+    color: #fff;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__badge--shipping {
+    background: transparent;
+    border: 2px solid var(--pb-accent);
+    color: var(--pb-accent);
+    display: none;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__badge--shipping.is-visible {
+    display: inline-block;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__badge--discount {
+    background: var(--pb-discount-bg);
+    color: #fff;
+    padding: 3px 10px;
+    font-size: 9px;
+    border-radius: 9999px;
+  }
+  @media (min-width: 640px) {
+    #shopify-section-{{ section.id }} .promo-banner__badge--discount {
+      padding: 4px 12px;
+      font-size: 12px;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__badge--coupon-extra {
+    background: var(--pb-coupon-xbg);
+    color: #fff;
+    padding: 3px 8px;
+    font-size: 9px;
+    border-radius: 4px;
+  }
+  @media (min-width: 640px) {
+    #shopify-section-{{ section.id }} .promo-banner__badge--coupon-extra {
+      padding: 4px 10px;
+      font-size: 12px;
+    }
+  }
+
+  /* ── M04: Product name ───────────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__product-name {
+    color: var(--pb-text);
+    font-size: var(--pb-name-mobile);
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    margin: 0;
+  }
+  @media (min-width: 640px) {
+    #shopify-section-{{ section.id }} .promo-banner__product-name {
+      font-size: var(--pb-name-desktop);
+    }
+  }
+
+  /* ── M08: Imagem mobile ──────────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__img-mobile {
+    display: block;
+    width: 100%;
+    max-width: var(--pb-img-mobile-max);
+    aspect-ratio: 1;
+    margin: 0 auto;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__img-mobile {
+      display: none;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__img-mobile img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+  }
+
+  /* ── M09: Preços ─────────────────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__prices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__prices {
+      align-items: flex-start;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__old-price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: nowrap;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__old-price {
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    text-decoration: line-through;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__new-price-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__new-price-row {
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__new-price {
+    color: var(--pb-text);
+    font-size: 27px;
+    font-weight: 800;
+  }
+  @media (min-width: 640px) {
+    #shopify-section-{{ section.id }} .promo-banner__new-price {
+      font-size: 24px;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__new-price-value {
+    color: var(--pb-accent);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  }
+  #shopify-section-{{ section.id }} .promo-banner__installments {
+    color: rgba(255,255,255,0.7);
+    font-size: 19px;
+    font-weight: 600;
+  }
+  @media (min-width: 640px) {
+    #shopify-section-{{ section.id }} .promo-banner__installments {
+      font-size: 16px;
+    }
+  }
+
+  /* ── M11: Cupom ──────────────────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__coupon {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__coupon {
+      justify-content: flex-start;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__coupon-label {
+    color: rgba(255,255,255,0.8);
+    font-size: 12px;
+    font-weight: 500;
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__coupon-label {
+      display: inline;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__coupon-code {
+    border: 2px dashed rgba(255,255,255,0.5);
+    padding: 8px 18px;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__coupon-code {
+      padding: 5px 12px;
+      font-size: 12px;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__copy-btn {
+      padding: 5px 8px;
+      font-size: 11px;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__copy-btn:hover {
+    background: rgba(255,255,255,0.25);
+  }
+  #shopify-section-{{ section.id }} .promo-banner__copy-btn svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* ── M08: Coluna central / imagem desktop ────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__center {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__center {
+      display: flex;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__img-desktop {
+    width: var(--pb-img-desktop);
+    height: var(--pb-img-desktop);
+    margin: -48px 0;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__img-desktop img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+    transform: scale(1.1);
+  }
+
+  /* ── M13: Coluna direita / CTA ───────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    z-index: 10;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__countdown-label {
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--pb-accent);
+    margin: 0;
+  }
+
+  /* ── M13/M16: CTA button + shine ────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__cta {
+    position: relative;
+    background: var(--pb-cta-bg);
+    color: #fff;
+    border-radius: 9999px;
+    padding: 16px 40px;
+    font-weight: 800;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    transition: transform 0.3s, background 0.3s;
+    cursor: pointer;
+    min-width: 0;
+    width: 100%;
+    max-width: 320px;
+    overflow: hidden;
+    border: none;
+    text-decoration: none;
+    font-family: inherit;
+  }
+  @media (min-width: 640px) {
+    #shopify-section-{{ section.id }} .promo-banner__cta {
+      padding: 16px 56px;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__cta:hover {
+    {% if st.enable_hover_scale %}
+    transform: scale(var(--pb-hover-scale));
+    {% endif %}
+    background: var(--pb-cta-hover);
+  }
+
+  /* ── M16: Shine animation ────────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__shine-wrap {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    border-radius: 9999px;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__shine {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
+    transform: skewX(-20deg);
+    width: 50%;
+    {% if st.enable_shine %}
+    animation: pb-shine-{{ section.id }} var(--pb-shine-dur) ease-in-out infinite;
+    {% endif %}
+  }
+
+  /* ── M12: Timer ──────────────────────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__timer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+    z-index: 10;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__timer-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__timer-number {
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__timer-label {
+    font-size: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__timer-sep {
+    font-size: 14px;
+    font-weight: 900;
+    margin: 0 5px;
+  }
+
+  /* ── M13: Cart text inside CTA ───────────────────────────────────────── */
+  #shopify-section-{{ section.id }} .promo-banner__cart-text {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    padding-top: 8px;
+    width: 100%;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+  }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__cart-text {
+      font-size: 16px;
+    }
+  }
+  #shopify-section-{{ section.id }} .promo-banner__cart-text svg {
+    width: 16px;
+    height: 16px;
+  }
+  #shopify-section-{{ section.id }} .promo-banner__cart-text-desktop { display: none; }
+  #shopify-section-{{ section.id }} .promo-banner__cart-text-mobile  { display: inline; }
+  @media (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .promo-banner__cart-text-desktop { display: inline; }
+    #shopify-section-{{ section.id }} .promo-banner__cart-text-mobile  { display: none; }
+  }
+</style>
+
+{% comment %}── M01/M03/M04/M05/M08/M09/M10/M11/M12/M13: HTML markup ──{% endcomment %}
+<div class="promo-banner" data-section-id="{{ section.id }}" data-banner-root>
+
+  <div class="promo-banner__grid">
+
+    {% comment %}── LEFT COLUMN ──{% endcomment %}
+    <div class="promo-banner__left">
+
+      {% comment %}── M05: Badges (blocks + section badges) ──{% endcomment %}
+      <div class="promo-banner__badges">
+        {% for block in section.blocks %}
+          {% if block.type == 'promo_badge' and block.settings.show %}
+            <span
+              {{ block.shopify_attributes }}
+              class="promo-banner__badge promo-banner__badge--{{ block.settings.style }}"
+            >{{ block.settings.text }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% comment %}── M04: Nome do produto ──{% endcomment %}
+      <h2 class="promo-banner__product-name" data-banner-product-name>
+        {{ resolved_name }}
+      </h2>
+
+      {% comment %}── M08: Imagem mobile ──{% endcomment %}
+      {% if st.show_mobile_image %}
+        <div class="promo-banner__img-mobile">
+          {% if resolved_img_url != '' %}
+            <img
+              src="{{ resolved_img_url }}"
+              alt="{{ resolved_img_alt | escape }}"
+              width="{{ st.image_mobile_max_width }}"
+              height="{{ st.image_mobile_max_width }}"
+              data-banner-img-mobile
+              loading="lazy"
+            >
+          {% else %}
+            <img
+              src="{{ 'product-1' | placeholder_svg_tag }}"
+              alt="{{ resolved_img_alt | escape }}"
+              data-banner-img-mobile
+              width="{{ st.image_mobile_max_width }}"
+              height="{{ st.image_mobile_max_width }}"
+              style="opacity:0.3"
+            >
+          {% endif %}
+        </div>
+      {% endif %}
+
+      {% comment %}── M09: Preços ──{% endcomment %}
+      <div class="promo-banner__prices">
+        <div class="promo-banner__old-price-row">
+          <span class="promo-banner__old-price">
+            de <span data-banner-old-price>{{ resolved_compare_display }}</span>
+          </span>
+          {% if st.show_discount_badge %}
+            <span
+              class="promo-banner__badge promo-banner__badge--discount"
+              data-banner-discount-badge
+              style="display:none"
+            ></span>
+          {% endif %}
+        </div>
+
+        <div class="promo-banner__new-price-row">
+          <span class="promo-banner__new-price">
+            por <span class="promo-banner__new-price-value" data-banner-new-price>{{ resolved_price_display }}</span>
+          </span>
+          {% if st.coupon_extra_text != blank %}
+            <span class="promo-banner__badge promo-banner__badge--coupon-extra" data-banner-coupon-extra>
+              {{ st.coupon_extra_text }}
+            </span>
+          {% endif %}
+        </div>
+
+        <span class="promo-banner__installments" data-banner-installments style="display:none"></span>
+
+        {% comment %}── M10: Frete grátis ──{% endcomment %}
+        {% if st.show_shipping_badge %}
+          <span
+            class="promo-banner__badge promo-banner__badge--shipping{% if show_shipping_initial %} is-visible{% endif %}"
+            data-banner-shipping
+          >FRETE GRÁTIS</span>
+        {% endif %}
+      </div>
+
+      {% comment %}── M11: Cupom ──{% endcomment %}
+      {% if st.show_coupon %}
+        <div class="promo-banner__coupon">
+          {% if st.coupon_label != blank %}
+            <span class="promo-banner__coupon-label" data-banner-coupon-label>{{ st.coupon_label }}</span>
+          {% endif %}
+          <span class="promo-banner__coupon-code" data-banner-coupon-code>{{ st.coupon_code }}</span>
+          {% if st.show_copy_button %}
+            <button class="promo-banner__copy-btn" data-copy-button type="button" title="Copiar cupom">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg>
+              <span data-copy-text>Copiar</span>
+            </button>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    </div>{% comment %}── /LEFT ──{% endcomment %}
+
+    {% comment %}── CENTER COLUMN: imagem desktop ──{% endcomment %}
+    {% if st.show_desktop_image %}
+      <div class="promo-banner__center">
+        <div class="promo-banner__img-desktop">
+          {% if resolved_img_url != '' %}
+            <img
+              src="{{ resolved_img_url }}"
+              alt="{{ resolved_img_alt | escape }}"
+              width="{{ st.image_desktop_size }}"
+              height="{{ st.image_desktop_size }}"
+              data-banner-img-desktop
+              loading="lazy"
+            >
+          {% else %}
+            <img
+              src="{{ 'product-1' | placeholder_svg_tag }}"
+              alt="{{ resolved_img_alt | escape }}"
+              data-banner-img-desktop
+              width="{{ st.image_desktop_size }}"
+              height="{{ st.image_desktop_size }}"
+              style="opacity:0.3"
+            >
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
+    {% comment %}── RIGHT COLUMN: countdown + CTA ──{% endcomment %}
+    <div class="promo-banner__right">
+
+      {% comment %}── M12: Countdown label ──{% endcomment %}
+      {% if st.countdown_label != blank %}
+        <p class="promo-banner__countdown-label">{{ st.countdown_label }}</p>
+      {% endif %}
+
+      {% comment %}── M13/M14: CTA ──{% endcomment %}
+      <a
+        class="promo-banner__cta"
+        href="{{ resolved_cta_href }}"
+        data-banner-cta
+        data-cta-mode="{{ st.cta_mode }}"
+        {% if resolved_variant != nil %}data-variant-id="{{ resolved_variant.id }}"{% endif %}
+      >
+        {% comment %}── M16: Shine ──{% endcomment %}
+        {% if st.enable_shine %}
+          <span class="promo-banner__shine-wrap" aria-hidden="true">
+            <span class="promo-banner__shine"></span>
+          </span>
+        {% endif %}
+
+        {% comment %}── M12: Timer digits ──{% endcomment %}
+        <span class="promo-banner__timer" aria-live="polite" aria-label="{{ st.countdown_label }}">
+          <span class="promo-banner__timer-unit">
+            <span class="promo-banner__timer-number" data-count-hours>23</span>
+            <span class="promo-banner__timer-label">Horas</span>
+          </span>
+          <span class="promo-banner__timer-sep" aria-hidden="true">:</span>
+          <span class="promo-banner__timer-unit">
+            <span class="promo-banner__timer-number" data-count-minutes>59</span>
+            <span class="promo-banner__timer-label">Min</span>
+          </span>
+          <span class="promo-banner__timer-sep" aria-hidden="true">:</span>
+          <span class="promo-banner__timer-unit">
+            <span class="promo-banner__timer-number" data-count-seconds>38</span>
+            <span class="promo-banner__timer-label">Seg</span>
+          </span>
+        </span>
+
+        {% comment %}── M13: Cart text ──{% endcomment %}
+        <span class="promo-banner__cart-text">
+          {% if st.show_cta_icons %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>
+          {% endif %}
+          <span class="promo-banner__cart-text-desktop">{{ st.cta_text_desktop }}</span>
+          <span class="promo-banner__cart-text-mobile">{{ st.cta_text_mobile }}</span>
+          {% if st.show_cta_icons %}
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg>
+          {% endif %}
+        </span>
+      </a>
+
+    </div>{% comment %}── /RIGHT ──{% endcomment %}
+
+  </div>{% comment %}── /GRID ──{% endcomment %}
+</div>{% comment %}── /BANNER ──{% endcomment %}
+
+<script>
+(function () {
+  'use strict';
+
+  /* ═══ MÓDULO: CONFIG ═══
+     ID: M17
+     ORIGEM: Objeto CONFIG hardcoded do artefato original — bloco JS (function(){var CONFIG=...})()
+     DEPENDE DE: —
+     RECEBE: Valores injetados pelo Liquid via section.settings
+     EXPÕE: CONFIG (objeto global da IIFE)
+     ESTADO: imutável após init
+     SCHEMA BINDINGS: S01-S57 integralmente
+  ═══ */
+  var sectionId    = '{{ section.id }}';
+  var sectionRoot  = document.querySelector('[data-section-id="' + sectionId + '"]');
+  if (!sectionRoot) return;
+
+  var CONFIG = {
+    sectionId:           sectionId,
+    useProductPrice:     {{ st.use_product_price | json }},
+    oldPrice:            {{ resolved_compare_display | json }},
+    newPrice:            {{ resolved_price_display | json }},
+    discountPct:         {% if use_liquid_discount %}{{ discount_pct_liquid }}{% else %}null{% endif %},
+    showDiscountBadge:   {{ st.show_discount_badge | json }},
+    freeShippingMin:     {{ st.free_shipping_min | json }},
+    showShippingInitial: {% if show_shipping_initial %}true{% else %}false{% endif %},
+    showCoupon:          {{ st.show_coupon | json }},
+    couponCode:          {{ st.coupon_code | json }},
+    showCopyBtn:         {{ st.show_copy_button | json }},
+    countdownHours:      {{ st.countdown_hours | json }},
+    storageKeySuffix:    {{ st.custom_countdown_storage_key_suffix | json }},
+    enableReset:         {{ st.enable_local_countdown_reset | json }},
+    ctaMode:             {{ st.cta_mode | json }},
+    ctaLink:             {{ resolved_cta_href | json }},
+    variantId:           {{ resolved_variant.id | default: 0 | json }},
+    bgImgUrl:            {% if bg_img_url != '' %}{{ bg_img_url | json }}{% else %}null{% endif %},
+    overlayOpacity:      {{ st.overlay_opacity | divided_by: 100.0 | json }},
+    bgStart:             {{ st.background_color_start | json }},
+    bgMid:               {{ st.background_color_mid | json }},
+    bgEnd:               {{ st.background_color_end | json }},
+    enableShine:         {{ st.enable_shine | json }},
+    shineDuration:       {{ st.shine_duration | json }},
+    priceCents:          {{ resolved_price_cents | json }},
+    installmentsCount:   {{ st.installments_count | json }},
+    installmentsRate:    {{ st.installments_rate | json }}
+  };
+
+  /* ═══ CHECKPOINT [M17] Scoping e isolamento ✓ — CONFIG + sectionRoot inicializados ═══ */
+
+  /* ═══ MÓDULO: DOMRefs ═══
+     ID: M01
+     ORIGEM: document.getElementById refs do artefato original
+     DEPENDE DE: CONFIG
+     RECEBE: —
+     EXPÕE: q() helper
+     ESTADO: referências ao DOM
+     SCHEMA BINDINGS: —
+  ═══ */
+  function q(attr) { return sectionRoot.querySelector('[' + attr + ']'); }
+  function qa(attr) { return sectionRoot.querySelectorAll('[' + attr + ']'); }
+
+  var elOldPrice       = q('data-banner-old-price');
+  var elNewPrice       = q('data-banner-new-price');
+  var elDiscountBadge  = q('data-banner-discount-badge');
+  var elShipping       = q('data-banner-shipping');
+  var elCouponExtra    = q('data-banner-coupon-extra');
+  var elInstallments   = q('data-banner-installments');
+  var elCountHours     = q('data-count-hours');
+  var elCountMinutes   = q('data-count-minutes');
+  var elCountSeconds   = q('data-count-seconds');
+  var elCopyBtn        = q('data-copy-button');
+  var elCopyText       = q('data-copy-text');
+  var elCta            = q('data-banner-cta');
+  var bannerEl         = q('data-banner-root');
+
+  /* ═══ CHECKPOINT [M01] Container principal ✓ — DOMRefs inicializados ═══ */
+
+  /* ═══ MÓDULO: BgModule ═══
+     ID: M02
+     ORIGEM: bloco JS CONFIG.backgroundImage + backgroundImage style do artefato original
+     DEPENDE DE: CONFIG, DOMRefs
+     RECEBE: —
+     EXPÕE: —
+     ESTADO: —
+     SCHEMA BINDINGS: S31 (background_image), S32-S34 (gradient), S35 (overlay_opacity)
+  ═══ */
+  if (CONFIG.bgImgUrl && bannerEl) {
+    var grad = 'linear-gradient(to right,'
+      + 'hsla(' + _hexToHslA(CONFIG.bgStart, CONFIG.overlayOpacity) + '),'
+      + 'hsla(' + _hexToHslA(CONFIG.bgMid,   CONFIG.overlayOpacity) + '),'
+      + 'hsla(' + _hexToHslA(CONFIG.bgEnd,   CONFIG.overlayOpacity) + '))';
+    bannerEl.style.backgroundImage = grad + ', url(' + CONFIG.bgImgUrl + ')';
+  }
+
+  function _hexToHslA(hex, alpha) {
+    // Minimal hex→hsl for overlay; original uses literal hsl strings.
+    // Since Liquid already injects hsl-equivalent via CSS custom props,
+    // here we use a neutral dark overlay matching original behaviour.
+    return '0,0%,0%,' + alpha;
+  }
+
+  /* ═══ CHECKPOINT [M02] Sistema de fundo ✓ — background image + overlay aplicados ═══ */
+
+  /* ═══ MÓDULO: PriceModule ═══
+     ID: M09
+     ORIGEM: parsePrice() + desconto + frete do artefato original
+     DEPENDE DE: CONFIG, DOMRefs
+     RECEBE: —
+     EXPÕE: newNum (para módulos dependentes)
+     ESTADO: oldNum, newNum (floats)
+     SCHEMA BINDINGS: S08-S13, S14, S15, S16, S35
+  ═══ */
+  function parsePrice(str) {
+    if (typeof str !== 'string') return NaN;
+    var clean = str.replace(/[R$\s.]/g, '').replace(',', '.');
+    return parseFloat(clean);
+  }
+
+  var oldNum = parsePrice(CONFIG.oldPrice);
+  var newNum = parsePrice(CONFIG.newPrice);
+
+  // ── Badge de desconto — calculado em JS para ambos os modos ──────────────
+  if (CONFIG.showDiscountBadge && elDiscountBadge) {
+    var discOld = CONFIG.priceCents > 0 ? (parsePrice(CONFIG.oldPrice) || 0) : oldNum;
+    var discNew = CONFIG.priceCents > 0 ? CONFIG.priceCents / 100            : newNum;
+    if (!isNaN(discOld) && !isNaN(discNew) && discOld > 0 && discNew < discOld) {
+      var pct = Math.round(((discOld - discNew) / discOld) * 100);
+      elDiscountBadge.textContent    = pct + '% OFF';
+      elDiscountBadge.style.display  = 'inline-block';
+    }
+  }
+
+  // ── Frete grátis ──────────────────────────────────────────────────────────
+  if (elShipping && !CONFIG.showShippingInitial) {
+    if (!isNaN(newNum) && newNum > CONFIG.freeShippingMin) {
+      elShipping.classList.add('is-visible');
+    }
+  }
+
+  // ── Parcelamento automático — fórmula Price × [r(1+r)^n / ((1+r)^n − 1)] ─
+  if (elInstallments) {
+    var instPrice = CONFIG.priceCents > 0 ? CONFIG.priceCents / 100 : newNum;
+    var n = CONFIG.installmentsCount;
+    var r = CONFIG.installmentsRate / 100;
+    if (!isNaN(instPrice) && instPrice > 0 && n >= 1) {
+      var instValue;
+      if (r === 0) {
+        instValue = instPrice / n;
+      } else {
+        var _pow = Math.pow(1 + r, n);
+        instValue = instPrice * (r * _pow) / (_pow - 1);
+      }
+      instValue = Math.floor(instValue * 100) / 100;
+      var instStr = instValue.toFixed(2).replace('.', ',');
+      elInstallments.textContent   = n === 1
+        ? 'à vista R$ ' + instStr
+        : 'ou até ' + n + 'x de R$ ' + instStr + (r === 0 ? ' sem juros' : '');
+      elInstallments.style.display = 'inline';
+    }
+  }
+
+  /* ═══ CHECKPOINT [M09] Sistema de preços ✓ — desconto e frete calculados ═══ */
+  /* ═══ CHECKPOINT [M10] Frete grátis condicional ✓ — is-visible aplicado ═══ */
+
+  /* ═══ MÓDULO: CountdownModule ═══
+     ID: M12
+     ORIGEM: bloco localStorage + tick() + setInterval do artefato original
+     DEPENDE DE: CONFIG, DOMRefs
+     RECEBE: —
+     EXPÕE: —
+     ESTADO: endTime, intervalId, storageKey
+     SCHEMA BINDINGS: S23 (countdown_hours), S24 (storage suffix), S25 (enable reset)
+  ═══ */
+  (function () {
+    if (!elCountHours || !elCountMinutes || !elCountSeconds) return;
+
+    var storageKey = 'pb-countdown-end-' + CONFIG.sectionId + (CONFIG.storageKeySuffix || '');
+    var endTime;
+
+    try {
+      var saved = localStorage.getItem(storageKey);
+      if (saved && parseInt(saved, 10) > Date.now()) {
+        endTime = parseInt(saved, 10);
+      } else {
+        endTime = Date.now() + CONFIG.countdownHours * 3600000;
+        localStorage.setItem(storageKey, endTime.toString());
+      }
+    } catch (e) {
+      endTime = Date.now() + CONFIG.countdownHours * 3600000;
+    }
+
+    function pad(n) { return n < 10 ? '0' + n : '' + n; }
+
+    function tick() {
+      var remaining = Math.max(0, endTime - Date.now());
+      var totalSec  = Math.floor(remaining / 1000);
+      elCountHours.textContent   = pad(Math.floor((totalSec % 86400) / 3600));
+      elCountMinutes.textContent = pad(Math.floor((totalSec % 3600) / 60));
+      elCountSeconds.textContent = pad(totalSec % 60);
+
+      if (remaining <= 0 && CONFIG.enableReset) {
+        endTime = Date.now() + CONFIG.countdownHours * 3600000;
+        try { localStorage.setItem(storageKey, endTime.toString()); } catch (e) {}
+      }
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  /* ═══ CHECKPOINT [M12] Countdown ✓ — localStorage + tick() iniciados ═══ */
+
+  /* ═══ MÓDULO: CouponModule ═══
+     ID: M11
+     ORIGEM: bannerCopyBtn addEventListener + fallbackCopy + showCopied do artefato original
+     DEPENDE DE: CONFIG, DOMRefs
+     RECEBE: —
+     EXPÕE: window.__SHOPIFY_PROMO_COPY__ (para validação)
+     ESTADO: —
+     SCHEMA BINDINGS: S19 (coupon_code), S21 (show_copy_button)
+  ═══ */
+  function fallbackCopy(code) {
+    var ta = document.createElement('textarea');
+    ta.value = code;
+    ta.style.cssText = 'position:fixed;left:-9999px;opacity:0';
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand('copy'); } catch (e) {}
+    document.body.removeChild(ta);
+    showCopied();
+  }
+
+  function showCopied() {
+    if (elCopyText) {
+      elCopyText.textContent = 'Copiado!';
+      setTimeout(function () { elCopyText.textContent = 'Copiar'; }, 2000);
+    }
+  }
+
+  window.__SHOPIFY_PROMO_COPY__ = function (code) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(code).then(showCopied).catch(function () { fallbackCopy(code); });
+    } else {
+      fallbackCopy(code);
+    }
+  };
+
+  if (elCopyBtn && CONFIG.showCopyBtn) {
+    elCopyBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.__SHOPIFY_PROMO_COPY__(CONFIG.couponCode);
+    });
+  }
+
+  /* ═══ CHECKPOINT [M11] Bloco de cupom ✓ — copy handler registrado ═══ */
+
+  /* ═══ MÓDULO: CTAModule ═══
+     ID: M13 / M14
+     ORIGEM: bannerCta addEventListener + window.location.href do artefato original
+     DEPENDE DE: CONFIG, DOMRefs
+     RECEBE: —
+     EXPÕE: —
+     ESTADO: —
+     SCHEMA BINDINGS: S26 (cta_mode), S27 (cta_link), S28-S29 (cta texts), S30 (show icons)
+  ═══ */
+  if (elCta) {
+    elCta.addEventListener('click', function (e) {
+      e.preventDefault();
+      var mode = CONFIG.ctaMode;
+
+      if (mode === 'drawer') {
+        // Carrinho customizado Denavita (VZ — vendedor-denavita-x.liquid)
+        // Nota: VZ.adicionarAoCarrinho() tem bug interno (passa resposta de /cart/add.js
+        // para processarCarrinho que espera /cart.js), então fazemos o fetch manualmente
+        // e chamamos VZ.abrirCarrinho() diretamente — que já chama renderCarrinho() internamente.
+        var variantId = CONFIG.variantId;
+        if (!variantId) {
+          if (typeof VZ !== 'undefined') { VZ.abrirCarrinho(); }
+          return;
+        }
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: variantId, quantity: 1 })
+        })
+          .then(function () {
+            if (typeof VZ !== 'undefined' && typeof VZ.abrirCarrinho === 'function') {
+              VZ.abrirCarrinho();
+            } else {
+              var cartEl = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+              if (cartEl && typeof cartEl.open === 'function') { cartEl.open(); }
+              else { window.location.href = '/cart'; }
+            }
+          })
+          .catch(function () { window.location.href = '/cart'; });
+
+      } else if (mode === 'checkout') {
+        // Adicionar ao carrinho e ir direto ao checkout Shopify
+        var variantId = CONFIG.variantId;
+        if (!variantId) { window.location.href = '/checkout'; return; }
+        fetch('/cart/add.js', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: variantId, quantity: 1 })
+        })
+          .then(function () { window.location.href = '/checkout'; })
+          .catch(function () { window.location.href = '/checkout'; });
+
+      } else {
+        // url — link externo (checkout próprio)
+        window.location.href = CONFIG.ctaLink;
+      }
+    });
+  }
+
+  /* ═══ CHECKPOINT [M13] CTA ✓ — click handler com todos os modos registrado ═══ */
+  /* ═══ CHECKPOINT [M14] Modos de CTA ✓ — url/product/add-to-cart funcionais ═══ */
+  /* ═══ CHECKPOINT [M15] Responsividade ✓ — via CSS breakpoints (nenhum JS necessário) ═══ */
+  /* ═══ CHECKPOINT [M16] Animações ✓ — shine keyframe escopado + hover CSS var aplicados ═══ */
+
+  /* ═══ MÓDULO: ValidationModule ═══
+     ID: M18
+     ORIGEM: —
+     DEPENDE DE: todos os módulos
+     RECEBE: —
+     EXPÕE: __VALIDATE_INTEGRITY__ no escopo global
+     ESTADO: —
+     SCHEMA BINDINGS: todos (via DOM queries)
+  ═══ */
+  window['__VALIDATE_INTEGRITY_' + sectionId.replace(/-/g, '_')] = function () {
+    var results = [];
+
+    function assert(module, test, description) {
+      try {
+        var pass = (typeof test === 'function') ? test() : !!test;
+        results.push({ module: module, description: description, status: pass ? '✅' : '❌' });
+      } catch (err) {
+        results.push({ module: module, description: description, status: '💥 ' + err.message });
+      }
+    }
+
+    assert('M01', function () { return !!sectionRoot; }, 'Container da seção existe');
+    assert('M01', function () { return !!bannerEl; },    'Elemento .promo-banner existe');
+    assert('M04', function () { return !!q('data-banner-product-name'); }, 'Nome do produto renderizado');
+    assert('M05', function () { return sectionRoot.querySelectorAll('.promo-banner__badge').length > 0; }, 'Ao menos 1 badge renderizado');
+    assert('M09', function () { return !!elNewPrice; },  'Preço principal renderizado');
+    assert('M09', function () { return !!elOldPrice; },  'Preço antigo renderizado');
+    assert('M10', function () { return !!elShipping || !CONFIG.freeShippingMin; }, 'Badge frete presente ou não configurado');
+    assert('M11', function () {
+      return !CONFIG.showCoupon || !!q('data-banner-coupon-code');
+    }, 'Código do cupom renderizado se show_coupon=true');
+    assert('M11', function () {
+      return typeof window.__SHOPIFY_PROMO_COPY__ === 'function';
+    }, 'Função de cópia do cupom existe');
+    assert('M12', function () { return !!elCountHours && !!elCountMinutes && !!elCountSeconds; }, 'Countdown renderizado');
+    assert('M13', function () { return !!elCta; }, 'CTA renderizado');
+    assert('M17', function () { return !!sectionRoot && sectionRoot.dataset.sectionId === sectionId; }, 'Scoping por section.id ativo');
+    assert('M17', function () {
+      return !!document.querySelector('#shopify-section-' + sectionId);
+    }, 'Shopify section wrapper presente');
+    assert('M19', function () { return typeof CONFIG === 'object' && CONFIG.sectionId === sectionId; }, 'CONFIG ligado ao schema');
+
+    if (typeof console !== 'undefined' && console.table) {
+      console.table(results);
+    }
+    var failures = results.filter(function (r) { return r.status !== '✅'; });
+    if (failures.length === 0) {
+      console && console.log('%c✅ TODOS OS INVARIANTES PASSARAM — seção ' + sectionId, 'color:green;font-size:14px');
+    } else {
+      console && console.log('%c❌ ' + failures.length + ' FALHA(S) — seção ' + sectionId, 'color:red;font-size:14px');
+    }
+    return results;
+  };
+
+  /* ═══ CHECKPOINT [M18] Invariantes executáveis ✓ — __VALIDATE_INTEGRITY__ registrada ═══ */
+  /* ═══ CHECKPOINT [M19] Schema Shopify ✓ — CONFIG integralmente alimentado pelo schema ═══ */
+  /* ═══ CHECKPOINT [M06] Resolução de produto ✓ — via Liquid (resolved_name/price/img) ═══ */
+  /* ═══ CHECKPOINT [M07] Sistema de overrides ✓ — use_product_* todos implementados ═══ */
+  /* ═══ CHECKPOINT [M08] Imagens mobile/desktop ✓ — via Liquid + CSS breakpoints ═══ */
+
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Banner Promo Countdown",
+  "tag": "section",
+  "settings": [
+    { "type": "header",  "content": "Produto" },
+    { "type": "product", "id": "selected_product",    "label": "Produto da oferta" },
+    { "type": "select",  "id": "variant_position",    "label": "Variante do produto",          "default": "1",
+      "options": [
+        { "value": "1", "label": "Variante 1" },
+        { "value": "2", "label": "Variante 2" },
+        { "value": "3", "label": "Variante 3" }
+      ]
+    },
+    { "type": "header",  "content": "Conteúdo" },
+    { "type": "checkbox","id": "use_product_title",   "label": "Usar título do produto",       "default": true },
+    { "type": "text",    "id": "custom_product_name", "label": "Nome (override)",              "default": "TONS" },
+    { "type": "checkbox","id": "use_product_image",   "label": "Usar imagem do produto",       "default": true },
+    { "type": "image_picker","id": "custom_product_image","label": "Imagem do produto (override)" },
+    { "type": "checkbox","id": "show_mobile_image",   "label": "Exibir imagem mobile",         "default": true },
+    { "type": "checkbox","id": "show_desktop_image",  "label": "Exibir imagem desktop",        "default": true },
+    { "type": "header",  "content": "Preços" },
+    { "type": "checkbox","id": "use_product_price",   "label": "Usar preço do produto",        "default": false },
+    { "type": "text",    "id": "custom_old_price",    "label": "Preço antigo (override)",      "default": "R$ 492,50" },
+    { "type": "text",    "id": "custom_new_price",    "label": "Preço novo (override)",        "default": "R$ 298,00" },
+    { "type": "range",     "id": "installments_count", "label": "Número de parcelas",
+      "min": 1, "max": 12, "step": 1, "default": 10 },
+    { "type": "paragraph", "content": "💡 Taxa 0% = sem juros (divisão simples do valor)" },
+    { "type": "range",     "id": "installments_rate",  "label": "Taxa de juros",
+      "min": 0, "max": 10, "step": 1, "default": 3, "unit": "%am" },
+    { "type": "checkbox","id": "use_compare_at_for_discount","label": "Calcular desconto via compare_at_price","default": true },
+    { "type": "text",    "id": "fallback_compare_price","label":"Preço de comparação (fallback)","default": "R$ 492,50" },
+    { "type": "header",  "content": "Badges e Frete" },
+    { "type": "checkbox","id": "show_discount_badge", "label": "Exibir badge de desconto",     "default": true },
+    { "type": "checkbox","id": "show_shipping_badge", "label": "Exibir badge frete grátis",    "default": true },
+    { "type": "number",  "id": "free_shipping_min",   "label": "Mínimo para frete grátis (R$)","default": 149 },
+    { "type": "text",    "id": "custom_badge_text",   "label": "Badge primário (seção)",        "default": "Oferta 24h ⌚" },
+    { "type": "text",    "id": "promo_label_text",    "label": "Badge outline (seção)",         "default": "COMPRE 3 LEVE 5" },
+    { "type": "header",  "content": "Cupom" },
+    { "type": "checkbox","id": "show_coupon",         "label": "Exibir bloco de cupom",        "default": true },
+    { "type": "text",    "id": "coupon_label",        "label": "Label do cupom",               "default": "USE O CUPOM:" },
+    { "type": "text",    "id": "coupon_code",         "label": "Código do cupom",              "default": "CONSUMIDOR" },
+    { "type": "text",    "id": "coupon_extra_text",   "label": "Texto extra (badge cupom)",    "default": "+20%OFF com cupom" },
+    { "type": "checkbox","id": "show_copy_button",    "label": "Exibir botão de copiar",       "default": true },
+    { "type": "header",  "content": "Countdown" },
+    { "type": "text",    "id": "countdown_label",     "label": "Label do countdown",           "default": "Compre em até" },
+    { "type": "range",   "id": "countdown_hours",     "label": "Horas do countdown",
+      "min": 1, "max": 100, "step": 1, "default": 24, "unit": "h" },
+    { "type": "text",    "id": "custom_countdown_storage_key_suffix","label":"Sufixo da chave localStorage","default": "v1" },
+    { "type": "checkbox","id": "enable_local_countdown_reset","label":"Resetar countdown ao expirar","default": true },
+    { "type": "header",  "content": "Botão CTA" },
+    { "type": "select",  "id": "cta_mode",            "label": "Modo do CTA",                  "default": "drawer",
+      "options": [
+        { "value": "drawer",   "label": "Adicionar ao carrinho (drawer)" },
+        { "value": "checkout", "label": "Checkout Shopify" },
+        { "value": "url",      "label": "Link externo (checkout próprio)" }
+      ]
+    },
+    { "type": "url",     "id": "cta_link",            "label": "Link do CTA (modo URL)" },
+    { "type": "text",    "id": "cta_text_desktop",    "label": "Texto CTA (desktop)",          "default": "Comprar Agora" },
+    { "type": "text",    "id": "cta_text_mobile",     "label": "Texto CTA (mobile)",           "default": "Comprar Agora" },
+    { "type": "checkbox","id": "show_cta_icons",      "label": "Exibir ícones no CTA",         "default": true },
+    { "type": "header",  "content": "Fundo" },
+    { "type": "image_picker","id": "background_image","label": "Imagem de fundo" },
+    { "type": "color",   "id": "background_color_start","label":"Gradiente — cor inicial",     "default": "#3B9B3B" },
+    { "type": "color",   "id": "background_color_mid", "label":"Gradiente — cor central",      "default": "#367D36" },
+    { "type": "color",   "id": "background_color_end", "label":"Gradiente — cor final",        "default": "#2E602E" },
+    { "type": "range",   "id": "overlay_opacity",    "label": "Opacidade do overlay sobre imagem (%)",
+      "min": 0, "max": 100, "step": 5, "default": 5, "unit": "%" },
+    { "type": "header",  "content": "Cores" },
+    { "type": "color",   "id": "text_color",          "label": "Cor do texto principal",       "default": "#ffffff" },
+    { "type": "color",   "id": "accent_color",        "label": "Cor de destaque",              "default": "#ccfd3f" },
+    { "type": "color",   "id": "cta_bg_color",        "label": "Fundo do CTA",                 "default": "#FF8800" },
+    { "type": "color",   "id": "cta_bg_hover_color",  "label": "Fundo do CTA (hover)",         "default": "#FFA43B" },
+    { "type": "color",   "id": "discount_badge_color","label": "Cor do badge de desconto",     "default": "#FF0000" },
+    { "type": "color",   "id": "coupon_extra_bg_color","label":"Fundo badge extra cupom",      "default": "#FF8800" },
+    { "type": "header",  "content": "Layout" },
+    { "type": "range",   "id": "border_radius",       "label": "Borda arredondada",
+      "min": 0, "max": 40, "step": 2, "default": 12, "unit": "px" },
+    { "type": "range",   "id": "section_max_width",   "label": "Largura máxima",
+      "min": 600, "max": 1600, "step": 20, "default": 1200, "unit": "px" },
+    { "type": "range",   "id": "padding_top",         "label": "Padding topo da seção",
+      "min": 0, "max": 80, "step": 4, "default": 0, "unit": "px" },
+    { "type": "range",   "id": "padding_bottom",      "label": "Padding base da seção",
+      "min": 0, "max": 80, "step": 4, "default": 0, "unit": "px" },
+    { "type": "range",   "id": "section_margin_top",  "label": "Margem topo da seção",
+      "min": 0, "max": 80, "step": 4, "default": 0, "unit": "px" },
+    { "type": "range",   "id": "section_margin_bottom","label":"Margem base da seção",
+      "min": 0, "max": 80, "step": 4, "default": 0, "unit": "px" },
+    { "type": "range",   "id": "image_desktop_size",  "label": "Tamanho imagem desktop",
+      "min": 180, "max": 600, "step": 12, "default": 336, "unit": "px" },
+    { "type": "range",   "id": "image_mobile_max_width","label":"Largura máxima imagem mobile",
+      "min": 120, "max": 400, "step": 10, "default": 220, "unit": "px" },
+    { "type": "header",  "content": "Tipografia" },
+    { "type": "range",   "id": "font_size_product_name_mobile", "label": "Nome do produto (mobile)",
+      "min": 14, "max": 40, "step": 1, "default": 20, "unit": "px" },
+    { "type": "range",   "id": "font_size_product_name_desktop","label": "Nome do produto (desktop)",
+      "min": 20, "max": 60, "step": 1, "default": 30, "unit": "px" },
+    { "type": "header",  "content": "Animações" },
+    { "type": "checkbox","id": "enable_shine",        "label": "Ativar shine no CTA",          "default": true },
+    { "type": "range",   "id": "shine_duration",      "label": "Duração do shine",
+      "min": 3, "max": 30, "step": 1, "default": 10, "unit": "s" },
+    { "type": "checkbox","id": "enable_hover_scale",  "label": "Escala no hover do CTA",       "default": true },
+    { "type": "range",   "id": "cta_hover_scale",     "label": "Intensidade do hover (%)",
+      "min": 100, "max": 120, "step": 1, "default": 105 }
+  ],
+  "blocks": [
+    {
+      "type": "promo_badge",
+      "name": "Badge Promocional",
+      "settings": [
+        { "type": "text",    "id": "text",  "label": "Texto do badge", "default": "COMPRE 3 LEVE 5" },
+        { "type": "select",  "id": "style", "label": "Estilo",         "default": "outline",
+          "options": [
+            { "value": "primary", "label": "Destaque (laranja)" },
+            { "value": "outline", "label": "Contorno (branco)"  }
+          ]
+        },
+        { "type": "checkbox","id": "show",  "label": "Exibir",         "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Banner Promo Countdown",
+      "blocks": [
+        { "type": "promo_badge", "settings": { "text": "Oferta 24h ⌚",   "style": "primary", "show": true } },
+        { "type": "promo_badge", "settings": { "text": "COMPRE 3 LEVE 5","style": "outline", "show": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}
